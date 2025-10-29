@@ -1,7 +1,5 @@
-import Image from "next/image";
-import React from "react";
-import quizzy from "../public/Quizzy.svg";
 import Logo from "./components/Logo";
+import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 
 const Navbar = () => {
   return (
@@ -13,16 +11,19 @@ const Navbar = () => {
       </div>
 
       <div className="flex-1 mx-4 flex justify-center">
-        <input
-          type="text"
-          placeholder="Find it faster with a search"
-          className="w-1/2  px-3  py-2 rounded focus:outline-none text-black bg-gray-100 placeholder:text-base, font-medium"
-        />
+        <div className="w-1/2 flex mx-5 bg-gray-100 rounded focus-within:ring-2 focus-within:ring-gray-400 focus-within:border-gray-400">
+          <MagnifyingGlassIcon className="h-5 w-5 ml-3 my-auto text-gray-700 " />
+          <input
+            type="text"
+            placeholder="Find it faster with a search"
+            className="w-full px-3  py-2  text-black outline-none placeholder:text-base, font-medium"
+          />
+        </div>
       </div>
 
-      <div className="flex items-center space-x-3 shrink-0">
-        <button className="btn-text">Button</button>
-        <button className="btn-primary">Button 5</button>
+      <div className="flex items-center space-x-5 mx-5 shrink-0">
+        <button className="btn-text text-base">Create +</button>
+        <button className="btn-primary">Login</button>
       </div>
     </header>
   );

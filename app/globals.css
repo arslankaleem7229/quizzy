@@ -25,7 +25,7 @@ body {
 @layer components {
   /* Primary Button: Rounded + Filled */
   .btn-primary {
-    @apply px-4 py-2 text-white rounded font-normal text-sm transition-colors;
+    @apply px-5 py-2.5 text-white rounded-full font-normal text-sm transition-colors;
     background-color: var(--primary);
   }
   .btn-primary:hover {
