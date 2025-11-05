@@ -1,7 +1,83 @@
-import React from "react";
+"use client";
 
-const Onboarding = () => {
-  return <div>Onboarding</div>;
-};
+import Image from "next/image";
+import { useState } from "react";
+import { IoClose } from "react-icons/io5";
+import BgImage from "../../../public/signup-bg-image.png";
+import UnderlineImage from "../../../public/underline-svg.svg";
+import LoginPage from "./Login";
+import SignupPage from "./Signup";
 
-export default Onboarding;
+export default function Onboarding({ onClose }: { onClose: () => void }) {
+  const [formType, setFormType] = useState<"login" | "signup">("login");
+
+  return (
+    <div className="max-h-screen w-screen fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="h-screen w-screen bg-white flex rounded-2xl shadow-lg relative">
+        <div className="md:shrink-0 w-1/2 h-full ">
+          <Image
+            src={BgImage}
+            alt="image"
+            className="object-cover w-full h-full"
+          />
+        </div>
+
+        <div className="w-1/2 h-full p-12 overflow-y-auto">
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 bg-gray-200 rounded-full p-2 text-2xl text-gray-500 hover:text-gray-700"
+          >
+            <IoClose />
+          </button>
+          <div className="w-1/2 mt-5">
+            <div className="relative flex justify-around ">
+              <button
+                className="text-xl font-semibold transition-colors tracking-wider"
+                onClick={() => setFormType("signup")}
+              >
+                Signup
+              </button>
+              <button
+                className="text-xl font-semibold transition-colors tracking-wider"
+                onClick={() => setFormType("login")}
+              >
+                Login
+              </button>
+            </div>
+
+            <div className="relative w-full pb-5 flex justify-center overflow-hidden">
+              <div
+                className={`absolute top-0 transition-all duration-300 ease-in-out ${
+                  formType === "signup" ? "left-1" : "left-1/2"
+                } w-1/2 flex justify-center`}
+              >
+                <Image
+                  className="object-contain"
+                  src={UnderlineImage}
+                  alt="underlineImage"
+                />
+              </div>
+            </div>
+          </div>
+          {formType === "login" ? <LoginPage /> : <SignupPage />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+//  <form className="flex flex-col gap-3">
+//           <input
+//             type="email"
+//             placeholder="Email"
+//             className="border p-2 rounded"
+//           />
+//           <input
+//             type="password"
+//             placeholder="Password"
+//             className="border p-2 rounded"
+//           />
+//           <button className="bg-blue-500 text-white rounded p-2 hover:bg-blue-600">
+//             Log In
+//           </button>
+//         </form>

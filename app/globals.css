@@ -32,6 +32,14 @@ body {
     background-color: var(--primaryHover);
   }
 
+  .social-btn-txt {
+    @apply text-sm font-medium transition-colors text-gray-600;
+  }
+
+  .email-input:focus-within {
+    @apply ring-2 focus:ring-[#7e89ed] focus:border-[#7e89ed];
+  }
+
   /* Text Button: Simple Text */
   .btn-text {
     @apply px-4 py-2 bg-transparent font-normal text-sm transition-colors;
