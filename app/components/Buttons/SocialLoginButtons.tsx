@@ -6,8 +6,15 @@ import Google from "../../../public/social_icons/google.png";
 import Image from "next/image";
 
 type Provider = "google" | "facebook" | "apple";
+type ProviderAction = "login" | "signup";
 
-const SocialLoginButtons = ({ provider }: { provider: Provider }) => {
+const SocialLoginButtons = ({
+  provider,
+  action,
+}: {
+  provider: Provider;
+  action: ProviderAction;
+}) => {
   const isGoogle: boolean = provider === "google";
   const isFacebook: boolean = provider === "facebook";
   const isApple: boolean = provider === "apple";
@@ -25,9 +32,15 @@ const SocialLoginButtons = ({ provider }: { provider: Provider }) => {
         className="flex items-center justify-center gap-2 h-6 w-6"
         alt={provider}
       />
-      {isGoogle && <span>Continue with Google</span>}
-      {isFacebook && <span>Continue with Facebook</span>}
-      {isApple && <span>Continue with Apple</span>}
+      {isGoogle && (
+        <span> {action === "signup" ? "Continue" : "Login "} with Google</span>
+      )}
+      {isFacebook && (
+        <span>{action === "signup" ? "Continue" : "Login "} with Facebook</span>
+      )}
+      {isApple && (
+        <span>{action === "signup" ? "Continue" : "Login "} with Apple</span>
+      )}
     </button>
   );
 };
