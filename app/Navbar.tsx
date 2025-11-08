@@ -17,21 +17,36 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 left-0 right-0 h-16 flex items-center px-4 bg-white">
-        <div className="flex items-center space-x-3 shrink-0 ">
-          <Logo />
-          <button className="btn-text ">Study tools</button>
-          <button className="btn-text ">Subject areas</button>
+      <header className=" grid grid-cols-2 grid-rows-2 md:grid-rows-1 md:grid-cols-3 sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 md:px-4 bg-white">
+        <div className="grid grid-cols-4 md:grid-cols-3 items-center shrink-0">
+          <Logo classname="col-span-1" />
+          <div className="col-span-3 md:col-span-2 grid grid-cols-2 justify-self-start ">
+            <button className=" btn-text hidden sm:block">Study tools</button>
+            <button className=" btn-text hidden sm:block">Subject areas</button>
+          </div>
         </div>
 
-        <SearchField placeholder="Find it faster with a search" />
+        <SearchField
+          classname="hidden md:block"
+          placeholder="Find it faster with a search"
+        />
 
-        <div className="flex items-center space-x-5 mx-5 shrink-0">
-          <button className="btn-text text-base">Create +</button>
-          <button onClick={() => setShowLogin(true)} className="btn-primary">
+        <div className="grid grid-cols-2 items-center gap-x-10 mx-5 shrink-0 justify-self-end">
+          <button className="btn-text text-sm w-22 md:text-base md:w-24">
+            Create +
+          </button>
+          <button
+            onClick={() => setShowLogin(true)}
+            className="btn-primary w-20"
+          >
             Login
           </button>
         </div>
+
+        <SearchField
+          classname="block md:hidden col-span-2 mx-1 md:mx-4 "
+          placeholder="Find it faster with a search"
+        />
       </header>
 
       {showLogin && <Onboarding onClose={() => setShowLogin(false)} />}

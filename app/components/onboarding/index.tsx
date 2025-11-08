@@ -13,8 +13,8 @@ export default function Onboarding({ onClose }: { onClose: () => void }) {
 
   return (
     <div className=" h-full w-full fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="h-full w-full bg-white flex rounded-2xl shadow-lg relative">
-        <div className="hidden lg:block lg:shrink-0 w-1/2 h-full">
+      <div className="h-full w-full bg-white flex relative">
+        <div className="hidden lg:block lg:shrink-0 w-0 lg:w-1/2  h-full">
           <Image
             src={BgImage}
             alt="image"

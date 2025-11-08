@@ -5,12 +5,10 @@ import PasswordField from "../Inputs/PasswordField";
 const LoginPage = () => {
   return (
     <div>
-      <div className="space-x-15">
-        <div className="flex flex-col gap-5 w-full">
-          <SocialLoginButtons provider="google" action="login" />
-          <SocialLoginButtons provider="facebook" action="login" />
-          <SocialLoginButtons provider="apple" action="login" />
-        </div>
+      <div className="flex flex-col gap-5 w-full">
+        <SocialLoginButtons provider="google" action="login" />
+        <SocialLoginButtons provider="facebook" action="login" />
+        <SocialLoginButtons provider="apple" action="login" />
       </div>
 
       <div className="flex items-center w-full my-8">
