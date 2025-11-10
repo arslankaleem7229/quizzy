@@ -36,7 +36,8 @@ body {
     @apply text-sm font-medium transition-colors text-gray-600;
   }
 
-  .email-input:focus-within {
+  .email-input:focus-within,
+  .password-input:focus-within {
     @apply ring-2 focus:ring-[#7e89ed] focus:border-[#7e89ed];
   }
 
@@ -44,7 +45,7 @@ body {
     @apply appearance-none w-auto border-2 
      border-gray-300 rounded-full px-7 py-2 bg-auto text-gray-500 font-medium 
      focus:ring-2 focus:ring-indigo-200 focus:border-indigo-200 outline-none 
-      bg-[url('/chevron-down.svg')] bg-no-repeat bg-[right_0.75rem_center] pr-10;
+      bg-[url('/chevron-down.svg')] bg-no-repeat bg-position-[right_0.75rem_center] pr-10;
   }
 
   /* Text Button: Simple Text */

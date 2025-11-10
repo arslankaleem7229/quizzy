@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./components/Logo";
-import Onboarding from "./components/Onboarding";
+import Onboarding from "./Onboarding";
 
 import { usePathname } from "next/navigation";
 import SearchField from "./components/Inputs/SearchField";
@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className=" grid grid-cols-2 grid-rows-2 md:grid-rows-1 md:grid-cols-3 sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 md:px-4 bg-white">
+      <header className="grid grid-cols-2 grid-rows-2 md:grid-rows-1 md:grid-cols-3 sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 md:px-4 bg-white">
         <div className="grid grid-cols-4 md:grid-cols-3 items-center shrink-0">
           <Logo classname="col-span-1" />
           <div className="col-span-3 md:col-span-2 grid grid-cols-2 justify-self-start ">

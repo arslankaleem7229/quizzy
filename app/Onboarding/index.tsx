@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import BgImage from "../../../public/signup-bg-image.png";
-import UnderlineImage from "../../../public/underline-svg.svg";
+import BgImage from "../../public/signup-bg-image.png";
+import UnderlineImage from "../../public/underline-svg.svg";
 import LoginPage from "./Login";
 import SignupPage from "./Signup";
 
@@ -14,12 +14,18 @@ export default function Onboarding({ onClose }: { onClose: () => void }) {
   return (
     <div className=" h-full w-full fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="h-full w-full bg-white flex relative">
-        <div className="hidden lg:block lg:shrink-0 w-0 lg:w-1/2  h-full">
+        <div className="relative hidden lg:block lg:shrink-0 w-0 lg:w-1/2 h-full ">
           <Image
             src={BgImage}
             alt="image"
             className="object-cover w-full h-full"
           />
+          <div className="absolute top-10 left-15 z-10 w-50 text-5xl xl:text-6xl 2xl:text-7xl font-bold text-black">
+            <h1 className="w-full h-full">Dress casually, study seriously.</h1>
+          </div>
+          <h1 className="absolute bottom-10 left-15 z-10 text-5xl xl:text-6xl 2xl:text-7xl font-bold text-white">
+            Quizzy.
+          </h1>
         </div>
 
         <div className="flex-1 flex justify-center p-15  items-center h-full overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">

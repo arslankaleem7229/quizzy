@@ -1,6 +1,6 @@
-import SocialLoginButtons from "../Buttons/SocialLoginButtons";
-import EmailField from "../Inputs/EmailField";
-import PasswordField from "../Inputs/PasswordField";
+import SocialLoginButtons from "../components/Buttons/SocialLoginButtons";
+import EmailField from "../components/Inputs/EmailField";
+import PasswordField from "../components/Inputs/PasswordField";
 
 const LoginPage = () => {
   return (
@@ -18,21 +18,10 @@ const LoginPage = () => {
         </span>
         <div className="grow border-t border-gray-100"></div>
       </div>
-      <div>
-        <label htmlFor="email" className="text-sm font-semibold text-gray-500">
-          Email
-        </label>
-        <EmailField placeholder="Enter your email address or username" />
-      </div>
-      <div>
-        <label
-          htmlFor="password"
-          className="text-sm font-semibold text-gray-500"
-        >
-          Password
-        </label>
-        <PasswordField placeholder="Enter your password" />
-      </div>
+
+      <EmailField placeholder="Enter your email address or username" />
+
+      <PasswordField placeholder="Enter your password" />
 
       <div className="flex justify-center w-full my-5">
         <span className="text-center mx-3 text-sm tracking-wider font-normal text-gray-500">

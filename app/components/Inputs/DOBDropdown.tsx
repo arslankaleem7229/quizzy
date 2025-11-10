@@ -28,48 +28,53 @@ export default function DOBDropdown() {
   );
 
   return (
-    <div className="flex gap-5 w-full my-5">
-      {/* Day */}
-      <select
-        value={day}
-        onChange={(e) => setDay(e.target.value)}
-        className="dob-selector"
-      >
-        <option value="">Day</option>
-        {days.map((d) => (
-          <option key={d} value={d}>
-            {d}
-          </option>
-        ))}
-      </select>
+    <>
+      <label htmlFor="email" className="text-sm font-semibold text-gray-500">
+        Date of Birth
+      </label>
+      <div className="flex gap-5 w-full my-5">
+        {/* Day */}
+        <select
+          value={day}
+          onChange={(e) => setDay(e.target.value)}
+          className="dob-selector"
+        >
+          <option value="">Day</option>
+          {days.map((d) => (
+            <option key={d} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
 
-      {/* Month */}
-      <select
-        value={month}
-        onChange={(e) => setMonth(e.target.value)}
-        className="dob-selector"
-      >
-        <option value="">Month</option>
-        {months.map((m) => (
-          <option key={m} value={m}>
-            {m}
-          </option>
-        ))}
-      </select>
+        {/* Month */}
+        <select
+          value={month}
+          onChange={(e) => setMonth(e.target.value)}
+          className="dob-selector"
+        >
+          <option value="">Month</option>
+          {months.map((m) => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
+        </select>
 
-      {/* Year */}
-      <select
-        value={year}
-        onChange={(e) => setYear(e.target.value)}
-        className="dob-selector"
-      >
-        <option value="">Year</option>
-        {years.map((y) => (
-          <option key={y} value={y}>
-            {y}
-          </option>
-        ))}
-      </select>
-    </div>
+        {/* Year */}
+        <select
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          className="dob-selector"
+        >
+          <option value="">Year</option>
+          {years.map((y) => (
+            <option key={y} value={y}>
+              {y}
+            </option>
+          ))}
+        </select>
+      </div>
+    </>
   );
 }
