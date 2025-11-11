@@ -4,24 +4,26 @@ import FlashCardsComponent from "./home/FlashCards";
 
 export default function Home() {
   return (
-    <main className=" h-screen flex-1 overflow-auto ">
-      <div className=" bg-gray-100 h-[calc(100%-60px)] w-full">
-        <div className="h-[calc(50%)] sm:h-[calc(45%)] p-8 md:p-16 flex justify-center ">
-          <div className="h-full max-w-3xl flex gap-0 md:gap-5 flex-col items-center justify-around">
-            <h1 className="flex text-[2.7rem] items-center text-center font-bold justify-center tracking-normal leading-tight">
+    <main className="flex-1 w-full overflow-x-hidden bg-white space-y-10 pb-16">
+      <section className="bg-gray-100 w-full">
+        <div className="max-w-6xl lg:max-w-7xl mx-auto flex flex-col items-center gap-10 px-8 md:px-16 py-12">
+          <div className="max-w-3xl flex flex-col gap-4 text-center">
+            <h1 className="text-[2.7rem] font-bold tracking-normal leading-tight">
               How do you want to study?
             </h1>
-            <p className="flex text-base md:text-xl font-light justify-center items-center text-center tracking-wide leading-relaxed">
+            <p className="text-base md:text-xl font-light tracking-wide leading-relaxed">
               Master whatever you&apos;re learning with Quizzy&apos;s
               interactive flashcards, practice tests and study activities.
             </p>
-            <button className="btn-primary justify-center py-4 px-6">
-              Sign up for free
-            </button>
+            <div className="flex justify-center">
+              <button className="btn-primary justify-center py-4 px-6">
+                Sign up for free
+              </button>
+            </div>
           </div>
+          <FlashCardsComponent />
         </div>
-        <FlashCardsComponent />
-      </div>
+      </section>
       <HomePosters
         title={"Every class, every test, one ultimate study app "}
         description={

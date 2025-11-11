@@ -22,17 +22,17 @@ const FlashCardsComponent = () => {
     return `translateX(${translateX}px)`;
   };
   return (
-    <div className="h-[calc(50%)] sm:h-[calc(55%)] w-full max-w-6xl lg:max-w-7xl items-center justify-center mx-auto">
-      <div className="w-full h-full flex overflow-hidden justify-center items-center">
+    <div className="w-full max-w-6xl lg:max-w-7xl mx-auto flex justify-center">
+      <div className="w-full flex overflow-hidden justify-center items-center">
         <div
-          className="flex h-[calc(95%)] space-x-8 py-6 px-8 transition-transform duration-500 ease-in-out"
+          className="flex min-h-[18rem] md:min-h-[22rem] space-x-6 sm:space-x-8 py-6 px-4 md:px-8 transition-transform duration-500 ease-in-out"
           style={{ transform: getTransform() }}
         >
           {flashcards.map((flashcard, i) => {
             return (
               <div
                 key={i}
-                className={`relative shrink-0 w-60 h-75 md:w-80 md:h-full ${flashcard.color} rounded-xl overflow-hidden shadow p-4 transform transition ease-in-out duration-500 hover:scale-110`}
+                className={`relative shrink-0 w-60 md:w-80 h-72 md:h-96 ${flashcard.color} rounded-xl overflow-hidden shadow p-4 transform transition ease-in-out duration-500 hover:scale-105`}
               >
                 <h3
                   className={`font-bold text-xl text-center ${
@@ -47,7 +47,7 @@ const FlashCardsComponent = () => {
                   width={1000}
                   height={1000}
                   src={`${flashcard.image}`}
-                  className="absolute flex h-[calc(90%)] w-full bottom-0 right-0"
+                  className="absolute flex h-[90%] w-full bottom-0 right-0"
                   alt={flashcard.title}
                 />
               </div>
