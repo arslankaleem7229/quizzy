@@ -69,7 +69,7 @@ export default function Home() {
         image={"/mockups/prepration.avif"}
         isreversed
       >
-        <button className="btn-primary w-35 p-5">Try it out</button>
+        <button className="btn-primary w-35 p-5">Get Started</button>
       </HomePosters>
     </main>
   );
