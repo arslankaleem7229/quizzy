@@ -5,7 +5,7 @@ import FlashCardsComponent from "./home/FlashCards";
 export default function Home() {
   return (
     <main className=" h-screen flex-1 overflow-auto ">
-      <div className="bg-gray-100 md:h-full h-[calc(100%-100px)] w-full">
+      <div className=" bg-gray-100 h-[calc(100%-60px)] w-full">
         <div className="h-[calc(50%)] sm:h-[calc(45%)] p-8 md:p-16 flex justify-center ">
           <div className="h-full max-w-3xl flex gap-0 md:gap-5 flex-col items-center justify-around">
             <h1 className="flex text-[2.7rem] items-center text-center font-bold justify-center tracking-normal leading-tight">

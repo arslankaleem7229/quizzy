@@ -17,7 +17,7 @@ const HomePosters = ({
   children,
 }: HomePostersProps) => {
   return (
-    <div className="w-full md:h-1/2 h-[calc(100%-100px)] bg-white">
+    <section className="w-full md:h-1/2 h-[calc(100%-100px)] bg-white">
       <div
         className={`flex ${
           isreversed ? "md:flex-row-reverse" : "md:flex-row"
@@ -36,7 +36,7 @@ const HomePosters = ({
           <div className="flex gap-3">{children}</div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
 
 export const metadata: Metadata = {
   title: "Quizzy",
@@ -15,12 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
+      <body className="bg-white">
         <Navbar />
-        <div className="flex flex-1">
-          {/* <Sidebar /> */}
-          {children}
-        </div>
+        <div className="flex bg-white">{children}</div>
       </body>
     </html>
   );
