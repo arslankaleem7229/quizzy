@@ -1,5 +1,6 @@
 import { flashcards } from "@/app/data/flashcards";
 import Image from "next/image";
+import HomePosters from "./home/HomePosters";
 
 export default function Home() {
   return (
@@ -51,90 +52,53 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full h-1/2  bg-white">
-        <div className="flex justify-center items-center max-w-7xl p-16 mx-auto  ">
-          <div className="h-full w-full flex bg-red-500">
-            <div className="flex flex-10 flex-col justify-around p-8 ">
-              <h3 className="text-2xl font-bold">
-                Every class, every test, one ultimate study app
-              </h3>
-              <p>
-                Create your own flashcards or find sets made by teachers,
-                students and experts. Study them anytime, anywhere with our free
-                app.
-              </p>
-              <div className="flex gap-3">
-                <Image
-                  src="/mockups/google-play.png"
-                  alt="GooglePlay download button"
-                  width={10000}
-                  height={100000}
-                  className="w-30 h-10"
-                />
-                <Image
-                  src="/mockups/google-play.png"
-                  alt="GooglePlay download button"
-                  width={10000}
-                  height={100000}
-                  className="w-30 h-10"
-                />
-              </div>
-            </div>
-            <div className="flex flex-12 items-center justify-center object-contain">
-              <Image
-                src="/mockups/all-in-one.avif"
-                alt="all-in-one"
-                width={100000}
-                height={100000}
-                quality={1000000}
-                className="object-contain w-fit h-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="w-full h-1/2  bg-white">
-        <div className="flex justify-center items-center max-w-7xl p-16 mx-auto  ">
-          <div className="h-full w-full flex bg-red-500">
-            <div className="flex flex-10 flex-col justify-around p-8 ">
-              <h3 className="text-2xl font-bold">
-                Every class, every test, one ultimate study app
-              </h3>
-              <p>
-                Create your own flashcards or find sets made by teachers,
-                students and experts. Study them anytime, anywhere with our free
-                app.
-              </p>
-              <div className="flex gap-3">
-                <Image
-                  src="/mockups/google-play.png"
-                  alt="GooglePlay download button"
-                  width={10000}
-                  height={100000}
-                  className="w-30 h-10"
-                />
-                <Image
-                  src="/mockups/google-play.png"
-                  alt="GooglePlay download button"
-                  width={10000}
-                  height={100000}
-                  className="w-30 h-10"
-                />
-              </div>
-            </div>
-            <div className="flex flex-12 items-center justify-center object-contain">
-              <Image
-                src="/mockups/all-in-one.avif"
-                alt="all-in-one"
-                width={100000}
-                height={100000}
-                quality={1000000}
-                className="object-contain w-fit h-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <HomePosters
+        title={"Every class, every test, one ultimate study app "}
+        description={
+          " Create your own flashcards or find sets made by teachers, students and experts. Study them anytime, anywhere with our free app."
+        }
+        image={"/mockups/all-in-one.avif"}
+        isreversed
+      >
+        <>
+          <Image
+            src="/mockups/google-play.png"
+            alt="GooglePlay download button"
+            width={10000}
+            height={100000}
+            className="w-30 h-10"
+          />
+          <Image
+            src="/mockups/google-play.png"
+            alt="GooglePlay download button"
+            width={10000}
+            height={100000}
+            className="w-30 h-10"
+          />
+        </>
+      </HomePosters>
+
+      <HomePosters
+        title={"Make studying class material quick and easy"}
+        description={
+          "Turn your slides, videos and notes into flashcard sets, practice tests and study guides."
+        }
+        image={"/mockups/study-material.avif"}
+        isreversed={false}
+      >
+        <button className="btn-primary w-35 p-5">Try it out</button>
+      </HomePosters>
+
+      <HomePosters
+        title={"Prepare for tests on any subject"}
+        description={
+          "Memorise anything with personalised practice tests and revision sessions in Learn. 98% of students say Quizlet has improved their comprehension."
+        }
+        image={"/mockups/prepration.avif"}
+        isreversed
+      >
+        <button className="btn-primary w-35 p-5">Try it out</button>
+      </HomePosters>
     </main>
   );
 }
