@@ -1,9 +1,8 @@
 import { signIn } from "next-auth/react";
-import React from "react";
+import Image from "next/image";
 import Apple from "../../../public/social_icons/apple.png";
 import Facebook from "../../../public/social_icons/facebook.png";
 import Google from "../../../public/social_icons/google.png";
-import Image from "next/image";
 
 type Provider = "google" | "facebook" | "apple";
 type ProviderAction = "login" | "signup";

@@ -6,7 +6,7 @@ const Logo = ({ classname }: { classname?: string }) => (
       data-logo="logo"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 109 43"
-      className={`w-24 h-auto primaryColor dark:primaryColor hidden md:block ${classname}`}
+      className={`w-24 h-auto primaryColor dark:primaryColor hidden lg:flex ${classname}`}
       fill="currentColor"
     >
       <g id="logotype" transform="translate(0, 1)">
@@ -19,7 +19,7 @@ const Logo = ({ classname }: { classname?: string }) => (
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       role="img"
-      className={`w-14 h-auto primaryColor dark:primaryColor iconify iconify--emojione block md:hidden ${classname}`}
+      className={`w-14 h-auto primaryColor dark:primaryColor iconify iconify--emojione flex lg:hidden ${classname}`}
       preserveAspectRatio="xMidYMid meet"
       fill="#000000"
     >

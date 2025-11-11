@@ -17,12 +17,12 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="grid grid-cols-2 grid-rows-2 md:grid-rows-1 md:grid-cols-3 sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 md:px-4 bg-white">
-        <div className="grid grid-cols-4 md:grid-cols-3 items-center shrink-0">
-          <Logo classname="col-span-1" />
-          <div className="col-span-3 md:col-span-2 grid grid-cols-2 justify-self-start ">
-            <button className=" btn-text hidden sm:block">Study tools</button>
-            <button className=" btn-text hidden sm:block">Subject areas</button>
+      <header className="flex flex-wrap md:flex-nowrap sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 lg:px-4 bg-white. z-9999999 bg-white">
+        <div className="flex flex-1 md:flex-none shrink-0 gap-2 mr-4 xl:mr-0">
+          <Logo />
+          <div className="hidden lg:flex gap-2">
+            <button className="btn-text">Study tools</button>
+            <button className="btn-text">Subject areas</button>
           </div>
         </div>
 
@@ -31,20 +31,20 @@ const Navbar = () => {
           placeholder="Find it faster with a search"
         />
 
-        <div className="grid grid-cols-2 items-center gap-x-10 mx-5 shrink-0 justify-self-end">
-          <button className="btn-text text-sm w-22 md:text-base md:w-24">
-            Create +
+        <div className="flex flex-none gap-x-5 items-center mx-5">
+          <button className="btn-text text-xs w-22 md:text-sm md:w-24">
+            + Create
           </button>
           <button
             onClick={() => setShowLogin(true)}
-            className="btn-primary w-20"
+            className="btn-primary w-20 text-sm"
           >
             Login
           </button>
         </div>
 
         <SearchField
-          classname="block md:hidden col-span-2 mx-1 md:mx-4 "
+          classname="block md:hidden mx-1 md:mx-4 w-full md:mb-1"
           placeholder="Find it faster with a search"
         />
       </header>
@@ -55,17 +55,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-{
-  /* <h1 className="flex justify-center items-center ">
-          <span className="font-semibold text-7xl text-cyan-200  pl-2 py-1">
-            Quizzy
-          </span>
-          {/* <span className="font-bold text-3xl pr-2 py-1">uizzy</span> 
-        </h1> */
-  /* <Image
-          src={quizzy}
-          className="flex justify-center items-center"
-          alt="Quizzy Logo"
-        /> */
-}
