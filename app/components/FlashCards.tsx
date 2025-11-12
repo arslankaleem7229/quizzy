@@ -1,33 +1,12 @@
 "use client";
 import Image from "next/image";
 import { flashcards } from "@/app/data/flashcards";
-import { useState, useRef } from "react";
 
 const FlashCardsComponent = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, flashcards.length - 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
-
-  const getTransform = () => {
-    const cardWidth = 320; // w-80 = 20rem = 320px
-    const gap = 32; // space-x-8 = 2rem = 32px
-    const translateX = -currentIndex * (cardWidth + gap);
-    return `translateX(${translateX}px)`;
-  };
   return (
     <div className="w-full max-w-6xl lg:max-w-7xl mx-auto flex justify-center">
       <div className="w-full flex overflow-hidden justify-center items-center">
-        <div
-          className="flex min-h-[18rem] md:min-h-[22rem] space-x-6 sm:space-x-8 py-6 px-4 md:px-8 transition-transform duration-500 ease-in-out"
-          style={{ transform: getTransform() }}
-        >
+        <div className="flex min-h-72 md:min-h-88 space-x-6 sm:space-x-8 py-6 px-4 md:px-8 transition-transform duration-500 ease-in-out">
           {flashcards.map((flashcard, i) => {
             return (
               <div

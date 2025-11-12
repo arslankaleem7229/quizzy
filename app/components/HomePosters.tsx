@@ -17,7 +17,7 @@ const HomePosters = ({
   children,
 }: HomePostersProps) => {
   return (
-    <section className="w-full bg-white">
+    <section className="w-full bg-(--background)">
       <div
         className={`flex ${
           isreversed ? "md:flex-row-reverse" : "md:flex-row"
