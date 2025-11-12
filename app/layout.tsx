@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import Navbar from "./Navbar";
+import ThemeToggle from "./components/ThemeToggle";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Quizzy",
@@ -13,10 +14,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="bg-white">
+    <html lang="en" data-theme="light">
+      <body className="min-h-screen bg-(--background) text-(--foreground) transition-colors">
+        <div className="fixed bottom-4 right-4 z-50">
+          <ThemeToggle />
+        </div>
         <Navbar />
-        <div className="flex bg-white">{children}</div>
+        <div className="flex">{children}</div>
       </body>
     </html>
   );

@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="flex flex-wrap md:flex-nowrap sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 lg:px-4 bg-white. z-9999999 bg-white">
+      <header className="flex flex-wrap md:flex-nowrap sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 lg:px-4 bg-(--background) z-999">
         <div className="flex flex-1 md:flex-none shrink-0 gap-2 mr-4 xl:mr-0">
           <Logo />
           <div className="hidden lg:flex gap-2">

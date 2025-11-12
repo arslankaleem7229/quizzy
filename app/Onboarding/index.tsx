@@ -12,8 +12,8 @@ export default function Onboarding({ onClose }: { onClose: () => void }) {
   const [formType, setFormType] = useState<"login" | "signup">("login");
 
   return (
-    <div className=" h-full w-full fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="h-full w-full bg-white flex relative">
+    <div className=" h-full w-full fixed inset-0 bg-black/50 flex items-center justify-center z-9999">
+      <div className="h-full w-full bg-(--background) flex relative">
         <div className="relative hidden lg:block lg:shrink-0 w-0 lg:w-1/2 h-full ">
           <Image
             src={BgImage}
