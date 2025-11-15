@@ -10,21 +10,26 @@ const PopularFlashCards = () => {
         {flashcardSets.map((set) => (
           <div
             key={set.title}
-            className="rounded-2xl border border-white/5 bg-white/3 px-5 py-4"
+            className={`rounded-lg hover:bg-(--latest-card) transition border-white/5 bg-white/3 duration-0 px-5 py-4 h-40 flex flex-col justify-between items-start`}
           >
-            <div className="text-lg font-semibold">{set.title}</div>
-            <div className="mt-2 inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-xs text-(--foreground)/70">
-              {set.terms}
+            <div className="w-full">
+              <div className="text-base font-medium overflow-hidden whitespace-nowrap text-ellipsis">
+                {set.title}
+              </div>
+              <div className="mt-2 inline-flex items-center rounded-full bg-(--latest-card) px-2 py-0.75 text-xs text-(--foreground)/70">
+                {set.terms}
+              </div>
             </div>
             <div className="mt-4 flex items-center gap-3 text-sm text-(--foreground)/70">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs">
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-(--latest-card) text-xs">
                 {set.author[0]}
               </div>
-              <div>
-                <div className="font-medium text-(--foreground)/90">
-                  {set.author}
-                </div>
-                <div className="text-xs text-(--foreground)/50">{set.role}</div>
+
+              <div className="font-medium text-(--foreground)/90">
+                {set.author}
+              </div>
+              <div className="text-xs text-(--foreground)/50 rounded-full bg-(--latest-card) px-1">
+                {set.role}
               </div>
             </div>
           </div>

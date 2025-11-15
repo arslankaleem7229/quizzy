@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Navbar from "./Navbar";
-import ThemeToggle from "./components/ThemeToggle";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,11 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="dark">
       <body className="min-h-screen bg-(--background) text-(--foreground) transition-colors">
-        <div className="fixed bottom-4 right-4 z-50">
-          <ThemeToggle />
-        </div>
         <Navbar />
         <div className="flex">{children}</div>
       </body>
