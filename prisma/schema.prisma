@@ -53,9 +53,13 @@ model User {
   accounts       Account[]
   sessions       Session[]
   hashedPassword String?
+  username       String?   @unique
+  dob            DateTime?
+  type           UserType  @default(unknown)
 
   @@map("users")
 }
+
 
 model VerificationToken {
   identifier String
@@ -64,4 +68,10 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+enum UserType {
+  student
+  teacher
+  unknown
 }
