@@ -1,9 +1,10 @@
+"use client";
 import SocialLoginButtons from "../components/Buttons/SocialLoginButtons";
 import DOBDropdown from "../components/Inputs/DOBDropdown";
 import EmailField from "../components/Inputs/EmailField";
 import PasswordField from "../components/Inputs/PasswordField";
 
-const SignupPage = () => {
+const SignupModal = () => {
   return (
     <div>
       <div className="space-x-15">
@@ -49,4 +50,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default SignupModal;

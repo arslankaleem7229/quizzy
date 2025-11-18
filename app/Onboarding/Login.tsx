@@ -2,7 +2,7 @@ import SocialLoginButtons from "../components/Buttons/SocialLoginButtons";
 import EmailField from "../components/Inputs/EmailField";
 import PasswordField from "../components/Inputs/PasswordField";
 
-const LoginPage = () => {
+const LoginModal = () => {
   return (
     <div>
       <div className="flex flex-col gap-5 w-full">
@@ -40,4 +40,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginModal;

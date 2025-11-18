@@ -17,9 +17,12 @@ export default function Home() {
               interactive flashcards, practice tests and study activities.
             </p>
             <div className="flex justify-center">
-              <button className="btn-primary justify-center py-4 px-6">
+              <Link
+                href="/latest"
+                className="btn-primary justify-center py-4 px-6"
+              >
                 Sign up for free
-              </button>
+              </Link>
             </div>
           </div>
           <FlashCardsComponent />
@@ -59,7 +62,9 @@ export default function Home() {
         image={"/mockups/study-material.avif"}
         isreversed={false}
       >
-        <button className="btn-primary w-35 p-5">Try it out</button>
+        <Link href={"/latest"}>
+          <button className="btn-primary w-35 p-5">Try it out</button>
+        </Link>
       </HomePosters>
 
       <HomePosters

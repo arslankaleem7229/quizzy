@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "./Navbar";
 import "./globals.css";
+import AuthProvider from "./auth/Provider";
 
 export const metadata: Metadata = {
   title: "Quizzy",
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="dark">
       <body className="min-h-screen bg-(--background) text-(--foreground) transition-colors">
-        <Navbar />
-        <div className="flex">{children}</div>
+        <AuthProvider>
+          <Navbar />
+          <div className="flex">{children}</div>
+        </AuthProvider>
       </body>
     </html>
   );

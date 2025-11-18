@@ -1,19 +1,24 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Logo from "./components/Logo";
-import Onboarding from "./Onboarding";
-
-import { usePathname } from "next/navigation";
 import SearchField from "./components/Inputs/SearchField";
+import Link from "next/link";
 
 const Navbar = () => {
-  const pathname = usePathname();
-  const [showLogin, setShowLogin] = useState(false);
+  // const { status } = useSession();
+  // const router = useRouter();
 
-  useEffect(() => {
-    setShowLogin(pathname === "/login");
-  }, [pathname]);
+  // useEffect(() => {
+  //   const token = document.cookie.includes("token=");
+  //   if (token) {
+  //     router.replace("/latest");
+  //   }
+  // }, [router]);
+
+  // const handleLoginClick = () => {
+  //   if (status === "authenticated") {
+  //     router.push("/latest");
+  //   }
+  //   return;
+  // };
 
   return (
     <>
@@ -32,15 +37,16 @@ const Navbar = () => {
         />
 
         <div className="flex flex-none gap-x-5 items-center mx-5">
-          <button className="btn-text text-xs w-22 md:text-sm md:w-24">
-            + Create
-          </button>
-          <button
-            onClick={() => setShowLogin(true)}
-            className="btn-primary w-20 text-sm"
+          <Link
+            href="/latest"
+            className="btn-text text-xs w-22 md:text-sm md:w-24"
           >
-            Login
-          </button>
+            + Create
+          </Link>
+
+          <Link href={"/latest"}>
+            <button className="btn-primary w-20 text-sm">Login</button>
+          </Link>
         </div>
 
         <SearchField
@@ -48,8 +54,6 @@ const Navbar = () => {
           placeholder="Find it faster with a search"
         />
       </header>
-
-      {showLogin && <Onboarding onClose={() => setShowLogin(false)} />}
     </>
   );
 };

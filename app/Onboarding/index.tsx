@@ -5,11 +5,15 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import BgImage from "../../public/signup-bg-image.png";
 import UnderlineImage from "../../public/underline-svg.svg";
-import LoginPage from "./Login";
-import SignupPage from "./Signup";
+import LoginModal from "../Onboarding/Login";
+import SignupModal from "../Onboarding/Signup";
+import { useRouter } from "next/navigation";
 
-export default function Onboarding({ onClose }: { onClose: () => void }) {
-  const [formType, setFormType] = useState<"login" | "signup">("login");
+export default function Onboarding({ type }: { type?: "login" | "signup" }) {
+  const router = useRouter();
+  const [formType, setFormType] = useState<"login" | "signup">(type ?? "login");
+
+  const handleOnClose = () => router.replace("/");
 
   return (
     <div className=" h-full w-full fixed inset-0 bg-black/50 flex items-center justify-center z-9999">
@@ -31,7 +35,7 @@ export default function Onboarding({ onClose }: { onClose: () => void }) {
         <div className="flex-1 flex justify-center p-15  items-center h-full overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <div className="flex-1 flex-row  max-w-2xl h-full ">
             <button
-              onClick={onClose}
+              onClick={handleOnClose}
               className="absolute top-3 right-3 bg-gray-100 rounded-full p-2 text-2xl text-gray-500 hover:text-gray-700"
             >
               <IoClose />
@@ -66,26 +70,10 @@ export default function Onboarding({ onClose }: { onClose: () => void }) {
                 </div>
               </div>
             </div>
-            {formType === "login" ? <LoginPage /> : <SignupPage />}
+            {formType === "login" ? <LoginModal /> : <SignupModal />}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-//  <form className="flex flex-col gap-3">
-//           <input
-//             type="email"
-//             placeholder="Email"
-//             className="border p-2 rounded"
-//           />
-//           <input
-//             type="password"
-//             placeholder="Password"
-//             className="border p-2 rounded"
-//           />
-//           <button className="bg-blue-500 text-white rounded p-2 hover:bg-blue-600">
-//             Log In
-//           </button>
-//         </form>
