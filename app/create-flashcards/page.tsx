@@ -41,7 +41,7 @@ const ActionIcon = ({
 
 const CreateFlashcardsPage = () => {
   const [cards, setCards] = useState([cardTemplate(), cardTemplate()]);
-  const [isSmartAssistOpen, setIsSmartAssistOpen] = useState(false);
+  const [isSmartAssistOpen, setIsSmartAssistOpen] = useState(true);
 
   const addCard = () => setCards((prev) => [...prev, cardTemplate()]);
   const removeCard = (id: string) => {

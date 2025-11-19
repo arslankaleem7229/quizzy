@@ -8,6 +8,8 @@ export async function proxy(req: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
+  const protectedRoutes = ["/latest", "/profile", "/create-flashcards"];
+
   const pathname = req.nextUrl.pathname;
   const isAuthenticated = Boolean(token);
 
@@ -16,8 +18,9 @@ export async function proxy(req: NextRequest) {
     pathname.startsWith("/login") ||
     pathname.startsWith("/signup");
 
-  const isProtected =
-    pathname.startsWith("/latest") || pathname.startsWith("/profile");
+  const isProtected = protectedRoutes.some((route) =>
+    pathname.startsWith(route)
+  );
 
   if (isAuthenticated && isPublic) {
     const redirectTo = req.nextUrl.clone();

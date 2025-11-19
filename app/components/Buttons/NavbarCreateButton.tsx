@@ -12,16 +12,22 @@ const NavbarCreateButton = () => {
 
   if (!session) {
     return (
-      <Link href="/latest" className="btn-text text-xs w-22 md:text-sm md:w-24">
+      <Link
+        href="/create-flashcards"
+        className="btn-text text-xs w-22 md:text-sm md:w-24"
+      >
         + Create
       </Link>
     );
   }
 
   return (
-    <button className="btn-primary p-1.5 h-11 w-11 flex items-center justify-center ">
+    <Link
+      href={"/create-flashcards"}
+      className="btn-primary p-1.5 h-11 w-11 flex items-center justify-center "
+    >
       <FaPlus />
-    </button>
+    </Link>
   );
 };
 
