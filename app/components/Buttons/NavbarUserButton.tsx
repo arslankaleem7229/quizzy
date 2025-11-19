@@ -139,7 +139,7 @@ const NavbarUserButton = () => {
             type="button"
             onClick={() => {
               closeDropdown();
-              signOut();
+              signOut({ callbackUrl: "/" });
             }}
             className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[#151c4b] transition-colors"
           >
