@@ -21,7 +21,7 @@ const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
 
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
     error: "/login",
@@ -137,13 +137,22 @@ const authOptions: NextAuthOptions = {
       }
       return token;
     },
-
     async session({ session, token }) {
-      if (session.user) {
+      if (!session.user) {
+        session.user = {
+          id: token.id,
+          username: token.username,
+          type: token.type,
+          name: token.name ?? null,
+          email: token.email ?? null,
+          image: token.picture ?? null,
+        };
+      } else {
         session.user.id = token.id;
         session.user.username = token.username;
         session.user.type = token.type;
       }
+
       return session;
     },
   },

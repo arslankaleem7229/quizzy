@@ -1,25 +1,10 @@
 import Logo from "./components/Logo";
 import SearchField from "./components/Inputs/SearchField";
-import Link from "next/link";
+import NavbarUserButton from "./components/Buttons/NavbarUserButton";
+import NavbarCreateButton from "./components/Buttons/NavbarCreateButton";
+import NavbarUpgradeButton from "./components/Buttons/NavbarUpgradeButton";
 
 const Navbar = () => {
-  // const { status } = useSession();
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   const token = document.cookie.includes("token=");
-  //   if (token) {
-  //     router.replace("/latest");
-  //   }
-  // }, [router]);
-
-  // const handleLoginClick = () => {
-  //   if (status === "authenticated") {
-  //     router.push("/latest");
-  //   }
-  //   return;
-  // };
-
   return (
     <>
       <header className="flex flex-wrap md:flex-nowrap sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 lg:px-4 bg-(--background) z-999">
@@ -36,17 +21,10 @@ const Navbar = () => {
           placeholder="Find it faster with a search"
         />
 
-        <div className="flex flex-none gap-x-5 items-center mx-5">
-          <Link
-            href="/latest"
-            className="btn-text text-xs w-22 md:text-sm md:w-24"
-          >
-            + Create
-          </Link>
-
-          <Link href={"/latest"}>
-            <button className="btn-primary w-20 text-sm">Login</button>
-          </Link>
+        <div className="flex flex-none gap-x-6 items-center ml-10 lg:mx-5">
+          <NavbarCreateButton />
+          <NavbarUpgradeButton />
+          <NavbarUserButton />
         </div>
 
         <SearchField
