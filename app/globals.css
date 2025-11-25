@@ -83,3 +83,12 @@ body {
     color: var(--primaryHover);
   }
 }
+
+@media (max-width: 768px) {
+  .desk {
+    display: none;
+  }
+  .mob {
+    display: block;
+  }
+}
