@@ -2,13 +2,18 @@ import React from "react";
 import { textbooks } from "../temp_data";
 import Image from "next/image";
 
-const PopularTextbooks = () => {
+const PopularTextbooks = ({
+  classname = "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3",
+}: {
+  classname?: string;
+}) => {
   return (
     <div className="pb-16">
       <div className="text-sm font-semibold text-(--foreground)/80">
         Popular textbooks
       </div>
-      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+      <div className={classname}>
         {textbooks.map((book) => (
           <div
             key={book.title}
