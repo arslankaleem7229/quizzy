@@ -20,6 +20,7 @@ export default function RootLayout({
           <Navbar />
           <div className="flex">{children}</div>
         </AuthProvider>
+        <div className="h-16" />
       </body>
     </html>
   );
