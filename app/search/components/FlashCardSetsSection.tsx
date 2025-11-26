@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { flashcardSets } from "../flashcardsdata";
 
-const FlashCardSetsSection = () => {
+const FlashCardSetsSection = ({ header }: { header?: string }) => {
   return (
     <section className="space-y-5">
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="">Flashcard sets</h1>
+          <h1>{header ?? "Flashcard sets"}</h1>
         </div>
         <button className="inline-flex items-center gap-2 text-sm font-medium text-(--primary)">
           View all

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Flashcard, TestFlashcard } from "./components/TestFlashcard";
 import FlashcardNavButton from "./components/FlashcardNavButton";
 
-const flashcards: Flashcard[] = [
+export const flashcards: Flashcard[] = [
   {
     id: 1,
     question:
@@ -32,7 +32,7 @@ const flashcards: Flashcard[] = [
   },
 ];
 
-const FlashcardTestPage = () => {
+const FlashcardTestPage = ({ classname }: { classname?: string }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -47,12 +47,9 @@ const FlashcardTestPage = () => {
   };
 
   return (
-    <main className="flex w-full min-h-screen">
+    <main className={classname ?? "flex w-full min-h-screen px-5"}>
       <section className="flex flex-1 flex-col">
         <div className="mt-8 flex flex-col items-center gap-8">
-          <h1 className="font-medium text-xl tracking-widest">
-            {currentIndex + 1 + " / " + flashcards.length}
-          </h1>
           <TestFlashcard
             currentCard={flashcards[currentIndex]}
             isFlipped={isFlipped}
@@ -60,6 +57,9 @@ const FlashcardTestPage = () => {
           />
           <div className="flex items-center gap-10">
             <FlashcardNavButton isLeft={true} handleAction={handlePrev} />
+            <h1 className="text-sm font-medium">
+              {currentIndex + 1 + " / " + flashcards.length}
+            </h1>
             <FlashcardNavButton isLeft={false} handleAction={handleNext} />
           </div>
         </div>
