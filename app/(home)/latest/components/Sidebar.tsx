@@ -11,7 +11,7 @@ const Sidebar = () => {
 
       <SidebarDivider />
 
-      <div className="mt-6 text-sm font-medium tracking-wide text-(--foreground)/50">
+      <div className="mt-6 text-sm font-medium tracking-wide text-(--textColor)/50">
         Your folders
       </div>
       <div className="mt-3 space-y-2 text-sm">
@@ -22,7 +22,7 @@ const Sidebar = () => {
 
       <SidebarDivider />
 
-      <div className="mt-6 text-sm font-medium tracking-wide text-(--foreground)/50">
+      <div className="mt-6 text-sm font-medium tracking-wide text-(--textColor)/50">
         Start here
       </div>
       <div className="mt-3 space-y-2 text-sm">

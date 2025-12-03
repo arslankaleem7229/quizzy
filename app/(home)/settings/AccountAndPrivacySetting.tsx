@@ -33,8 +33,8 @@ const AccountAndPrivacySetting = () => {
   });
 
   return (
-    <section className="space-y-4">
-      <h2 className="text-white font-medium">Account and privacy</h2>
+    <section className="space-y-4 text-(--textColor)">
+      <h2 className="font-medium">Account and privacy</h2>
       <div className="rounded-xl border-2 border-gray-700">
         <div className="space-y-4">
           <SettingCustomButtonRow
@@ -43,7 +43,7 @@ const AccountAndPrivacySetting = () => {
           >
             <button
               type="button"
-              className="rounded-full px-5 py-3 text-sm font-medium"
+              className="rounded-full px-5 py-3 text-sm font-medium text-white"
             >
               Create
             </button>
@@ -55,14 +55,14 @@ const AccountAndPrivacySetting = () => {
           >
             <button
               type="button"
-              className="flex gap-3 justify-center items-center rounded-full px-5 py-3 text-sm font-medium"
+              className="flex gap-3 justify-center items-center rounded-full px-5 py-3 text-sm font-medium text-white"
             >
               <FaFacebook className="h-5 w-5 text-blue-700" /> Link Facebook
             </button>
           </SettingCustomButtonRow>
 
           <div className="flex flex-col space-y-4 gap-2 pl-6 pr-10">
-            <h2 className="text-white font-medium">Privacy</h2>
+            <h2 className="font-medium">Privacy</h2>
             <div className="flex justify-between">
               <p className="text-sm font-light">
                 Show your actual name on Quizlet

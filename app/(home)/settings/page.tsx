@@ -7,7 +7,7 @@ import PersonalInfoSetting from "./PersonalInfoSetting";
 
 const SettingsPage = () => {
   return (
-    <main className="min-h-screen w-full bg-(--background) text-white">
+    <main className="min-h-screen w-full bg-(--background) text-(--textColor)">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-5 md:gap-10 px-4 pb-24 pt-5 md:pt-8 lg:px-0">
         <header>
           <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold tracking-wide">
@@ -16,7 +16,7 @@ const SettingsPage = () => {
         </header>
 
         <section className="space-y-3">
-          <h2 className="text-white font-medium">Subscription</h2>
+          <h2 className="font-medium">Subscription</h2>
           <div className="flex items-center md:block rounded-lg md:rounded-3xl bg-linear-to-r from-[#7f8bff] to-[#c2c8ff] px-4 py-2 sm:p-6 md:p-6 text-(--background)">
             <p className="flex flex-1 md:block text-xl font-semibold">
               Level up with Q+
@@ -36,7 +36,6 @@ const SettingsPage = () => {
         <PersonalInfoSetting />
         <AppearanceSetting />
         <NotificationSetting />
-
         <AccountAndPrivacySetting />
       </div>
     </main>

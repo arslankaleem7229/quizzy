@@ -19,6 +19,8 @@
   --cardColorHover: #edeff4;
   --iconColor: #000000;
   --textColor: #000000;
+  --capsule: #d1d5db;
+  --grayText: #4b5563;
 }
 
 :root[data-theme="dark"] {
@@ -30,6 +32,8 @@
   --cardColorHover: #586380;
   --iconColor: #ffffff;
   --textColor: #ffffff;
+  --capsule: #6b7280;
+  --grayText: #d1d5db;
 }
 
 .primaryColor {

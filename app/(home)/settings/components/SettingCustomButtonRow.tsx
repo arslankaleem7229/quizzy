@@ -16,7 +16,7 @@ const SettingCustomButtonRow = ({
 }) => {
   return (
     <div
-      className={`flex flex-row gap-2 ${enableTopBorder && "border-t-2"} ${
+      className={`flex flex-row gap-2 ${enableTopBorder && "border-t-2 "} ${
         enableBottomBorder && "border-b-2"
       } border-gray-700 pl-6 pr-10 py-6 items-center justify-between `}
     >
@@ -24,7 +24,7 @@ const SettingCustomButtonRow = ({
         <p className="font-medium"> {label} </p>
         <p className="text-sm font-light tracking-wide">{desc}</p>
       </div>
-      <div className="inline-flex gap-2 items-center rounded-full bg-[#2E3856] text-sm font-semibold transition">
+      <div className="inline-flex gap-2 items-center rounded-full bg-(--capsule) text-sm font-semibold transition text-white">
         {children}
       </div>
     </div>

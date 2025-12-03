@@ -30,7 +30,7 @@ const ActionIcon = ({
   onClick?: () => void;
 }) => (
   <button
-    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2E3856] text-white font-bold transition hover:bg-[#262f55] hover:text-white"
+    className="flex h-10 w-10 items-center justify-center rounded-full bg-(--capsule) font-bold transition hover:bg-[#262f55] hover:text-white"
     aria-label={label}
     type="button"
     onClick={onClick}
@@ -64,7 +64,7 @@ const CreateFlashcardsPage = () => {
   };
 
   return (
-    <main className="w-full min-h-screen">
+    <main className="w-full min-h-screen bg-(--background) text-(--textColor)">
       <div className="flex w-full">
         <div
           className={`flex-1 transition-all duration-300 ${
@@ -74,13 +74,13 @@ const CreateFlashcardsPage = () => {
           {/* top header */}
           <div className="mx-auto max-w-7xl px-4 py-6 lg:px-12 lg:py-12">
             <div className="flex gap-5 flex-row justify-between mb-8">
-              <h1 className="text-xl content-center font-medium text-white lg:text-2xl">
+              <h1 className="text-xl content-center font-medium lg:text-2xl">
                 Create a new flashcard set
               </h1>
               <div className="sm:flex gap-3 shrink-0">
                 <button
                   type="button"
-                  className="sm:block hidden rounded-full bg-[#2E3856] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#555d82]"
+                  className="sm:block hidden rounded-full bg-(--capsule) px-6 py-3 text-sm font-medium transition hover:bg-(--cardColorHover)"
                 >
                   Create
                 </button>
@@ -96,23 +96,23 @@ const CreateFlashcardsPage = () => {
             <div className="space-y-2">
               <input
                 placeholder="Title"
-                className="w-full rounded-lg border border-transparent bg-[#2E3856] p-4 text-base font-normal text-white placeholder:text-white focus:border-white focus:outline-none focus:ring-1 "
+                className="w-full rounded-lg border bg-(--cardColor) p-4 text-base font-normal border-transparent focus:outline-none focus:ring-[#a8b1ff] focus:ring-2 "
               />
               <textarea
                 placeholder="Add a description..."
                 rows={3}
-                className="w-full rounded-lg border border-transparent bg-[#2E3856] p-4 text-base text-white placeholder:text-white focus:border-white focus:outline-none focus:ring-1 resize-none"
+                className="w-full rounded-lg border border-transparent bg-(--cardColor) p-4 text-base focus:outline-none focus:ring-[#a8b1ff] focus:ring-2 resize-none"
               />
             </div>
             {/* button list */}
             <div className="flex flex-col flex-wrap gap-4 py-5  md:flex-row ">
               <div className=" flex flex-wrap items-center gap-3 w-full md:w-auto lg:w-auto">
-                <button className="inline-flex items-center gap-2 rounded-full bg-[#2E3856] px-4 py-2 font-medium text-sm text-white hover:bg-[#262f55]">
+                <button className="inline-flex items-center gap-2 rounded-full bg-(--capsule) px-4 py-2 font-medium text-sm hover:bg-[#262f55]">
                   <HiOutlinePlus className="h-4 w-4" />
                   Import
                 </button>
 
-                <button className="inline-flex items-center gap-2 rounded-full bg-[#2E3856] px-4 py-2 font-medium text-sm text-white hover:bg-[#262f55]">
+                <button className="inline-flex items-center gap-2 rounded-full bg-(--capsule) px-4 py-2 font-medium text-sm hover:bg-[#262f55]">
                   <HiOutlinePlus className="h-4 w-4" />
                   Add diagram
                   <span className="inline-flex items-center rounded-full bg-[#ffcd1f] px-2 py-0.5 font-medium text-sm text-black ml-1">
@@ -121,10 +121,10 @@ const CreateFlashcardsPage = () => {
                 </button>
 
                 <button
-                  className={`items-center gap-2 rounded-full px-4 py-2 font-medium text-sm text-white transition ${
+                  className={`items-center gap-2 rounded-full px-4 py-2 font-medium text-sm transition ${
                     isSmartAssistOpen
                       ? "hidden"
-                      : "hidden xl:inline-flex bg-[#2E3856] hover:bg-[#262f55]"
+                      : "hidden xl:inline-flex bg-(--capsule) hover:bg-[#262f55]"
                   }`}
                   onClick={() => setIsSmartAssistOpen(!isSmartAssistOpen)}
                 >
@@ -172,7 +172,7 @@ const CreateFlashcardsPage = () => {
               <button
                 type="button"
                 onClick={addCard}
-                className="rounded-full bg-[#2E3856] px-8 py-3 text-base font-semibold text-white transition hover:bg-[#3a4173]"
+                className="rounded-full bg-(--capsule) px-8 py-3 text-base font-semibold transition hover:bg-[#3a4173]"
               >
                 Add a card
               </button>

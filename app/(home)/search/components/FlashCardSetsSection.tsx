@@ -3,11 +3,9 @@ import { flashcardSets } from "../flashcardsdata";
 
 const FlashCardSetsSection = ({ header }: { header?: string }) => {
   return (
-    <section className="space-y-5">
+    <section className="space-y-5 text-(--textColor)">
       <header className="flex items-center justify-between">
-        <div>
-          <h1>{header ?? "Flashcard sets"}</h1>
-        </div>
+        <h1>{header ?? "Flashcard sets"}</h1>
         <button className="inline-flex items-center gap-2 text-sm font-medium text-(--primary)">
           View all
         </button>
@@ -18,7 +16,7 @@ const FlashCardSetsSection = ({ header }: { header?: string }) => {
           return (
             <article
               key={set.id}
-              className="flex h-full min-h-[200px] flex-col rounded-lg border-gray-700 border-2 bg-white/10 p-5 transition hover:-translate-0.5"
+              className="flex h-full min-h-[200px] flex-col rounded-lg border-(--grayText)/10 border-2 bg-(--cardColor) p-5 transition hover:-translate-0.5"
             >
               <div className="flex flex-2 flex-col justify-evenly">
                 <div className="hidden">
@@ -39,7 +37,7 @@ const FlashCardSetsSection = ({ header }: { header?: string }) => {
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-white/10 px-3 py-1 text-white">
+                    <span className="rounded-full bg-(--capsule) px-3 py-1">
                       {set.terms} terms
                     </span>
                     <span>&bull;</span>
@@ -49,22 +47,31 @@ const FlashCardSetsSection = ({ header }: { header?: string }) => {
                   </div>
                 </div>
               </div>
-
-              <div className="mt-6 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="relative h-10 w-10 rounded-full overflow-clip">
+              <div className="mt-6 flex items-center justify-between gap-3">
+                <div className="flex min-w-0 flex-1 flex-row flex-nowrap items-center gap-3">
+                  <div className="shrink-0 relative h-10 w-10 rounded-full overflow-clip">
                     <Image
                       src={`/avatars/${index + (1 % 20)}.jpg`}
                       alt={set.author}
                       fill
                     />
                   </div>
-                  <p className="text-sm text-gray-200">{set.author}</p>
-                  <div className="rounded-full bg-white/10 px-2 py-1 text-xs font-semibold text-indigo-100">
-                    {set.authorRole}
+                  <div className="flex flex-col">
+                    <p className="text-sm text-(--grayText) overflow-clip line-clamp-1">
+                      {set.author}
+                    </p>
+                    <div className="flex">
+                      <div className="rounded-full bg-(--capsule) px-2 py-1 text-[10px] font-medium">
+                        {set.authorRole}
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <button className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold text-white transition hover:border-white/40 hover:bg-white/5">
+                <button
+                  className={`${
+                    header && "flex xl:hidden"
+                  } rounded-full border border-(--foreground)/20 px-4 py-2 text-xs font-semibold transition hover:border-(--foreground)/40 hover:bg-(--foreground)/5`}
+                >
                   Preview
                 </button>
               </div>

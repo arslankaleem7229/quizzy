@@ -39,7 +39,7 @@ const BillingCards = () => {
       {plans.map((plan) => (
         <article
           key={plan.id}
-          className="rounded-lg bg-white/10 p-6 text-left max-w-md"
+          className="rounded-lg bg-(--foreground)/10 p-6 text-left max-w-md"
         >
           <div>
             <h3 className="mt-4 text-2xl font-semibold">{plan.name}</h3>
@@ -49,7 +49,7 @@ const BillingCards = () => {
           </div>
           <div className="mt-6 flex items-baseline gap-2 text-5xl font-bold">
             {plan.price}
-            <span className="text-base font-semibold text-gray-300">
+            <span className="text-base font-semibold text-(--grayText)">
               / month
             </span>
           </div>
@@ -59,7 +59,7 @@ const BillingCards = () => {
           <button className="mt-6 w-full rounded-full bg-[#FFCD1F] py-4.5 font-semibold text-black/90 transition hover:bg-[#ffe07b]">
             Start your free trial
           </button>
-          <ul className="mt-6 space-y-4 text-white">
+          <ul className="mt-6 space-y-4 ">
             {plan.highlights.map((item) => (
               <li key={item} className="flex justify-start items-center gap-5">
                 <FaCheck />

@@ -3,7 +3,7 @@ import Image from "next/image";
 const PaymentFooterCard = () => {
   return (
     <div className="">
-      <div className="rounded-3xl bg-white/10 px-8 py-10 text-white flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="rounded-3xl bg-(--foreground)/10 px-8 py-10 text-(--textColor) flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-between">
         <div className="relative h-14 w-14">
           <Image
             src={"/icons/castle.png"}
@@ -20,7 +20,7 @@ const PaymentFooterCard = () => {
             We offer generous discounts for your business, school, or family.
           </p>
         </div>
-        <button className="inset-0 rounded-full bg-[#FFCD1F] px-8 py-5 tracking-wide text-sm font-semibold text-[#0a092d]">
+        <button className="inset-0 shrink-0 rounded-full bg-[#FFCD1F] px-8 py-5 tracking-wide text-sm font-semibold text-[#0a092d]">
           Get pricing now
         </button>
       </div>

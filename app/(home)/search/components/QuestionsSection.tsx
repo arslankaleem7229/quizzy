@@ -4,7 +4,7 @@ import { MdVerified } from "react-icons/md";
 
 const QuestionsSection = () => {
   return (
-    <section className="space-y-5">
+    <section className="space-y-5 text-(--textColor)">
       <header className="flex items-center justify-between">
         <div>
           <h1 className="">Questions</h1>
@@ -19,14 +19,14 @@ const QuestionsSection = () => {
           return (
             <article
               key={set.id}
-              className="flex h-full flex-col rounded-lg border-gray-700 border-2 bg-white/10 p-3 transition hover:-translate-0.5"
+              className="flex h-full flex-col rounded-lg border-(--grayText)/10 border-2 bg-(--cardColor) p-3 transition hover:-translate-0.5"
             >
               <div className="flex flex-1 flex-col">
                 <div>
                   <h3 className="text-xs font-medium">{set.title}</h3>
                 </div>
                 <div className="mt-2 text-xs max-h-[60px] overflow-hidden">
-                  <span className="py-0.5 text-white font-extralight ">
+                  <span className="py-0.5 text-(--grayText) font-extralight ">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. At
                     nulla vel fugit mollitia aspernatur officia animi, nihil,
                     odit saepe vitae perspiciatis modi, consequatur repudiandae.

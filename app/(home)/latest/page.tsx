@@ -6,7 +6,7 @@ import Sidebar from "./components/Sidebar";
 
 const Latest = () => {
   return (
-    <main className="flex w-full min-h-screen bg-(--background) text-(--foreground)">
+    <main className="flex w-full min-h-screen bg-(--background) text-(--textColor)">
       <Sidebar />
 
       <section className="flex flex-1 flex-col px-6 pb-5 lg:px-12">

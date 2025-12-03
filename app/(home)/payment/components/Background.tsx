@@ -1,6 +1,6 @@
 export default function Background() {
   return (
-    <div className="pointer-events-none absolute top-0 bottom-0 left-0 right-0 -z-10 flex items-center justify-center overflow-hidden">
+    <div className="pointer-events-none absolute top-0 bottom-0 left-0 right-0 z-1 flex items-center justify-center overflow-hidden">
       <svg
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"

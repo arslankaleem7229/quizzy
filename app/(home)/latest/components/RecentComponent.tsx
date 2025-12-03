@@ -3,7 +3,7 @@ import { recents } from "../temp_data";
 const RecentComponent = () => {
   return (
     <div>
-      <div className="px-1 md:px-3 py-3 text-md font-base text-(--foreground)/80">
+      <div className="px-1 md:px-3 py-3 text-md font-base text-(--textColor)/80">
         Recents
       </div>
 
@@ -11,11 +11,11 @@ const RecentComponent = () => {
         {recents.map((item) => (
           <div
             key={item.title}
-            className={`rounded-lg hover:bg-(--latest-card) px-3 py-2 transition duration-0`}
+            className={`rounded-lg hover:bg-(--cardColorHover) px-3 py-2 transition duration-0`}
           >
             <div className="flex flex-row items-center gap-4">
               <div
-                className={`flex h-10 w-10 items-center justify-center rounded-lg bg-(--latest-card) text-lg text-white/80`}
+                className={`flex h-10 w-10 items-center justify-center rounded-lg bg-(--cardColorHover) text-lg text-(--textColor)/80`}
               >
                 <svg
                   aria-hidden

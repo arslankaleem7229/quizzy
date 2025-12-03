@@ -8,8 +8,8 @@ const AppearanceSetting = () => {
   const [theme, setTheme] = useState("Auto");
   const [language, setLanguage] = useState("English (UK)");
   return (
-    <section className="space-y-4">
-      <h2 className="text-white font-medium">Appearance</h2>
+    <section className="space-y-4 text-(--textColor)">
+      <h2 className=" font-medium">Appearance</h2>
       <div className="rounded-xl border-2 border-gray-700">
         <SettingDropDownRow
           label={"Theme"}

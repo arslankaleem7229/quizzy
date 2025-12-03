@@ -87,7 +87,7 @@ const notStudied: Term[] = [
 
 const FlashcardSetPage = () => {
   return (
-    <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--foreground)">
+    <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor)">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
         <BreadCrumbs />
         <FlashcardTestHeader />
@@ -96,7 +96,7 @@ const FlashcardSetPage = () => {
           {studyModes.map((mode) => (
             <button
               key={mode.id}
-              className="rounded-lg bg-white/10 p-5 font-medium tracking-wide transition hover:border-b-white/30"
+              className="rounded-lg bg-(--cardColor) p-5 font-medium tracking-wide transition hover:border-b-2 border-(--primary)"
             >
               {mode.label}
             </button>
@@ -131,7 +131,7 @@ const RemainingSection = ({
           {header}({terms.length})
         </h2>
 
-        <button className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm">
+        <button className="inline-flex items-center gap-2 rounded-full bg-(--capsule) px-4 py-2 text-sm">
           <StarIcon className="h-5 w-5 text-emerald-300" />
           Select these {terms.length}
         </button>
@@ -140,7 +140,7 @@ const RemainingSection = ({
         {terms.map((term) => (
           <article
             key={term.id}
-            className="flex flex-row w-full items-center justify-between gap-4 rounded-lg px-5 py-4 bg-white/10"
+            className="flex flex-row w-full items-center justify-between gap-4 rounded-lg px-5 py-4 bg-(--cardColor)"
           >
             <div className="flex flex-col w-full md:flex-row pr-4 md:pr-0 ">
               <p className="flex-1 px-2 font-bold md:font-normal">

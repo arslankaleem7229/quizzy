@@ -26,7 +26,7 @@ export const TestFlashcard = ({
           type="button"
           className={`
                   flex h-[520px] w-full mx-auto
-                  rounded-xl bg-white/10 
+                  rounded-xl bg-(--cardColor) 
                   text-xl font-medium 
                   transition-transform duration-500 transform-3d ${
                     isFlipped ? "rotate-y-180" : "rotate-y-0"
@@ -53,7 +53,7 @@ export const TestFlashcard = ({
             </div>
           )}
           {isFlipped && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-lg text-white backface-hidden rotate-y-180">
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-lg backface-hidden rotate-y-180">
               <p className="text-3xl font-light">{currentCard.answer}</p>
             </div>
           )}

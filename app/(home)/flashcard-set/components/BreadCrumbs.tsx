@@ -10,10 +10,10 @@ const breadcrumbs = [
 const BreadCrumbs = () => {
   return (
     <div className="flex justify-between items-center">
-      <div className="flex flex-wrap gap-2 text-sm text-gray-400">
+      <div className="flex flex-wrap gap-2 text-sm text-(--grayText)">
         {breadcrumbs.map((crumb, idx) => (
           <div key={crumb} className="items-center">
-            <Link href="#" className="hover:text-white">
+            <Link href="#" className="hover:text-(--text-color)">
               {crumb}
             </Link>
             {idx < breadcrumbs.length - 1 && <span> / </span>}

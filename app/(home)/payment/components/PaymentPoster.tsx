@@ -28,7 +28,7 @@ const benefits = [
 
 const PaymentPoster = () => {
   return (
-    <div className="w-full bg-(--background)">
+    <div className="w-full">
       {benefits.map((benefit, index) => {
         const isreversed = index % 2 === 0;
         return (

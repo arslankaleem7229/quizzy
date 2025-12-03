@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const StudyGuidesSection = () => {
   return (
-    <section className="space-y-5">
+    <section className="-mt-16 space-y-5 text-(--textColor)">
       <header className="flex items-center justify-between">
         <div>
           <h1 className="">Study guides</h1>
@@ -19,7 +19,7 @@ const StudyGuidesSection = () => {
           return (
             <article
               key={set.id}
-              className="flex h-full min-h-[200px] flex-col rounded-lg border-gray-700 border-2 bg-white/10 p-5 transition hover:-translate-0.5"
+              className="flex h-full min-h-[200px] flex-col rounded-lg border-(--grayText)/10 border-2 bg-(--cardColor) p-5 transition hover:-translate-0.5"
             >
               <div className="flex flex-1 flex-col">
                 <div className="hidden">
@@ -53,7 +53,7 @@ const StudyGuidesSection = () => {
                     fill
                   />
                 </div>
-                <p className="text-sm text-gray-200">{set.author}</p>
+                <p className="text-sm text-(--grayText)">{set.author}</p>
               </div>
             </article>
           );

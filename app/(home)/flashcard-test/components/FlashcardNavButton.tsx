@@ -10,7 +10,7 @@ const FlashcardNavButton = ({
   return (
     <button
       onClick={handleAction}
-      className="flex h-12 w-20 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-[#323a6c]"
+      className="flex h-12 w-20 items-center justify-center rounded-full bg-(--cardColor) text-white transition hover:bg-[#323a6c]"
     >
       {isLeft ? (
         <FaArrowLeft className="h-5 w-10" />

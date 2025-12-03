@@ -1,7 +1,15 @@
 "use client";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  MouseEvent,
+  MouseEventHandler,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { FaTrophy } from "react-icons/fa";
@@ -99,11 +107,11 @@ const NavbarUserButtonContent = ({ user }: { user: User }) => {
       {isOpen ? (
         <div
           ref={dropdownRef}
-          className="absolute right-0 mt-3 w-80 rounded-2xl border border-[#2e3356] bg-[#0c133d] shadow-2xl overflow-hidden z-50"
+          className="absolute right-0 mt-3 w-80 rounded-2xl border border-(--foreground)/20 bg-(--background) shadow-2xl overflow-hidden z-50"
           role="menu"
         >
-          <div className="px-4 py-3 flex items-center gap-3 border-b border-[#2e3356]">
-            <div className="relative h-12 w-12 rounded-full bg-[#3c4796] flex items-center justify-center overflow-hidden text-lg font-semibold">
+          <div className="px-4 py-3 flex items-center gap-3 border-b border-(--foreground)/20">
+            <div className="relative h-12 w-12 rounded-full flex items-center justify-center overflow-hidden text-lg font-semibold">
               {user?.image ? (
                 <Image
                   className="object-cover"
@@ -116,87 +124,94 @@ const NavbarUserButtonContent = ({ user }: { user: User }) => {
               )}
             </div>
             <div className="flex flex-col">
-              <span className="text-sm font-semibold">{user.name}</span>
+              <span className="text-sm font-semibold text-(--textColor)">
+                {user.name}
+              </span>
               <span className="text-xs text-gray-300">{user.email}</span>
             </div>
           </div>
 
           <nav className="flex flex-col text-sm">
-            <button
-              type="button"
-              className="flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[#151c4b] transition-colors"
-              onClick={closeDropdown}
+            <NavBarDropDownButton
+              label={"Achievements"}
+              onclick={closeDropdown}
             >
               <FaTrophy className="text-lg " />
-              <span>Achievements</span>
-            </button>
-            <button
-              type="button"
-              className="flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[#151c4b] transition-colors"
-              onClick={closeDropdown}
-            >
-              <FiSettings className="text-lg" />
-              <span>Settings</span>
-            </button>
-            <button
-              type="button"
-              className="flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[#151c4b] transition-colors"
-              onClick={toggleTheme}
+            </NavBarDropDownButton>
+            <Link href={"/settings"}>
+              <NavBarDropDownButton label={"Settings"} onclick={closeDropdown}>
+                <FiSettings className="text-lg" />
+              </NavBarDropDownButton>
+            </Link>
+            <NavBarDropDownButton
+              label={isLightMode ? "Dark mode" : "Light mode"}
+              onclick={toggleTheme}
             >
               {isLightMode ? (
                 <FiMoon className="text-lg" />
               ) : (
                 <FiSun className="text-lg" />
               )}
-              <span>{isLightMode ? "Dark mode" : "Light mode"}</span>
-            </button>
-          </nav>
+            </NavBarDropDownButton>
 
-          <div className="border-t border-[#2e3356]" />
+            <div className="border-t border-(--foreground)/20" />
 
-          <button
-            type="button"
-            onClick={() => {
-              closeDropdown();
-              signOut({ callbackUrl: "/" });
-            }}
-            className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[#151c4b] transition-colors"
-          >
-            <RiLogoutBoxLine className="text-lg" />
-            <span>Log out</span>
-          </button>
+            <NavBarDropDownButton
+              label={"Log out"}
+              onclick={() => {
+                closeDropdown();
+                signOut({ callbackUrl: "/" });
+              }}
+            >
+              <RiLogoutBoxLine className="text-lg" />
+            </NavBarDropDownButton>
 
-          <div className="border-t border-[#2e3356]" />
+            <div className="border-t border-(--foreground)/20" />
 
-          <nav className="flex flex-col text-sm">
-            <button
-              type="button"
-              className="flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[#151c4b] transition-colors"
-              onClick={closeDropdown}
+            <NavBarDropDownButton
+              label={"Privacy policy"}
+              onclick={closeDropdown}
             >
               <MdOutlinePrivacyTip className="text-lg" />
-              <span>Privacy policy</span>
-            </button>
-            <button
-              type="button"
-              className="flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[#151c4b] transition-colors"
-              onClick={closeDropdown}
+            </NavBarDropDownButton>
+
+            <NavBarDropDownButton
+              label={"Help and feedback"}
+              onclick={closeDropdown}
             >
               <MdOutlineFeedback className="text-lg" />
-              <span>Help and feedback</span>
-            </button>
-            <button
-              type="button"
-              className="flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[#151c4b] transition-colors"
-              onClick={closeDropdown}
-            >
-              <BsStars className="text-lg text-[#f4c64e]" />
-              <span>Upgrade</span>
-            </button>
+            </NavBarDropDownButton>
+
+            <Link href={"/payment"} className="flex max-w-full">
+              <NavBarDropDownButton label={"Upgrade"} onclick={closeDropdown}>
+                <BsStars className="text-lg text-[#f4c64e]" />
+              </NavBarDropDownButton>
+            </Link>
           </nav>
         </div>
       ) : null}
     </div>
+  );
+};
+
+const NavBarDropDownButton = ({
+  label,
+  onclick,
+  children,
+}: {
+  label: string;
+  onclick: MouseEventHandler<HTMLButtonElement>;
+  children: ReactNode;
+}) => {
+  return (
+    <button
+      type="button"
+      className="w-full flex items-center gap-3 px-4 py-2.5 text-left text-(--textColor) hover:bg-(--foreground)/10 transition-colors"
+      onClick={onclick}
+    >
+      {children}
+      <span>{label}</span>
+    </button>
   );
 };
 

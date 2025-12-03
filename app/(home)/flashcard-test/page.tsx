@@ -47,7 +47,12 @@ const FlashcardTestPage = ({ classname }: { classname?: string }) => {
   };
 
   return (
-    <main className={classname ?? "flex w-full min-h-screen px-5"}>
+    <main
+      className={
+        classname ??
+        "flex w-full min-h-screen px-5 bg-(--background) text-(--textColor)"
+      }
+    >
       <section className="flex flex-1 flex-col">
         <div className="mt-8 flex flex-col items-center gap-8">
           <TestFlashcard

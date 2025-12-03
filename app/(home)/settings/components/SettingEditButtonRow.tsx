@@ -33,7 +33,7 @@ const SettingEditButtonRow = ({
         <button
           type="button"
           onClick={onAction}
-          className="text-sm font-semibold text-[#8ea5ff] transition hover:text-white"
+          className="text-sm font-semibold text-[#8ea5ff] transition hover:text-(--foreground)"
         >
           {children}
         </button>

@@ -13,7 +13,7 @@ const SmartAssistPanel = ({ onClose }: SmartAssistPanelProps) => {
   const [notes, setNotes] = useState("");
 
   return (
-    <aside className="flex w-full h-full flex-col rounded-lg bg-[#2E3856] p-4 overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-6rem)]">
+    <aside className="flex w-full h-full flex-col rounded-lg bg-(--cardColor) p-4 overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-6rem)]">
       {/* header of ai assistant */}
       <div className="flex items-start justify-between gap-3">
         <div className="flex flex-col">
@@ -31,7 +31,7 @@ const SmartAssistPanel = ({ onClose }: SmartAssistPanelProps) => {
         </div>
         {onClose && (
           <button
-            className="rounded-full text-xl text-white transition hover:bg-white/20 flex items-center justify-center h-8 w-8"
+            className="rounded-full text-xl text-(--textColor) transition hover:bg-(--textColor)/20 flex items-center justify-center h-8 w-8"
             onClick={onClose}
             aria-label="Close assistant"
           >
@@ -40,13 +40,13 @@ const SmartAssistPanel = ({ onClose }: SmartAssistPanelProps) => {
         )}
       </div>
       {/* text area  */}
-      <div className="mt-5 rounded-lg bg-[#0c0f2f] p-3 focus-within:ring-2 focus-within:ring-white">
+      <div className="mt-5 rounded-lg bg-(--background) p-3 focus-within:ring-2 focus-within:ring-[#a67bff]">
         <textarea
           value={notes}
           onChange={(event) => setNotes(event.target.value)}
           maxLength={100000}
           placeholder="Create flashcards by either uploading documents or pasting notes and providing a topic (e.g. photosynthesis)."
-          className="h-120 w-full resize-none text-white placeholder:text-white/60
+          className="h-120 w-full resize-none text-(--textColor) placeholder:text-(--textColor)/60
           outline-none"
         />
       </div>
@@ -55,7 +55,7 @@ const SmartAssistPanel = ({ onClose }: SmartAssistPanelProps) => {
       <div
         className={`mt-2 text-right text-xs ${
           notes.length > 10 || notes.length === 0
-            ? "text-white"
+            ? "text-(--foreground)"
             : "text-red-500"
         }`}
       >
@@ -69,14 +69,17 @@ const SmartAssistPanel = ({ onClose }: SmartAssistPanelProps) => {
           className={`
             text-sm p-2.5 font-normal
           ${notes.length > 10 ? "pointer-events-none opacity-50" : ""}
-          inline-flex items-center gap-2 transition hover:text-white`}
+          inline-flex items-center gap-2 transition hover:text-(--textColor)`}
         >
           <LuCirclePlus className="h-4 w-4" />
           Upload
         </button>
         <button
           className={`btn-primary
-            ${notes.length < 10 && "opacity-50 bg-transparent "}
+            ${
+              notes.length < 10 &&
+              "opacity-50 bg-transparent text-(--grayText) "
+            }
           `}
         >
           Start

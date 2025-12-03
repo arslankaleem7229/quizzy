@@ -11,7 +11,7 @@ const SettingDropDownRow = ({
   label: string;
   value: string;
   actionLabel?: string;
-  onAction: ChangeEventHandler<HTMLSelectElement>;
+  onAction?: ChangeEventHandler<HTMLSelectElement>;
   children?: ReactNode;
 }) => {
   return (
@@ -19,13 +19,13 @@ const SettingDropDownRow = ({
       <div>
         <p className="font-medium"> {label} </p>
       </div>
-      <div className="inline-flex gap-2 items-center rounded-full bg-[#2E3856] pr-6 text-sm font-semibold transition">
+      <div className="inline-flex gap-2 items-center rounded-full bg-(--capsule) pr-6 text-sm font-semibold transition">
         <select
           value={value}
           name={actionLabel}
           onChange={onAction}
           // TODO: Fix this
-          className="w-full bg-transparent text-white outline-none pl-6 py-3.5 appearance-none"
+          className="w-full bg-transparent outline-none pl-6 py-3.5 appearance-none"
         >
           {children}
           {/* {actionLabel} */}

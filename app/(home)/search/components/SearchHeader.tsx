@@ -15,18 +15,20 @@ const SearchHeader = () => {
   const query = "sajnasd";
   return (
     <div className="space-y-4">
-      <p className="text-lg text-gray-200">
+      <p className="text-lg text-(--grayText)">
         Results for{" "}
-        <span className="font-semibold text-white">&quot;{query}&quot;</span>
+        <span className="font-semibold text-(--forground)">
+          &quot;{query}&quot;
+        </span>
       </p>
-      <div className="flex justify-between text-sm border-gray-700 border-b-2 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div className="flex justify-between text-sm border-(--grayText) border-b-2 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {tabs.map((tab) => (
           <button
             key={tab}
-            className={`border-b-2 px-5 py-2  transition relative -bottom-0.5 ${
+            className={`border-b-2 px-5 py-2 transition relative -bottom-0.5 ${
               tab === "All results"
                 ? "border-(--primary) text-(--primary)"
-                : "border-transparent hover:text-(--primary) hover:border-current"
+                : "border-transparent hover:text-(--primary) hover:border-current text-(--textColor)"
             }`}
           >
             {tab}

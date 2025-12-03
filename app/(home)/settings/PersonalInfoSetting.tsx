@@ -37,7 +37,7 @@ const PersonalInfoSetting = () => {
 
   return (
     <section className="space-y-4">
-      <h2 className="text-white font-medium">Personal information</h2>
+      <h2 className="font-medium">Personal information</h2>
       <div className="rounded-xl border-2 border-gray-700">
         <div className="p-4 flex flex-wrap items-center gap-3">
           <p className="font-medium tracking-wide">Profile picture</p>
@@ -63,7 +63,7 @@ const PersonalInfoSetting = () => {
                   onClick={() => setSelectedAvatar(letter)}
                   className={`flex h-12 w-12 items-center justify-center rounded-full text-sm font-semibold uppercase transition ${
                     selectedAvatar === letter
-                      ? "bg-[#4f57fd] text-white ring-2 ring-white/70"
+                      ? "bg-(--primary) text-white ring-2 ring-(--foreground)/70"
                       : "bg-[#1d2246] text-white/80 hover:opacity-80"
                   }`}
                 >
@@ -72,7 +72,7 @@ const PersonalInfoSetting = () => {
               ))}
               <button
                 type="button"
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-white/30 text-white/70 transition hover:border-white"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-(--foreground)/30 text-(--foreground)/70 transition hover:border-(--foreground)"
               >
                 <HiOutlinePlus className="h-5 w-5" />
               </button>

@@ -29,18 +29,18 @@ export const FlashCardTestHeaderButtonRow = ({
 }) => {
   return (
     <div className={`${classname} items-center gap-2 text-sm`}>
-      <button className="flex gap-2 justify-center items-center rounded-full bg-white/10 px-4 py-2.5">
+      <button className="flex gap-2 justify-center items-center rounded-full bg-(--capsule) px-4 py-2.5">
         <CiBookmark className="h-4 w-4" />
         Save
       </button>
-      <button className="flex gap-2 justify-center items-center rounded-full bg-white/10 px-4 py-2.5">
+      <button className="flex gap-2 justify-center items-center rounded-full bg-(--capsule) px-4 py-2.5">
         <MdGroups className="h-4 w-4" />
         Groups
       </button>
-      <button className="rounded-full bg-white/10 p-2.5">
+      <button className="rounded-full bg-(--capsule) p-2.5">
         <IoShareOutline className="h-5 w-5" />
       </button>
-      <button className="rounded-full bg-white/10 p-2.5">
+      <button className="rounded-full bg-(--capsule) p-2.5">
         <EllipsisHorizontalIcon className="h-5 w-5" />
       </button>
     </div>
