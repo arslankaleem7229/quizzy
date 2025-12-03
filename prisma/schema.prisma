@@ -11,7 +11,6 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
 }
 
 model Account {
@@ -55,7 +54,7 @@ model User {
   hashedPassword String?
   username       String?   @unique
   dob            DateTime?
-  type           UserType  @default(unknown)
+  type           UserType  @default(student)
 
   @@map("users")
 }
@@ -73,5 +72,4 @@ model VerificationToken {
 enum UserType {
   student
   teacher
-  unknown
 }
