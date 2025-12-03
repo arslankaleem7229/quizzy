@@ -1,0 +1,54 @@
+services:
+  app:
+    image: node:24-alpine
+    container_name: quizzy-node
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+      - .env.docker
+    environment:
+      DATABASE_URL: postgres://postgres:password@postgres:5432/quizzy
+      MONGODB_URL: mongodb://quizzy:quizzy@mongo:27017/quizzy?authSource=admin
+      NODE_ENV: development
+    # Ensure Prisma client is generated for the container's platform and DB schema is applied
+    command: >
+      sh -c "npm install &&
+             npx prisma generate &&
+             npx prisma migrate deploy &&
+             npm run dev"
+    depends_on:
+      - postgres
+      - mongo
+
+  postgres:
+    image: postgres:17
+    container_name: quizzy-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: quizzy
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:latest
+    container_name: quizzy-monogdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: quizzy
+      MONGO_INITDB_ROOT_PASSWORD: quizzy
+      MONGO_INITDB_DATABASE: quizzy
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  postgres_data:
+  mongo_data:
