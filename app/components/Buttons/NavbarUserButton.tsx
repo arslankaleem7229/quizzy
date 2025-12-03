@@ -10,26 +10,26 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import { MdOutlinePrivacyTip, MdOutlineFeedback } from "react-icons/md";
 import { BsStars } from "react-icons/bs";
 
-import { ThemeProvider, useTheme } from "next-themes";
+import { useTheme } from "next-themes";
+import { User } from "next-auth";
+import { useMounted } from "@/app/hooks/useMounted";
 
-const NavbarUserButtonContent = () => {
-  const { data: session, status } = useSession();
+const NavbarUserButtonContent = ({ user }: { user: User }) => {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const closeDropdown = () => setIsOpen(false);
   const { resolvedTheme, setTheme } = useTheme();
+  const closeDropdown = () => setIsOpen(false);
 
   const currentTheme =
     resolvedTheme && (resolvedTheme === "light" || resolvedTheme === "dark")
       ? resolvedTheme
       : "dark";
+
   const isLightMode = currentTheme === "light";
 
   const toggleTheme = () => setTheme(isLightMode ? "dark" : "light");
-
-  const user = useMemo(() => session?.user, [session]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,6 +56,10 @@ const NavbarUserButtonContent = () => {
       document.removeEventListener("keydown", handleEsc);
     };
   }, []);
+
+  const mounted = useMounted();
+
+  if (!mounted) return null;
 
   if (status === "loading") {
     return null;
@@ -196,17 +200,17 @@ const NavbarUserButtonContent = () => {
   );
 };
 
-const NavbarUserButton = () => {
-  return (
-    <ThemeProvider
-      attribute="data-theme"
-      defaultTheme="dark"
-      enableSystem={false}
-      disableTransitionOnChange
-    >
-      <NavbarUserButtonContent />
-    </ThemeProvider>
-  );
-};
+// const NavbarUserButton = () => {
+//   return (
+//     <ThemeProvider
+//       attribute="data-theme"
+//       defaultTheme="dark"
+//       enableSystem={false}
+//       disableTransitionOnChange
+//     >
+//       <NavbarUserButtonContent />
+//     </ThemeProvider>
+//   );
+// };
 
-export default NavbarUserButton;
+export default NavbarUserButtonContent;

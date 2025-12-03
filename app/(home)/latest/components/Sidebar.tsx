@@ -51,13 +51,13 @@ const SidebarButton = ({
       className={`flex w-full items-center gap-5 rounded-lg px-3 py-3 text-left transition ${
         item.active
           ? "bg-white/10 font-medium"
-          : "text-(--foreground) hover:bg-white/5"
+          : "text-(--textColor) hover:bg-(--foreground)/5"
       }`}
     >
       <div
         className={`
                 relative h-4 w-4
-                before:content-[''] before:absolute before:inset-0 before:bg-white
+                before:content-[''] before:absolute before:inset-0 before:bg-(--iconColor)
                 before:[-webkit-mask-image:var(--icon)]
                 before:mask-(--icon)
                 before:mask-contain

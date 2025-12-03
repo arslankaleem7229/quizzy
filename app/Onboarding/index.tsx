@@ -17,7 +17,7 @@ export default function Onboarding({ type }: { type?: "login" | "signup" }) {
 
   return (
     <div className=" h-full w-full fixed inset-0 bg-black/50 flex items-center justify-center z-9999">
-      <div className="h-full w-full bg-(--background) flex relative">
+      <div className="h-full w-full bg-white flex relative">
         <div className="relative hidden lg:block lg:shrink-0 w-0 lg:w-1/2 h-full ">
           <Image
             src={BgImage}

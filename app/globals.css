@@ -6,29 +6,30 @@
   --primaryHover: #423ed8;
   --cardColor: #2e3856;
   --cardColorHover: #586380;
+  --iconColor: #ffffff;
+  --textColor: #ffffff;
 }
 
-[data-theme="light"] {
+:root[data-theme="light"] {
   --background: #ffffff;
   --foreground: #0a092d;
   --primary: #4255ff;
   --primaryHover: #423ed8;
   --cardColor: #f6f7fb;
   --cardColorHover: #edeff4;
+  --iconColor: #000000;
+  --textColor: #000000;
 }
 
-[data-theme="dark"] {
+:root[data-theme="dark"] {
   --background: #0a092d;
   --foreground: #ffffff;
   --primary: #4255ff;
   --primaryHover: #423ed8;
   --cardColor: #2e3856;
   --cardColorHover: #586380;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
+  --iconColor: #ffffff;
+  --textColor: #ffffff;
 }
 
 .primaryColor {
