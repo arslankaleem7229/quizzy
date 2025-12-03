@@ -5,8 +5,8 @@ import HomePosters from "./components/HomePosters";
 
 export default function Home() {
   return (
-    <main className="flex-1 w-full overflow-x-hidden bg-(--background) space-y-10 pb-16">
-      <section className="bg-(--primary-gray) w-full">
+    <main className="flex-1 w-full overflow-x-hidden bg-white text-black space-y-10 pb-16">
+      <section className="w-full">
         <div className="max-w-6xl lg:max-w-7xl mx-auto flex flex-col items-center gap-10 px-8 md:px-16 py-12">
           <div className="max-w-3xl flex flex-col gap-4 text-center">
             <h1 className="text-[2.7rem] font-bold tracking-normal leading-tight">

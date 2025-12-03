@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "./Navbar";
 import "./globals.css";
 import AuthProvider from "./auth/Provider";
+import AppThemeProvider from "./AppThemeProvider";
 
 export const metadata: Metadata = {
   title: "Quizzy",
@@ -14,13 +15,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-(--background) text-(--foreground) transition-colors">
+    <html lang="en" suppressHydrationWarning data-theme="light">
+      <body className="min-h-screen bg-white text-black transition-colors">
         <AuthProvider>
-          <Navbar />
-          <div className="flex">{children}</div>
+          <AppThemeProvider>
+            <Navbar />
+            <div className="flex">{children}</div>
+          </AppThemeProvider>
         </AuthProvider>
-        <div className="h-16" />
       </body>
     </html>
   );

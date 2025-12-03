@@ -3,5 +3,9 @@ export default function HomeLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  return (
+    <body className="min-h-screen bg-(--background) text-(--foreground) transition-colors">
+      {children}
+    </body>
+  );
 }
