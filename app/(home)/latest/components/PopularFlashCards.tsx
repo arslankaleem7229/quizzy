@@ -1,4 +1,4 @@
-import { flashcardSets } from "./../temp_data";
+import { flashcardSets } from "../temp_data";
 
 const PopularFlashCards = () => {
   return (

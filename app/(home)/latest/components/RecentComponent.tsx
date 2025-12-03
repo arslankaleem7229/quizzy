@@ -1,4 +1,4 @@
-import { recents } from "./../temp_data";
+import { recents } from "../temp_data";
 
 const RecentComponent = () => {
   return (

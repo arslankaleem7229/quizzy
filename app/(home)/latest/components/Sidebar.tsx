@@ -1,4 +1,4 @@
-import { folders, primaryNav, quickLinks } from "./../temp_data";
+import { folders, primaryNav, quickLinks } from "../temp_data";
 
 const Sidebar = () => {
   return (

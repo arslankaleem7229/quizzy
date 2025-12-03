@@ -5,18 +5,29 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { FaTrophy } from "react-icons/fa";
-import { FiSettings, FiSun } from "react-icons/fi";
+import { FiMoon, FiSettings, FiSun } from "react-icons/fi";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { MdOutlinePrivacyTip, MdOutlineFeedback } from "react-icons/md";
 import { BsStars } from "react-icons/bs";
 
-const NavbarUserButton = () => {
+import { ThemeProvider, useTheme } from "next-themes";
+
+const NavbarUserButtonContent = () => {
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const closeDropdown = () => setIsOpen(false);
+  const { resolvedTheme, setTheme } = useTheme();
+
+  const currentTheme =
+    resolvedTheme && (resolvedTheme === "light" || resolvedTheme === "dark")
+      ? resolvedTheme
+      : "dark";
+  const isLightMode = currentTheme === "light";
+
+  const toggleTheme = () => setTheme(isLightMode ? "dark" : "light");
 
   const user = useMemo(() => session?.user, [session]);
 
@@ -126,10 +137,14 @@ const NavbarUserButton = () => {
             <button
               type="button"
               className="flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[#151c4b] transition-colors"
-              onClick={closeDropdown}
+              onClick={toggleTheme}
             >
-              <FiSun className="text-lg" />
-              <span>Light mode</span>
+              {isLightMode ? (
+                <FiMoon className="text-lg" />
+              ) : (
+                <FiSun className="text-lg" />
+              )}
+              <span>{isLightMode ? "Dark mode" : "Light mode"}</span>
             </button>
           </nav>
 
@@ -178,6 +193,19 @@ const NavbarUserButton = () => {
         </div>
       ) : null}
     </div>
+  );
+};
+
+const NavbarUserButton = () => {
+  return (
+    <ThemeProvider
+      attribute="data-theme"
+      defaultTheme="dark"
+      enableSystem={false}
+      disableTransitionOnChange
+    >
+      <NavbarUserButtonContent />
+    </ThemeProvider>
   );
 };
 
