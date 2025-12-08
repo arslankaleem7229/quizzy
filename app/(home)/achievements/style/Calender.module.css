@@ -1,5 +1,5 @@
 .calendar {
-  padding: 24px 32px;
+  padding: 0px 16px;
 }
 
 .calendar :global(.react-calendar__navigation) {
@@ -106,18 +106,24 @@
   color: grey !important;
 }
 
-.streak_week {
-  background-color: #586380;
-}
-
 .streak_week_start {
-  background-color: #586380;
   border-top-left-radius: 9999px;
   border-bottom-left-radius: 9999px;
 }
 
 .streak_week_end {
-  background-color: #586380;
   border-top-right-radius: 9999px;
   border-bottom-right-radius: 9999px;
+}
+
+.streak_week,
+.streak_week_start,
+.streak_week_end {
+  background-color: #282e3e;
+}
+
+[data-theme="light"] .streak_week,
+[data-theme="light"] .streak_week_start,
+[data-theme="light"] .streak_week_end {
+  background-color: #fff6ef;
 }

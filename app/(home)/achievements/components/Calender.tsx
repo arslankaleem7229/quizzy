@@ -2,8 +2,8 @@
 
 import { useCallback } from "react";
 import { Calendar, type TileArgs } from "react-calendar";
-import styles from "./Calender.module.css";
-import StreakImage from "../../../public/achivements/streak-flame.svg";
+import styles from "../style/Calender.module.css";
+import StreakImage from "@/public/achivements/streak-flame.svg";
 import Image from "next/image";
 
 const STREAK_YEAR = 2025;
@@ -16,7 +16,7 @@ const streakDays: Set<number> = new Set([
   new Date(2025, 10, 5).getTime(),
 ]);
 
-export default function DecemberCalendar() {
+export default function CustomCalendar() {
   const streakWeeks = Array.from(streakDays).map((date) => {
     const streakDate = startOfDay(new Date(date));
     const weekStart = startOfWeekSunday(streakDate);
@@ -91,7 +91,7 @@ export default function DecemberCalendar() {
           return !isSameMonth(date, activeStartDate);
         }}
         minDetail="month"
-        className={`max-w-sm mx-auto ${styles.calendar}`}
+        className={`mx-auto ${styles.calendar}`}
       />
     </div>
   );
