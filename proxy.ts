@@ -8,7 +8,18 @@ export async function proxy(req: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  const protectedRoutes = ["/latest", "/profile", "/create-flashcards"];
+  const protectedRoutes = [
+    "/latest",
+    "/profile",
+    "/create-flashcards",
+    "/achievements",
+    "/learn",
+    "/payment",
+    "/flashcard-set",
+    "/flashcard-test",
+    "/search",
+    "/settings",
+  ];
 
   const pathname = req.nextUrl.pathname;
   const isAuthenticated = Boolean(token);

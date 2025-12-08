@@ -4,8 +4,8 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <body className="min-h-screen bg-(--background) text-(--textColor) transition-colors">
+    <div className="min-h-screen min-w-screen bg-(--background) text-(--textColor) transition-colors">
       {children}
-    </body>
+    </div>
   );
 }
