@@ -76,22 +76,22 @@ enum UserType {
 }
 
 model Quizz {
-  id          String     @id @unique @default(cuid())
-  title       String
-  description String
-  questions   Question[]
-  createdById String     @map(name: "created_by")
-  createdBy   User       @relation(fields: [createdById], references: [id])
+  id                String             @id @unique @default(cuid())
+  title             String
+  description       String
+  questions         Question[]
+  createdById       String             @map(name: "created_by")
+  createdBy         User               @relation(fields: [createdById], references: [id])
   userQuizzAttempts UserQuizzAttempt[]
 }
 
 model Question {
-  id            Int          @id @default(autoincrement())
+  id            String       @id @default(cuid())
   question      String
   answer        String
-  explanation  String
+  explanation   String
   hint          String
-  correctAnswer String[]       @map(name: "correct_answer")
+  correctAnswer String[]     @map(name: "correct_answer")
   options       String[]
   nature        QuestionType
   createdAt     DateTime     @default(now()) @map(name: "created_at")
@@ -100,6 +100,7 @@ model Question {
   quizz         Quizz        @relation(fields: [quizzId], references: [id])
 
   userAnswers UserAnswer[]
+  attachments Attachment[]
 }
 
 enum QuestionType {
@@ -108,11 +109,11 @@ enum QuestionType {
 }
 
 model UserQuizzAttempt {
-  id      String @id @default(cuid())
-  userId  String
-  quizzId String
-  status AttemptStatus // "seen", "attempted", "completed", "incomplete"
-  score  Int?
+  id          String        @id @default(cuid())
+  userId      String
+  quizzId     String
+  status      AttemptStatus // "seen", "attempted", "completed", "incomplete"
+  score       Int?
   startedAt   DateTime?
   completedAt DateTime?
 
@@ -132,9 +133,26 @@ enum AttemptStatus {
 model UserAnswer {
   id         String @id @default(cuid())
   attemptId  String
-  questionId Int
+  questionId String
   answer     String
 
   attempt  UserQuizzAttempt @relation(fields: [attemptId], references: [id])
   question Question         @relation(fields: [questionId], references: [id])
+}
+
+model Attachment {
+  id         String          @id @default(cuid())
+  url        String
+  type       AttachmentType?
+  size       Int?
+  uploadedAt DateTime?        @default(now()) @map("uploaded_at")
+  questionId String?
+  answerId   String?
+  question   Question?       @relation(fields: [questionId], references: [id])
+}
+
+enum AttachmentType {
+  option
+  answer
+  question
 }
