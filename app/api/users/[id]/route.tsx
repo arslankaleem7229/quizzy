@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import schema from "../schema";
+import { verifyApiAuth } from "@/lib/utils/verifyToken";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const auth = await verifyApiAuth(request);
+  if (!auth.authorized) return auth.response;
+
   const user = await prisma.user.findUnique({
     where: {
       id: parseInt(params.id),
@@ -21,6 +25,9 @@ export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const auth = await verifyApiAuth(request);
+  if (!auth.authorized) return auth.response;
+
   const body = await request.body;
   const validation = schema.safeParse(body);
   if (!validation.success)
@@ -32,6 +39,9 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const auth = await verifyApiAuth(request);
+  if (!auth.authorized) return auth.response;
+
   const body = await request.json();
 
   const validation = schema.safeParse(body);
@@ -65,6 +75,9 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const auth = await verifyApiAuth(request);
+  if (!auth.authorized) return auth.response;
+
   const body = await request.json();
 
   const validation = schema.safeParse(body);
