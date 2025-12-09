@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import SocialLoginButtons from "../components/Buttons/SocialLoginButtons";
-import EmailField from "../components/Inputs/EmailField";
-import PasswordField from "../components/Inputs/PasswordField";
+import SocialLoginButtons from "@/app/components/Buttons/SocialLoginButtons";
+import EmailField from "@/app/components/Inputs/EmailField";
+import PasswordField from "@/app/components/Inputs/PasswordField";
 
 const LoginModal = () => {
   const router = useRouter();

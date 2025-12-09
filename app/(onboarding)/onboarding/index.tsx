@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import BgImage from "../../public/signup-bg-image.png";
-import UnderlineImage from "../../public/underline-svg.svg";
+import BgImage from "@/public/signup-bg-image.png";
+import UnderlineImage from "@/public/underline-svg.svg";
 import LoginModal from "./Login";
 import SignupModal from "./Signup";
 import { useRouter } from "next/navigation";

@@ -5,11 +5,11 @@ import RecentComponent from "./components/RecentComponent";
 import Sidebar from "./components/Sidebar";
 
 export default async function Latest() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/quiz`, {
-    cache: "no-store",
-  });
+  // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/quiz`, {
+  //   cache: "no-store",
+  // });
 
-  const data = await res.json();
+  // const data = await res.json();
   return (
     <main className="flex w-full min-h-screen bg-(--background) text-(--textColor)">
       <Sidebar />

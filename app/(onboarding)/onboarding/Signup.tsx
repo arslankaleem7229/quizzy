@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import SocialLoginButtons from "../components/Buttons/SocialLoginButtons";
-import DOBDropdown from "../components/Inputs/DOBDropdown";
-import EmailField from "../components/Inputs/EmailField";
-import PasswordField from "../components/Inputs/PasswordField";
+import SocialLoginButtons from "@/app/components/Buttons/SocialLoginButtons";
+import DOBDropdown from "@/app/components/Inputs/DOBDropdown";
+import EmailField from "@/app/components/Inputs/EmailField";
+import PasswordField from "@/app/components/Inputs/PasswordField";
 
 const SignupModal = () => {
   const router = useRouter();
@@ -20,10 +20,8 @@ const SignupModal = () => {
 
     const formData = new FormData(e.currentTarget);
     const email = (formData.get("email") as string | null)?.trim() || "";
-    const username =
-      (formData.get("username") as string | null)?.trim() || "";
-    const password =
-      (formData.get("password") as string | null)?.trim() || "";
+    const username = (formData.get("username") as string | null)?.trim() || "";
+    const password = (formData.get("password") as string | null)?.trim() || "";
     const confirmPassword =
       (formData.get("confirmPassword") as string | null)?.trim() || "";
 
@@ -38,8 +36,7 @@ const SignupModal = () => {
     }
 
     const { day, month, year } = dob;
-    const dobIso =
-      day && month && year ? `${year}-${month}-${day}` : undefined;
+    const dobIso = day && month && year ? `${year}-${month}-${day}` : undefined;
 
     setLoading(true);
     const res = await signIn("credentials", {
