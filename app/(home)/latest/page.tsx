@@ -4,7 +4,12 @@ import PopularTextbooks from "./components/PopularTextbooks";
 import RecentComponent from "./components/RecentComponent";
 import Sidebar from "./components/Sidebar";
 
-const Latest = () => {
+export default async function Latest() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/quiz`, {
+    cache: "no-store",
+  });
+
+  const data = await res.json();
   return (
     <main className="flex w-full min-h-screen bg-(--background) text-(--textColor)">
       <Sidebar />
@@ -19,6 +24,4 @@ const Latest = () => {
       </section>
     </main>
   );
-};
-
-export default Latest;
+}

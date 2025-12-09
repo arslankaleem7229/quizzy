@@ -89,7 +89,7 @@ model Question {
   id            Int          @id @default(autoincrement())
   question      String
   answer        String
-  explaination  String
+  explanation  String
   hint          String
   correctAnswer String[]       @map(name: "correct_answer")
   options       String[]
