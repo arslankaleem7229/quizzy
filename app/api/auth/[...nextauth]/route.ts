@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { User } from "@/app/generated/prisma";
+import { encode } from "next-auth/jwt";
 
 type CredentialsInput = {
   email?: string; // used as email or username identifier from form
@@ -32,6 +32,7 @@ const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -101,6 +102,7 @@ const authOptions: NextAuthOptions = {
 
         const user = await prisma.user.findFirst({
           where: { OR: [{ email: identifier }, { username: identifier }] },
+          include: { accounts: true },
         });
 
         if (!user) {
@@ -111,7 +113,9 @@ const authOptions: NextAuthOptions = {
 
         if (!user.hashedPassword) {
           throw new Error(
-            "This account uses social login. Please sign in with Google."
+            `This account uses social login. Please sign in with ${
+              user.accounts[0].provider ?? "Google"
+            }`
           );
         }
 
@@ -133,7 +137,6 @@ const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.username = user.username;
-        token.type = user.type;
       }
       return token;
     },
@@ -142,7 +145,7 @@ const authOptions: NextAuthOptions = {
         session.user = {
           id: token.id,
           username: token.username,
-          type: token.type,
+          type: "student",
           name: token.name ?? null,
           email: token.email ?? null,
           image: token.picture ?? null,
@@ -150,7 +153,17 @@ const authOptions: NextAuthOptions = {
       } else {
         session.user.id = token.id;
         session.user.username = token.username;
-        session.user.type = token.type;
+        session.user.type = "student";
+      }
+
+      if (process.env.NEXTAUTH_SECRET) {
+        // Attach a signed JWT so the client can grab a Bearer token after auth
+        const signed = await encode({
+          token,
+          secret: process.env.NEXTAUTH_SECRET,
+          maxAge: 60 * 60 * 24 * 30, // align with default NextAuth JWT expiry (30d)
+        });
+        session.accessToken = signed;
       }
 
       return session;
