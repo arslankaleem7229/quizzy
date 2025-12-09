@@ -44,21 +44,22 @@ model Session {
 }
 
 model User {
-  id             String    @id @default(cuid())
-  name           String?
-  email          String?   @unique
-  emailVerified  DateTime? @map("email_verified")
-  image          String?
-  accounts       Account[]
-  sessions       Session[]
-  hashedPassword String?
-  username       String?   @unique
-  dob            DateTime?
-  type           UserType  @default(student)
+  id                String             @id @default(cuid())
+  name              String?
+  email             String?            @unique
+  emailVerified     DateTime?          @map("email_verified")
+  image             String?
+  accounts          Account[]
+  sessions          Session[]
+  hashedPassword    String?
+  username          String?            @unique
+  dob               DateTime?
+  type              UserType           @default(student)
+  quizzes           Quizz[]
+  userQuizzAttempts UserQuizzAttempt[]
 
   @@map("users")
 }
-
 
 model VerificationToken {
   identifier String
@@ -72,4 +73,68 @@ model VerificationToken {
 enum UserType {
   student
   teacher
+}
+
+model Quizz {
+  id          String     @id @unique @default(cuid())
+  title       String
+  description String
+  questions   Question[]
+  createdById String     @map(name: "created_by")
+  createdBy   User       @relation(fields: [createdById], references: [id])
+  userQuizzAttempts UserQuizzAttempt[]
+}
+
+model Question {
+  id            Int          @id @default(autoincrement())
+  question      String
+  answer        String
+  explaination  String
+  hint          String
+  correctAnswer String[]       @map(name: "correct_answer")
+  options       String[]
+  nature        QuestionType
+  createdAt     DateTime     @default(now()) @map(name: "created_at")
+  updatedAt     DateTime     @updatedAt @map(name: "updated_at")
+  quizzId       String
+  quizz         Quizz        @relation(fields: [quizzId], references: [id])
+
+  userAnswers UserAnswer[]
+}
+
+enum QuestionType {
+  ChooseOne
+  ChooseMany
+}
+
+model UserQuizzAttempt {
+  id      String @id @default(cuid())
+  userId  String
+  quizzId String
+  status AttemptStatus // "seen", "attempted", "completed", "incomplete"
+  score  Int?
+  startedAt   DateTime?
+  completedAt DateTime?
+
+  user  User  @relation(fields: [userId], references: [id])
+  quizz Quizz @relation(fields: [quizzId], references: [id])
+
+  answers UserAnswer[]
+}
+
+enum AttemptStatus {
+  seen
+  attempted
+  incomplete
+  completed
+}
+
+model UserAnswer {
+  id         String @id @default(cuid())
+  attemptId  String
+  questionId Int
+  answer     String
+
+  attempt  UserQuizzAttempt @relation(fields: [attemptId], references: [id])
+  question Question         @relation(fields: [questionId], references: [id])
 }
