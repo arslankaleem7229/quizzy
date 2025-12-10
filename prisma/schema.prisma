@@ -121,32 +121,37 @@ model UserQuizzAttempt {
   id          String        @id @default(cuid())
   userId      String
   setId       String
-  status      AttemptStatus // "seen", "attempted", "completed", "incomplete"
+  status      AttemptStatus // "seen", "completed", "incomplete"
   score       Int?
-  startedAt   DateTime?
-  completedAt DateTime?
+  startedAt   DateTime?     @default(now()) @map("started_at")
+  updatedAt   DateTime?     @default(now()) @map("updated_at")
+  completedAt DateTime?     @map("completed_at")
+  isActive    Boolean       @default(true)
 
   user User     @relation(fields: [userId], references: [id])
   set  QuizzSet @relation(fields: [setId], references: [id])
 
   answers UserAnswer[]
+
+  @@unique([userId, setId, isActive])
 }
 
 enum AttemptStatus {
   seen
-  attempted
   incomplete
   completed
 }
 
 model UserAnswer {
-  id         String @id @default(cuid())
+  id         String   @id @default(cuid())
   attemptId  String
   questionId String
-  answer     String
+  answer     String[]
 
   attempt  UserQuizzAttempt @relation(fields: [attemptId], references: [id])
   question Question         @relation(fields: [questionId], references: [id])
+
+  @@unique([attemptId, questionId])
 }
 
 model Attachment {
