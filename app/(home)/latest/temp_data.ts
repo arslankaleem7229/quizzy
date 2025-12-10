@@ -15,38 +15,6 @@ export const quickLinks = [
   { label: "Expert solutions", icon: "/sidebar-icons/book.png" },
 ];
 
-export const recents = [
-  {
-    title: "Untitled flashcard set",
-    subtitle: "Draft • by you",
-  },
-  {
-    title: "AQA A-Level Chemistry 3.1.3.7",
-    subtitle: "Flashcard set • 33 terms • by Bookloverlolly",
-  },
-];
-
-export const flashcardSets = [
-  {
-    title: "Capitals of the World",
-    terms: "60 terms",
-    author: "LHaara",
-    role: "Teacher",
-  },
-  {
-    title: "ELC Week 7: (Preparing for Week 8)",
-    terms: "23 terms",
-    author: "every_lesson_counts",
-    role: "Teacher",
-  },
-  {
-    title: "Viva 1 - Module 1",
-    terms: "117 terms",
-    author: "MrsMFL",
-    role: "Teacher",
-  },
-];
-
 export const textbooks = [
   {
     title: "AQA GCSE Physics",

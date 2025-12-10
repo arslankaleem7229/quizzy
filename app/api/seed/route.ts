@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import Error from "next/error";
-import fs from "fs";
-import crypto, { createHash } from "crypto";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
-import { HeadObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
-import s3 from "@/lib/clients/s3";
 import { uploadFromURLToS3 } from "@/lib/utils/uploadToS3";
 
 interface Quizz {

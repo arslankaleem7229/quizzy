@@ -158,6 +158,7 @@ const authOptions: NextAuthOptions = {
 
       if (process.env.NEXTAUTH_SECRET) {
         // Attach a signed JWT so the client can grab a Bearer token after auth
+
         const signed = await encode({
           token,
           secret: process.env.NEXTAUTH_SECRET,

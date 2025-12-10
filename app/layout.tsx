@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Navbar from "./Navbar";
-import "./globals.css";
+import "@/app/globals.css";
 import AuthProvider from "./auth/Provider";
 import AppThemeProvider from "./AppThemeProvider";
+import "@/lib/utils/string.extensions";
 
 export const metadata: Metadata = {
   title: "Quizzy",
