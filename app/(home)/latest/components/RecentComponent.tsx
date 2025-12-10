@@ -1,6 +1,10 @@
-import { recents } from "../temp_data";
+import { ReturnQuizzesOnly } from "@/lib/types/prisma";
 
-const RecentComponent = () => {
+export default async function RecentComponent({
+  flashcards,
+}: {
+  flashcards: ReturnQuizzesOnly;
+}) {
   return (
     <div>
       <div className="px-1 md:px-3 py-3 text-md font-base text-(--textColor)/80">
@@ -8,9 +12,9 @@ const RecentComponent = () => {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        {recents.map((item) => (
+        {flashcards.quizzes.map((quizz) => (
           <div
-            key={item.title}
+            key={quizz.id}
             className={`rounded-lg hover:bg-(--cardColorHover) px-3 py-2 transition duration-0`}
           >
             <div className="flex flex-row items-center gap-4">
@@ -43,8 +47,8 @@ const RecentComponent = () => {
               </div>
 
               <div className="flex flex-col justify-center items-start h-full">
-                <div className="text-sm">{item.title}</div>
-                <p className="text-sm font-light">{item.subtitle}</p>
+                <div className="text-sm">{quizz.slug.slugify()}</div>
+                <p className="text-sm font-light">{quizz.slug.slugify()}</p>
               </div>
             </div>
           </div>
@@ -52,6 +56,4 @@ const RecentComponent = () => {
       </div>
     </div>
   );
-};
-
-export default RecentComponent;
+}
