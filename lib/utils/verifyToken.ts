@@ -32,6 +32,10 @@ export async function verifyApiAuth(
     const token = await getToken({
       req,
       secret: process.env.NEXTAUTH_SECRET,
+      cookieName:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-next-auth.session-token"
+          : "next-auth.session-token",
     });
 
     if (!token) {
