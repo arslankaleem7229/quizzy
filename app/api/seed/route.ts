@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import Error from "next/error";
 import fs from "fs";
-import crypto from "crypto";
+import crypto, { createHash } from "crypto";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { HeadObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import s3 from "@/lib/clients/s3";
+import { uploadFromURLToS3 } from "@/lib/utils/uploadToS3";
 
 interface Quizz {
   slug: string;
@@ -15,7 +16,6 @@ interface Quizz {
 
 interface QuizzSet {
   id: string;
-  quizzId: string;
   language: string;
   title: string;
   description: string;
@@ -82,8 +82,7 @@ export async function POST(request: NextRequest) {
         if (q.attachments?.length > 0) {
           const uploaded: Attachment[] = [];
           for (const a of q.attachments) {
-            const url = await uploadFileToS3({ url: a.url });
-
+            const url = await uploadFromURLToS3({ url: a.url });
             if (url) uploaded.push({ url: url!, type: a.type, questionId: "" });
             else {
               return NextResponse.json({
@@ -161,48 +160,5 @@ export async function POST(request: NextRequest) {
       },
       { status: 500 }
     );
-  }
-}
-
-async function uploadFileToS3({
-  url,
-}: {
-  url: string;
-}): Promise<string | null> {
-  if (!url) return null;
-  try {
-    const fileBytes = fs.readFileSync(url);
-    const fileName = `${crypto.randomBytes(12).toString("hex")}-${url
-      .split("/")
-      .pop()}`;
-    const fileExt = url.split(".").pop();
-
-    const contentType =
-      fileExt === "jpg" || fileExt === "jpeg"
-        ? "image/jpeg"
-        : fileExt === "png"
-        ? "image/png"
-        : fileExt === "gif"
-        ? "image/gif"
-        : "application/octet-stream";
-
-    const command = new PutObjectCommand({
-      Bucket: process.env.S3_BUCKET_NAME!,
-      Key: fileName,
-      Body: fileBytes,
-      ContentType: contentType,
-    });
-
-    const response = s3.send(command);
-
-    response.then((data) => {
-      console.log(data);
-    });
-
-    const publicUrl = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.S3_REGION}.amazonaws.com/${fileName}`;
-    return publicUrl;
-  } catch (error) {
-    console.error("Upload Error:", error);
-    return null;
   }
 }
