@@ -6,7 +6,6 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-      - /Users/arslankaleem/Workspace/Junk/linkedin-skill-assessments-quizzes:/Users/arslankaleem/Workspace/Junk/linkedin-skill-assessments-quizzes
 
     ports:
       - "3000:3000"
