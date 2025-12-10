@@ -76,17 +76,28 @@ enum UserType {
 }
 
 model Quizz {
+  id          String     @id @unique @default(cuid())
+  slug        String     @unique
+  sets        QuizzSet[]
+  createdById String     @map(name: "created_by")
+  createdBy   User       @relation(fields: [createdById], references: [id])
+}
+
+model QuizzSet {
   id                String             @id @unique @default(cuid())
+  quizzId           String
+  quizz             Quizz              @relation(fields: [quizzId], references: [id])
+  language          String             @default("en")
   title             String
   description       String
   questions         Question[]
-  createdById       String             @map(name: "created_by")
-  createdBy         User               @relation(fields: [createdById], references: [id])
   userQuizzAttempts UserQuizzAttempt[]
 }
 
 model Question {
   id            String       @id @default(cuid())
+  setId         String
+  set           QuizzSet     @relation(fields: [setId], references: [id])
   question      String
   answer        String
   explanation   String
@@ -96,8 +107,6 @@ model Question {
   nature        QuestionType
   createdAt     DateTime     @default(now()) @map(name: "created_at")
   updatedAt     DateTime     @updatedAt @map(name: "updated_at")
-  quizzId       String
-  quizz         Quizz        @relation(fields: [quizzId], references: [id])
 
   userAnswers UserAnswer[]
   attachments Attachment[]
@@ -111,14 +120,14 @@ enum QuestionType {
 model UserQuizzAttempt {
   id          String        @id @default(cuid())
   userId      String
-  quizzId     String
+  setId       String
   status      AttemptStatus // "seen", "attempted", "completed", "incomplete"
   score       Int?
   startedAt   DateTime?
   completedAt DateTime?
 
-  user  User  @relation(fields: [userId], references: [id])
-  quizz Quizz @relation(fields: [quizzId], references: [id])
+  user User     @relation(fields: [userId], references: [id])
+  set  QuizzSet @relation(fields: [setId], references: [id])
 
   answers UserAnswer[]
 }
@@ -145,7 +154,7 @@ model Attachment {
   url        String
   type       AttachmentType?
   size       Int?
-  uploadedAt DateTime?        @default(now()) @map("uploaded_at")
+  uploadedAt DateTime?       @default(now()) @map("uploaded_at")
   questionId String?
   answerId   String?
   question   Question?       @relation(fields: [questionId], references: [id])
