@@ -1,9 +1,11 @@
 import { SpeakerWaveIcon, StarIcon } from "@heroicons/react/16/solid";
-import FlashcardTestPage from "../flashcard-test/page";
-import FlashcardTestHeader from "./components/FlashcardTestHeader";
-import BreadCrumbs from "./components/BreadCrumbs";
-import UserAvatarIcon from "./components/UserAvatarIcon";
-import FlashCardSetsSection from "../search/components/FlashCardSetsSection";
+import FlashcardTestPage from "../../flashcard-test/page";
+import FlashcardTestHeader from "./../components/FlashcardTestHeader";
+import BreadCrumbs from "./../components/BreadCrumbs";
+import UserAvatarIcon from "./../components/UserAvatarIcon";
+import FlashCardSetsSection from "../../search/components/FlashCardSetsSection";
+import { ReturnSpecificQuizz } from "@/lib/types/prisma";
+import { cookies } from "next/headers";
 
 type Term = {
   id: string;
@@ -85,12 +87,27 @@ const notStudied: Term[] = [
   },
 ];
 
-const FlashcardSetPage = () => {
+export default async function FlashcardSetPage(context: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await context.params;
+  const res = await fetch(process.env.APP_URL + `/api/quizz/${id}`, {
+    cache: "no-store",
+    credentials: "include",
+    headers: {
+      cookie: (await cookies()).toString(),
+    },
+  });
+
+  if (!res.ok) throw new Error("Failed to load quizzes");
+
+  const quizz: ReturnSpecificQuizz = await res.json();
+
   return (
     <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor)">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
         <BreadCrumbs />
-        <FlashcardTestHeader />
+        <FlashcardTestHeader quizz={quizz} />
 
         <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
           {studyModes.map((mode) => (
@@ -115,7 +132,7 @@ const FlashcardSetPage = () => {
       </div>
     </main>
   );
-};
+}
 
 const RemainingSection = ({
   header,
@@ -165,5 +182,3 @@ const RemainingSection = ({
     </section>
   );
 };
-
-export default FlashcardSetPage;
