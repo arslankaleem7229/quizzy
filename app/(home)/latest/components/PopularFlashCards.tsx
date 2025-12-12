@@ -1,4 +1,5 @@
 import { ReturnQuizzesOnly } from "@/lib/types/prisma";
+import Link from "next/link";
 
 export default function PopularFlashCards({
   flashcards,
@@ -12,31 +13,37 @@ export default function PopularFlashCards({
       </div>
       <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {flashcards.quizzes.map((quizz) => (
-          <div
+          <Link
             key={quizz.id}
-            className={`rounded-lg hover:bg-(--cardColorHover) transition border-(--forground)/5 bg-(--foreground)/10 duration-0 px-5 py-4 h-40 flex flex-col justify-between items-start`}
+            href={{
+              pathname: `/flashcard-set/${quizz.id}`,
+            }}
           >
-            <div className="w-full">
-              <div className="text-base font-medium overflow-hidden whitespace-nowrap text-ellipsis">
-                {quizz.slug.slugify()}
+            <div
+              className={`rounded-lg hover:bg-(--cardColorHover) transition border-(--forground)/5 bg-(--foreground)/10 duration-0 px-5 py-4 h-40 flex flex-col justify-between items-start`}
+            >
+              <div className="w-full">
+                <div className="text-base font-medium overflow-hidden whitespace-nowrap text-ellipsis">
+                  {quizz.slug.slugify()}
+                </div>
+                <div className="mt-2 inline-flex items-center rounded-full bg-(--capsule) px-2 py-0.75 text-xs text-(--textColor)/70">
+                  {quizz.sets[0]._count.questions + " terms"}
+                </div>
               </div>
-              <div className="mt-2 inline-flex items-center rounded-full bg-(--capsule) px-2 py-0.75 text-xs text-(--textColor)/70">
-                {quizz.sets[0]._count.questions + " terms"}
+              <div className="mt-4 flex items-center gap-3 text-sm text-(--textColor)/70">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-(--capsule) text-xs">
+                  {quizz.createdBy.image ??
+                    quizz.createdBy.name![0].capitalize()}
+                </div>
+                <div className="font-medium text-(--textColor)/90">
+                  {quizz.createdBy.name}
+                </div>
+                <div className="text-xs text-(--textColor)/50 rounded-full bg-(--capsule) px-1">
+                  {quizz.createdBy.type}
+                </div>
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-3 text-sm text-(--textColor)/70">
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-(--capsule) text-xs">
-                {quizz.createdBy.image ?? quizz.createdBy.name![0].capitalize()}
-              </div>
-
-              <div className="font-medium text-(--textColor)/90">
-                {quizz.createdBy.name}
-              </div>
-              <div className="text-xs text-(--textColor)/50 rounded-full bg-(--capsule) px-1">
-                {quizz.createdBy.type}
-              </div>
-            </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
