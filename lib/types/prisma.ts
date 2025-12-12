@@ -16,6 +16,42 @@ export type QuizzGetPayload = Prisma.QuizzGetPayload<{
   };
 }>;
 
+export type FullQuizzPayload = Prisma.QuizzGetPayload<{
+  include: {
+    sets: {
+      include: {
+        questions: true;
+        userQuizzAttempts: true;
+      };
+    };
+    createdBy: {
+      select: {
+        id: true;
+        name: true;
+        email: true;
+        image: true;
+        username: true;
+        type: true;
+      };
+    };
+  };
+}>;
+
+export type QuizzSetPayload = Prisma.QuizzSetGetPayload<{
+  include: {
+    questions: true;
+    quizz: {
+      select: {
+        id: true;
+        slug: true;
+        createdBy: true;
+        _count: { select: { reviews: true } };
+      };
+    };
+    userQuizzAttempts: true;
+  };
+}>;
+
 export type PaginationMeta = {
   limit: number;
   cursor?: string | null;
@@ -26,4 +62,8 @@ export type PaginationMeta = {
 export type ReturnQuizzesOnly = {
   quizzes: QuizzGetPayload[];
   pagination: PaginationMeta;
+};
+
+export type ReturnSpecificQuizz = {
+  quizz: FullQuizzPayload;
 };

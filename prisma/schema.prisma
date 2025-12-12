@@ -44,17 +44,20 @@ model Session {
 }
 
 model User {
-  id                String             @id @default(cuid())
-  name              String?
-  email             String?            @unique
-  emailVerified     DateTime?          @map("email_verified")
-  image             String?
-  accounts          Account[]
-  sessions          Session[]
-  hashedPassword    String?
-  username          String?            @unique
-  dob               DateTime?
-  type              UserType           @default(student)
+  id             String    @id @default(cuid())
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime? @map("email_verified")
+  image          String?
+  accounts       Account[]
+  sessions       Session[]
+  hashedPassword String?
+  username       String?   @unique
+  dob            DateTime?
+  type           UserType  @default(student)
+
+  createdAt         DateTime           @default(now()) @map(name: "created_at")
+  updatedAt         DateTime           @default(now()) @updatedAt @map(name: "updated_at")
   quizzes           Quizz[]
   userQuizzAttempts UserQuizzAttempt[]
 
@@ -80,7 +83,24 @@ model Quizz {
   slug        String     @unique
   sets        QuizzSet[]
   createdById String     @map(name: "created_by")
-  createdBy   User       @relation(fields: [createdById], references: [id])
+  reviews     Review[]
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  createdBy User     @relation(fields: [createdById], references: [id])
+}
+
+model Review {
+  id        String  @unique @default(uuid())
+  userId    String  @map("user_id")
+  contentId String  @map("content_id")
+  review    String?
+  stars     Int     @default(0)
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
+
+  quizz Quizz @relation(fields: [contentId], references: [id])
 }
 
 model QuizzSet {
@@ -92,6 +112,9 @@ model QuizzSet {
   description       String
   questions         Question[]
   userQuizzAttempts UserQuizzAttempt[]
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
 }
 
 model Question {
@@ -106,7 +129,7 @@ model Question {
   options       String[]
   nature        QuestionType
   createdAt     DateTime     @default(now()) @map(name: "created_at")
-  updatedAt     DateTime     @updatedAt @map(name: "updated_at")
+  updatedAt     DateTime     @default(now()) @updatedAt @map(name: "updated_at")
 
   userAnswers UserAnswer[]
   attachments Attachment[]
@@ -148,6 +171,9 @@ model UserAnswer {
   questionId String
   answer     String[]
 
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
+
   attempt  UserQuizzAttempt @relation(fields: [attemptId], references: [id])
   question Question         @relation(fields: [questionId], references: [id])
 
@@ -163,6 +189,9 @@ model Attachment {
   questionId String?
   answerId   String?
   question   Question?       @relation(fields: [questionId], references: [id])
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
 }
 
 enum AttachmentType {
