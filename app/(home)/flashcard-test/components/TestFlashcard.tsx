@@ -1,23 +1,18 @@
+import { FullQuestion } from "@/lib/types/prisma";
 import { useState } from "react";
 import { FaLightbulb } from "react-icons/fa";
-
-export type Flashcard = {
-  id: number;
-  question: string;
-  answer: string;
-  hint: string;
-};
 
 export const TestFlashcard = ({
   currentCard,
   isFlipped,
   setIsFlipped,
 }: {
-  currentCard: Flashcard;
+  currentCard: FullQuestion;
   isFlipped: boolean;
   setIsFlipped: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [showHintButton, setShowHintButton] = useState(true);
+  const [showHint, setShowHint] = useState(false);
 
   return (
     <div className="flex w-full max-w-4xl flex-col gap-5">
@@ -38,9 +33,24 @@ export const TestFlashcard = ({
           }}
         >
           {showHintButton && !isFlipped && (
-            <div className="absolute top-5 left-5 flex items-center justify-between text-sm gap-2">
-              <FaLightbulb />
-              Get a hint
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowHint(!showHint);
+              }}
+            >
+              <div className="absolute top-5 left-5 flex items-center justify-between text-sm gap-2">
+                {showHint ? (
+                  <p>{currentCard.hint}</p>
+                ) : (
+                  <>
+                    <FaLightbulb />
+                    Get a hint
+                  </>
+                )}
+              </div>
             </div>
           )}
 
@@ -48,8 +58,10 @@ export const TestFlashcard = ({
                       Hint: {currentCard.hint}
                     </p> */}
           {!isFlipped && (
-            <div className="absolute inset-0 flex items-center justify-center px-6 backface-hidden text-3xl font-extralight">
-              {currentCard.question}
+            <div className="absolute inset-0 overflow-scroll px-6 my-16 backface-hidden">
+              <div className="min-h-full flex items-center justify-center text-3xl font-extralight break-words">
+                {currentCard.question}
+              </div>
             </div>
           )}
           {isFlipped && (

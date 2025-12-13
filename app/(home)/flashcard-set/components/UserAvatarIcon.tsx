@@ -1,15 +1,41 @@
-const UserAvatarIcon = ({ classname }: { classname: string }) => {
+import { CreatedBy } from "@/lib/types/prisma";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import Image from "next/image";
+
+dayjs.extend(relativeTime);
+
+const UserAvatarIcon = ({
+  classname,
+  user,
+  createdAt,
+}: {
+  classname: string;
+  user: CreatedBy;
+  createdAt: Date;
+}) => {
   return (
     <div className={`${classname}  md:flex-wrap items-center gap-1 md:gap-3`}>
-      <div className="flex h-5 w-5 text-sm lg:h-12 lg:w-12 lg:text-xl items-center justify-center rounded-full bg-teal-600  font-semibold text-(--textColor)">
-        J
-      </div>
+      {!user.image ? (
+        <div className="flex h-5 w-5 text-sm lg:h-12 lg:w-12 lg:text-xl items-center justify-center rounded-full bg-teal-600  font-semibold text-(--textColor)">
+          {user.name?.charAt(0).toUpperCase()}
+        </div>
+      ) : (
+        <div className="relative h-5 w-5 lg:h-12 lg:w-12 items-center justify-center rounded-full overflow-hidden">
+          <Image
+            src={user.image}
+            alt={"creator image"}
+            fill
+            className="object-cover"
+          />
+        </div>
+      )}
       <div>
         <p className="text-sm font-light lg:text-base lg:font-medium ">
-          Jose_Rangel302
+          {user.username}
         </p>
         <p className="hidden lg:flex text-xs font-extralight">
-          Created 4 years ago
+          Created {dayjs(createdAt).fromNow()}
         </p>
       </div>
     </div>

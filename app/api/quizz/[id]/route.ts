@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
-import { ReturnSpecificQuizz } from "@/lib/types/prisma";
+import { FullQuizz, FullQuizzResponse } from "@/lib/types/prisma";
 
 export async function GET(
   request: NextRequest,
@@ -14,6 +14,7 @@ export async function GET(
   const quizz = await prisma.quizz.findUnique({
     where: { id: id },
     include: {
+      _count: { select: { reviews: true } },
       sets: {
         where: { language: "en" },
         include: {
@@ -36,7 +37,7 @@ export async function GET(
 
   if (!quizz)
     return NextResponse.json({ error: "Quizz not found" }, { status: 404 });
-  return NextResponse.json({ quizz } satisfies ReturnSpecificQuizz, {
+  return NextResponse.json(quizz satisfies FullQuizz, {
     status: 200,
   });
 }

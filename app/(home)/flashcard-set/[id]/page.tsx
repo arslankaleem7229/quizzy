@@ -4,7 +4,7 @@ import FlashcardTestHeader from "./../components/FlashcardTestHeader";
 import BreadCrumbs from "./../components/BreadCrumbs";
 import UserAvatarIcon from "./../components/UserAvatarIcon";
 import FlashCardSetsSection from "../../search/components/FlashCardSetsSection";
-import { ReturnSpecificQuizz } from "@/lib/types/prisma";
+import { FullQuizzResponse } from "@/lib/types/prisma";
 import { cookies } from "next/headers";
 
 type Term = {
@@ -101,13 +101,13 @@ export default async function FlashcardSetPage(context: {
 
   if (!res.ok) throw new Error("Failed to load quizzes");
 
-  const quizz: ReturnSpecificQuizz = await res.json();
+  const quizz: FullQuizzResponse = await res.json();
 
   return (
     <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor)">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
         <BreadCrumbs />
-        <FlashcardTestHeader quizz={quizz} />
+        <FlashcardTestHeader quizzSet={quizz} />
 
         <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
           {studyModes.map((mode) => (
@@ -120,9 +120,13 @@ export default async function FlashcardSetPage(context: {
           ))}
         </div>
 
-        <FlashcardTestPage classname="" />
+        <FlashcardTestPage flashcards={quizz.sets[0].questions} classname="" />
 
-        <UserAvatarIcon classname="hidden lg:flex" />
+        <UserAvatarIcon
+          user={quizz.createdBy}
+          createdAt={quizz.createdAt}
+          classname="hidden lg:flex"
+        />
 
         <FlashCardSetsSection header="Student also studied" />
 

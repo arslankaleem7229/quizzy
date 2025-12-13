@@ -63,7 +63,6 @@ export async function GET(request: NextRequest) {
     );
   } catch (error) {
     const err = error as Error;
-    console.log(error);
     return NextResponse.json({ error: err }, { status: 400 });
   }
 }

@@ -33,7 +33,6 @@ export async function POST(request: NextRequest) {
         status: 400,
       });
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { message: "Invalid or missing JSON body" },
       { status: 400 }

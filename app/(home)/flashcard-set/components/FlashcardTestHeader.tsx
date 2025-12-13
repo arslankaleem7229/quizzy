@@ -3,19 +3,24 @@ import { CiBookmark } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { MdGroups } from "react-icons/md";
 import UserAvatarIcon from "./UserAvatarIcon";
+import { FullQuizz } from "@/lib/types/prisma";
 
-const FlashcardTestHeader = () => {
+const FlashcardTestHeader = ({ quizzSet }: { quizzSet: FullQuizz }) => {
   return (
     <header className="space-y-3">
       <div className="flex flex-wrap items-center">
-        <h1 className="text-3xl font-semibold">AWS Cloud Practitioner</h1>
+        <h1 className="text-3xl font-semibold">{quizzSet.sets[0].title}</h1>
       </div>
       <div className="flex flex-row items-center justify-between md:justify-start md:gap-5 text-sm">
         <span>13 studiers today</span>
         <StarIcon className="h-5 w-5 text-yellow-400" />
-        <span>4.5 (39 reviews)</span>
+        <span>4.5 ({quizzSet?._count?.reviews} reviews)</span>
 
-        <UserAvatarIcon classname="flex flex-row lg:hidden" />
+        <UserAvatarIcon
+          user={quizzSet.createdBy}
+          createdAt={quizzSet.createdAt}
+          classname="flex flex-row lg:hidden"
+        />
       </div>
       <FlashCardTestHeaderButtonRow classname="flex justify-start lg:hidden" />
     </header>

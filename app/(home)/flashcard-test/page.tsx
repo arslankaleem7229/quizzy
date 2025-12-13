@@ -2,37 +2,17 @@
 "use client";
 
 import { useState } from "react";
-import { Flashcard, TestFlashcard } from "./components/TestFlashcard";
+import { TestFlashcard } from "./components/TestFlashcard";
 import FlashcardNavButton from "./components/FlashcardNavButton";
+import { FullQuestion } from "@/lib/types/prisma";
 
-export const flashcards: Flashcard[] = [
-  {
-    id: 1,
-    question:
-      "Where can a customer go to get more detail about EC2 billing activity that took place 3 months ago?",
-    answer:
-      "Use the AWS Cost Explorer. It provides granular cost and usage data for up to 12 months and lets you drill into individual services such as EC2.",
-    hint: "It lives inside the Billing & Cost Management console.",
-  },
-  {
-    id: 2,
-    question:
-      "Which AWS support plan includes a designated Technical Account Manager?",
-    answer:
-      "The Enterprise Support plan provides a TAM who guides architectural decisions and operations.",
-    hint: "Think of the highest non-custom public plan.",
-  },
-  {
-    id: 3,
-    question:
-      "Which service should you use to deploy managed MySQL databases on AWS?",
-    answer:
-      "Amazon RDS (Relational Database Service) offers managed MySQL, PostgreSQL, Oracle, SQL Server, and MariaDB.",
-    hint: "It's the go-to managed relational database service.",
-  },
-];
-
-const FlashcardTestPage = ({ classname }: { classname?: string }) => {
+const FlashcardTestPage = ({
+  classname,
+  flashcards,
+}: {
+  classname?: string;
+  flashcards: FullQuestion[];
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
