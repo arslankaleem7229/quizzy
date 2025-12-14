@@ -3,9 +3,9 @@ import { CiBookmark } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { MdGroups } from "react-icons/md";
 import UserAvatarIcon from "./UserAvatarIcon";
-import { FullQuizz } from "@/lib/types/prisma";
+import { QuizDetail } from "@/lib/types/prisma";
 
-const FlashcardTestHeader = ({ quizzSet }: { quizzSet: FullQuizz }) => {
+const FlashcardTestHeader = ({ quizzSet }: { quizzSet: QuizDetail }) => {
   return (
     <header className="space-y-3">
       <div className="flex flex-wrap items-center">

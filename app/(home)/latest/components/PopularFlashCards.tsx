@@ -1,10 +1,10 @@
-import { ReturnQuizzesOnly } from "@/lib/types/prisma";
+import { QuizListResponse } from "@/lib/types/prisma";
 import Link from "next/link";
 
 export default function PopularFlashCards({
   flashcards,
 }: {
-  flashcards: ReturnQuizzesOnly;
+  flashcards: QuizListResponse;
 }) {
   return (
     <div>

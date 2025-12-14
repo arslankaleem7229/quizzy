@@ -2,7 +2,7 @@ import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 import Error from "next/error";
-import { ReturnQuizzesOnly } from "@/lib/types/prisma";
+import { QuizListResponse } from "@/lib/types/prisma";
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);
@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
           nextCursor: nextCursor,
           hasMore: nextCursor != null,
         },
-      } satisfies ReturnQuizzesOnly,
+      } satisfies QuizListResponse,
       { status: 200 }
     );
   } catch (error) {

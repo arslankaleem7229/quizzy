@@ -4,7 +4,7 @@ import PopularFlashCards from "./components/PopularFlashCards";
 import PopularTextbooks from "./components/PopularTextbooks";
 import RecentComponent from "./components/RecentComponent";
 import Sidebar from "./components/Sidebar";
-import { ReturnQuizzesOnly } from "@/lib/types/prisma";
+import { QuizListResponse } from "@/lib/types/prisma";
 
 export default async function Latest() {
   const res = await fetch(process.env.APP_URL + "/api/quizz?limit=4", {
@@ -17,7 +17,7 @@ export default async function Latest() {
 
   if (!res.ok) throw new Error("Failed to load quizzes");
 
-  const flashcards: ReturnQuizzesOnly = await res.json();
+  const flashcards: QuizListResponse = await res.json();
 
   return (
     <main className="flex w-full min-h-screen bg-(--background) text-(--textColor)">

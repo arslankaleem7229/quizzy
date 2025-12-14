@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
-import { FullQuizz, FullQuizzResponse } from "@/lib/types/prisma";
+import { QuizDetail } from "@/lib/types/prisma";
 
 export async function GET(
   request: NextRequest,
@@ -37,7 +37,7 @@ export async function GET(
 
   if (!quizz)
     return NextResponse.json({ error: "Quizz not found" }, { status: 404 });
-  return NextResponse.json(quizz satisfies FullQuizz, {
+  return NextResponse.json(quizz satisfies QuizDetail, {
     status: 200,
   });
 }

@@ -1,9 +1,9 @@
-import { ReturnQuizzesOnly } from "@/lib/types/prisma";
+import { QuizListResponse } from "@/lib/types/prisma";
 
 export default async function RecentComponent({
   flashcards,
 }: {
-  flashcards: ReturnQuizzesOnly;
+  flashcards: QuizListResponse;
 }) {
   return (
     <div>

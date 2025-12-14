@@ -1,17 +1,18 @@
 import { Prisma } from "@/app/generated/prisma";
 
-export type AccountPayload = Prisma.AccountGetPayload<object>;
-export type SessionPayload = Prisma.SessionGetPayload<object>;
-export type UserPayload = Prisma.UserGetPayload<object>;
-export type VerificationTokenPayload =
+export type AccountRecord = Prisma.AccountGetPayload<object>;
+export type SessionRecord = Prisma.SessionGetPayload<object>;
+export type UserRecord = Prisma.UserGetPayload<object>;
+export type VerificationTokenRecord =
   Prisma.VerificationTokenGetPayload<object>;
-export type ReviewPayload = Prisma.ReviewGetPayload<object>;
-export type AttachmentPayload = Prisma.AttachmentGetPayload<object>;
-export type QuestionPayload = Prisma.QuestionGetPayload<object>;
-export type UserAnswerPayload = Prisma.UserAnswerGetPayload<object>;
-export type UserQuizzAttemptPayload = Prisma.UserQuizzAttemptGetPayload<object>;
+export type ReviewRecord = Prisma.ReviewGetPayload<object>;
+export type AttachmentRecord = Prisma.AttachmentGetPayload<object>;
+export type QuestionRecord = Prisma.QuestionGetPayload<object>;
+export type UserAnswerRecord = Prisma.UserAnswerGetPayload<object>;
+export type UserQuizAttemptRecord =
+  Prisma.UserQuizzAttemptGetPayload<object>;
 
-const quizzListArgs = Prisma.validator<Prisma.QuizzDefaultArgs>()({
+const quizListSelection = Prisma.validator<Prisma.QuizzDefaultArgs>()({
   include: {
     sets: {
       select: {
@@ -26,9 +27,9 @@ const quizzListArgs = Prisma.validator<Prisma.QuizzDefaultArgs>()({
     },
   },
 });
-export type QuizzGetPayload = Prisma.QuizzGetPayload<typeof quizzListArgs>;
+export type QuizListEntry = Prisma.QuizzGetPayload<typeof quizListSelection>;
 
-const quizzSetArgs = Prisma.validator<Prisma.QuizzDefaultArgs>()({
+const quizDetailSelection = Prisma.validator<Prisma.QuizzDefaultArgs>()({
   include: {
     _count: { select: { reviews: true } },
     sets: {
@@ -50,9 +51,9 @@ const quizzSetArgs = Prisma.validator<Prisma.QuizzDefaultArgs>()({
     },
   },
 });
-export type FullQuizzResponse = Prisma.QuizzGetPayload<typeof quizzSetArgs>;
+export type QuizDetail = Prisma.QuizzGetPayload<typeof quizDetailSelection>;
 
-const questionWithRelationsArgs =
+const questionWithAssociationsSelection =
   Prisma.validator<Prisma.QuestionDefaultArgs>()({
     include: {
       attachments: true,
@@ -60,11 +61,11 @@ const questionWithRelationsArgs =
       set: { select: { id: true, quizzId: true, title: true, language: true } },
     },
   });
-export type QuestionWithRelations = Prisma.QuestionGetPayload<
-  typeof questionWithRelationsArgs
+export type QuestionWithAssociations = Prisma.QuestionGetPayload<
+  typeof questionWithAssociationsSelection
 >;
 
-const userAttemptWithRelationsArgs =
+const quizAttemptWithDetailsSelection =
   Prisma.validator<Prisma.UserQuizzAttemptDefaultArgs>()({
     include: {
       answers: true,
@@ -77,28 +78,26 @@ const userAttemptWithRelationsArgs =
       user: true,
     },
   });
-export type UserAttemptWithRelations = Prisma.UserQuizzAttemptGetPayload<
-  typeof userAttemptWithRelationsArgs
+export type QuizAttemptWithDetails = Prisma.UserQuizzAttemptGetPayload<
+  typeof quizAttemptWithDetailsSelection
 >;
 
-export type PaginationMeta = {
+export type PaginationInfo = {
   limit: number;
   cursor?: string | null;
   nextCursor?: string | null;
   hasMore: boolean;
 };
 
-export type ReturnQuizzesOnly = {
-  quizzes: QuizzGetPayload[];
-  pagination: PaginationMeta;
+export type QuizListResponse = {
+  quizzes: QuizListEntry[];
+  pagination: PaginationInfo;
 };
 
-export type ReturnRecentAttempts = UserAttemptWithRelations[];
+export type RecentQuizAttempts = QuizAttemptWithDetails[];
 
-export type QuizzListItem = ReturnQuizzesOnly["quizzes"][number];
-export type QuizzListSet = QuizzListItem["sets"][number];
-export type FullQuizz = FullQuizzResponse;
-export type FullQuizzSet = FullQuizz["sets"][number];
-export type FullQuestion = FullQuizzSet["questions"][number];
-export type FullAttempt = FullQuizzSet["userQuizzAttempts"][number];
-export type CreatedBy = FullQuizzResponse["createdBy"];
+export type QuizListSetSummary = QuizListEntry["sets"][number];
+export type QuizDetailSet = QuizDetail["sets"][number];
+export type QuizDetailQuestion = QuizDetailSet["questions"][number];
+export type QuizDetailAttempt = QuizDetailSet["userQuizzAttempts"][number];
+export type QuizAuthor = QuizDetail["createdBy"];

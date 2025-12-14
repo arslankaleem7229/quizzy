@@ -4,14 +4,14 @@
 import { useState } from "react";
 import { TestFlashcard } from "./components/TestFlashcard";
 import FlashcardNavButton from "./components/FlashcardNavButton";
-import { FullQuestion } from "@/lib/types/prisma";
+import { QuizDetailQuestion } from "@/lib/types/prisma";
 
 const FlashcardTestPage = ({
   classname,
   flashcards,
 }: {
   classname?: string;
-  flashcards: FullQuestion[];
+  flashcards: QuizDetailQuestion[];
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);

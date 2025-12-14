@@ -1,4 +1,4 @@
-import { FullQuestion } from "@/lib/types/prisma";
+import { QuizDetailQuestion } from "@/lib/types/prisma";
 import { useState } from "react";
 import { FaLightbulb } from "react-icons/fa";
 
@@ -7,7 +7,7 @@ export const TestFlashcard = ({
   isFlipped,
   setIsFlipped,
 }: {
-  currentCard: FullQuestion;
+  currentCard: QuizDetailQuestion;
   isFlipped: boolean;
   setIsFlipped: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -59,7 +59,7 @@ export const TestFlashcard = ({
                     </p> */}
           {!isFlipped && (
             <div className="absolute inset-0 overflow-scroll px-6 my-16 backface-hidden">
-              <div className="min-h-full flex items-center justify-center text-3xl font-extralight break-words">
+              <div className="min-h-full flex items-center justify-center text-3xl font-extralight wrap-break-word">
                 {currentCard.question}
               </div>
             </div>

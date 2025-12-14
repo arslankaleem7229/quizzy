@@ -4,7 +4,7 @@ import FlashcardTestHeader from "./../components/FlashcardTestHeader";
 import BreadCrumbs from "./../components/BreadCrumbs";
 import UserAvatarIcon from "./../components/UserAvatarIcon";
 import FlashCardSetsSection from "../../search/components/FlashCardSetsSection";
-import { FullQuizzResponse } from "@/lib/types/prisma";
+import { QuizDetail } from "@/lib/types/prisma";
 import { cookies } from "next/headers";
 
 type Term = {
@@ -22,71 +22,6 @@ const studyModes = [
   { id: "match", label: "Match" },
 ];
 
-const stillLearning: Term[] = [
-  {
-    id: "still-1",
-    question: "Which tasks are the responsibilities of AWS? (TWO)",
-    answer:
-      "Maintaining virtualization infrastructure & configuring AWS infrastructure devices",
-  },
-  {
-    id: "still-2",
-    question:
-      "Which example supports the cloud design principle 'design for failure and nothing will fail'?",
-    answer: "Deploying an application in multiple availability zones",
-  },
-  {
-    id: "still-3",
-    question: "Which service uses AWS edge locations?",
-    answer: "Amazon CloudFront",
-  },
-  {
-    id: "still-4",
-    question:
-      "Which of the following is a benefit of Amazon Elastic Compute Cloud over physical servers?",
-    answer: "Paying only for what you use",
-  },
-  {
-    id: "still-5",
-    question:
-      "Which of the following is a factor when calculating total cost of ownership (TCO) for the AWS cloud?",
-    answer: "The number of servers migrated to AWS",
-  },
-];
-
-const notStudied: Term[] = [
-  {
-    id: "not-1",
-    question:
-      "How can the AWS management console be secured against unauthorized access?",
-    answer: "Multi-Factor Authentication",
-  },
-  {
-    id: "not-2",
-    question:
-      "Where can a customer go to get more detail about EC2 billing activity that took place 3 months ago?",
-    answer: "AWS Cost and usage reports",
-  },
-  {
-    id: "not-3",
-    question:
-      "Which AWS service provides infrastructure security recommendations?",
-    answer: "AWS Trusted Advisor",
-  },
-  {
-    id: "not-4",
-    question: "Which AWS services can be used to store files?",
-    answer:
-      "Amazon Simple Storage Service (S3) and Amazon Elastic Block Store (EBS)",
-  },
-  {
-    id: "not-5",
-    question:
-      "Which service allows an admin to create and modify AWS user permissions?",
-    answer: "AWS Identity and Access Management (IAM)",
-  },
-];
-
 export default async function FlashcardSetPage(context: {
   params: Promise<{ id: string }>;
 }) {
@@ -99,13 +34,13 @@ export default async function FlashcardSetPage(context: {
     },
   });
 
-  if (!res.ok) throw new Error("Failed to load quizzes");
+  if (!res.ok) throw new Error(`Failed to load quizzes ${res.body}`);
 
-  const quizz: FullQuizzResponse = await res.json();
+  const quizz: QuizDetail = await res.json();
 
   return (
-    <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor)">
-      <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
+    <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor) pb-10">
+      <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
         <BreadCrumbs />
         <FlashcardTestHeader quizzSet={quizz} />
 
@@ -130,9 +65,10 @@ export default async function FlashcardSetPage(context: {
 
         <FlashCardSetsSection header="Student also studied" />
 
-        <RemainingSection header="Still Learning" terms={stillLearning} />
-
-        <RemainingSection header="Not studied" terms={notStudied} />
+        <RemainingSection
+          header="Terms in this set"
+          terms={quizz.sets[0].questions}
+        />
       </div>
     </main>
   );
@@ -149,7 +85,7 @@ const RemainingSection = ({
     <section className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h2 className="text-xl font-medium">
-          {header}({terms.length})
+          {header} ({terms.length})
         </h2>
 
         <button className="inline-flex items-center gap-2 rounded-full bg-(--capsule) px-4 py-2 text-sm">
@@ -164,15 +100,15 @@ const RemainingSection = ({
             className="flex flex-row w-full items-center justify-between gap-4 rounded-lg px-5 py-4 bg-(--cardColor)"
           >
             <div className="flex flex-col w-full md:flex-row pr-4 md:pr-0 ">
-              <p className="flex-1 px-2 font-bold md:font-normal">
-                {term.question}
-              </p>
-              <div className="md:border-(--background) md:border md:py-0 py-2" />
-              <p className="flex-2 px-2 font-extralight md:font-normal">
+              <p className="flex-1 px-2 font-bold md:font-light">
                 {term.answer}
               </p>
+              <div className="md:border-(--background) md:border md:py-0 py-2" />
+              <p className="flex-2 px-5 font-extralight md:font-light">
+                {term.question}
+              </p>
             </div>
-            <div className="w-16 flex justify-end items-center gap-3">
+            <div className="w-18 flex justify-end items-center gap-3">
               <button className="rounded-full border border-white/15 p-2">
                 <StarIcon className="h-5 w-5" />
               </button>
