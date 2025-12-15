@@ -7,13 +7,22 @@ async function run() {
 
   while (true) {
     try {
+      const t0 = performance.now();
       const res = await fetch("http://localhost:3000/api/process", {
         method: "POST",
       });
 
       const data = await res.json();
 
-      console.log("Processed:", data.processed, "Failed:", data.failed);
+      const t1 = performance.now();
+      console.log(
+        "Processed:",
+        data.processed,
+        "Failed:",
+        data.failed,
+        "time:",
+        `${t1 - t0}`
+      );
 
       if (data.processed === 0) {
         console.log("All questions processed");

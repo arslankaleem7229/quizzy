@@ -21,11 +21,10 @@ export function buildQuestionPrompt({
     : "Use the same language as the input.";
 
   return `
-You are an assistant that generates a helpful hint and a clear explanation for a multiple choice question.
+You are an assistant that generates a helpful hint for a multiple choice question.
 
 Rules:
 - Do NOT reveal the correct answer in the hint
-- Explanation MAY mention the correct answer
 - Do NOT invent facts
 - Output valid JSON only
 - ${languageInstruction}
@@ -42,8 +41,17 @@ ${answer}
 Return JSON:
 {
   "hint": "...",
-  "explanation": "...",
-  "language": "..."
 }
 `;
 }
+
+// Return JSON:
+// {
+//   "hint": "...",
+//   "explanation": "...",
+//   "language": "..."
+// }
+
+// - Explanation MAY mention the correct answer
+
+// You are an assistant that generates a helpful hint and a clear explanation for a multiple choice question.

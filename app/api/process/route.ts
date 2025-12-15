@@ -45,22 +45,22 @@ export async function POST() {
       });
       const generation = await generateQuestionEnrichment(prompt);
 
-      const mergedExplanation = question.explanation
-        ? `${question.explanation}\n\n${generation.explanation}`
-        : generation.explanation;
+      // const mergedExplanation = question.explanation
+      //   ? `${question.explanation}\n\n${generation.explanation}`
+      //   : generation.explanation;
 
-      if (question.explanation) {
-        logger.info(
-          `Appending generated explanation to existing text for question ${question.id}`
-        );
-      }
+      // if (question.explanation) {
+      //   logger.info(
+      //     `Appending generated explanation to existing text for question ${question.id}`
+      //   );
+      // }
 
       await prisma.question.update({
         where: { id: question.id },
         data: {
           hint: generation.hint,
-          explanation: mergedExplanation,
-          status: "done",
+          // explanation: mergedExplanation,
+          status: "hint_done",
         },
       });
 

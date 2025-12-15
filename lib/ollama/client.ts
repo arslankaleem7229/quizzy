@@ -2,8 +2,8 @@ import { logger } from "./logger";
 
 export type OllamaGeneration = {
   hint: string;
-  explanation: string;
-  language: string;
+  // explanation: string;
+  // language: string;
 };
 
 const OLLAMA_URL =
@@ -59,13 +59,15 @@ function validateGeneration(payload: unknown): OllamaGeneration {
   if (
     !payload ||
     typeof payload !== "object" ||
-    typeof (payload as Record<string, unknown>).hint !== "string" ||
-    typeof (payload as Record<string, unknown>).explanation !== "string" ||
-    typeof (payload as Record<string, unknown>).language !== "string"
+    typeof (payload as Record<string, unknown>).hint !== "string"
+    // typeof (payload as Record<string, unknown>).explanation !== "string" ||
+    // typeof (payload as Record<string, unknown>).language !== "string"
   ) {
     throw new Error("Ollama response missing required fields");
   }
 
-  const { hint, explanation, language } = payload as Record<string, string>;
-  return { hint, explanation, language };
+  // const { hint, explanation, language } = payload as Record<string, string>;
+  // return { hint, explanation, language };
+  const { hint } = payload as Record<string, string>;
+  return { hint };
 }

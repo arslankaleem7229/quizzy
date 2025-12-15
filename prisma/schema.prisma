@@ -141,6 +141,7 @@ enum QuestionStatus {
   pending
   error
   done
+  hint_done
 }
 
 enum QuestionType {

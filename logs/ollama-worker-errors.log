@@ -55,3 +55,5 @@
 [2025-12-15T00:48:47.761Z] Question cmizbhg9x00kd4dqs6fg3um24 failed: Failed to parse Ollama response JSON
 [2025-12-15T00:49:07.006Z] Unterminated string in JSON at position 794 (line 3 column 449)
 [2025-12-15T00:49:07.223Z] Question cmizbhg9y00ke4dqsllfbxmd1 failed: Failed to parse Ollama response JSON
+[2025-12-15T01:29:57.883Z] Question cmizbhm8o01cd4dqs7oyn5w2f failed: 
+[2025-12-15T01:32:28.599Z] Question cmizbhm8t01cz4dqsv84hm72b failed: 
