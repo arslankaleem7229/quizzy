@@ -18,7 +18,19 @@ export async function GET(
       sets: {
         where: { language: "en" },
         include: {
-          questions: true,
+          questions: {
+            include: {
+              attachments: {
+                select: {
+                  id: true,
+                  type: true,
+                  questionId: true,
+                  answerId: true,
+                  url: true,
+                },
+              },
+            },
+          },
           userQuizzAttempts: true,
         },
       },

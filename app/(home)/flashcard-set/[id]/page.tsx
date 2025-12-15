@@ -4,19 +4,15 @@ import FlashcardTestHeader from "./../components/FlashcardTestHeader";
 import BreadCrumbs from "./../components/BreadCrumbs";
 import UserAvatarIcon from "./../components/UserAvatarIcon";
 import FlashCardSetsSection from "../../search/components/FlashCardSetsSection";
-import { QuizDetail } from "@/lib/types/prisma";
+import { QuizDetail, QuizDetailQuestion } from "@/lib/types/prisma";
 import { cookies } from "next/headers";
-
-type Term = {
-  id: string;
-  question: string;
-  answer: string;
-};
+import { AttachmentType } from "@/app/generated/prisma";
+import Image from "next/image";
 
 const studyModes = [
-  { id: "flashcards", label: "Flashcards" },
-  { id: "learn", label: "Learn" },
-  { id: "test", label: "Test" },
+  { id: "flashcards", label: "Flashcards", enabled: true },
+  { id: "learn", label: "Learn", enabled: true },
+  { id: "test", label: "Test", enabled: true },
   { id: "blocks", label: "Blocks" },
   { id: "blast", label: "Blast" },
   { id: "match", label: "Match" },
@@ -48,7 +44,8 @@ export default async function FlashcardSetPage(context: {
           {studyModes.map((mode) => (
             <button
               key={mode.id}
-              className="rounded-lg bg-(--cardColor) p-5 font-medium tracking-wide transition hover:border-b-2 border-(--primary)"
+              disabled={!mode.enabled}
+              className="rounded-lg bg-(--cardColor) p-5 font-medium tracking-wide transition hover:border-b-2 border-(--primary) disabled:bg-gray-700 disabled:hover:border-b-0"
             >
               {mode.label}
             </button>
@@ -65,59 +62,87 @@ export default async function FlashcardSetPage(context: {
 
         <FlashCardSetsSection header="Student also studied" />
 
-        <RemainingSection
-          header="Terms in this set"
-          terms={quizz.sets[0].questions}
-        />
+        <RemainingSection questions={quizz.sets[0].questions} />
       </div>
     </main>
   );
 }
 
 const RemainingSection = ({
-  header,
-  terms,
+  questions,
 }: {
-  header: string;
-  terms: Term[];
+  questions: QuizDetailQuestion[];
 }) => {
   return (
     <section className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h2 className="text-xl font-medium">
-          {header} ({terms.length})
+          Terms in this set ({questions.length})
         </h2>
 
         <button className="inline-flex items-center gap-2 rounded-full bg-(--capsule) px-4 py-2 text-sm">
           <StarIcon className="h-5 w-5 text-emerald-300" />
-          Select these {terms.length}
+          Select these {questions.length}
         </button>
       </div>
       <div className="space-y-4">
-        {terms.map((term) => (
-          <article
-            key={term.id}
-            className="flex flex-row w-full items-center justify-between gap-4 rounded-lg px-5 py-4 bg-(--cardColor)"
-          >
-            <div className="flex flex-col w-full md:flex-row pr-4 md:pr-0 ">
-              <p className="flex-1 px-2 font-bold md:font-light">
-                {term.answer}
-              </p>
-              <div className="md:border-(--background) md:border md:py-0 py-2" />
-              <p className="flex-2 px-5 font-extralight md:font-light">
-                {term.question}
-              </p>
-            </div>
-            <div className="w-18 flex justify-end items-center gap-3">
-              <button className="rounded-full border border-white/15 p-2">
-                <StarIcon className="h-5 w-5" />
-              </button>
-              <button className="rounded-full border border-white/15 p-2">
-                <SpeakerWaveIcon className="h-5 w-5" />
-              </button>
-            </div>
-          </article>
-        ))}
+        {questions.map((question) => {
+          const hasAttachements = question.attachments.length > 0;
+          if (hasAttachements) {
+            console.log(question);
+          }
+          const questionImages = question.attachments.filter(
+            (a) => a.questionId
+          );
+          const answerImages = question.attachments.filter((a) => a.answerId);
+
+          return (
+            <article
+              key={question.id}
+              className="flex flex-row w-full items-center justify-between gap-4 rounded-lg px-5 py-4 bg-(--cardColor)"
+            >
+              <div className="flex flex-col w-full md:flex-row pr-4 md:pr-0 ">
+                {hasAttachements && answerImages ? (
+                  <div className="relative h-5 w-5">
+                    <Image
+                      src={answerImages[0].url}
+                      alt="answer-image"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ) : (
+                  <p className="flex-1 px-2 font-bold md:font-light">
+                    {question.answer}
+                  </p>
+                )}
+                <div className="md:border-(--background) md:border md:py-0 py-2" />
+                {hasAttachements && questionImages ? (
+                  <div className="relative h-5 w-5">
+                    <Image
+                      src={questionImages[0].url}
+                      alt="answer-image"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ) : (
+                  <p className="flex-2 px-5 font-extralight md:font-light">
+                    {question.question}
+                  </p>
+                )}
+              </div>
+              <div className="w-18 flex justify-end items-center gap-3">
+                <button className="rounded-full border border-white/15 p-2">
+                  <StarIcon className="h-5 w-5" />
+                </button>
+                <button className="rounded-full border border-white/15 p-2">
+                  <SpeakerWaveIcon className="h-5 w-5" />
+                </button>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

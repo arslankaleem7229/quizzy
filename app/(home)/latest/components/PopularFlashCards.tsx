@@ -1,4 +1,5 @@
 import { QuizListResponse } from "@/lib/types/prisma";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function PopularFlashCards({
@@ -31,10 +32,20 @@ export default function PopularFlashCards({
                 </div>
               </div>
               <div className="mt-4 flex items-center gap-3 text-sm text-(--textColor)/70">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-(--capsule) text-xs">
-                  {quizz.createdBy.image ??
-                    quizz.createdBy.name![0].capitalize()}
-                </div>
+                {quizz.createdBy.image ? (
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full relative overflow-clip">
+                    <Image
+                      src={quizz.createdBy.image}
+                      alt={"creator image"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-(--capsule) text-xs">
+                    {quizz.createdBy.name![0].capitalize()}
+                  </div>
+                )}
                 <div className="font-medium text-(--textColor)/90">
                   {quizz.createdBy.name}
                 </div>

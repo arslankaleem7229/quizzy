@@ -9,8 +9,7 @@ export type ReviewRecord = Prisma.ReviewGetPayload<object>;
 export type AttachmentRecord = Prisma.AttachmentGetPayload<object>;
 export type QuestionRecord = Prisma.QuestionGetPayload<object>;
 export type UserAnswerRecord = Prisma.UserAnswerGetPayload<object>;
-export type UserQuizAttemptRecord =
-  Prisma.UserQuizzAttemptGetPayload<object>;
+export type UserQuizAttemptRecord = Prisma.UserQuizzAttemptGetPayload<object>;
 
 const quizListSelection = Prisma.validator<Prisma.QuizzDefaultArgs>()({
   include: {
@@ -35,7 +34,19 @@ const quizDetailSelection = Prisma.validator<Prisma.QuizzDefaultArgs>()({
     sets: {
       where: { language: "en" },
       include: {
-        questions: true,
+        questions: {
+          include: {
+            attachments: {
+              select: {
+                id: true,
+                type: true,
+                questionId: true,
+                answerId: true,
+                url: true,
+              },
+            },
+          },
+        },
         userQuizzAttempts: true,
       },
     },
