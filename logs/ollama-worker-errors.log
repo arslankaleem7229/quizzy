@@ -1,0 +1,57 @@
+[2025-12-14T22:47:21.531Z] Question cmizbdug600cp4dqsjwcsiiq0 failed: Failed to parse Ollama response JSON
+[2025-12-14T22:51:37.156Z] Question cmizbdugp00d84dqssluyge3h failed: Failed to parse Ollama response JSON
+[2025-12-14T23:07:14.796Z] Question cmizbdugv00di4dqs2l1cn3rt failed: Failed to parse Ollama response JSON
+[2025-12-14T23:10:45.934Z] Question cmizbduh400dy4dqsr636rd70 failed: Failed to parse Ollama response JSON
+[2025-12-14T23:18:49.384Z] Question cmizbhg4300ew4dqsappg92gm failed: Failed to parse Ollama response JSON
+[2025-12-14T23:20:36.279Z] Question cmizbhg5000f44dqsqje75ryu failed: Failed to parse Ollama response JSON
+[2025-12-14T23:28:25.022Z] Question cmizbhg5n00fx4dqspixrrj0n failed: Failed to parse Ollama response JSON
+[2025-12-14T23:30:03.078Z] Question cmizbhg5x00g64dqs4dtywd1g failed: Failed to parse Ollama response JSON
+[2025-12-14T23:41:33.761Z] Question cmizbhg7d00hg4dqshjl1zo2q failed: Failed to parse Ollama response JSON
+[2025-12-14T23:41:51.254Z] Question cmizbhg7d00hg4dqshjl1zo2q failed: Failed to parse Ollama response JSON
+[2025-12-14T23:49:49.717Z] Question cmizbhg9400ij4dqsbnfgwglf failed: Failed to parse Ollama response JSON
+[2025-12-14T23:53:27.070Z] Question cmizbhg9b00iw4dqs1qnrmbub failed: Failed to parse Ollama response JSON
+[2025-12-14T23:55:14.277Z] Question cmizbhg9f00j44dqsonr9cw67 failed: Failed to parse Ollama response JSON
+[2025-12-14T23:57:09.365Z] Question cmizbhg9j00jb4dqsft84hfi1 failed: Failed to parse Ollama response JSON
+[2025-12-14T23:57:31.932Z] Question cmizbhg9j00jc4dqsinpbts8n failed: Failed to parse Ollama response JSON
+[2025-12-15T00:30:10.370Z] Unterminated string in JSON at position 613 (line 4 column 32)
+[2025-12-15T00:30:10.894Z] Question cmizbhg5n00fx4dqspixrrj0n failed: Failed to parse Ollama response JSON
+[2025-12-15T00:30:32.090Z] Unterminated string in JSON at position 904 (line 3 column 676)
+[2025-12-15T00:30:32.475Z] Question cmizbhg5x00g64dqs4dtywd1g failed: Failed to parse Ollama response JSON
+[2025-12-15T00:30:52.915Z] Unterminated string in JSON at position 694 (line 3 column 536)
+[2025-12-15T00:30:53.173Z] Question cmizbhg7d00hg4dqshjl1zo2q failed: Failed to parse Ollama response JSON
+[2025-12-15T00:31:11.852Z] Unterminated string in JSON at position 610 (line 3 column 520)
+[2025-12-15T00:31:12.197Z] Question cmizbhg9400ij4dqsbnfgwglf failed: Failed to parse Ollama response JSON
+[2025-12-15T00:31:31.815Z] Unterminated string in JSON at position 652 (line 3 column 417)
+[2025-12-15T00:31:32.035Z] Question cmizbhg9b00iw4dqs1qnrmbub failed: Failed to parse Ollama response JSON
+[2025-12-15T00:32:25.779Z] Unterminated string in JSON at position 683 (line 3 column 521)
+[2025-12-15T00:32:25.964Z] Question cmizbhg9j00jc4dqsinpbts8n failed: Failed to parse Ollama response JSON
+[2025-12-15T00:32:46.063Z] Unterminated string in JSON at position 651 (line 3 column 378)
+[2025-12-15T00:32:46.371Z] Question cmizbhg9k00je4dqs7lzf8q3v failed: Failed to parse Ollama response JSON
+[2025-12-15T00:34:26.775Z] Expected double-quoted property name in JSON at position 651 (line 4 column 2)
+[2025-12-15T00:34:27.105Z] Question cmizbhg9m00jj4dqswle9ie7h failed: Failed to parse Ollama response JSON
+[2025-12-15T00:35:01.900Z] Unterminated string in JSON at position 669 (line 3 column 472)
+[2025-12-15T00:35:02.121Z] Question cmizbhg9n00jk4dqsw6xdfobz failed: Failed to parse Ollama response JSON
+[2025-12-15T00:35:35.959Z] Unterminated string in JSON at position 707 (line 3 column 528)
+[2025-12-15T00:35:36.185Z] Question cmizbhg9o00jl4dqsnuvlzpdo failed: Failed to parse Ollama response JSON
+[2025-12-15T00:37:21.259Z] Unterminated string in JSON at position 725 (line 3 column 544)
+[2025-12-15T00:37:21.496Z] Question cmizbhg9p00jo4dqs15bnliut failed: Failed to parse Ollama response JSON
+[2025-12-15T00:37:56.512Z] Unterminated string in JSON at position 699 (line 3 column 526)
+[2025-12-15T00:37:56.722Z] Question cmizbhg9p00jp4dqsuz9d50yc failed: Failed to parse Ollama response JSON
+[2025-12-15T00:38:59.356Z] Unterminated string in JSON at position 773 (line 3 column 534)
+[2025-12-15T00:38:59.596Z] Question cmizbhg9r00jr4dqsb27ygx4x failed: Failed to parse Ollama response JSON
+[2025-12-15T00:40:28.647Z] Expected ',' or '}' after property value in JSON at position 743 (line 5 column 1)
+[2025-12-15T00:40:29.188Z] Question cmizbhg9s00ju4dqsjqpt237s failed: Failed to parse Ollama response JSON
+[2025-12-15T00:42:14.801Z] Unterminated string in JSON at position 667 (line 3 column 445)
+[2025-12-15T00:42:15.097Z] Question cmizbhg9t00jy4dqshmva8x9s failed: Failed to parse Ollama response JSON
+[2025-12-15T00:44:32.743Z] Unterminated string in JSON at position 691 (line 3 column 534)
+[2025-12-15T00:44:33.532Z] Question cmizbhg9u00k24dqsip5hw7f7 failed: Failed to parse Ollama response JSON
+[2025-12-15T00:45:18.182Z] Unterminated string in JSON at position 663 (line 3 column 496)
+[2025-12-15T00:45:18.507Z] Question cmizbhg9u00k34dqszfzj62zc failed: Failed to parse Ollama response JSON
+[2025-12-15T00:46:14.253Z] Unterminated string in JSON at position 630 (line 3 column 440)
+[2025-12-15T00:46:14.729Z] Question cmizbhg9v00k54dqsnlqs8sg8 failed: Failed to parse Ollama response JSON
+[2025-12-15T00:47:54.537Z] Unterminated string in JSON at position 683 (line 3 column 474)
+[2025-12-15T00:47:55.064Z] Question cmizbhg9w00ka4dqs13q5gvbl failed: Failed to parse Ollama response JSON
+[2025-12-15T00:48:47.399Z] Unterminated string in JSON at position 642 (line 3 column 478)
+[2025-12-15T00:48:47.761Z] Question cmizbhg9x00kd4dqs6fg3um24 failed: Failed to parse Ollama response JSON
+[2025-12-15T00:49:07.006Z] Unterminated string in JSON at position 794 (line 3 column 449)
+[2025-12-15T00:49:07.223Z] Question cmizbhg9y00ke4dqsllfbxmd1 failed: Failed to parse Ollama response JSON

@@ -1,0 +1,967 @@
+[2025-12-14T22:31:27.638Z] Ollama worker started
+[2025-12-14T22:31:27.662Z] Processing question cmizbduel00ai4dqs4hq9hhji
+[2025-12-14T22:31:42.648Z] Question cmizbduel00ai4dqs4hq9hhji processed
+[2025-12-14T22:31:42.652Z] Processing question cmizbduem00aj4dqsbtpjswx4
+[2025-12-14T22:31:54.776Z] Question cmizbduem00aj4dqsbtpjswx4 processed
+[2025-12-14T22:31:54.780Z] Processing question cmizbduen00ak4dqsbgsp7tx9
+[2025-12-14T22:32:06.785Z] Question cmizbduen00ak4dqsbgsp7tx9 processed
+[2025-12-14T22:32:06.790Z] Processing question cmizbduen00al4dqsa1rr4sms
+[2025-12-14T22:32:16.846Z] Question cmizbduen00al4dqsa1rr4sms processed
+[2025-12-14T22:32:16.850Z] Processing question cmizbdueo00am4dqse4xc7tth
+[2025-12-14T22:32:27.850Z] Question cmizbdueo00am4dqse4xc7tth processed
+[2025-12-14T22:32:27.854Z] Processing question cmizbduep00an4dqs5sgjfzk3
+[2025-12-14T22:32:39.303Z] Question cmizbduep00an4dqs5sgjfzk3 processed
+[2025-12-14T22:32:39.310Z] Processing question cmizbdueq00ao4dqsu3ch2xdo
+[2025-12-14T22:32:50.481Z] Question cmizbdueq00ao4dqsu3ch2xdo processed
+[2025-12-14T22:32:50.485Z] Processing question cmizbduer00ap4dqspb6faebm
+[2025-12-14T22:33:01.714Z] Question cmizbduer00ap4dqspb6faebm processed
+[2025-12-14T22:33:01.718Z] Processing question cmizbduer00aq4dqsr3wx4rzv
+[2025-12-14T22:33:13.320Z] Question cmizbduer00aq4dqsr3wx4rzv processed
+[2025-12-14T22:33:13.325Z] Processing question cmizbdues00ar4dqsnub9r48u
+[2025-12-14T22:33:26.253Z] Question cmizbdues00ar4dqsnub9r48u processed
+[2025-12-14T22:33:26.258Z] Processing question cmizbduet00as4dqs58y2jl4o
+[2025-12-14T22:33:40.493Z] Question cmizbduet00as4dqs58y2jl4o processed
+[2025-12-14T22:33:40.494Z] Processing question cmizbduet00at4dqsg7knfebd
+[2025-12-14T22:33:53.866Z] Question cmizbduet00at4dqsg7knfebd processed
+[2025-12-14T22:33:53.868Z] Processing question cmizbdueu00au4dqsx7hxo3iq
+[2025-12-14T22:34:06.997Z] Question cmizbdueu00au4dqsx7hxo3iq processed
+[2025-12-14T22:34:07.000Z] Processing question cmizbduev00av4dqswfzym7li
+[2025-12-14T22:34:20.207Z] Question cmizbduev00av4dqswfzym7li processed
+[2025-12-14T22:34:20.210Z] Processing question cmizbduev00aw4dqs5pq64zlm
+[2025-12-14T22:34:33.216Z] Question cmizbduev00aw4dqs5pq64zlm processed
+[2025-12-14T22:34:33.220Z] Processing question cmizbduew00ax4dqsbffi6ld6
+[2025-12-14T22:34:43.286Z] Question cmizbduew00ax4dqsbffi6ld6 processed
+[2025-12-14T22:34:43.290Z] Processing question cmizbduew00ay4dqsi3l96ajm
+[2025-12-14T22:34:55.487Z] Question cmizbduew00ay4dqsi3l96ajm processed
+[2025-12-14T22:34:55.490Z] Processing question cmizbduex00az4dqs23b1tysu
+[2025-12-14T22:35:06.775Z] Question cmizbduex00az4dqs23b1tysu processed
+[2025-12-14T22:35:06.779Z] Processing question cmizbduex00b04dqs0abkdo5s
+[2025-12-14T22:35:18.867Z] Question cmizbduex00b04dqs0abkdo5s processed
+[2025-12-14T22:35:18.872Z] Processing question cmizbduey00b14dqsgf2bw68c
+[2025-12-14T22:35:31.380Z] Appending generated explanation to existing text for question cmizbduey00b14dqsgf2bw68c
+[2025-12-14T22:35:31.448Z] Question cmizbduey00b14dqsgf2bw68c processed
+[2025-12-14T22:35:31.448Z] Processing question cmizbduey00b24dqsj39tg42y
+[2025-12-14T22:35:42.793Z] Question cmizbduey00b24dqsj39tg42y processed
+[2025-12-14T22:35:42.794Z] Processing question cmizbduez00b34dqsi16loznz
+[2025-12-14T22:35:52.298Z] Appending generated explanation to existing text for question cmizbduez00b34dqsi16loznz
+[2025-12-14T22:35:52.321Z] Question cmizbduez00b34dqsi16loznz processed
+[2025-12-14T22:35:52.322Z] Processing question cmizbduez00b44dqsmrx134da
+[2025-12-14T22:36:02.371Z] Appending generated explanation to existing text for question cmizbduez00b44dqsmrx134da
+[2025-12-14T22:36:02.441Z] Question cmizbduez00b44dqsmrx134da processed
+[2025-12-14T22:36:02.442Z] Processing question cmizbduf000b54dqsq99rqcbs
+[2025-12-14T22:36:13.079Z] Question cmizbduf000b54dqsq99rqcbs processed
+[2025-12-14T22:36:13.082Z] Processing question cmizbduf100b64dqs22g1bkqi
+[2025-12-14T22:36:23.783Z] Appending generated explanation to existing text for question cmizbduf100b64dqs22g1bkqi
+[2025-12-14T22:36:23.818Z] Question cmizbduf100b64dqs22g1bkqi processed
+[2025-12-14T22:36:23.819Z] Worker finished. Processed 25, Failed 0
+[2025-12-14T22:36:24.509Z] Ollama worker started
+[2025-12-14T22:36:24.528Z] Processing question cmizbduf300b74dqsjdsl1wta
+[2025-12-14T22:36:43.176Z] Question cmizbduf300b74dqsjdsl1wta processed
+[2025-12-14T22:36:43.177Z] Processing question cmizbduf600b84dqseixz64dz
+[2025-12-14T22:36:52.205Z] Question cmizbduf600b84dqseixz64dz processed
+[2025-12-14T22:36:52.206Z] Processing question cmizbduf700b94dqslr36ajbh
+[2025-12-14T22:37:03.801Z] Question cmizbduf700b94dqslr36ajbh processed
+[2025-12-14T22:37:03.802Z] Processing question cmizbdufa00ba4dqsbd57nyxy
+[2025-12-14T22:37:19.779Z] Question cmizbdufa00ba4dqsbd57nyxy processed
+[2025-12-14T22:37:19.782Z] Processing question cmizbdufa00bb4dqs2nh2jri6
+[2025-12-14T22:37:31.453Z] Question cmizbdufa00bb4dqs2nh2jri6 processed
+[2025-12-14T22:37:31.454Z] Processing question cmizbdufb00bc4dqsd77v0r7y
+[2025-12-14T22:37:43.446Z] Question cmizbdufb00bc4dqsd77v0r7y processed
+[2025-12-14T22:37:43.447Z] Processing question cmizbdufc00bd4dqsqrx5bl5u
+[2025-12-14T22:37:54.735Z] Question cmizbdufc00bd4dqsqrx5bl5u processed
+[2025-12-14T22:37:54.736Z] Processing question cmizbdufd00be4dqsunzj2uzt
+[2025-12-14T22:38:06.055Z] Question cmizbdufd00be4dqsunzj2uzt processed
+[2025-12-14T22:38:06.055Z] Processing question cmizbdufd00bf4dqs3t9vcyuq
+[2025-12-14T22:38:17.283Z] Question cmizbdufd00bf4dqs3t9vcyuq processed
+[2025-12-14T22:38:17.285Z] Processing question cmizbdufe00bg4dqsmicdhxbb
+[2025-12-14T22:38:27.522Z] Question cmizbdufe00bg4dqsmicdhxbb processed
+[2025-12-14T22:38:27.522Z] Processing question cmizbdufe00bh4dqsw9eg8ifd
+[2025-12-14T22:38:39.748Z] Question cmizbdufe00bh4dqsw9eg8ifd processed
+[2025-12-14T22:38:39.749Z] Processing question cmizbduff00bi4dqsnvj74wl3
+[2025-12-14T22:38:51.331Z] Question cmizbduff00bi4dqsnvj74wl3 processed
+[2025-12-14T22:38:51.335Z] Processing question cmizbdufg00bj4dqs0vdw1zy2
+[2025-12-14T22:39:01.750Z] Question cmizbdufg00bj4dqs0vdw1zy2 processed
+[2025-12-14T22:39:01.750Z] Processing question cmizbdufh00bk4dqsu3bi8z2c
+[2025-12-14T22:39:13.829Z] Question cmizbdufh00bk4dqsu3bi8z2c processed
+[2025-12-14T22:39:13.830Z] Processing question cmizbdufh00bl4dqszaptj03i
+[2025-12-14T22:39:24.917Z] Appending generated explanation to existing text for question cmizbdufh00bl4dqszaptj03i
+[2025-12-14T22:39:24.979Z] Question cmizbdufh00bl4dqszaptj03i processed
+[2025-12-14T22:39:24.980Z] Processing question cmizbdufi00bm4dqsn4nd0rnc
+[2025-12-14T22:39:35.573Z] Question cmizbdufi00bm4dqsn4nd0rnc processed
+[2025-12-14T22:39:35.574Z] Processing question cmizbdufi00bn4dqsbjbe3s6v
+[2025-12-14T22:39:47.408Z] Appending generated explanation to existing text for question cmizbdufi00bn4dqsbjbe3s6v
+[2025-12-14T22:39:47.453Z] Question cmizbdufi00bn4dqsbjbe3s6v processed
+[2025-12-14T22:39:47.453Z] Processing question cmizbdufj00bo4dqs9ibos7en
+[2025-12-14T22:40:00.408Z] Appending generated explanation to existing text for question cmizbdufj00bo4dqs9ibos7en
+[2025-12-14T22:40:00.421Z] Question cmizbdufj00bo4dqs9ibos7en processed
+[2025-12-14T22:40:00.421Z] Processing question cmizbdufk00bp4dqswvwsvden
+[2025-12-14T22:40:10.989Z] Question cmizbdufk00bp4dqswvwsvden processed
+[2025-12-14T22:40:10.989Z] Processing question cmizbdufl00bq4dqsmjpao63l
+[2025-12-14T22:40:22.614Z] Question cmizbdufl00bq4dqsmjpao63l processed
+[2025-12-14T22:40:22.615Z] Processing question cmizbdufm00br4dqsxw9mfjzs
+[2025-12-14T22:40:32.485Z] Appending generated explanation to existing text for question cmizbdufm00br4dqsxw9mfjzs
+[2025-12-14T22:40:32.492Z] Question cmizbdufm00br4dqsxw9mfjzs processed
+[2025-12-14T22:40:32.492Z] Processing question cmizbdufm00bs4dqs46dlmukt
+[2025-12-14T22:40:44.518Z] Question cmizbdufm00bs4dqs46dlmukt processed
+[2025-12-14T22:40:44.519Z] Processing question cmizbdufn00bt4dqspkatncfs
+[2025-12-14T22:40:57.944Z] Question cmizbdufn00bt4dqspkatncfs processed
+[2025-12-14T22:40:57.948Z] Processing question cmizbdufo00bu4dqsibvuam7a
+[2025-12-14T22:41:08.432Z] Question cmizbdufo00bu4dqsibvuam7a processed
+[2025-12-14T22:41:08.433Z] Processing question cmizbdufo00bv4dqstj78d1ng
+[2025-12-14T22:41:20.298Z] Question cmizbdufo00bv4dqstj78d1ng processed
+[2025-12-14T22:41:20.299Z] Worker finished. Processed 25, Failed 0
+[2025-12-14T22:41:20.928Z] Ollama worker started
+[2025-12-14T22:41:20.948Z] Processing question cmizbdufp00bw4dqs6pw16cze
+[2025-12-14T22:41:33.351Z] Question cmizbdufp00bw4dqs6pw16cze processed
+[2025-12-14T22:41:33.354Z] Processing question cmizbdufq00bx4dqsmdqqoek5
+[2025-12-14T22:41:43.225Z] Question cmizbdufq00bx4dqsmdqqoek5 processed
+[2025-12-14T22:41:43.226Z] Processing question cmizbdufq00by4dqsncev1g38
+[2025-12-14T22:41:52.584Z] Question cmizbdufq00by4dqsncev1g38 processed
+[2025-12-14T22:41:52.585Z] Processing question cmizbdufr00bz4dqsaxsr6eyf
+[2025-12-14T22:42:06.471Z] Question cmizbdufr00bz4dqsaxsr6eyf processed
+[2025-12-14T22:42:06.472Z] Processing question cmizbdufr00c04dqsjpzf5k1s
+[2025-12-14T22:42:19.664Z] Question cmizbdufr00c04dqsjpzf5k1s processed
+[2025-12-14T22:42:19.666Z] Processing question cmizbdufs00c14dqspwjehxuf
+[2025-12-14T22:42:29.222Z] Question cmizbdufs00c14dqspwjehxuf processed
+[2025-12-14T22:42:29.223Z] Processing question cmizbduft00c34dqsshg2epyx
+[2025-12-14T22:42:40.355Z] Question cmizbduft00c34dqsshg2epyx processed
+[2025-12-14T22:42:40.356Z] Processing question cmizbdufu00c44dqs5vng4uji
+[2025-12-14T22:42:54.020Z] Question cmizbdufu00c44dqs5vng4uji processed
+[2025-12-14T22:42:54.021Z] Processing question cmizbdufu00c54dqszcpzesp5
+[2025-12-14T22:43:06.479Z] Question cmizbdufu00c54dqszcpzesp5 processed
+[2025-12-14T22:43:06.480Z] Processing question cmizbdufv00c64dqshub4rzrt
+[2025-12-14T22:43:15.760Z] Question cmizbdufv00c64dqshub4rzrt processed
+[2025-12-14T22:43:15.763Z] Processing question cmizbdufw00c74dqstxtaytpi
+[2025-12-14T22:43:28.423Z] Question cmizbdufw00c74dqstxtaytpi processed
+[2025-12-14T22:43:28.424Z] Processing question cmizbdufx00c84dqsw3si1sow
+[2025-12-14T22:43:38.324Z] Question cmizbdufx00c84dqsw3si1sow processed
+[2025-12-14T22:43:38.325Z] Processing question cmizbdufx00c94dqssae6roev
+[2025-12-14T22:43:49.351Z] Question cmizbdufx00c94dqssae6roev processed
+[2025-12-14T22:43:49.351Z] Processing question cmizbdufy00ca4dqsrqsqf9fn
+[2025-12-14T22:44:00.215Z] Question cmizbdufy00ca4dqsrqsqf9fn processed
+[2025-12-14T22:44:00.217Z] Processing question cmizbdufy00cb4dqsx8ygt0vc
+[2025-12-14T22:44:13.244Z] Question cmizbdufy00cb4dqsx8ygt0vc processed
+[2025-12-14T22:44:13.245Z] Processing question cmizbdufz00cc4dqswyqjpnv0
+[2025-12-14T22:44:22.450Z] Question cmizbdufz00cc4dqswyqjpnv0 processed
+[2025-12-14T22:44:22.451Z] Processing question cmizbdufz00cd4dqsu3widg5f
+[2025-12-14T22:44:36.160Z] Question cmizbdufz00cd4dqsu3widg5f processed
+[2025-12-14T22:44:36.161Z] Processing question cmizbdug000ce4dqskgt7fysd
+[2025-12-14T22:44:48.673Z] Question cmizbdug000ce4dqskgt7fysd processed
+[2025-12-14T22:44:48.673Z] Processing question cmizbdug000cf4dqsyd26eeyz
+[2025-12-14T22:44:58.191Z] Question cmizbdug000cf4dqsyd26eeyz processed
+[2025-12-14T22:44:58.191Z] Processing question cmizbdug100cg4dqse03xsmon
+[2025-12-14T22:45:10.456Z] Question cmizbdug100cg4dqse03xsmon processed
+[2025-12-14T22:45:10.459Z] Processing question cmizbdug200ch4dqs34jj21x7
+[2025-12-14T22:45:24.419Z] Question cmizbdug200ch4dqs34jj21x7 processed
+[2025-12-14T22:45:24.421Z] Processing question cmizbdug200ci4dqsg1eru129
+[2025-12-14T22:45:35.827Z] Question cmizbdug200ci4dqsg1eru129 processed
+[2025-12-14T22:45:35.828Z] Processing question cmizbdug300cj4dqs1wxvlqlo
+[2025-12-14T22:45:50.821Z] Question cmizbdug300cj4dqs1wxvlqlo processed
+[2025-12-14T22:45:50.822Z] Processing question cmizbdug300ck4dqsjpyjrue5
+[2025-12-14T22:46:03.173Z] Question cmizbdug300ck4dqsjpyjrue5 processed
+[2025-12-14T22:46:03.174Z] Processing question cmizbdug400cl4dqskze2jpww
+[2025-12-14T22:46:17.159Z] Question cmizbdug400cl4dqskze2jpww processed
+[2025-12-14T22:46:17.161Z] Worker finished. Processed 25, Failed 0
+[2025-12-14T22:46:17.769Z] Ollama worker started
+[2025-12-14T22:46:17.791Z] Processing question cmizbdug400cm4dqslk3awq6r
+[2025-12-14T22:46:31.615Z] Appending generated explanation to existing text for question cmizbdug400cm4dqslk3awq6r
+[2025-12-14T22:46:31.659Z] Question cmizbdug400cm4dqslk3awq6r processed
+[2025-12-14T22:46:31.659Z] Processing question cmizbdug500cn4dqsq5oq3av1
+[2025-12-14T22:46:45.879Z] Question cmizbdug500cn4dqsq5oq3av1 processed
+[2025-12-14T22:46:45.883Z] Processing question cmizbdug600co4dqs0i6trrya
+[2025-12-14T22:47:01.146Z] Appending generated explanation to existing text for question cmizbdug600co4dqs0i6trrya
+[2025-12-14T22:47:01.257Z] Question cmizbdug600co4dqs0i6trrya processed
+[2025-12-14T22:47:01.257Z] Processing question cmizbdug600cp4dqsjwcsiiq0
+[2025-12-14T22:47:21.571Z] Processing question cmizbdug700cq4dqskr8rp2kd
+[2025-12-14T22:47:36.586Z] Question cmizbdug700cq4dqskr8rp2kd processed
+[2025-12-14T22:47:36.590Z] Processing question cmizbdug700cr4dqsvq97t654
+[2025-12-14T22:47:48.740Z] Question cmizbdug700cr4dqsvq97t654 processed
+[2025-12-14T22:47:48.741Z] Processing question cmizbdug800cs4dqsrvzyd17d
+[2025-12-14T22:48:04.657Z] Question cmizbdug800cs4dqsrvzyd17d processed
+[2025-12-14T22:48:04.659Z] Processing question cmizbdug900ct4dqsljlw9vf4
+[2025-12-14T22:48:14.917Z] Question cmizbdug900ct4dqsljlw9vf4 processed
+[2025-12-14T22:48:14.920Z] Processing question cmizbdugb00cv4dqsa23wuky6
+[2025-12-14T22:48:26.214Z] Question cmizbdugb00cv4dqsa23wuky6 processed
+[2025-12-14T22:48:26.215Z] Processing question cmizbdugb00cw4dqsdj2nf0dj
+[2025-12-14T22:48:43.604Z] Question cmizbdugb00cw4dqsdj2nf0dj processed
+[2025-12-14T22:48:43.604Z] Processing question cmizbdugc00cx4dqs1fe08l45
+[2025-12-14T22:48:59.993Z] Question cmizbdugc00cx4dqs1fe08l45 processed
+[2025-12-14T22:48:59.994Z] Processing question cmizbdugc00cy4dqsmfjac65q
+[2025-12-14T22:49:14.705Z] Question cmizbdugc00cy4dqsmfjac65q processed
+[2025-12-14T22:49:14.707Z] Processing question cmizbdugd00cz4dqshcxf2cy2
+[2025-12-14T22:49:29.334Z] Question cmizbdugd00cz4dqshcxf2cy2 processed
+[2025-12-14T22:49:29.337Z] Processing question cmizbdugd00d04dqsnjedl07g
+[2025-12-14T22:49:43.027Z] Question cmizbdugd00d04dqsnjedl07g processed
+[2025-12-14T22:49:43.027Z] Processing question cmizbdugg00d14dqsefmhhfz5
+[2025-12-14T22:49:57.484Z] Question cmizbdugg00d14dqsefmhhfz5 processed
+[2025-12-14T22:49:57.485Z] Processing question cmizbdugi00d24dqsfz0r0ha0
+[2025-12-14T22:50:10.538Z] Question cmizbdugi00d24dqsfz0r0ha0 processed
+[2025-12-14T22:50:10.538Z] Processing question cmizbdugj00d34dqs7v04qupt
+[2025-12-14T22:50:24.231Z] Question cmizbdugj00d34dqs7v04qupt processed
+[2025-12-14T22:50:24.233Z] Processing question cmizbdugl00d44dqsu9ievb6a
+[2025-12-14T22:50:35.520Z] Question cmizbdugl00d44dqsu9ievb6a processed
+[2025-12-14T22:50:35.521Z] Processing question cmizbdugm00d54dqs6k9frxmq
+[2025-12-14T22:50:51.746Z] Question cmizbdugm00d54dqs6k9frxmq processed
+[2025-12-14T22:50:51.747Z] Processing question cmizbdugn00d64dqsm2zwfpjf
+[2025-12-14T22:51:05.587Z] Question cmizbdugn00d64dqsm2zwfpjf processed
+[2025-12-14T22:51:05.588Z] Processing question cmizbdugo00d74dqsavexcmys
+[2025-12-14T22:51:17.636Z] Question cmizbdugo00d74dqsavexcmys processed
+[2025-12-14T22:51:17.636Z] Processing question cmizbdugp00d84dqssluyge3h
+[2025-12-14T22:51:37.218Z] Processing question cmizbdugq00d94dqs42szysna
+[2025-12-14T22:51:55.034Z] Question cmizbdugq00d94dqs42szysna processed
+[2025-12-14T22:51:55.035Z] Processing question cmizbdugr00da4dqsja10b4ph
+[2025-12-14T22:52:10.353Z] Question cmizbdugr00da4dqsja10b4ph processed
+[2025-12-14T22:52:10.353Z] Processing question cmizbdugr00db4dqsxppkbyxi
+[2025-12-14T22:52:23.555Z] Question cmizbdugr00db4dqsxppkbyxi processed
+[2025-12-14T22:52:23.557Z] Worker finished. Processed 23, Failed 2
+[2025-12-14T23:05:15.900Z] Ollama worker started
+[2025-12-14T23:05:15.915Z] Processing question cmizbdugs00dc4dqs53qqgtla
+[2025-12-14T23:05:34.717Z] Question cmizbdugs00dc4dqs53qqgtla processed
+[2025-12-14T23:05:34.720Z] Processing question cmizbdugs00dd4dqslsaytr6g
+[2025-12-14T23:05:52.573Z] Question cmizbdugs00dd4dqslsaytr6g processed
+[2025-12-14T23:05:52.576Z] Processing question cmizbdugt00de4dqsztajh061
+[2025-12-14T23:06:09.810Z] Appending generated explanation to existing text for question cmizbdugt00de4dqsztajh061
+[2025-12-14T23:06:09.882Z] Question cmizbdugt00de4dqsztajh061 processed
+[2025-12-14T23:06:09.882Z] Processing question cmizbdugt00df4dqsc6v5u3kn
+[2025-12-14T23:06:26.512Z] Question cmizbdugt00df4dqsc6v5u3kn processed
+[2025-12-14T23:06:26.515Z] Processing question cmizbdugu00dg4dqsbwdmo7gp
+[2025-12-14T23:06:41.782Z] Appending generated explanation to existing text for question cmizbdugu00dg4dqsbwdmo7gp
+[2025-12-14T23:06:41.872Z] Question cmizbdugu00dg4dqsbwdmo7gp processed
+[2025-12-14T23:06:41.873Z] Processing question cmizbdugu00dh4dqsywbfyjqj
+[2025-12-14T23:06:55.254Z] Question cmizbdugu00dh4dqsywbfyjqj processed
+[2025-12-14T23:06:55.258Z] Processing question cmizbdugv00di4dqs2l1cn3rt
+[2025-12-14T23:07:14.878Z] Processing question cmizbdugv00dj4dqsbyvjn2nm
+[2025-12-14T23:07:28.712Z] Question cmizbdugv00dj4dqsbyvjn2nm processed
+[2025-12-14T23:07:28.717Z] Processing question cmizbdugw00dk4dqsexsvdg83
+[2025-12-14T23:07:45.436Z] Question cmizbdugw00dk4dqsexsvdg83 processed
+[2025-12-14T23:07:45.440Z] Processing question cmizbdugw00dl4dqsjiijaekd
+[2025-12-14T23:07:57.173Z] Question cmizbdugw00dl4dqsjiijaekd processed
+[2025-12-14T23:07:57.176Z] Processing question cmizbdugx00dm4dqs7jh4tfji
+[2025-12-14T23:08:05.612Z] Question cmizbdugx00dm4dqs7jh4tfji processed
+[2025-12-14T23:08:05.613Z] Processing question cmizbdugy00do4dqs41znka1u
+[2025-12-14T23:08:18.509Z] Question cmizbdugy00do4dqs41znka1u processed
+[2025-12-14T23:08:18.512Z] Processing question cmizbdugz00dp4dqsw76u2hqq
+[2025-12-14T23:08:32.709Z] Question cmizbdugz00dp4dqsw76u2hqq processed
+[2025-12-14T23:08:32.714Z] Processing question cmizbdugz00dq4dqsn980uslo
+[2025-12-14T23:08:44.489Z] Question cmizbdugz00dq4dqsn980uslo processed
+[2025-12-14T23:08:44.493Z] Processing question cmizbduh000dr4dqs4r16b0to
+[2025-12-14T23:08:58.875Z] Question cmizbduh000dr4dqs4r16b0to processed
+[2025-12-14T23:08:58.876Z] Processing question cmizbduh100ds4dqs7eguw7c8
+[2025-12-14T23:09:13.042Z] Question cmizbduh100ds4dqs7eguw7c8 processed
+[2025-12-14T23:09:13.045Z] Processing question cmizbduh100dt4dqsj3uylncy
+[2025-12-14T23:09:26.310Z] Question cmizbduh100dt4dqsj3uylncy processed
+[2025-12-14T23:09:26.312Z] Processing question cmizbduh200du4dqsoomrie55
+[2025-12-14T23:09:41.276Z] Question cmizbduh200du4dqsoomrie55 processed
+[2025-12-14T23:09:41.277Z] Processing question cmizbduh200dv4dqsze6ar1li
+[2025-12-14T23:09:50.293Z] Question cmizbduh200dv4dqsze6ar1li processed
+[2025-12-14T23:09:50.295Z] Processing question cmizbduh300dw4dqsf0au1pah
+[2025-12-14T23:10:02.833Z] Question cmizbduh300dw4dqsf0au1pah processed
+[2025-12-14T23:10:02.835Z] Processing question cmizbduh300dx4dqsoxaesgrx
+[2025-12-14T23:10:14.022Z] Question cmizbduh300dx4dqsoxaesgrx processed
+[2025-12-14T23:10:14.027Z] Processing question cmizbduh400dy4dqsr636rd70
+[2025-12-14T23:10:19.204Z] Ollama worker started
+[2025-12-14T23:10:19.249Z] Processing question cmizbduh400dy4dqsr636rd70
+[2025-12-14T23:10:27.202Z] Question cmizbduh400dy4dqsr636rd70 processed
+[2025-12-14T23:10:27.203Z] Processing question cmizbduh600dz4dqsbxm6pit2
+[2025-12-14T23:10:46.011Z] Processing question cmizbduh600dz4dqsbxm6pit2
+[2025-12-14T23:10:57.573Z] Question cmizbduh600dz4dqsbxm6pit2 processed
+[2025-12-14T23:10:57.575Z] Processing question cmizbduh700e04dqs6kl2cgg5
+[2025-12-14T23:11:10.514Z] Question cmizbduh600dz4dqsbxm6pit2 processed
+[2025-12-14T23:11:10.515Z] Processing question cmizbduh700e04dqs6kl2cgg5
+[2025-12-14T23:11:20.574Z] Question cmizbduh700e04dqs6kl2cgg5 processed
+[2025-12-14T23:11:20.574Z] Processing question cmizbduh800e14dqs4vonzo2b
+[2025-12-14T23:11:31.862Z] Question cmizbduh700e04dqs6kl2cgg5 processed
+[2025-12-14T23:11:31.863Z] Processing question cmizbduh800e14dqs4vonzo2b
+[2025-12-14T23:11:40.548Z] Question cmizbduh800e14dqs4vonzo2b processed
+[2025-12-14T23:11:40.549Z] Worker finished. Processed 24, Failed 1
+[2025-12-14T23:11:49.790Z] Question cmizbduh800e14dqs4vonzo2b processed
+[2025-12-14T23:11:49.791Z] Processing question cmizbduh900e24dqsj4pnunfx
+[2025-12-14T23:12:03.403Z] Question cmizbduh900e24dqsj4pnunfx processed
+[2025-12-14T23:12:03.404Z] Processing question cmizbduha00e34dqsvfv10fkn
+[2025-12-14T23:12:13.295Z] Question cmizbduha00e34dqsvfv10fkn processed
+[2025-12-14T23:12:13.295Z] Processing question cmizbduis00e44dqshmv5qblh
+[2025-12-14T23:12:28.135Z] Question cmizbduis00e44dqshmv5qblh processed
+[2025-12-14T23:12:28.135Z] Processing question cmizbduit00e54dqsgjntfqfw
+[2025-12-14T23:12:39.500Z] Question cmizbduit00e54dqsgjntfqfw processed
+[2025-12-14T23:12:39.500Z] Processing question cmizbduiu00e64dqsm96xc5w5
+[2025-12-14T23:12:54.267Z] Question cmizbduiu00e64dqsm96xc5w5 processed
+[2025-12-14T23:12:54.267Z] Processing question cmizbduiv00e74dqspikai5s9
+[2025-12-14T23:13:06.587Z] Appending generated explanation to existing text for question cmizbduiv00e74dqspikai5s9
+[2025-12-14T23:13:06.635Z] Question cmizbduiv00e74dqspikai5s9 processed
+[2025-12-14T23:13:06.636Z] Processing question cmizbduiw00e84dqsxv4pca23
+[2025-12-14T23:13:18.127Z] Question cmizbduiw00e84dqsxv4pca23 processed
+[2025-12-14T23:13:18.128Z] Processing question cmizbduiw00e94dqs6smw7lwx
+[2025-12-14T23:13:29.274Z] Appending generated explanation to existing text for question cmizbduiw00e94dqs6smw7lwx
+[2025-12-14T23:13:29.289Z] Question cmizbduiw00e94dqs6smw7lwx processed
+[2025-12-14T23:13:29.289Z] Processing question cmizbduix00ea4dqsuscznoan
+[2025-12-14T23:13:44.313Z] Question cmizbduix00ea4dqsuscznoan processed
+[2025-12-14T23:13:44.314Z] Processing question cmizbduix00eb4dqsrjjx9gcb
+[2025-12-14T23:13:53.725Z] Question cmizbduix00eb4dqsrjjx9gcb processed
+[2025-12-14T23:13:53.726Z] Processing question cmizbduiy00ec4dqslrelkjpn
+[2025-12-14T23:14:04.806Z] Question cmizbduiy00ec4dqslrelkjpn processed
+[2025-12-14T23:14:04.807Z] Processing question cmizbduiy00ed4dqs896hqgly
+[2025-12-14T23:14:21.811Z] Question cmizbduiy00ed4dqs896hqgly processed
+[2025-12-14T23:14:21.811Z] Processing question cmizbduiz00ee4dqs00tmaefq
+[2025-12-14T23:14:30.722Z] Question cmizbduiz00ee4dqs00tmaefq processed
+[2025-12-14T23:14:30.723Z] Processing question cmizbhg3u00eh4dqsbz8o14xk
+[2025-12-14T23:14:43.789Z] Question cmizbhg3u00eh4dqsbz8o14xk processed
+[2025-12-14T23:14:43.789Z] Processing question cmizbhg3v00ei4dqszg3o5utk
+[2025-12-14T23:14:58.160Z] Question cmizbhg3v00ei4dqszg3o5utk processed
+[2025-12-14T23:14:58.161Z] Processing question cmizbhg3w00ej4dqsd9e6s725
+[2025-12-14T23:15:07.860Z] Question cmizbhg3w00ej4dqsd9e6s725 processed
+[2025-12-14T23:15:07.861Z] Processing question cmizbhg3w00ek4dqsegkjwy9k
+[2025-12-14T23:15:18.884Z] Question cmizbhg3w00ek4dqsegkjwy9k processed
+[2025-12-14T23:15:18.884Z] Processing question cmizbhg3x00el4dqsoa9ojfng
+[2025-12-14T23:15:22.199Z] Ollama worker started
+[2025-12-14T23:15:22.209Z] Processing question cmizbhg3x00el4dqsoa9ojfng
+[2025-12-14T23:15:32.090Z] Question cmizbhg3x00el4dqsoa9ojfng processed
+[2025-12-14T23:15:32.092Z] Processing question cmizbhg3x00em4dqs5lsvjm6r
+[2025-12-14T23:15:42.288Z] Question cmizbhg3x00el4dqsoa9ojfng processed
+[2025-12-14T23:15:42.288Z] Processing question cmizbhg3x00em4dqs5lsvjm6r
+[2025-12-14T23:15:59.231Z] Question cmizbhg3x00em4dqs5lsvjm6r processed
+[2025-12-14T23:15:59.232Z] Processing question cmizbhg3y00en4dqsqx4g1j7b
+[2025-12-14T23:16:11.226Z] Question cmizbhg3x00em4dqs5lsvjm6r processed
+[2025-12-14T23:16:11.227Z] Processing question cmizbhg3y00en4dqsqx4g1j7b
+[2025-12-14T23:16:25.269Z] Question cmizbhg3y00en4dqsqx4g1j7b processed
+[2025-12-14T23:16:25.270Z] Processing question cmizbhg3y00eo4dqs5760mwhe
+[2025-12-14T23:16:36.599Z] Question cmizbhg3y00en4dqsqx4g1j7b processed
+[2025-12-14T23:16:36.599Z] Processing question cmizbhg3y00eo4dqs5760mwhe
+[2025-12-14T23:16:47.640Z] Question cmizbhg3y00eo4dqs5760mwhe processed
+[2025-12-14T23:16:47.640Z] Worker finished. Processed 24, Failed 1
+[2025-12-14T23:17:00.016Z] Question cmizbhg3y00eo4dqs5760mwhe processed
+[2025-12-14T23:17:00.016Z] Processing question cmizbhg3z00ep4dqs3pf2xulu
+[2025-12-14T23:17:16.199Z] Appending generated explanation to existing text for question cmizbhg3z00ep4dqs3pf2xulu
+[2025-12-14T23:17:16.239Z] Question cmizbhg3z00ep4dqs3pf2xulu processed
+[2025-12-14T23:17:16.239Z] Processing question cmizbhg4000eq4dqss56y1fn5
+[2025-12-14T23:17:31.252Z] Question cmizbhg4000eq4dqss56y1fn5 processed
+[2025-12-14T23:17:31.253Z] Processing question cmizbhg4100er4dqsx72tnb13
+[2025-12-14T23:17:43.442Z] Question cmizbhg4100er4dqsx72tnb13 processed
+[2025-12-14T23:17:43.443Z] Processing question cmizbhg4100es4dqsihw7e34g
+[2025-12-14T23:17:59.267Z] Question cmizbhg4100es4dqsihw7e34g processed
+[2025-12-14T23:17:59.268Z] Processing question cmizbhg4200et4dqsnts65k5a
+[2025-12-14T23:18:11.666Z] Question cmizbhg4200et4dqsnts65k5a processed
+[2025-12-14T23:18:11.670Z] Processing question cmizbhg4200eu4dqsrve834wl
+[2025-12-14T23:18:22.312Z] Question cmizbhg4200eu4dqsrve834wl processed
+[2025-12-14T23:18:22.313Z] Processing question cmizbhg4300ev4dqsodtorr3h
+[2025-12-14T23:18:31.434Z] Question cmizbhg4300ev4dqsodtorr3h processed
+[2025-12-14T23:18:31.435Z] Processing question cmizbhg4300ew4dqsappg92gm
+[2025-12-14T23:18:49.406Z] Processing question cmizbhg4400ex4dqs7uyavcoh
+[2025-12-14T23:19:00.797Z] Question cmizbhg4400ex4dqs7uyavcoh processed
+[2025-12-14T23:19:00.799Z] Processing question cmizbhg4400ey4dqso9bkusnv
+[2025-12-14T23:19:12.961Z] Question cmizbhg4400ey4dqso9bkusnv processed
+[2025-12-14T23:19:12.962Z] Processing question cmizbhg4500ez4dqs6tyfzhz9
+[2025-12-14T23:19:25.519Z] Appending generated explanation to existing text for question cmizbhg4500ez4dqs6tyfzhz9
+[2025-12-14T23:19:25.546Z] Question cmizbhg4500ez4dqs6tyfzhz9 processed
+[2025-12-14T23:19:25.547Z] Processing question cmizbhg4500f04dqshrc0h9v6
+[2025-12-14T23:19:37.135Z] Appending generated explanation to existing text for question cmizbhg4500f04dqshrc0h9v6
+[2025-12-14T23:19:37.156Z] Question cmizbhg4500f04dqshrc0h9v6 processed
+[2025-12-14T23:19:37.157Z] Processing question cmizbhg4600f14dqshopkkimo
+[2025-12-14T23:19:46.734Z] Question cmizbhg4600f14dqshopkkimo processed
+[2025-12-14T23:19:46.735Z] Processing question cmizbhg4600f24dqsbiigyxl0
+[2025-12-14T23:20:02.151Z] Appending generated explanation to existing text for question cmizbhg4600f24dqsbiigyxl0
+[2025-12-14T23:20:02.186Z] Question cmizbhg4600f24dqsbiigyxl0 processed
+[2025-12-14T23:20:02.186Z] Processing question cmizbhg4600f34dqs1wohl4tt
+[2025-12-14T23:20:16.386Z] Question cmizbhg4600f34dqs1wohl4tt processed
+[2025-12-14T23:20:16.387Z] Processing question cmizbhg5000f44dqsqje75ryu
+[2025-12-14T23:20:25.592Z] Ollama worker started
+[2025-12-14T23:20:25.655Z] Processing question cmizbhg5000f44dqsqje75ryu
+[2025-12-14T23:20:36.327Z] Processing question cmizbhg5200f54dqsh3daegi6
+[2025-12-14T23:20:51.056Z] Question cmizbhg5000f44dqsqje75ryu processed
+[2025-12-14T23:20:51.058Z] Processing question cmizbhg5200f54dqsh3daegi6
+[2025-12-14T23:20:58.828Z] Question cmizbhg5200f54dqsh3daegi6 processed
+[2025-12-14T23:20:58.829Z] Processing question cmizbhg5300f64dqsfs4sqqsl
+[2025-12-14T23:21:09.109Z] Question cmizbhg5200f54dqsh3daegi6 processed
+[2025-12-14T23:21:09.110Z] Processing question cmizbhg5300f64dqsfs4sqqsl
+[2025-12-14T23:21:23.184Z] Question cmizbhg5300f64dqsfs4sqqsl processed
+[2025-12-14T23:21:23.188Z] Processing question cmizbhg5400f74dqsozg4zewx
+[2025-12-14T23:21:35.529Z] Question cmizbhg5300f64dqsfs4sqqsl processed
+[2025-12-14T23:21:35.530Z] Processing question cmizbhg5400f74dqsozg4zewx
+[2025-12-14T23:21:49.193Z] Question cmizbhg5400f74dqsozg4zewx processed
+[2025-12-14T23:21:49.194Z] Processing question cmizbhg5600f84dqsa6nxichn
+[2025-12-14T23:22:00.811Z] Question cmizbhg5400f74dqsozg4zewx processed
+[2025-12-14T23:22:00.812Z] Processing question cmizbhg5600f84dqsa6nxichn
+[2025-12-14T23:22:09.698Z] Question cmizbhg5600f84dqsa6nxichn processed
+[2025-12-14T23:22:09.699Z] Processing question cmizbhg5700f94dqs0hdijn94
+[2025-12-14T23:22:18.256Z] Question cmizbhg5600f84dqsa6nxichn processed
+[2025-12-14T23:22:18.257Z] Processing question cmizbhg5700f94dqs0hdijn94
+[2025-12-14T23:22:32.332Z] Question cmizbhg5700f94dqs0hdijn94 processed
+[2025-12-14T23:22:32.333Z] Worker finished. Processed 23, Failed 2
+[2025-12-14T23:22:43.611Z] Question cmizbhg5700f94dqs0hdijn94 processed
+[2025-12-14T23:22:43.612Z] Processing question cmizbhg5800fa4dqsu0kf19kc
+[2025-12-14T23:22:53.950Z] Question cmizbhg5800fa4dqsu0kf19kc processed
+[2025-12-14T23:22:53.952Z] Processing question cmizbhg5b00fb4dqs0ohtd8b8
+[2025-12-14T23:23:03.896Z] Question cmizbhg5b00fb4dqs0ohtd8b8 processed
+[2025-12-14T23:23:03.897Z] Processing question cmizbhg5b00fc4dqsivzhmb1t
+[2025-12-14T23:23:14.554Z] Question cmizbhg5b00fc4dqsivzhmb1t processed
+[2025-12-14T23:23:14.554Z] Processing question cmizbhg5c00fd4dqslarmy88t
+[2025-12-14T23:23:26.304Z] Question cmizbhg5c00fd4dqslarmy88t processed
+[2025-12-14T23:23:26.304Z] Processing question cmizbhg5d00fe4dqs71xt7zq2
+[2025-12-14T23:23:41.103Z] Question cmizbhg5d00fe4dqs71xt7zq2 processed
+[2025-12-14T23:23:41.104Z] Processing question cmizbhg5d00ff4dqs4b3lllcs
+[2025-12-14T23:23:54.681Z] Question cmizbhg5d00ff4dqs4b3lllcs processed
+[2025-12-14T23:23:54.682Z] Processing question cmizbhg5e00fg4dqsoo71q8sx
+[2025-12-14T23:24:06.333Z] Question cmizbhg5e00fg4dqsoo71q8sx processed
+[2025-12-14T23:24:06.334Z] Processing question cmizbhg5e00fh4dqsge2mpwb2
+[2025-12-14T23:24:15.958Z] Question cmizbhg5e00fh4dqsge2mpwb2 processed
+[2025-12-14T23:24:15.959Z] Processing question cmizbhg5f00fi4dqse1jogab2
+[2025-12-14T23:24:25.180Z] Question cmizbhg5f00fi4dqse1jogab2 processed
+[2025-12-14T23:24:25.181Z] Processing question cmizbhg5f00fj4dqs0dixrje4
+[2025-12-14T23:24:37.453Z] Appending generated explanation to existing text for question cmizbhg5f00fj4dqs0dixrje4
+[2025-12-14T23:24:37.481Z] Question cmizbhg5f00fj4dqs0dixrje4 processed
+[2025-12-14T23:24:37.481Z] Processing question cmizbhg5g00fk4dqsbj6mq4qx
+[2025-12-14T23:24:50.558Z] Appending generated explanation to existing text for question cmizbhg5g00fk4dqsbj6mq4qx
+[2025-12-14T23:24:50.582Z] Question cmizbhg5g00fk4dqsbj6mq4qx processed
+[2025-12-14T23:24:50.582Z] Processing question cmizbhg5g00fl4dqsymn93u6c
+[2025-12-14T23:25:02.990Z] Question cmizbhg5g00fl4dqsymn93u6c processed
+[2025-12-14T23:25:02.992Z] Processing question cmizbhg5h00fm4dqst05wh8tk
+[2025-12-14T23:25:15.311Z] Appending generated explanation to existing text for question cmizbhg5h00fm4dqst05wh8tk
+[2025-12-14T23:25:15.347Z] Question cmizbhg5h00fm4dqst05wh8tk processed
+[2025-12-14T23:25:15.348Z] Processing question cmizbhg5i00fn4dqsg9t3n2q7
+[2025-12-14T23:25:25.275Z] Appending generated explanation to existing text for question cmizbhg5i00fn4dqsg9t3n2q7
+[2025-12-14T23:25:25.279Z] Question cmizbhg5i00fn4dqsg9t3n2q7 processed
+[2025-12-14T23:25:25.279Z] Processing question cmizbhg5i00fo4dqsehcrszaq
+[2025-12-14T23:25:29.002Z] Ollama worker started
+[2025-12-14T23:25:29.032Z] Processing question cmizbhg5i00fo4dqsehcrszaq
+[2025-12-14T23:25:33.118Z] Appending generated explanation to existing text for question cmizbhg5i00fo4dqsehcrszaq
+[2025-12-14T23:25:33.129Z] Question cmizbhg5i00fo4dqsehcrszaq processed
+[2025-12-14T23:25:33.130Z] Processing question cmizbhg5j00fp4dqsvl62qury
+[2025-12-14T23:25:39.308Z] Appending generated explanation to existing text for question cmizbhg5i00fo4dqsehcrszaq
+[2025-12-14T23:25:39.312Z] Question cmizbhg5i00fo4dqsehcrszaq processed
+[2025-12-14T23:25:39.312Z] Processing question cmizbhg5j00fp4dqsvl62qury
+[2025-12-14T23:25:50.636Z] Question cmizbhg5j00fp4dqsvl62qury processed
+[2025-12-14T23:25:50.636Z] Processing question cmizbhg5j00fq4dqsxab15wbu
+[2025-12-14T23:26:02.064Z] Question cmizbhg5j00fp4dqsvl62qury processed
+[2025-12-14T23:26:02.065Z] Processing question cmizbhg5j00fq4dqsxab15wbu
+[2025-12-14T23:26:16.044Z] Question cmizbhg5j00fq4dqsxab15wbu processed
+[2025-12-14T23:26:16.045Z] Processing question cmizbhg5k00fr4dqszbjg9lw7
+[2025-12-14T23:26:26.393Z] Question cmizbhg5j00fq4dqsxab15wbu processed
+[2025-12-14T23:26:26.395Z] Processing question cmizbhg5k00fr4dqszbjg9lw7
+[2025-12-14T23:26:34.729Z] Question cmizbhg5k00fr4dqszbjg9lw7 processed
+[2025-12-14T23:26:34.731Z] Processing question cmizbhg5k00fs4dqsyg3dmx0g
+[2025-12-14T23:26:44.434Z] Question cmizbhg5k00fr4dqszbjg9lw7 processed
+[2025-12-14T23:26:44.436Z] Processing question cmizbhg5k00fs4dqsyg3dmx0g
+[2025-12-14T23:26:59.702Z] Question cmizbhg5k00fs4dqsyg3dmx0g processed
+[2025-12-14T23:26:59.703Z] Worker finished. Processed 25, Failed 0
+[2025-12-14T23:27:13.295Z] Question cmizbhg5k00fs4dqsyg3dmx0g processed
+[2025-12-14T23:27:13.296Z] Processing question cmizbhg5l00ft4dqsjl7kjk52
+[2025-12-14T23:27:29.529Z] Question cmizbhg5l00ft4dqsjl7kjk52 processed
+[2025-12-14T23:27:29.530Z] Processing question cmizbhg5l00fu4dqsk3z1qvn6
+[2025-12-14T23:27:41.402Z] Question cmizbhg5l00fu4dqsk3z1qvn6 processed
+[2025-12-14T23:27:41.403Z] Processing question cmizbhg5m00fv4dqsv1pmdn9n
+[2025-12-14T23:27:53.977Z] Question cmizbhg5m00fv4dqsv1pmdn9n processed
+[2025-12-14T23:27:53.979Z] Processing question cmizbhg5m00fw4dqstc9s3l68
+[2025-12-14T23:28:06.546Z] Question cmizbhg5m00fw4dqstc9s3l68 processed
+[2025-12-14T23:28:06.547Z] Processing question cmizbhg5n00fx4dqspixrrj0n
+[2025-12-14T23:28:25.039Z] Processing question cmizbhg5o00fy4dqs1w6b5k9f
+[2025-12-14T23:28:38.191Z] Question cmizbhg5o00fy4dqs1w6b5k9f processed
+[2025-12-14T23:28:38.192Z] Processing question cmizbhg5p00g04dqs1xmjrwrd
+[2025-12-14T23:28:47.228Z] Question cmizbhg5p00g04dqs1xmjrwrd processed
+[2025-12-14T23:28:47.229Z] Processing question cmizbhg5r00g14dqsfy3qje8a
+[2025-12-14T23:28:57.818Z] Question cmizbhg5r00g14dqsfy3qje8a processed
+[2025-12-14T23:28:57.819Z] Processing question cmizbhg5v00g24dqsv8mic0we
+[2025-12-14T23:29:07.621Z] Question cmizbhg5v00g24dqsv8mic0we processed
+[2025-12-14T23:29:07.622Z] Processing question cmizbhg5w00g34dqs8keto2cg
+[2025-12-14T23:29:18.224Z] Question cmizbhg5w00g34dqs8keto2cg processed
+[2025-12-14T23:29:18.224Z] Processing question cmizbhg5w00g44dqsq71442xj
+[2025-12-14T23:29:31.828Z] Question cmizbhg5w00g44dqsq71442xj processed
+[2025-12-14T23:29:31.832Z] Processing question cmizbhg5x00g54dqshq8czsh9
+[2025-12-14T23:29:44.075Z] Question cmizbhg5x00g54dqshq8czsh9 processed
+[2025-12-14T23:29:44.076Z] Processing question cmizbhg5x00g64dqs4dtywd1g
+[2025-12-14T23:30:03.145Z] Processing question cmizbhg6100g74dqs4lzk3ykc
+[2025-12-14T23:30:13.127Z] Question cmizbhg6100g74dqs4lzk3ykc processed
+[2025-12-14T23:30:13.128Z] Processing question cmizbhg6200g84dqstro6yyhf
+[2025-12-14T23:30:24.894Z] Appending generated explanation to existing text for question cmizbhg6200g84dqstro6yyhf
+[2025-12-14T23:30:24.915Z] Question cmizbhg6200g84dqstro6yyhf processed
+[2025-12-14T23:30:24.915Z] Processing question cmizbhg6300g94dqs7bwgnldb
+[2025-12-14T23:30:32.184Z] Ollama worker started
+[2025-12-14T23:30:32.201Z] Processing question cmizbhg6300g94dqs7bwgnldb
+[2025-12-14T23:30:38.301Z] Question cmizbhg6300g94dqs7bwgnldb processed
+[2025-12-14T23:30:38.302Z] Processing question cmizbhg6700ga4dqsctgo01h1
+[2025-12-14T23:30:47.594Z] Question cmizbhg6300g94dqs7bwgnldb processed
+[2025-12-14T23:30:47.594Z] Processing question cmizbhg6700ga4dqsctgo01h1
+[2025-12-14T23:31:00.052Z] Question cmizbhg6700ga4dqsctgo01h1 processed
+[2025-12-14T23:31:00.053Z] Processing question cmizbhg6700gb4dqsc9vcpuoz
+[2025-12-14T23:31:11.184Z] Question cmizbhg6700ga4dqsctgo01h1 processed
+[2025-12-14T23:31:11.185Z] Processing question cmizbhg6700gb4dqsc9vcpuoz
+[2025-12-14T23:31:21.237Z] Appending generated explanation to existing text for question cmizbhg6700gb4dqsc9vcpuoz
+[2025-12-14T23:31:21.264Z] Question cmizbhg6700gb4dqsc9vcpuoz processed
+[2025-12-14T23:31:21.265Z] Processing question cmizbhg6800gc4dqsnw3y05ti
+[2025-12-14T23:31:32.083Z] Appending generated explanation to existing text for question cmizbhg6700gb4dqsc9vcpuoz
+[2025-12-14T23:31:32.150Z] Question cmizbhg6700gb4dqsc9vcpuoz processed
+[2025-12-14T23:31:32.151Z] Processing question cmizbhg6800gc4dqsnw3y05ti
+[2025-12-14T23:31:43.097Z] Question cmizbhg6800gc4dqsnw3y05ti processed
+[2025-12-14T23:31:43.098Z] Processing question cmizbhg6800gd4dqs87zgj23a
+[2025-12-14T23:31:55.712Z] Question cmizbhg6800gc4dqsnw3y05ti processed
+[2025-12-14T23:31:55.713Z] Processing question cmizbhg6800gd4dqs87zgj23a
+[2025-12-14T23:32:07.465Z] Question cmizbhg6800gd4dqs87zgj23a processed
+[2025-12-14T23:32:07.466Z] Worker finished. Processed 23, Failed 2
+[2025-12-14T23:32:18.023Z] Question cmizbhg6800gd4dqs87zgj23a processed
+[2025-12-14T23:32:18.023Z] Processing question cmizbhg6900ge4dqsabssp29z
+[2025-12-14T23:32:28.859Z] Question cmizbhg6900ge4dqsabssp29z processed
+[2025-12-14T23:32:28.860Z] Processing question cmizbhg6a00gf4dqsvcuhjihq
+[2025-12-14T23:32:45.370Z] Question cmizbhg6a00gf4dqsvcuhjihq processed
+[2025-12-14T23:32:45.371Z] Processing question cmizbhg6a00gg4dqsqxl0ym67
+[2025-12-14T23:32:59.972Z] Appending generated explanation to existing text for question cmizbhg6a00gg4dqsqxl0ym67
+[2025-12-14T23:32:59.990Z] Question cmizbhg6a00gg4dqsqxl0ym67 processed
+[2025-12-14T23:32:59.990Z] Processing question cmizbhg6a00gh4dqssv3ezpny
+[2025-12-14T23:33:10.464Z] Appending generated explanation to existing text for question cmizbhg6a00gh4dqssv3ezpny
+[2025-12-14T23:33:10.480Z] Question cmizbhg6a00gh4dqssv3ezpny processed
+[2025-12-14T23:33:10.480Z] Processing question cmizbhg6e00gi4dqsjhxbm1u7
+[2025-12-14T23:33:25.115Z] Appending generated explanation to existing text for question cmizbhg6e00gi4dqsjhxbm1u7
+[2025-12-14T23:33:25.137Z] Question cmizbhg6e00gi4dqsjhxbm1u7 processed
+[2025-12-14T23:33:25.138Z] Processing question cmizbhg6e00gj4dqsx95l1k0o
+[2025-12-14T23:33:36.456Z] Appending generated explanation to existing text for question cmizbhg6e00gj4dqsx95l1k0o
+[2025-12-14T23:33:36.477Z] Question cmizbhg6e00gj4dqsx95l1k0o processed
+[2025-12-14T23:33:36.477Z] Processing question cmizbhg6f00gk4dqsfjxgnvxd
+[2025-12-14T23:33:46.915Z] Appending generated explanation to existing text for question cmizbhg6f00gk4dqsfjxgnvxd
+[2025-12-14T23:33:46.933Z] Question cmizbhg6f00gk4dqsfjxgnvxd processed
+[2025-12-14T23:33:46.933Z] Processing question cmizbhg6g00gl4dqsouz7y08t
+[2025-12-14T23:33:56.749Z] Appending generated explanation to existing text for question cmizbhg6g00gl4dqsouz7y08t
+[2025-12-14T23:33:56.752Z] Question cmizbhg6g00gl4dqsouz7y08t processed
+[2025-12-14T23:33:56.752Z] Processing question cmizbhg6l00gm4dqsgo6av4g7
+[2025-12-14T23:34:07.530Z] Question cmizbhg6l00gm4dqsgo6av4g7 processed
+[2025-12-14T23:34:07.530Z] Processing question cmizbhg6l00gn4dqst9en8as0
+[2025-12-14T23:34:21.980Z] Appending generated explanation to existing text for question cmizbhg6l00gn4dqst9en8as0
+[2025-12-14T23:34:22.007Z] Question cmizbhg6l00gn4dqst9en8as0 processed
+[2025-12-14T23:34:22.008Z] Processing question cmizbhg6m00go4dqsui0n4ol7
+[2025-12-14T23:34:36.767Z] Question cmizbhg6m00go4dqsui0n4ol7 processed
+[2025-12-14T23:34:36.768Z] Processing question cmizbhg6m00gp4dqsa5iz76z1
+[2025-12-14T23:34:50.913Z] Question cmizbhg6m00gp4dqsa5iz76z1 processed
+[2025-12-14T23:34:50.913Z] Processing question cmizbhg6n00gq4dqsnhp1lqm3
+[2025-12-14T23:35:04.808Z] Question cmizbhg6n00gq4dqsnhp1lqm3 processed
+[2025-12-14T23:35:04.809Z] Processing question cmizbhg6n00gr4dqs0wo2bmkc
+[2025-12-14T23:35:14.056Z] Question cmizbhg6n00gr4dqs0wo2bmkc processed
+[2025-12-14T23:35:14.056Z] Processing question cmizbhg6q00gs4dqs9n5ivpzm
+[2025-12-14T23:35:26.192Z] Appending generated explanation to existing text for question cmizbhg6q00gs4dqs9n5ivpzm
+[2025-12-14T23:35:26.210Z] Question cmizbhg6q00gs4dqs9n5ivpzm processed
+[2025-12-14T23:35:26.210Z] Processing question cmizbhg6q00gt4dqsx5hps4w1
+[2025-12-14T23:35:35.250Z] Ollama worker started
+[2025-12-14T23:35:35.288Z] Processing question cmizbhg6q00gt4dqsx5hps4w1
+[2025-12-14T23:35:36.310Z] Question cmizbhg6q00gt4dqsx5hps4w1 processed
+[2025-12-14T23:35:36.311Z] Processing question cmizbhg6r00gu4dqsdtmng5o8
+[2025-12-14T23:35:45.486Z] Question cmizbhg6q00gt4dqsx5hps4w1 processed
+[2025-12-14T23:35:45.486Z] Processing question cmizbhg6r00gu4dqsdtmng5o8
+[2025-12-14T23:35:55.811Z] Appending generated explanation to existing text for question cmizbhg6r00gu4dqsdtmng5o8
+[2025-12-14T23:35:55.838Z] Question cmizbhg6r00gu4dqsdtmng5o8 processed
+[2025-12-14T23:35:55.839Z] Processing question cmizbhg6r00gv4dqsl7drlo0g
+[2025-12-14T23:36:04.463Z] Appending generated explanation to existing text for question cmizbhg6r00gu4dqsdtmng5o8
+[2025-12-14T23:36:04.472Z] Question cmizbhg6r00gu4dqsdtmng5o8 processed
+[2025-12-14T23:36:04.472Z] Processing question cmizbhg6r00gv4dqsl7drlo0g
+[2025-12-14T23:36:15.794Z] Appending generated explanation to existing text for question cmizbhg6r00gv4dqsl7drlo0g
+[2025-12-14T23:36:15.821Z] Question cmizbhg6r00gv4dqsl7drlo0g processed
+[2025-12-14T23:36:15.821Z] Processing question cmizbhg6r00gw4dqswp3bqeko
+[2025-12-14T23:36:25.745Z] Appending generated explanation to existing text for question cmizbhg6r00gv4dqsl7drlo0g
+[2025-12-14T23:36:25.754Z] Question cmizbhg6r00gv4dqsl7drlo0g processed
+[2025-12-14T23:36:25.754Z] Processing question cmizbhg6r00gw4dqswp3bqeko
+[2025-12-14T23:36:36.920Z] Appending generated explanation to existing text for question cmizbhg6r00gw4dqswp3bqeko
+[2025-12-14T23:36:36.951Z] Question cmizbhg6r00gw4dqswp3bqeko processed
+[2025-12-14T23:36:36.951Z] Processing question cmizbhg6s00gx4dqsl305nyg9
+[2025-12-14T23:36:48.204Z] Appending generated explanation to existing text for question cmizbhg6r00gw4dqswp3bqeko
+[2025-12-14T23:36:48.224Z] Question cmizbhg6r00gw4dqswp3bqeko processed
+[2025-12-14T23:36:48.224Z] Processing question cmizbhg6s00gx4dqsl305nyg9
+[2025-12-14T23:37:01.202Z] Appending generated explanation to existing text for question cmizbhg6s00gx4dqsl305nyg9
+[2025-12-14T23:37:01.231Z] Question cmizbhg6s00gx4dqsl305nyg9 processed
+[2025-12-14T23:37:01.231Z] Worker finished. Processed 25, Failed 0
+[2025-12-14T23:37:13.173Z] Appending generated explanation to existing text for question cmizbhg6s00gx4dqsl305nyg9
+[2025-12-14T23:37:13.192Z] Question cmizbhg6s00gx4dqsl305nyg9 processed
+[2025-12-14T23:37:13.192Z] Processing question cmizbhg6s00gy4dqshi0fz2sp
+[2025-12-14T23:37:27.437Z] Appending generated explanation to existing text for question cmizbhg6s00gy4dqshi0fz2sp
+[2025-12-14T23:37:27.464Z] Question cmizbhg6s00gy4dqshi0fz2sp processed
+[2025-12-14T23:37:27.464Z] Processing question cmizbhg6w00gz4dqs40ybh1er
+[2025-12-14T23:37:40.335Z] Appending generated explanation to existing text for question cmizbhg6w00gz4dqs40ybh1er
+[2025-12-14T23:37:40.401Z] Question cmizbhg6w00gz4dqs40ybh1er processed
+[2025-12-14T23:37:40.401Z] Processing question cmizbhg6w00h04dqs4ffpck1x
+[2025-12-14T23:37:51.226Z] Appending generated explanation to existing text for question cmizbhg6w00h04dqs4ffpck1x
+[2025-12-14T23:37:51.250Z] Question cmizbhg6w00h04dqs4ffpck1x processed
+[2025-12-14T23:37:51.251Z] Processing question cmizbhg6x00h14dqsgxwpx0u7
+[2025-12-14T23:38:01.974Z] Appending generated explanation to existing text for question cmizbhg6x00h14dqsgxwpx0u7
+[2025-12-14T23:38:02.002Z] Question cmizbhg6x00h14dqsgxwpx0u7 processed
+[2025-12-14T23:38:02.002Z] Processing question cmizbhg6x00h24dqsjbm82atn
+[2025-12-14T23:38:14.765Z] Appending generated explanation to existing text for question cmizbhg6x00h24dqsjbm82atn
+[2025-12-14T23:38:14.779Z] Question cmizbhg6x00h24dqsjbm82atn processed
+[2025-12-14T23:38:14.780Z] Processing question cmizbhg6x00h34dqs5lfrptvv
+[2025-12-14T23:38:27.045Z] Appending generated explanation to existing text for question cmizbhg6x00h34dqs5lfrptvv
+[2025-12-14T23:38:27.077Z] Question cmizbhg6x00h34dqs5lfrptvv processed
+[2025-12-14T23:38:27.077Z] Processing question cmizbhg6y00h44dqs6cx751n2
+[2025-12-14T23:38:37.912Z] Appending generated explanation to existing text for question cmizbhg6y00h44dqs6cx751n2
+[2025-12-14T23:38:37.926Z] Question cmizbhg6y00h44dqs6cx751n2 processed
+[2025-12-14T23:38:37.926Z] Processing question cmizbhg6y00h54dqsigniyd6d
+[2025-12-14T23:38:48.938Z] Appending generated explanation to existing text for question cmizbhg6y00h54dqsigniyd6d
+[2025-12-14T23:38:48.986Z] Question cmizbhg6y00h54dqsigniyd6d processed
+[2025-12-14T23:38:48.987Z] Processing question cmizbhg7000h64dqsbgm23m1a
+[2025-12-14T23:39:03.934Z] Appending generated explanation to existing text for question cmizbhg7000h64dqsbgm23m1a
+[2025-12-14T23:39:03.987Z] Question cmizbhg7000h64dqsbgm23m1a processed
+[2025-12-14T23:39:03.987Z] Processing question cmizbhg7100h74dqsq3fvdtjv
+[2025-12-14T23:39:12.973Z] Appending generated explanation to existing text for question cmizbhg7100h74dqsq3fvdtjv
+[2025-12-14T23:39:12.979Z] Question cmizbhg7100h74dqsq3fvdtjv processed
+[2025-12-14T23:39:12.980Z] Processing question cmizbhg7200h84dqs0jaj80kg
+[2025-12-14T23:39:24.580Z] Appending generated explanation to existing text for question cmizbhg7200h84dqs0jaj80kg
+[2025-12-14T23:39:24.600Z] Question cmizbhg7200h84dqs0jaj80kg processed
+[2025-12-14T23:39:24.601Z] Processing question cmizbhg7200h94dqswi5zbmho
+[2025-12-14T23:39:40.520Z] Appending generated explanation to existing text for question cmizbhg7200h94dqswi5zbmho
+[2025-12-14T23:39:40.585Z] Question cmizbhg7200h94dqswi5zbmho processed
+[2025-12-14T23:39:40.586Z] Processing question cmizbhg7600ha4dqsk2flwi2x
+[2025-12-14T23:39:57.504Z] Question cmizbhg7600ha4dqsk2flwi2x processed
+[2025-12-14T23:39:57.505Z] Processing question cmizbhg7700hb4dqs9dzjm39d
+[2025-12-14T23:40:10.459Z] Question cmizbhg7700hb4dqs9dzjm39d processed
+[2025-12-14T23:40:10.460Z] Processing question cmizbhg7700hc4dqszywqqazd
+[2025-12-14T23:40:21.294Z] Appending generated explanation to existing text for question cmizbhg7700hc4dqszywqqazd
+[2025-12-14T23:40:21.315Z] Question cmizbhg7700hc4dqszywqqazd processed
+[2025-12-14T23:40:21.315Z] Processing question cmizbhg7800hd4dqsc6ub5aww
+[2025-12-14T23:40:31.909Z] Appending generated explanation to existing text for question cmizbhg7800hd4dqsc6ub5aww
+[2025-12-14T23:40:31.932Z] Question cmizbhg7800hd4dqsc6ub5aww processed
+[2025-12-14T23:40:31.932Z] Processing question cmizbhg7b00he4dqshcaclgqj
+[2025-12-14T23:40:38.519Z] Ollama worker started
+[2025-12-14T23:40:38.558Z] Processing question cmizbhg7b00he4dqshcaclgqj
+[2025-12-14T23:40:42.195Z] Question cmizbhg7b00he4dqshcaclgqj processed
+[2025-12-14T23:40:42.195Z] Processing question cmizbhg7c00hf4dqsb3qt2hlf
+[2025-12-14T23:40:55.024Z] Question cmizbhg7b00he4dqshcaclgqj processed
+[2025-12-14T23:40:55.025Z] Processing question cmizbhg7c00hf4dqsb3qt2hlf
+[2025-12-14T23:41:05.195Z] Question cmizbhg7c00hf4dqsb3qt2hlf processed
+[2025-12-14T23:41:05.196Z] Processing question cmizbhg7d00hg4dqshjl1zo2q
+[2025-12-14T23:41:15.116Z] Question cmizbhg7c00hf4dqsb3qt2hlf processed
+[2025-12-14T23:41:15.116Z] Processing question cmizbhg7d00hg4dqshjl1zo2q
+[2025-12-14T23:41:33.795Z] Processing question cmizbhg7d00hh4dqswqccxx1i
+[2025-12-14T23:41:51.293Z] Processing question cmizbhg7d00hh4dqswqccxx1i
+[2025-12-14T23:41:58.582Z] Question cmizbhg7d00hh4dqswqccxx1i processed
+[2025-12-14T23:41:58.582Z] Worker finished. Processed 24, Failed 1
+[2025-12-14T23:42:05.995Z] Question cmizbhg7d00hh4dqswqccxx1i processed
+[2025-12-14T23:42:05.996Z] Processing question cmizbhg7h00hi4dqsek106fyl
+[2025-12-14T23:42:16.337Z] Question cmizbhg7h00hi4dqsek106fyl processed
+[2025-12-14T23:42:16.337Z] Processing question cmizbhg7h00hj4dqs4vgvj4l7
+[2025-12-14T23:42:28.283Z] Appending generated explanation to existing text for question cmizbhg7h00hj4dqs4vgvj4l7
+[2025-12-14T23:42:28.304Z] Question cmizbhg7h00hj4dqs4vgvj4l7 processed
+[2025-12-14T23:42:28.305Z] Processing question cmizbhg7l00hk4dqsdjub1omi
+[2025-12-14T23:42:40.396Z] Question cmizbhg7l00hk4dqsdjub1omi processed
+[2025-12-14T23:42:40.398Z] Processing question cmizbhg7l00hl4dqs8nsc9bgo
+[2025-12-14T23:42:50.330Z] Question cmizbhg7l00hl4dqs8nsc9bgo processed
+[2025-12-14T23:42:50.331Z] Processing question cmizbhg7m00hm4dqs25t4kfet
+[2025-12-14T23:42:59.544Z] Question cmizbhg7m00hm4dqs25t4kfet processed
+[2025-12-14T23:42:59.544Z] Processing question cmizbhg7m00hn4dqsv1zg01cc
+[2025-12-14T23:43:09.772Z] Question cmizbhg7m00hn4dqsv1zg01cc processed
+[2025-12-14T23:43:09.773Z] Processing question cmizbhg7n00ho4dqsyn16y007
+[2025-12-14T23:43:20.798Z] Question cmizbhg7n00ho4dqsyn16y007 processed
+[2025-12-14T23:43:20.799Z] Processing question cmizbhg7n00hp4dqssj1cmtfo
+[2025-12-14T23:43:31.961Z] Question cmizbhg7n00hp4dqssj1cmtfo processed
+[2025-12-14T23:43:31.962Z] Processing question cmizbhg7u00hq4dqss8cxj40z
+[2025-12-14T23:43:44.315Z] Question cmizbhg7u00hq4dqss8cxj40z processed
+[2025-12-14T23:43:44.315Z] Processing question cmizbhg7v00hr4dqssq4fa62m
+[2025-12-14T23:43:54.354Z] Question cmizbhg7v00hr4dqssq4fa62m processed
+[2025-12-14T23:43:54.354Z] Processing question cmizbhg7y00hs4dqsxm2w4h9d
+[2025-12-14T23:44:08.149Z] Question cmizbhg7y00hs4dqsxm2w4h9d processed
+[2025-12-14T23:44:08.151Z] Processing question cmizbhg7z00ht4dqszddnaqts
+[2025-12-14T23:44:17.344Z] Question cmizbhg7z00ht4dqszddnaqts processed
+[2025-12-14T23:44:17.345Z] Processing question cmizbhg7z00hu4dqsmqhlfvvc
+[2025-12-14T23:44:29.028Z] Question cmizbhg7z00hu4dqsmqhlfvvc processed
+[2025-12-14T23:44:29.028Z] Processing question cmizbhg7z00hv4dqs9xvze8pm
+[2025-12-14T23:44:39.410Z] Appending generated explanation to existing text for question cmizbhg7z00hv4dqs9xvze8pm
+[2025-12-14T23:44:39.429Z] Question cmizbhg7z00hv4dqs9xvze8pm processed
+[2025-12-14T23:44:39.429Z] Processing question cmizbhg8000hw4dqs8gyes4ku
+[2025-12-14T23:44:50.231Z] Question cmizbhg8000hw4dqs8gyes4ku processed
+[2025-12-14T23:44:50.232Z] Processing question cmizbhg8000hx4dqsrsmganf2
+[2025-12-14T23:45:00.985Z] Question cmizbhg8000hx4dqsrsmganf2 processed
+[2025-12-14T23:45:00.986Z] Processing question cmizbhg8400hy4dqsw9ww0ary
+[2025-12-14T23:45:11.527Z] Question cmizbhg8400hy4dqsw9ww0ary processed
+[2025-12-14T23:45:11.527Z] Processing question cmizbhg8500hz4dqshp6sdw2e
+[2025-12-14T23:45:20.952Z] Question cmizbhg8500hz4dqshp6sdw2e processed
+[2025-12-14T23:45:20.953Z] Processing question cmizbhg8500i04dqs3lz281s8
+[2025-12-14T23:45:31.969Z] Question cmizbhg8500i04dqs3lz281s8 processed
+[2025-12-14T23:45:31.969Z] Processing question cmizbhg8600i14dqs01vxk6w2
+[2025-12-14T23:45:41.619Z] Ollama worker started
+[2025-12-14T23:45:41.646Z] Processing question cmizbhg8600i14dqs01vxk6w2
+[2025-12-14T23:45:45.681Z] Question cmizbhg8600i14dqs01vxk6w2 processed
+[2025-12-14T23:45:45.682Z] Processing question cmizbhg8q00i24dqsblsshoe5
+[2025-12-14T23:45:58.057Z] Question cmizbhg8600i14dqs01vxk6w2 processed
+[2025-12-14T23:45:58.058Z] Processing question cmizbhg8q00i24dqsblsshoe5
+[2025-12-14T23:46:08.761Z] Question cmizbhg8q00i24dqsblsshoe5 processed
+[2025-12-14T23:46:08.761Z] Worker finished. Processed 24, Failed 1
+[2025-12-14T23:46:18.333Z] Question cmizbhg8q00i24dqsblsshoe5 processed
+[2025-12-14T23:46:18.334Z] Processing question cmizbhg8s00i44dqspbvrjn7y
+[2025-12-14T23:46:28.171Z] Question cmizbhg8s00i44dqspbvrjn7y processed
+[2025-12-14T23:46:28.172Z] Processing question cmizbhg8t00i54dqs2b9v3jvr
+[2025-12-14T23:46:43.815Z] Question cmizbhg8t00i54dqs2b9v3jvr processed
+[2025-12-14T23:46:43.815Z] Processing question cmizbhg8u00i64dqsrit2qeih
+[2025-12-14T23:46:53.826Z] Question cmizbhg8u00i64dqsrit2qeih processed
+[2025-12-14T23:46:53.827Z] Processing question cmizbhg8v00i74dqswkkifrxb
+[2025-12-14T23:47:06.586Z] Question cmizbhg8v00i74dqswkkifrxb processed
+[2025-12-14T23:47:06.586Z] Processing question cmizbhg8w00i84dqsxfb3h1ex
+[2025-12-14T23:47:18.563Z] Question cmizbhg8w00i84dqsxfb3h1ex processed
+[2025-12-14T23:47:18.564Z] Processing question cmizbhg8x00i94dqs4pwalree
+[2025-12-14T23:47:29.641Z] Question cmizbhg8x00i94dqs4pwalree processed
+[2025-12-14T23:47:29.642Z] Processing question cmizbhg8y00ia4dqszv9f2chn
+[2025-12-14T23:47:41.816Z] Question cmizbhg8y00ia4dqszv9f2chn processed
+[2025-12-14T23:47:41.820Z] Processing question cmizbhg8z00ib4dqskk7wm5bd
+[2025-12-14T23:47:51.473Z] Question cmizbhg8z00ib4dqskk7wm5bd processed
+[2025-12-14T23:47:51.475Z] Processing question cmizbhg9000ic4dqs4oxjyy3f
+[2025-12-14T23:48:01.991Z] Appending generated explanation to existing text for question cmizbhg9000ic4dqs4oxjyy3f
+[2025-12-14T23:48:02.038Z] Question cmizbhg9000ic4dqs4oxjyy3f processed
+[2025-12-14T23:48:02.039Z] Processing question cmizbhg9000id4dqskwz1r6hq
+[2025-12-14T23:48:16.010Z] Question cmizbhg9000id4dqskwz1r6hq processed
+[2025-12-14T23:48:16.015Z] Processing question cmizbhg9100ie4dqshz92jgmr
+[2025-12-14T23:48:34.435Z] Question cmizbhg9100ie4dqshz92jgmr processed
+[2025-12-14T23:48:34.438Z] Processing question cmizbhg9200if4dqs44da2ogz
+[2025-12-14T23:48:53.995Z] Appending generated explanation to existing text for question cmizbhg9200if4dqs44da2ogz
+[2025-12-14T23:48:54.075Z] Question cmizbhg9200if4dqs44da2ogz processed
+[2025-12-14T23:48:54.075Z] Processing question cmizbhg9200ig4dqscmq3yzwp
+[2025-12-14T23:49:05.310Z] Question cmizbhg9200ig4dqscmq3yzwp processed
+[2025-12-14T23:49:05.316Z] Processing question cmizbhg9300ih4dqsuuhqyfkm
+[2025-12-14T23:49:18.222Z] Question cmizbhg9300ih4dqsuuhqyfkm processed
+[2025-12-14T23:49:18.227Z] Processing question cmizbhg9300ii4dqs7w4jlyfg
+[2025-12-14T23:49:30.845Z] Question cmizbhg9300ii4dqs7w4jlyfg processed
+[2025-12-14T23:49:30.846Z] Processing question cmizbhg9400ij4dqsbnfgwglf
+[2025-12-14T23:49:49.780Z] Processing question cmizbhg9400ik4dqsexmwrpxc
+[2025-12-14T23:50:01.996Z] Appending generated explanation to existing text for question cmizbhg9400ik4dqsexmwrpxc
+[2025-12-14T23:50:02.064Z] Question cmizbhg9400ik4dqsexmwrpxc processed
+[2025-12-14T23:50:02.064Z] Processing question cmizbhg9500il4dqswratu4qb
+[2025-12-14T23:50:17.742Z] Appending generated explanation to existing text for question cmizbhg9500il4dqswratu4qb
+[2025-12-14T23:50:17.807Z] Question cmizbhg9500il4dqswratu4qb processed
+[2025-12-14T23:50:17.808Z] Processing question cmizbhg9600im4dqskbbrs36t
+[2025-12-14T23:50:31.242Z] Appending generated explanation to existing text for question cmizbhg9600im4dqskbbrs36t
+[2025-12-14T23:50:31.311Z] Question cmizbhg9600im4dqskbbrs36t processed
+[2025-12-14T23:50:31.311Z] Processing question cmizbhg9600in4dqsr4n8k5sv
+[2025-12-14T23:50:43.604Z] Appending generated explanation to existing text for question cmizbhg9600in4dqsr4n8k5sv
+[2025-12-14T23:50:43.665Z] Question cmizbhg9600in4dqsr4n8k5sv processed
+[2025-12-14T23:50:43.665Z] Processing question cmizbhg9700io4dqsroetw7jz
+[2025-12-14T23:50:45.050Z] Ollama worker started
+[2025-12-14T23:50:45.083Z] Processing question cmizbhg9700io4dqsroetw7jz
+[2025-12-14T23:50:57.255Z] Appending generated explanation to existing text for question cmizbhg9700io4dqsroetw7jz
+[2025-12-14T23:50:57.319Z] Question cmizbhg9700io4dqsroetw7jz processed
+[2025-12-14T23:50:57.319Z] Processing question cmizbhg9700ip4dqslco0g6b3
+[2025-12-14T23:51:11.541Z] Appending generated explanation to existing text for question cmizbhg9700io4dqsroetw7jz
+[2025-12-14T23:51:11.621Z] Question cmizbhg9700io4dqsroetw7jz processed
+[2025-12-14T23:51:11.621Z] Processing question cmizbhg9700ip4dqslco0g6b3
+[2025-12-14T23:51:24.366Z] Appending generated explanation to existing text for question cmizbhg9700ip4dqslco0g6b3
+[2025-12-14T23:51:24.426Z] Question cmizbhg9700ip4dqslco0g6b3 processed
+[2025-12-14T23:51:24.426Z] Processing question cmizbhg9800iq4dqsh8u8sjsr
+[2025-12-14T23:51:36.658Z] Appending generated explanation to existing text for question cmizbhg9700ip4dqslco0g6b3
+[2025-12-14T23:51:36.716Z] Question cmizbhg9700ip4dqslco0g6b3 processed
+[2025-12-14T23:51:36.717Z] Processing question cmizbhg9800iq4dqsh8u8sjsr
+[2025-12-14T23:51:47.510Z] Question cmizbhg9800iq4dqsh8u8sjsr processed
+[2025-12-14T23:51:47.513Z] Worker finished. Processed 24, Failed 1
+[2025-12-14T23:52:00.878Z] Question cmizbhg9800iq4dqsh8u8sjsr processed
+[2025-12-14T23:52:00.879Z] Processing question cmizbhg9900ir4dqsaqv3d1uc
+[2025-12-14T23:52:17.984Z] Appending generated explanation to existing text for question cmizbhg9900ir4dqsaqv3d1uc
+[2025-12-14T23:52:18.073Z] Question cmizbhg9900ir4dqsaqv3d1uc processed
+[2025-12-14T23:52:18.073Z] Processing question cmizbhg9900is4dqs0w3stw01
+[2025-12-14T23:52:28.731Z] Question cmizbhg9900is4dqs0w3stw01 processed
+[2025-12-14T23:52:28.733Z] Processing question cmizbhg9a00it4dqsi09dvzb0
+[2025-12-14T23:52:40.669Z] Question cmizbhg9a00it4dqsi09dvzb0 processed
+[2025-12-14T23:52:40.671Z] Processing question cmizbhg9a00iu4dqsdfvvqx0n
+[2025-12-14T23:52:56.124Z] Question cmizbhg9a00iu4dqsdfvvqx0n processed
+[2025-12-14T23:52:56.129Z] Processing question cmizbhg9b00iv4dqs6rte80l7
+[2025-12-14T23:53:07.593Z] Question cmizbhg9b00iv4dqs6rte80l7 processed
+[2025-12-14T23:53:07.597Z] Processing question cmizbhg9b00iw4dqs1qnrmbub
+[2025-12-14T23:53:27.136Z] Processing question cmizbhg9c00ix4dqsyhlxb8i1
+[2025-12-14T23:53:37.457Z] Question cmizbhg9c00ix4dqsyhlxb8i1 processed
+[2025-12-14T23:53:37.458Z] Processing question cmizbhg9c00iy4dqsgs8k6s7j
+[2025-12-14T23:53:49.973Z] Appending generated explanation to existing text for question cmizbhg9c00iy4dqsgs8k6s7j
+[2025-12-14T23:53:50.041Z] Question cmizbhg9c00iy4dqsgs8k6s7j processed
+[2025-12-14T23:53:50.042Z] Processing question cmizbhg9d00iz4dqsf7q4kwkf
+[2025-12-14T23:54:00.274Z] Appending generated explanation to existing text for question cmizbhg9d00iz4dqsf7q4kwkf
+[2025-12-14T23:54:00.354Z] Question cmizbhg9d00iz4dqsf7q4kwkf processed
+[2025-12-14T23:54:00.354Z] Processing question cmizbhg9e00j14dqsda6k2bp0
+[2025-12-14T23:54:17.065Z] Question cmizbhg9e00j14dqsda6k2bp0 processed
+[2025-12-14T23:54:17.070Z] Processing question cmizbhg9e00j24dqs2huu89m6
+[2025-12-14T23:54:34.055Z] Question cmizbhg9e00j24dqs2huu89m6 processed
+[2025-12-14T23:54:34.058Z] Processing question cmizbhg9f00j34dqsq0izh98v
+[2025-12-14T23:54:53.168Z] Question cmizbhg9f00j34dqsq0izh98v processed
+[2025-12-14T23:54:53.173Z] Processing question cmizbhg9f00j44dqsonr9cw67
+[2025-12-14T23:55:14.344Z] Processing question cmizbhg9g00j54dqstol4rix4
+[2025-12-14T23:55:32.514Z] Question cmizbhg9g00j54dqstol4rix4 processed
+[2025-12-14T23:55:32.519Z] Processing question cmizbhg9g00j64dqs6hp5k6k3
+[2025-12-14T23:55:51.642Z] Question cmizbhg9g00j64dqs6hp5k6k3 processed
+[2025-12-14T23:55:51.646Z] Processing question cmizbhg9h00j74dqsg67eoa1b
+[2025-12-14T23:56:07.438Z] Question cmizbhg9h00j74dqsg67eoa1b processed
+[2025-12-14T23:56:07.439Z] Processing question cmizbhg9h00j84dqs46x4b9sy
+[2025-12-14T23:56:21.883Z] Question cmizbhg9h00j84dqs46x4b9sy processed
+[2025-12-14T23:56:21.889Z] Processing question cmizbhg9i00j94dqsb5b7se05
+[2025-12-14T23:56:34.203Z] Appending generated explanation to existing text for question cmizbhg9i00j94dqsb5b7se05
+[2025-12-14T23:56:34.264Z] Question cmizbhg9i00j94dqsb5b7se05 processed
+[2025-12-14T23:56:34.264Z] Processing question cmizbhg9i00ja4dqsy79e7vsm
+[2025-12-14T23:56:48.141Z] Question cmizbhg9i00ja4dqsy79e7vsm processed
+[2025-12-14T23:56:48.145Z] Processing question cmizbhg9j00jb4dqsft84hfi1
+[2025-12-14T23:57:09.411Z] Processing question cmizbhg9j00jc4dqsinpbts8n
+[2025-12-14T23:57:32.043Z] Processing question cmizbhg9j00jd4dqsz0omte7g
+[2025-12-14T23:57:47.190Z] Question cmizbhg9j00jd4dqsz0omte7g processed
+[2025-12-14T23:57:47.193Z] Worker finished. Processed 21, Failed 4
+[2025-12-15T00:28:21.743Z] Ollama worker started
+[2025-12-15T00:28:21.756Z] Processing question cmizbdug600cp4dqsjwcsiiq0
+[2025-12-15T00:28:51.518Z] Question cmizbdug600cp4dqsjwcsiiq0 processed
+[2025-12-15T00:28:51.528Z] Processing question cmizbdugp00d84dqssluyge3h
+[2025-12-15T00:29:08.537Z] Question cmizbdugp00d84dqssluyge3h processed
+[2025-12-15T00:29:08.542Z] Processing question cmizbdugv00di4dqs2l1cn3rt
+[2025-12-15T00:29:22.539Z] Question cmizbdugv00di4dqs2l1cn3rt processed
+[2025-12-15T00:29:22.544Z] Processing question cmizbduh400dy4dqsr636rd70
+[2025-12-15T00:29:39.410Z] Appending generated explanation to existing text for question cmizbduh400dy4dqsr636rd70
+[2025-12-15T00:29:39.502Z] Question cmizbduh400dy4dqsr636rd70 processed
+[2025-12-15T00:29:39.503Z] Processing question cmizbhg4300ew4dqsappg92gm
+[2025-12-15T00:29:50.662Z] Question cmizbhg4300ew4dqsappg92gm processed
+[2025-12-15T00:29:50.666Z] Processing question cmizbhg5n00fx4dqspixrrj0n
+[2025-12-15T00:30:10.978Z] Processing question cmizbhg5x00g64dqs4dtywd1g
+[2025-12-15T00:30:32.574Z] Processing question cmizbhg7d00hg4dqshjl1zo2q
+[2025-12-15T00:30:53.246Z] Processing question cmizbhg9400ij4dqsbnfgwglf
+[2025-12-15T00:31:12.331Z] Processing question cmizbhg9b00iw4dqs1qnrmbub
+[2025-12-15T00:31:32.105Z] Processing question cmizbhg9f00j44dqsonr9cw67
+[2025-12-15T00:31:50.358Z] Question cmizbhg9f00j44dqsonr9cw67 processed
+[2025-12-15T00:31:50.364Z] Processing question cmizbhg9j00jb4dqsft84hfi1
+[2025-12-15T00:32:06.199Z] Question cmizbhg9j00jb4dqsft84hfi1 processed
+[2025-12-15T00:32:06.201Z] Processing question cmizbhg9j00jc4dqsinpbts8n
+[2025-12-15T00:32:26.029Z] Processing question cmizbhg9k00je4dqs7lzf8q3v
+[2025-12-15T00:32:46.458Z] Processing question cmizbhg9k00jf4dqs82n6wgic
+[2025-12-15T00:33:02.709Z] Question cmizbhg9k00jf4dqs82n6wgic processed
+[2025-12-15T00:33:02.713Z] Processing question cmizbhg9l00jg4dqsn4dw1k0j
+[2025-12-15T00:33:17.644Z] Question cmizbhg9l00jg4dqsn4dw1k0j processed
+[2025-12-15T00:33:17.649Z] Processing question cmizbhg9l00jh4dqsfzpkp5hb
+[2025-12-15T00:33:24.932Z] Ollama worker started
+[2025-12-15T00:33:24.985Z] Processing question cmizbhg9l00jh4dqsfzpkp5hb
+[2025-12-15T00:33:32.462Z] Appending generated explanation to existing text for question cmizbhg9l00jh4dqsfzpkp5hb
+[2025-12-15T00:33:32.480Z] Question cmizbhg9l00jh4dqsfzpkp5hb processed
+[2025-12-15T00:33:32.481Z] Processing question cmizbhg9m00ji4dqsl2jakvhn
+[2025-12-15T00:33:43.531Z] Appending generated explanation to existing text for question cmizbhg9l00jh4dqsfzpkp5hb
+[2025-12-15T00:33:43.609Z] Question cmizbhg9l00jh4dqsfzpkp5hb processed
+[2025-12-15T00:33:43.610Z] Processing question cmizbhg9m00ji4dqsl2jakvhn
+[2025-12-15T00:33:57.003Z] Appending generated explanation to existing text for question cmizbhg9m00ji4dqsl2jakvhn
+[2025-12-15T00:33:57.048Z] Question cmizbhg9m00ji4dqsl2jakvhn processed
+[2025-12-15T00:33:57.049Z] Processing question cmizbhg9m00jj4dqswle9ie7h
+[2025-12-15T00:34:06.967Z] Appending generated explanation to existing text for question cmizbhg9m00ji4dqsl2jakvhn
+[2025-12-15T00:34:06.993Z] Question cmizbhg9m00ji4dqsl2jakvhn processed
+[2025-12-15T00:34:06.993Z] Processing question cmizbhg9m00jj4dqswle9ie7h
+[2025-12-15T00:34:27.161Z] Processing question cmizbhg9n00jk4dqsw6xdfobz
+[2025-12-15T00:34:42.959Z] Appending generated explanation to existing text for question cmizbhg9m00jj4dqswle9ie7h
+[2025-12-15T00:34:43.026Z] Question cmizbhg9m00jj4dqswle9ie7h processed
+[2025-12-15T00:34:43.027Z] Processing question cmizbhg9n00jk4dqsw6xdfobz
+[2025-12-15T00:35:02.266Z] Processing question cmizbhg9o00jl4dqsnuvlzpdo
+[2025-12-15T00:35:17.650Z] Appending generated explanation to existing text for question cmizbhg9n00jk4dqsw6xdfobz
+[2025-12-15T00:35:17.732Z] Question cmizbhg9n00jk4dqsw6xdfobz processed
+[2025-12-15T00:35:17.734Z] Processing question cmizbhg9o00jl4dqsnuvlzpdo
+[2025-12-15T00:35:36.278Z] Processing question cmizbhg9o00jm4dqsfm26dtju
+[2025-12-15T00:35:52.619Z] Appending generated explanation to existing text for question cmizbhg9o00jl4dqsnuvlzpdo
+[2025-12-15T00:35:52.710Z] Question cmizbhg9o00jl4dqsnuvlzpdo processed
+[2025-12-15T00:35:52.711Z] Processing question cmizbhg9o00jm4dqsfm26dtju
+[2025-12-15T00:36:09.098Z] Appending generated explanation to existing text for question cmizbhg9o00jm4dqsfm26dtju
+[2025-12-15T00:36:09.143Z] Question cmizbhg9o00jm4dqsfm26dtju processed
+[2025-12-15T00:36:09.143Z] Processing question cmizbhg9o00jn4dqsdbk9ivr6
+[2025-12-15T00:36:26.026Z] Appending generated explanation to existing text for question cmizbhg9o00jm4dqsfm26dtju
+[2025-12-15T00:36:26.130Z] Question cmizbhg9o00jm4dqsfm26dtju processed
+[2025-12-15T00:36:26.131Z] Processing question cmizbhg9o00jn4dqsdbk9ivr6
+[2025-12-15T00:36:44.208Z] Question cmizbhg9o00jn4dqsdbk9ivr6 processed
+[2025-12-15T00:36:44.212Z] Processing question cmizbhg9p00jo4dqs15bnliut
+[2025-12-15T00:37:01.905Z] Question cmizbhg9o00jn4dqsdbk9ivr6 processed
+[2025-12-15T00:37:01.912Z] Processing question cmizbhg9p00jo4dqs15bnliut
+[2025-12-15T00:37:21.573Z] Processing question cmizbhg9p00jp4dqsuz9d50yc
+[2025-12-15T00:37:38.218Z] Appending generated explanation to existing text for question cmizbhg9p00jo4dqs15bnliut
+[2025-12-15T00:37:38.302Z] Question cmizbhg9p00jo4dqs15bnliut processed
+[2025-12-15T00:37:38.303Z] Processing question cmizbhg9p00jp4dqsuz9d50yc
+[2025-12-15T00:37:56.861Z] Worker finished. Processed 13, Failed 12
+[2025-12-15T00:38:11.017Z] Question cmizbhg9p00jp4dqsuz9d50yc processed
+[2025-12-15T00:38:11.021Z] Processing question cmizbhg9q00jq4dqs3j2dg5vy
+[2025-12-15T00:38:28.201Z] Question cmizbhg9q00jq4dqs3j2dg5vy processed
+[2025-12-15T00:38:28.208Z] Processing question cmizbhg9r00jr4dqsb27ygx4x
+[2025-12-15T00:38:28.369Z] Ollama worker started
+[2025-12-15T00:38:28.396Z] Processing question cmizbhg9r00jr4dqsb27ygx4x
+[2025-12-15T00:38:41.495Z] Question cmizbhg9r00jr4dqsb27ygx4x processed
+[2025-12-15T00:38:41.499Z] Processing question cmizbhg9r00js4dqssd90fzi4
+[2025-12-15T00:38:59.688Z] Processing question cmizbhg9r00js4dqssd90fzi4
+[2025-12-15T00:39:11.745Z] Question cmizbhg9r00js4dqssd90fzi4 processed
+[2025-12-15T00:39:11.749Z] Processing question cmizbhg9r00jt4dqsd4vn7hrw
+[2025-12-15T00:39:27.156Z] Question cmizbhg9r00js4dqssd90fzi4 processed
+[2025-12-15T00:39:27.160Z] Processing question cmizbhg9r00jt4dqsd4vn7hrw
+[2025-12-15T00:39:38.877Z] Appending generated explanation to existing text for question cmizbhg9r00jt4dqsd4vn7hrw
+[2025-12-15T00:39:38.939Z] Question cmizbhg9r00jt4dqsd4vn7hrw processed
+[2025-12-15T00:39:38.940Z] Processing question cmizbhg9s00ju4dqsjqpt237s
+[2025-12-15T00:39:53.142Z] Appending generated explanation to existing text for question cmizbhg9r00jt4dqsd4vn7hrw
+[2025-12-15T00:39:53.259Z] Question cmizbhg9r00jt4dqsd4vn7hrw processed
+[2025-12-15T00:39:53.260Z] Processing question cmizbhg9s00ju4dqsjqpt237s
+[2025-12-15T00:40:09.870Z] Question cmizbhg9s00ju4dqsjqpt237s processed
+[2025-12-15T00:40:09.875Z] Processing question cmizbhg9s00jv4dqsv9l5qdau
+[2025-12-15T00:40:29.287Z] Processing question cmizbhg9s00jv4dqsv9l5qdau
+[2025-12-15T00:40:42.486Z] Appending generated explanation to existing text for question cmizbhg9s00jv4dqsv9l5qdau
+[2025-12-15T00:40:42.593Z] Question cmizbhg9s00jv4dqsv9l5qdau processed
+[2025-12-15T00:40:42.593Z] Processing question cmizbhg9s00jw4dqs5pizzneo
+[2025-12-15T00:40:56.357Z] Appending generated explanation to existing text for question cmizbhg9s00jv4dqsv9l5qdau
+[2025-12-15T00:40:56.468Z] Question cmizbhg9s00jv4dqsv9l5qdau processed
+[2025-12-15T00:40:56.469Z] Processing question cmizbhg9s00jw4dqs5pizzneo
+[2025-12-15T00:41:11.549Z] Appending generated explanation to existing text for question cmizbhg9s00jw4dqs5pizzneo
+[2025-12-15T00:41:11.683Z] Question cmizbhg9s00jw4dqs5pizzneo processed
+[2025-12-15T00:41:11.684Z] Processing question cmizbhg9t00jx4dqs1sazz2bh
+[2025-12-15T00:41:24.121Z] Appending generated explanation to existing text for question cmizbhg9s00jw4dqs5pizzneo
+[2025-12-15T00:41:24.211Z] Question cmizbhg9s00jw4dqs5pizzneo processed
+[2025-12-15T00:41:24.212Z] Processing question cmizbhg9t00jx4dqs1sazz2bh
+[2025-12-15T00:41:40.669Z] Appending generated explanation to existing text for question cmizbhg9t00jx4dqs1sazz2bh
+[2025-12-15T00:41:40.779Z] Question cmizbhg9t00jx4dqs1sazz2bh processed
+[2025-12-15T00:41:40.779Z] Processing question cmizbhg9t00jy4dqshmva8x9s
+[2025-12-15T00:41:55.583Z] Appending generated explanation to existing text for question cmizbhg9t00jx4dqs1sazz2bh
+[2025-12-15T00:41:55.710Z] Question cmizbhg9t00jx4dqs1sazz2bh processed
+[2025-12-15T00:41:55.710Z] Processing question cmizbhg9t00jy4dqshmva8x9s
+[2025-12-15T00:42:15.305Z] Processing question cmizbhg9t00jz4dqsyd18m8hi
+[2025-12-15T00:42:33.199Z] Appending generated explanation to existing text for question cmizbhg9t00jy4dqshmva8x9s
+[2025-12-15T00:42:33.307Z] Question cmizbhg9t00jy4dqshmva8x9s processed
+[2025-12-15T00:42:33.308Z] Processing question cmizbhg9t00jz4dqsyd18m8hi
+[2025-12-15T00:42:49.160Z] Appending generated explanation to existing text for question cmizbhg9t00jz4dqsyd18m8hi
+[2025-12-15T00:42:49.276Z] Question cmizbhg9t00jz4dqsyd18m8hi processed
+[2025-12-15T00:42:49.276Z] Processing question cmizbhg9u00k04dqsaf1vcu4x
+[2025-12-15T00:43:07.104Z] Appending generated explanation to existing text for question cmizbhg9t00jz4dqsyd18m8hi
+[2025-12-15T00:43:07.190Z] Question cmizbhg9t00jz4dqsyd18m8hi processed
+[2025-12-15T00:43:07.190Z] Processing question cmizbhg9u00k04dqsaf1vcu4x
+[2025-12-15T00:43:26.819Z] Appending generated explanation to existing text for question cmizbhg9u00k04dqsaf1vcu4x
+[2025-12-15T00:43:26.984Z] Question cmizbhg9u00k04dqsaf1vcu4x processed
+[2025-12-15T00:43:26.985Z] Processing question cmizbhg9u00k14dqsbd4dna5o
+[2025-12-15T00:43:44.350Z] Appending generated explanation to existing text for question cmizbhg9u00k04dqsaf1vcu4x
+[2025-12-15T00:43:44.492Z] Question cmizbhg9u00k04dqsaf1vcu4x processed
+[2025-12-15T00:43:44.492Z] Processing question cmizbhg9u00k14dqsbd4dna5o
+[2025-12-15T00:43:59.717Z] Appending generated explanation to existing text for question cmizbhg9u00k14dqsbd4dna5o
+[2025-12-15T00:43:59.862Z] Question cmizbhg9u00k14dqsbd4dna5o processed
+[2025-12-15T00:43:59.863Z] Processing question cmizbhg9u00k24dqsip5hw7f7
+[2025-12-15T00:44:13.580Z] Appending generated explanation to existing text for question cmizbhg9u00k14dqsbd4dna5o
+[2025-12-15T00:44:13.672Z] Question cmizbhg9u00k14dqsbd4dna5o processed
+[2025-12-15T00:44:13.673Z] Processing question cmizbhg9u00k24dqsip5hw7f7
+[2025-12-15T00:44:33.620Z] Processing question cmizbhg9u00k34dqszfzj62zc
+[2025-12-15T00:44:47.364Z] Appending generated explanation to existing text for question cmizbhg9u00k24dqsip5hw7f7
+[2025-12-15T00:44:47.459Z] Question cmizbhg9u00k24dqsip5hw7f7 processed
+[2025-12-15T00:44:47.459Z] Processing question cmizbhg9u00k34dqszfzj62zc
+[2025-12-15T00:45:00.029Z] Appending generated explanation to existing text for question cmizbhg9u00k34dqszfzj62zc
+[2025-12-15T00:45:00.101Z] Question cmizbhg9u00k34dqszfzj62zc processed
+[2025-12-15T00:45:00.102Z] Processing question cmizbhg9v00k44dqs6r3u1pvw
+[2025-12-15T00:45:18.593Z] Processing question cmizbhg9v00k44dqs6r3u1pvw
+[2025-12-15T00:45:35.045Z] Appending generated explanation to existing text for question cmizbhg9v00k44dqs6r3u1pvw
+[2025-12-15T00:45:35.135Z] Question cmizbhg9v00k44dqs6r3u1pvw processed
+[2025-12-15T00:45:35.135Z] Processing question cmizbhg9v00k54dqsnlqs8sg8
+[2025-12-15T00:45:52.258Z] Appending generated explanation to existing text for question cmizbhg9v00k44dqs6r3u1pvw
+[2025-12-15T00:45:52.377Z] Question cmizbhg9v00k44dqs6r3u1pvw processed
+[2025-12-15T00:45:52.378Z] Processing question cmizbhg9v00k54dqsnlqs8sg8
+[2025-12-15T00:46:14.843Z] Worker finished. Processed 22, Failed 3
+[2025-12-15T00:46:27.235Z] Appending generated explanation to existing text for question cmizbhg9v00k54dqsnlqs8sg8
+[2025-12-15T00:46:27.330Z] Question cmizbhg9v00k54dqsnlqs8sg8 processed
+[2025-12-15T00:46:27.330Z] Processing question cmizbhg9v00k64dqsjwwo2y6n
+[2025-12-15T00:46:41.802Z] Appending generated explanation to existing text for question cmizbhg9v00k64dqsjwwo2y6n
+[2025-12-15T00:46:41.995Z] Question cmizbhg9v00k64dqsjwwo2y6n processed
+[2025-12-15T00:46:41.996Z] Processing question cmizbhg9w00k74dqs58211j0q
+[2025-12-15T00:46:59.061Z] Appending generated explanation to existing text for question cmizbhg9w00k74dqs58211j0q
+[2025-12-15T00:46:59.154Z] Question cmizbhg9w00k74dqs58211j0q processed
+[2025-12-15T00:46:59.154Z] Processing question cmizbhg9w00k84dqs6d63d7z6
+[2025-12-15T00:47:15.141Z] Appending generated explanation to existing text for question cmizbhg9w00k84dqs6d63d7z6
+[2025-12-15T00:47:15.234Z] Question cmizbhg9w00k84dqs6d63d7z6 processed
+[2025-12-15T00:47:15.234Z] Processing question cmizbhg9w00k94dqswh2d1b6p
+[2025-12-15T00:47:33.909Z] Appending generated explanation to existing text for question cmizbhg9w00k94dqswh2d1b6p
+[2025-12-15T00:47:34.025Z] Question cmizbhg9w00k94dqswh2d1b6p processed
+[2025-12-15T00:47:34.026Z] Processing question cmizbhg9w00ka4dqs13q5gvbl
+[2025-12-15T00:47:55.233Z] Processing question cmizbhg9x00kb4dqsk9wyibds
+[2025-12-15T00:48:08.270Z] Question cmizbhg9x00kb4dqsk9wyibds processed
+[2025-12-15T00:48:08.273Z] Processing question cmizbhg9x00kc4dqspll0se4v
+[2025-12-15T00:48:27.030Z] Appending generated explanation to existing text for question cmizbhg9x00kc4dqspll0se4v
+[2025-12-15T00:48:27.117Z] Question cmizbhg9x00kc4dqspll0se4v processed
+[2025-12-15T00:48:27.118Z] Processing question cmizbhg9x00kd4dqs6fg3um24
+[2025-12-15T00:48:47.831Z] Processing question cmizbhg9y00ke4dqsllfbxmd1
+[2025-12-15T00:49:07.285Z] Processing question cmizbhg9z00kf4dqsj9m6mz5d
+[2025-12-15T00:49:23.810Z] Question cmizbhg9z00kf4dqsj9m6mz5d processed
+[2025-12-15T00:49:23.814Z] Worker finished. Processed 19, Failed 6
+[2025-12-15T00:49:39.032Z] Ollama worker started
+[2025-12-15T00:49:39.166Z] Processing question cmizbhio800p04dqsv2x64vht
+[2025-12-15T00:49:55.318Z] Question cmizbhio800p04dqsv2x64vht processed
+[2025-12-15T00:49:55.321Z] Processing question cmizbhio800p24dqskr34oy7b
+[2025-12-15T00:50:06.782Z] Question cmizbhio800p24dqskr34oy7b processed
+[2025-12-15T00:50:06.787Z] Processing question cmizbhio900p44dqsyjjsuuz2
+[2025-12-15T00:50:19.055Z] Question cmizbhio900p44dqsyjjsuuz2 processed
+[2025-12-15T00:50:19.061Z] Processing question cmizbhioa00p64dqs3wuxxbnu
+[2025-12-15T00:50:28.772Z] Question cmizbhioa00p64dqs3wuxxbnu processed
+[2025-12-15T00:50:28.777Z] Processing question cmizbhioa00p84dqsbszmdewx

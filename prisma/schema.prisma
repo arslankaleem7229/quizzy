@@ -131,8 +131,16 @@ model Question {
   createdAt     DateTime     @default(now()) @map(name: "created_at")
   updatedAt     DateTime     @default(now()) @updatedAt @map(name: "updated_at")
 
+  status QuestionStatus @default(pending)
+
   userAnswers UserAnswer[]
   attachments Attachment[]
+}
+
+enum QuestionStatus {
+  pending
+  error
+  done
 }
 
 enum QuestionType {
