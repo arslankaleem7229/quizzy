@@ -25,19 +25,27 @@ export async function uploadFromURLToS3({
   const ext = url.split(".").pop()?.toLowerCase() ?? "";
   const contentType = CONTENT_TYPES[ext] ?? "application/octet-stream";
 
-  return uploadBytesToS3({ bytes: fileBytes, contentType });
+  return uploadBytesToS3({
+    bytes: fileBytes,
+    contentType,
+    bucketType: "images",
+  });
 }
 
 async function uploadBytesToS3({
   bytes,
   contentType,
+  bucketType,
 }: {
   bytes: Buffer;
   contentType: string;
+  bucketType: "images" | "user-images";
 }): Promise<string | null> {
   if (!bytes.length) return null;
 
-  const key = `${"images/"}${createHash("sha256").update(bytes).digest("hex")}`;
+  const key = `${bucketType}/${createHash("sha256")
+    .update(bytes)
+    .digest("hex")}`;
   const bucket = process.env.S3_BUCKET_NAME!;
   const region = process.env.S3_REGION;
   const publicUrl = `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
@@ -71,8 +79,10 @@ async function uploadBytesToS3({
 
 export async function uploadFileToS3({
   file,
+  bucketType,
 }: {
   file: File;
+  bucketType: "images" | "user-images";
 }): Promise<string | null> {
   try {
     const bytes = Buffer.from(await file.arrayBuffer());
@@ -81,7 +91,7 @@ export async function uploadFileToS3({
       file.type || CONTENT_TYPES[ext] || "application/octet-stream";
 
     // Deduplicated upload: use a hash key and return existing URL if present
-    return uploadBytesToS3({ bytes, contentType });
+    return uploadBytesToS3({ bytes, contentType, bucketType });
   } catch (error) {
     console.error("uploadFileToS3 failed", error);
     return null;

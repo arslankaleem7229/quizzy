@@ -27,7 +27,7 @@ export async function resolveAttachmentUrl(
     throw new BadRequestError(`File "${key}" not found in form-data`);
   }
 
-  const uploadedUrl = await uploadFileToS3({ file });
+  const uploadedUrl = await uploadFileToS3({ file, bucketType: "images" });
 
   if (!uploadedUrl) {
     throw new Error(`Failed to upload attachment "${file.name}"`);

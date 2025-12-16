@@ -63,8 +63,10 @@ model User {
   attempts Attempt[]
   reviews  Review[]
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt            DateTime              @default(now()) @map("created_at")
+  updatedAt            DateTime              @updatedAt @map("updated_at")
+  notificationSettings NotificationSettings?
+  userPreferences      UserPreferences?
 
   @@index([email])
   @@index([username])
@@ -265,7 +267,54 @@ model Review {
   @@map("reviews")
 }
 
+model UserPreferences {
+  id       String @id @default(cuid())
+  userId   String @unique @map("user_id")
+  theme    Theme  @default(AUTO)
+  language String @default("en") @db.VarChar(10)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+model NotificationSettings {
+  id     String @id @default(cuid())
+  userId String @unique @map("user_id")
+
+  studyReminders   Boolean @default(true) @map("study_reminders")
+  streaksAndBadges Boolean @default(true) @map("streaks_and_badges")
+
+  featuresAndTips    Boolean @default(true) @map("features_and_tips")
+  salesAndPromotions Boolean @default(false) @map("sales_and_promotions")
+
+  emailFrequency EmailFrequency @default(DAILY) @map("email_frequency")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notification_settings")
+}
+
 // all enums under this
+
+enum EmailFrequency {
+  INSTANT
+  DAILY
+  WEEKLY
+  NEVER
+}
+
+enum Theme {
+  DARK
+  LIGHT
+  AUTO
+}
 
 enum AttachmentType {
   QUESTION_IMAGE

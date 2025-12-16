@@ -75,6 +75,19 @@ export const reviewWithUserInclude = {
   user: { select: userBasics },
 } satisfies Prisma.ReviewInclude;
 
+export const getUserWithPreference = {
+  id: true,
+  name: true,
+  username: true,
+  image: true,
+  isActive: true,
+  email: true,
+  emailVerified: true,
+  role: true,
+  notificationSettings: true,
+  userPreferences: true,
+} satisfies Prisma.UserSelect;
+
 //FOR FRONT END ONLY
 
 export type UserBasic = Prisma.UserGetPayload<{
@@ -88,6 +101,14 @@ export type QuizWithLocalization = Prisma.QuizGetPayload<{
 export type QuizWithoutLocalization = Prisma.QuizGetPayload<{
   include: typeof quizWithoutLocalizationInclude;
 }>;
+
+export type UserWithPreference = Prisma.UserGetPayload<{
+  include: typeof getUserWithPreference;
+}>;
+
+export type UserPreferences = UserWithPreference["userPreferences"];
+export type NotificationPreferences =
+  UserWithPreference["notificationSettings"];
 
 export type QuizCreator = QuizWithLocalization["createdBy"];
 export type QuizLocalization = QuizWithLocalization["localizations"][number];
@@ -140,6 +161,8 @@ export type AttemptDetailResponse = ApiResponse<{
 }>;
 export type AttemptsResponse = ApiResponse<AttemptWithAnswers[]>;
 export type ReviewResponse = ApiResponse<ReviewWithUser>;
+export type UserWithPreferenceResponse = ApiResponse<UserWithPreference>;
+export type DeleteAccountResponse = ApiResponse<{ message: string }>;
 
 // API RESPONSE TYPE
 export type ReviewsResponse = ApiResponse<{

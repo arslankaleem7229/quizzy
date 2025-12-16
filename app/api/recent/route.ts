@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
-import recentAttemptSchema, { RecentAttemptPayload } from "./recent.schema";
+import recentAttemptSchema from "./recent.schema";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
 import { AttemptStatus } from "@/app/generated/prisma/client";
 import {
@@ -10,15 +10,6 @@ import {
   RecentListResponse,
 } from "@/lib/types/api";
 import { findLocalizationForAttempt } from "../attempts/helpers";
-
-function mapStatus(input?: RecentAttemptPayload["status"]): AttemptStatus {
-  if (!input) return AttemptStatus.IN_PROGRESS;
-
-  // if ((Object.values(AttemptStatus) as string[]).includes(input as string)) {
-  //   return input as AttemptStatus;
-  // }
-  return input as AttemptStatus;
-}
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);
@@ -100,7 +91,7 @@ export async function POST(request: NextRequest) {
 
   const userId = auth.token.id;
   const payload = parsed.data;
-  const targetStatus = mapStatus(payload.status);
+  const targetStatus = payload.status ?? "IN_PROGRESS";
 
   if (!userId) {
     return NextResponse.json<RecentItemResponse>(
