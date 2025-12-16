@@ -3,22 +3,24 @@ import { CiBookmark } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { MdGroups } from "react-icons/md";
 import UserAvatarIcon from "./UserAvatarIcon";
-import { QuizDetail } from "@/lib/types/prisma";
+import { QuizWithLocalization } from "@/lib/types/api";
 
-const FlashcardTestHeader = ({ quizzSet }: { quizzSet: QuizDetail }) => {
+const FlashcardTestHeader = ({ quiz }: { quiz: QuizWithLocalization }) => {
   return (
     <header className="space-y-3">
       <div className="flex flex-wrap items-center">
-        <h1 className="text-3xl font-semibold">{quizzSet.sets[0].title}</h1>
+        <h1 className="text-3xl font-semibold">
+          {quiz.localizations[0].title}
+        </h1>
       </div>
       <div className="flex flex-row items-center justify-between md:justify-start md:gap-5 text-sm">
         <span>13 studiers today</span>
         <StarIcon className="h-5 w-5 text-yellow-400" />
-        <span>4.5 ({quizzSet?._count?.reviews} reviews)</span>
+        <span>4.5 ({quiz.reviews.length} reviews)</span>
 
         <UserAvatarIcon
-          user={quizzSet.createdBy}
-          createdAt={quizzSet.createdAt}
+          user={quiz.createdBy}
+          createdAt={quiz.createdAt}
           classname="flex flex-row lg:hidden"
         />
       </div>

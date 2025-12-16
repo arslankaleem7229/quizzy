@@ -3,8 +3,7 @@ import GenerateByAI from "./components/GenerateByAI";
 import PopularFlashCards from "./components/PopularFlashCards";
 import PopularTextbooks from "./components/PopularTextbooks";
 import RecentComponent from "./components/RecentComponent";
-import Sidebar from "./components/Sidebar";
-import { QuizListResponse } from "@/lib/types/prisma";
+import { QuizWithoutLocalization, QuizzesResponse } from "@/lib/types/api";
 
 export default async function Latest() {
   const res = await fetch(process.env.APP_URL + "/api/quizz?limit=4", {
@@ -17,18 +16,19 @@ export default async function Latest() {
 
   if (!res.ok) throw new Error("Failed to load quizzes");
 
-  const flashcards: QuizListResponse = await res.json();
+  const quiz: QuizzesResponse = await res.json();
 
-  return (
-    <main className="flex w-full min-h-screen bg-(--background) text-(--textColor)">
-      <section className="flex flex-1 flex-col px-6 pb-5 lg:px-12">
-        <div className="grid gap-8">
-          <RecentComponent flashcards={flashcards} />
-          <GenerateByAI />
-          <PopularFlashCards flashcards={flashcards} />
-          <PopularTextbooks />
-        </div>
-      </section>
-    </main>
-  );
+  if (quiz.success)
+    return (
+      <main className="flex w-full min-h-screen bg-(--background) text-(--textColor)">
+        <section className="flex flex-1 flex-col px-6 pb-5 lg:px-12">
+          <div className="grid gap-8">
+            <RecentComponent flashcards={quiz.data} />
+            <GenerateByAI />
+            <PopularFlashCards flashcards={quiz.data} />
+            <PopularTextbooks />
+          </div>
+        </section>
+      </main>
+    );
 }

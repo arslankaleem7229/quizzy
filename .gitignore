@@ -44,4 +44,5 @@ next-env.d.ts
 /app/generated/prisma
 /gutter
 /keys
-db_backup/quizzy.sql
+db_backup/
+db_backup/quizzy-v1.sql

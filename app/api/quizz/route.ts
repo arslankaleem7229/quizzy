@@ -2,7 +2,11 @@ import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 import Error from "next/error";
-import { QuizListResponse } from "@/lib/types/prisma";
+import {
+  QuizResponse,
+  quizWithoutLocalizationInclude,
+  QuizzesResponse,
+} from "@/lib/types/api";
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);
@@ -17,52 +21,46 @@ export async function GET(request: NextRequest) {
   );
 
   try {
-    const quizzes = await prisma.quizz.findMany({
+    const quiz = await prisma.quiz.findMany({
       take: limit,
       skip: cursor ? 1 : 0,
       cursor: cursor ? { id: cursor } : undefined,
-
-      include: {
-        sets: {
-          select: {
-            title: true,
-            description: true,
-            language: true,
-            _count: { select: { userQuizzAttempts: true, questions: true } },
-          },
-        },
-        createdBy: {
-          select: {
-            id: true,
-            name: true,
-            image: true,
-            email: true,
-            type: true,
-          },
-        },
-      },
+      include: quizWithoutLocalizationInclude,
     });
 
-    if (!quizzes)
-      return NextResponse.json({ error: "No Quizzes found" }, { status: 404 });
+    if (!quiz) {
+      return NextResponse.json<QuizResponse>(
+        {
+          success: false,
+          error: { message: "Quiz not found", code: "NOT_FOUND" },
+        },
+        { status: 404 }
+      );
+    }
 
-    const nextCursor =
-      quizzes.length === limit ? quizzes[quizzes.length - 1].id : null;
+    const nextCursor = quiz.length === limit ? quiz[quiz.length - 1].id : null;
 
-    return NextResponse.json(
+    return NextResponse.json<QuizzesResponse>(
       {
-        quizzes,
+        success: true,
+        data: quiz,
         pagination: {
           limit: limit,
           cursor: cursor ?? null,
           nextCursor: nextCursor,
           hasMore: nextCursor != null,
         },
-      } satisfies QuizListResponse,
+      },
       { status: 200 }
     );
   } catch (error) {
-    const err = error as Error;
-    return NextResponse.json({ error: err }, { status: 400 });
+    console.error("Error fetching quiz:", error);
+    return NextResponse.json<QuizResponse>(
+      {
+        success: false,
+        error: { message: "Internal server error", code: "INTERNAL_ERROR" },
+      },
+      { status: 500 }
+    );
   }
 }

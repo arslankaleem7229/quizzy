@@ -4,10 +4,10 @@ import FlashcardTestHeader from "./../components/FlashcardTestHeader";
 import BreadCrumbs from "./../components/BreadCrumbs";
 import UserAvatarIcon from "./../components/UserAvatarIcon";
 import FlashCardSetsSection from "../../search/components/FlashCardSetsSection";
-import { QuizDetail, QuizDetailQuestion } from "@/lib/types/prisma";
+
 import { cookies } from "next/headers";
-import { AttachmentType } from "@/app/generated/prisma";
 import Image from "next/image";
+import { QuizLocalization, QuizResponse } from "@/lib/types/api";
 
 const studyModes = [
   { id: "flashcards", label: "Flashcards", enabled: true },
@@ -32,47 +32,54 @@ export default async function FlashcardSetPage(context: {
 
   if (!res.ok) throw new Error(`Failed to load quizzes ${res.body}`);
 
-  const quizz: QuizDetail = await res.json();
+  const response: QuizResponse = await res.json();
 
-  return (
-    <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor) pb-10">
-      <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
-        <BreadCrumbs />
-        <FlashcardTestHeader quizzSet={quizz} />
+  if (response.success) {
+    const quiz = response.data;
+    return (
+      <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor) pb-10">
+        <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
+          <BreadCrumbs />
+          <FlashcardTestHeader quiz={quiz} />
 
-        <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
-          {studyModes.map((mode) => (
-            <button
-              key={mode.id}
-              disabled={!mode.enabled}
-              className="rounded-lg bg-(--cardColor) p-5 font-medium tracking-wide transition hover:border-b-2 border-(--primary) disabled:bg-gray-700 disabled:hover:border-b-0"
-            >
-              {mode.label}
-            </button>
-          ))}
+          <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
+            {studyModes.map((mode) => (
+              <button
+                key={mode.id}
+                disabled={!mode.enabled}
+                className="rounded-lg bg-(--cardColor) p-5 font-medium tracking-wide transition hover:border-b-2 border-(--primary) disabled:bg-gray-700 disabled:hover:border-b-0"
+              >
+                {mode.label}
+              </button>
+            ))}
+          </div>
+
+          <FlashcardTestPage
+            questions={quiz.localizations[0].questions}
+            classname=""
+          />
+
+          <UserAvatarIcon
+            user={quiz.createdBy}
+            createdAt={quiz.createdAt}
+            classname="hidden lg:flex"
+          />
+
+          <FlashCardSetsSection header="Student also studied" />
+
+          <RemainingSection localization={quiz.localizations[0]} />
         </div>
-
-        <FlashcardTestPage flashcards={quizz.sets[0].questions} classname="" />
-
-        <UserAvatarIcon
-          user={quizz.createdBy}
-          createdAt={quizz.createdAt}
-          classname="hidden lg:flex"
-        />
-
-        <FlashCardSetsSection header="Student also studied" />
-
-        <RemainingSection questions={quizz.sets[0].questions} />
-      </div>
-    </main>
-  );
+      </main>
+    );
+  }
 }
 
 const RemainingSection = ({
-  questions,
+  localization,
 }: {
-  questions: QuizDetailQuestion[];
+  localization: QuizLocalization;
 }) => {
+  const questions = localization.questions;
   return (
     <section className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -94,7 +101,7 @@ const RemainingSection = ({
           const questionImages = question.attachments.filter(
             (a) => a.questionId
           );
-          const answerImages = question.attachments.filter((a) => a.answerId);
+          const optionImages = question.attachments.filter((a) => a.optionId);
 
           return (
             <article
@@ -102,10 +109,10 @@ const RemainingSection = ({
               className="flex flex-row w-full items-center justify-between gap-4 rounded-lg px-5 py-4 bg-(--cardColor)"
             >
               <div className="flex flex-col w-full md:flex-row pr-4 md:pr-0 ">
-                {hasAttachements && answerImages ? (
+                {hasAttachements && optionImages.length > 0 ? (
                   <div className="relative h-5 w-5">
                     <Image
-                      src={answerImages[0].url}
+                      src={optionImages[0].url}
                       alt="answer-image"
                       fill
                       className="object-contain"
@@ -113,12 +120,14 @@ const RemainingSection = ({
                   </div>
                 ) : (
                   <p className="flex-1 px-2 font-bold md:font-light">
-                    {question.answer}
+                    {question.options
+                      .filter((o) => o.isCorrect)
+                      .map((o) => o.optionText + "\n\n")}
                   </p>
                 )}
                 <div className="md:border-(--background) md:border md:py-0 py-2" />
                 {hasAttachements && questionImages ? (
-                  <div className="relative h-5 w-5">
+                  <div className="relative h-25 w-25">
                     <Image
                       src={questionImages[0].url}
                       alt="answer-image"
@@ -128,7 +137,7 @@ const RemainingSection = ({
                   </div>
                 ) : (
                   <p className="flex-2 px-5 font-extralight md:font-light">
-                    {question.question}
+                    {question.questionText}
                   </p>
                 )}
               </div>

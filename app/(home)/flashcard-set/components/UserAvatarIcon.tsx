@@ -1,4 +1,4 @@
-import { QuizAuthor } from "@/lib/types/prisma";
+import { QuizCreator } from "@/lib/types/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Image from "next/image";
@@ -11,7 +11,7 @@ const UserAvatarIcon = ({
   createdAt,
 }: {
   classname: string;
-  user: QuizAuthor;
+  user: QuizCreator;
   createdAt: Date;
 }) => {
   return (

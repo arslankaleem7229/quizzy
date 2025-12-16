@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
-import { QuizDetail } from "@/lib/types/prisma";
+import { QuizResponse, quizWithLocalizationInclude } from "@/lib/types/api";
 
 export async function GET(
   request: NextRequest,
@@ -11,45 +11,46 @@ export async function GET(
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
-  const quizz = await prisma.quizz.findUnique({
-    where: { id: id },
-    include: {
-      _count: { select: { reviews: true } },
-      sets: {
-        where: { language: "en" },
-        include: {
-          questions: {
-            include: {
-              attachments: {
-                select: {
-                  id: true,
-                  type: true,
-                  questionId: true,
-                  answerId: true,
-                  url: true,
-                },
-              },
-            },
+  try {
+    const quiz = await prisma.quiz.findUnique({
+      where: { id: id },
+      // , localizations: { every: { language: "en" } }
+      include: {
+        ...quizWithLocalizationInclude,
+        localizations: {
+          ...quizWithLocalizationInclude.localizations,
+          where: {
+            language: "en",
           },
-          userQuizzAttempts: true,
         },
       },
-      createdBy: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          image: true,
-          username: true,
-          type: true,
-        },
-      },
-    },
-  });
+    });
 
-  if (!quizz)
-    return NextResponse.json({ error: "Quizz not found" }, { status: 404 });
-  return NextResponse.json(quizz satisfies QuizDetail, {
-    status: 200,
-  });
+    if (!quiz) {
+      return NextResponse.json<QuizResponse>(
+        {
+          success: false,
+          error: { message: "Quiz not found", code: "NOT_FOUND" },
+        },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json<QuizResponse>(
+      {
+        success: true,
+        data: quiz,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error fetching quiz:", error);
+    return NextResponse.json<QuizResponse>(
+      {
+        success: false,
+        error: { message: "Internal server error", code: "INTERNAL_ERROR" },
+      },
+      { status: 500 }
+    );
+  }
 }

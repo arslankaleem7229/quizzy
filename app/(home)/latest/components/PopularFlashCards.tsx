@@ -1,11 +1,11 @@
-import { QuizListResponse } from "@/lib/types/prisma";
+import { QuizWithoutLocalization } from "@/lib/types/api";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function PopularFlashCards({
   flashcards,
 }: {
-  flashcards: QuizListResponse;
+  flashcards: QuizWithoutLocalization[];
 }) {
   return (
     <div>
@@ -13,7 +13,7 @@ export default function PopularFlashCards({
         Popular flashcard sets
       </div>
       <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {flashcards.quizzes.map((quizz) => (
+        {flashcards.map((quizz) => (
           <Link
             key={quizz.id}
             href={{
@@ -28,7 +28,7 @@ export default function PopularFlashCards({
                   {quizz.slug.slugify()}
                 </div>
                 <div className="mt-2 inline-flex items-center rounded-full bg-(--capsule) px-2 py-0.75 text-xs text-(--textColor)/70">
-                  {quizz.sets[0]._count.questions + " terms"}
+                  {quizz.totalQuestions + " terms"}
                 </div>
               </div>
               <div className="mt-4 flex items-center gap-3 text-sm text-(--textColor)/70">
@@ -50,7 +50,7 @@ export default function PopularFlashCards({
                   {quizz.createdBy.name}
                 </div>
                 <div className="text-xs text-(--textColor)/50 rounded-full bg-(--capsule) px-1">
-                  {quizz.createdBy.type}
+                  {quizz.createdBy.role}
                 </div>
               </div>
             </div>

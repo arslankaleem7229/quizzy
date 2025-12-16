@@ -1,9 +1,9 @@
-import { QuizListResponse } from "@/lib/types/prisma";
+import { QuizWithoutLocalization } from "@/lib/types/api";
 
 export default async function RecentComponent({
   flashcards,
 }: {
-  flashcards: QuizListResponse;
+  flashcards: QuizWithoutLocalization[];
 }) {
   return (
     <div>
@@ -12,9 +12,9 @@ export default async function RecentComponent({
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        {flashcards.quizzes.map((quizz) => (
+        {flashcards.map((quiz) => (
           <div
-            key={quizz.id}
+            key={quiz.id}
             className={`rounded-lg hover:bg-(--cardColorHover) px-3 py-2 transition duration-0`}
           >
             <div className="flex flex-row items-center gap-4">
@@ -47,8 +47,8 @@ export default async function RecentComponent({
               </div>
 
               <div className="flex flex-col justify-center items-start h-full">
-                <div className="text-sm">{quizz.slug.slugify()}</div>
-                <p className="text-sm font-light">{quizz.slug.slugify()}</p>
+                <div className="text-sm">{quiz.slug.slugify()}</div>
+                <p className="text-sm font-light">{quiz.slug.slugify()}</p>
               </div>
             </div>
           </div>

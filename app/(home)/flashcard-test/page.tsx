@@ -4,26 +4,26 @@
 import { useState } from "react";
 import { TestFlashcard } from "./components/TestFlashcard";
 import FlashcardNavButton from "./components/FlashcardNavButton";
-import { QuizDetailQuestion } from "@/lib/types/prisma";
+import { QuizQuestion } from "@/lib/types/api";
 
 const FlashcardTestPage = ({
   classname,
-  flashcards,
+  questions,
 }: {
   classname?: string;
-  flashcards: QuizDetailQuestion[];
+  questions: QuizQuestion[];
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleNext = () => {
     setIsFlipped(false);
-    setCurrentIndex((prev) => (prev + 1) % flashcards.length);
+    setCurrentIndex((prev) => (prev + 1) % questions.length);
   };
 
   const handlePrev = () => {
     setIsFlipped(false);
-    setCurrentIndex((prev) => (prev === 0 ? flashcards.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? questions.length - 1 : prev - 1));
   };
 
   return (
@@ -36,14 +36,14 @@ const FlashcardTestPage = ({
       <section className="flex flex-1 flex-col">
         <div className="mt-8 flex flex-col items-center gap-8">
           <TestFlashcard
-            currentCard={flashcards[currentIndex]}
+            currentCard={questions[currentIndex]}
             isFlipped={isFlipped}
             setIsFlipped={setIsFlipped}
           />
           <div className="flex items-center gap-10">
             <FlashcardNavButton isLeft={true} handleAction={handlePrev} />
             <h1 className="text-sm font-medium">
-              {currentIndex + 1 + " / " + flashcards.length}
+              {currentIndex + 1 + " / " + questions.length}
             </h1>
             <FlashcardNavButton isLeft={false} handleAction={handleNext} />
           </div>

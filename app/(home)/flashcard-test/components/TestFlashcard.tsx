@@ -1,4 +1,4 @@
-import { QuizDetailQuestion } from "@/lib/types/prisma";
+import { QuizQuestion } from "@/lib/types/api";
 import { useState } from "react";
 import { FaLightbulb } from "react-icons/fa";
 
@@ -7,12 +7,15 @@ export const TestFlashcard = ({
   isFlipped,
   setIsFlipped,
 }: {
-  currentCard: QuizDetailQuestion;
+  currentCard: QuizQuestion;
   isFlipped: boolean;
   setIsFlipped: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [showHintButton, setShowHintButton] = useState(true);
   const [showHint, setShowHint] = useState(false);
+  const correctValues = currentCard.options
+    .filter((o) => o.isCorrect)
+    .map((o) => o.optionText + "\n\n");
 
   return (
     <div className="flex w-full max-w-4xl flex-col gap-5">
@@ -60,13 +63,13 @@ export const TestFlashcard = ({
           {!isFlipped && (
             <div className="absolute inset-0 overflow-scroll px-6 my-16 backface-hidden">
               <div className="min-h-full flex items-center justify-center text-3xl font-extralight wrap-break-word">
-                {currentCard.question}
+                {currentCard.questionText}
               </div>
             </div>
           )}
           {isFlipped && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-lg backface-hidden rotate-y-180">
-              <p className="text-3xl font-light">{currentCard.answer}</p>
+              <p className="text-3xl font-light">{correctValues}</p>
             </div>
           )}
         </button>

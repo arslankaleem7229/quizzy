@@ -30,6 +30,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
   @@map("accounts")
 }
 
@@ -40,6 +41,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([userId])
   @@map("sessions")
 }
 
@@ -49,18 +51,24 @@ model User {
   email          String?   @unique
   emailVerified  DateTime? @map("email_verified")
   image          String?
-  accounts       Account[]
-  sessions       Session[]
   hashedPassword String?
   username       String?   @unique
   dob            DateTime?
-  type           UserType  @default(student)
+  role           UserRole  @default(STUDENT)
+  isActive       Boolean   @default(true)
 
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @default(now()) @updatedAt @map(name: "updated_at")
-  quizzes           Quizz[]
-  userQuizzAttempts UserQuizzAttempt[]
+  accounts Account[]
+  sessions Session[]
+  quizzes  Quiz[]    @relation("QuizCreator")
+  attempts Attempt[]
+  reviews  Review[]
 
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([email])
+  @@index([username])
+  @@index([role, isActive])
   @@map("users")
 }
 
@@ -73,138 +81,215 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-enum UserType {
-  student
-  teacher
+model Quiz {
+  id          String @id @default(cuid())
+  slug        String @unique
+  createdById String @map("created_by_id")
+
+  createdBy     User               @relation("QuizCreator", fields: [createdById], references: [id])
+  localizations QuizLocalization[]
+  attempts      Attempt[]
+  reviews       Review[]
+
+  //for later usage for dashboard
+  isPublished    Boolean @default(false)
+  isActive       Boolean @default(true)
+  totalQuestions Int     @default(0)
+  totalAttempts  Int     @default(0)
+  avgRating      Float?  @default(0)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([slug])
+  @@index([createdById, isPublished])
+  @@index([isPublished, isActive])
+  @@index([avgRating])
+  @@map("quizzes")
 }
 
-model Quizz {
-  id          String     @id @unique @default(cuid())
-  slug        String     @unique
-  sets        QuizzSet[]
-  createdById String     @map(name: "created_by")
-  reviews     Review[]
+// rather than sets for each language that causing querying difficult
+model QuizLocalization {
+  id            String @id @default(cuid())
+  quizId        String @map("quiz_id")
+  language      String @default("en")
+  title         String
+  description   String
+  questionCount Int    @default(0)
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
-  createdBy User     @relation(fields: [createdById], references: [id])
-}
+  quiz      Quiz       @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  questions Question[]
 
-model Review {
-  id        String  @unique @default(uuid())
-  userId    String  @map("user_id")
-  contentId String  @map("content_id")
-  review    String?
-  stars     Int     @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
-
-  quizz Quizz @relation(fields: [contentId], references: [id])
-}
-
-model QuizzSet {
-  id                String             @id @unique @default(cuid())
-  quizzId           String
-  quizz             Quizz              @relation(fields: [quizzId], references: [id])
-  language          String             @default("en")
-  title             String
-  description       String
-  questions         Question[]
-  userQuizzAttempts UserQuizzAttempt[]
-
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  @@unique([quizId, language])
+  @@index([quizId, language])
+  @@index([language])
+  @@map("quiz_localizations")
 }
 
 model Question {
-  id            String       @id @default(cuid())
-  setId         String
-  set           QuizzSet     @relation(fields: [setId], references: [id])
-  question      String
-  answer        String
-  explanation   String
-  hint          String
-  correctAnswer String[]     @map(name: "correct_answer")
-  options       String[]
-  nature        QuestionType
-  createdAt     DateTime     @default(now()) @map(name: "created_at")
-  updatedAt     DateTime     @default(now()) @updatedAt @map(name: "updated_at")
+  id             String       @id @default(cuid())
+  localizationId String       @map("localization_id")
+  questionText   String
+  questionType   QuestionType @map("question_type")
+  explanation    String?
+  hint           String?
+  hasAttachment  Boolean      @default(false) @map("has_attachment")
 
-  status QuestionStatus @default(pending)
+  //for later on dahboards
+  points          Int  @default(1)
+  orderIndex      Int  @default(0) @map("order_index")
+  difficultyLevel Int? @default(1) @map("difficulty_level")
 
-  userAnswers UserAnswer[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  localization QuizLocalization @relation(fields: [localizationId], references: [id], onDelete: Cascade)
+  options      QuestionOption[]
+  attachments  Attachment[]
+  answers      Answer[]
+
+  @@index([localizationId, orderIndex])
+  @@index([questionType])
+  @@map("questions")
+}
+
+model QuestionOption {
+  id            String  @id @default(cuid())
+  questionId    String  @map("question_id")
+  optionText    String
+  isCorrect     Boolean @default(false) @map("is_correct")
+  hasAttachment Boolean @default(false) @map("has_attachment")
+
+  orderIndex Int @default(autoincrement()) @map("order_index")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  question    Question     @relation(fields: [questionId], references: [id], onDelete: Cascade)
   attachments Attachment[]
-}
 
-enum QuestionStatus {
-  pending
-  error
-  done
-  hint_done
-}
-
-enum QuestionType {
-  ChooseOne
-  ChooseMany
-}
-
-model UserQuizzAttempt {
-  id          String        @id @default(cuid())
-  userId      String
-  setId       String
-  status      AttemptStatus // "seen", "completed", "incomplete"
-  score       Int?
-  startedAt   DateTime?     @default(now()) @map("started_at")
-  updatedAt   DateTime?     @default(now()) @map("updated_at")
-  completedAt DateTime?     @map("completed_at")
-  isActive    Boolean       @default(true)
-
-  user User     @relation(fields: [userId], references: [id])
-  set  QuizzSet @relation(fields: [setId], references: [id])
-
-  answers UserAnswer[]
-
-  @@unique([userId, setId, isActive])
-}
-
-enum AttemptStatus {
-  seen
-  incomplete
-  completed
-}
-
-model UserAnswer {
-  id         String   @id @default(cuid())
-  attemptId  String
-  questionId String
-  answer     String[]
-
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
-
-  attempt  UserQuizzAttempt @relation(fields: [attemptId], references: [id])
-  question Question         @relation(fields: [questionId], references: [id])
-
-  @@unique([attemptId, questionId])
+  @@index([questionId, orderIndex])
+  @@index([questionId, isCorrect])
+  @@map("question_options")
 }
 
 model Attachment {
-  id         String          @id @default(cuid())
-  url        String
-  type       AttachmentType?
-  size       Int?
-  uploadedAt DateTime?       @default(now()) @map("uploaded_at")
-  questionId String?
-  answerId   String?
-  question   Question?       @relation(fields: [questionId], references: [id])
+  id             String         @id @default(cuid())
+  url            String
+  fileName       String?        @map("file_name")
+  mimeType       String?        @map("mime_type")
+  fileSize       Int?           @map("file_size")
+  attachmentType AttachmentType @map("attachment_type")
+  questionId     String?        @map("question_id")
+  optionId       String?        @map("option_id")
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  question Question?       @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  option   QuestionOption? @relation(fields: [optionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId])
+  @@index([optionId])
+  @@index([attachmentType])
+  @@map("attachments")
 }
 
+model Attempt {
+  id       String        @id @default(cuid())
+  userId   String        @map("user_id")
+  quizId   String        @map("quiz_id")
+  language String        @default("en")
+  status   AttemptStatus @default(IN_PROGRESS)
+
+  //for dashboard analytics
+  score      Int?
+  maxScore   Int?   @map("max_score")
+  percentage Float?
+  timeSpent  Int?   @map("time_spent")
+
+  startedAt   DateTime  @default(now()) @map("started_at")
+  completedAt DateTime? @map("completed_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz    Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  answers Answer[]
+
+  @@index([userId, status])
+  @@index([quizId, status])
+  @@index([userId, quizId, completedAt])
+  @@index([completedAt])
+  @@map("attempts")
+}
+
+model Answer {
+  id                String   @id @default(cuid())
+  attemptId         String   @map("attempt_id")
+  questionId        String   @map("question_id")
+  selectedOptionIds String[] @default([]) @map("selected_option_ids")
+
+  isCorrect    Boolean? @map("is_correct")
+  pointsEarned Int?     @default(0) @map("points_earned")
+
+  answeredAt DateTime @default(now()) @map("answered_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  attempt  Attempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, questionId])
+  @@index([attemptId])
+  @@index([questionId])
+  @@map("answers")
+}
+
+model Review {
+  id     String @id @default(cuid())
+  userId String @map("user_id")
+  quizId String @map("quiz_id")
+  rating Int    @default(0)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, quizId])
+  @@index([quizId, rating])
+  @@index([quizId, createdAt])
+  @@map("reviews")
+}
+
+// all enums under this
+
 enum AttachmentType {
-  option
-  answer
-  question
+  QUESTION_IMAGE
+  OPTION_IMAGE
+  QUESTION_AUDIO
+  QUESTION_GIF
+  OPTION_GIF
+}
+
+enum QuestionType {
+  SINGLE_CHOICE
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+}
+
+enum UserRole {
+  STUDENT
+  TEACHER
+  ADMIN
+}
+
+enum AttemptStatus {
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
 }

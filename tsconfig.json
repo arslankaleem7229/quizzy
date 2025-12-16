@@ -31,5 +31,12 @@
     "**/*.mts",
     "proxy.ts"
   ],
-  "exclude": ["node_modules", ".next", "build", "generated"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "build",
+    "generated",
+    "app/api/seed/route-v0",
+    "lib/types/api-v0"
+  ]
 }

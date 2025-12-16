@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decode, getToken, type JWT } from "next-auth/jwt";
+import { getToken, type JWT } from "next-auth/jwt";
 
 type VerifyApiAuthSuccess = {
   authorized: true;
@@ -18,6 +18,8 @@ export async function verifyApiAuth(
   try {
     const header = req.headers.get("authorization");
     const bearerMatch = header?.match(/^Bearer\s+(.+)$/i);
+
+    console.log(header);
 
     if (header && !bearerMatch) {
       return {
