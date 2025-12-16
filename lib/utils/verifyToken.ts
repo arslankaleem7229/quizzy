@@ -19,8 +19,6 @@ export async function verifyApiAuth(
     const header = req.headers.get("authorization");
     const bearerMatch = header?.match(/^Bearer\s+(.+)$/i);
 
-    console.log(header);
-
     if (header && !bearerMatch) {
       return {
         authorized: false,

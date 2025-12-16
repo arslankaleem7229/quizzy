@@ -3,7 +3,7 @@ import GenerateByAI from "./components/GenerateByAI";
 import PopularFlashCards from "./components/PopularFlashCards";
 import PopularTextbooks from "./components/PopularTextbooks";
 import RecentComponent from "./components/RecentComponent";
-import { QuizWithoutLocalization, QuizzesResponse } from "@/lib/types/api";
+import { QuizzesResponse } from "@/lib/types/api";
 
 export default async function Latest() {
   const res = await fetch(process.env.APP_URL + "/api/quizz?limit=4", {

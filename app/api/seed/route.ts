@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // app/api/seed/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { uploadFromURLToS3 } from "@/lib/utils/uploadToS3";
-import { cuid } from "zod";
 
 interface QuizSeedData {
   slug: string;
@@ -236,7 +236,7 @@ function transformLegacyFormat(data: any, userId: string): QuizSeedData {
     slug: data.slug,
     createdById: userId,
     isPublished: data.isPublished ?? false,
-    localizations: sets.map((set: any, setIndex: number) => ({
+    localizations: sets.map((set: any) => ({
       language: set.language || "en",
       title: set.title,
       description: set.description,

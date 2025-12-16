@@ -18,51 +18,72 @@ export async function uploadFromURLToS3({
 }): Promise<string | null> {
   if (!url) return null;
 
-  let resourceUrl: string | null = "";
-
   const fileBytes = url.startsWith("http")
     ? Buffer.from(await (await fetch(url)).arrayBuffer())
     : fs.readFileSync(url);
 
-  const key = `images/${createHash("sha256").update(fileBytes).digest("hex")}`;
+  const ext = url.split(".").pop()?.toLowerCase() ?? "";
+  const contentType = CONTENT_TYPES[ext] ?? "application/octet-stream";
 
-  await s3
-    .send(
+  return uploadBytesToS3({ bytes: fileBytes, contentType });
+}
+
+async function uploadBytesToS3({
+  bytes,
+  contentType,
+}: {
+  bytes: Buffer;
+  contentType: string;
+}): Promise<string | null> {
+  if (!bytes.length) return null;
+
+  const key = `${"images/"}${createHash("sha256").update(bytes).digest("hex")}`;
+  const bucket = process.env.S3_BUCKET_NAME!;
+  const region = process.env.S3_REGION;
+  const publicUrl = `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
+
+  try {
+    await s3.send(
       new HeadObjectCommand({
-        Bucket: process.env.S3_BUCKET_NAME!,
+        Bucket: bucket,
         Key: key,
       })
-    )
-    .then((data) => {
-      // console.log(data);
-      resourceUrl = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.S3_REGION}.amazonaws.com/${key}`;
-    })
-    .catch((error) => {
-      // console.log(error);
-      resourceUrl = null;
-    });
-
-  if (resourceUrl === null) {
-    const ext = url.split(".").pop()?.toLowerCase() ?? "";
-    const contentType = CONTENT_TYPES[ext] ?? "application/octet-stream";
-    await s3
-      .send(
-        new PutObjectCommand({
-          Bucket: process.env.S3_BUCKET_NAME!,
-          Key: key,
-          Body: fileBytes,
-          ContentType: contentType,
-        })
-      )
-      .then((data) => {
-        // console.log(data);
-        resourceUrl = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.S3_REGION}.amazonaws.com/${key}`;
-      })
-      .catch((error) => {
-        // console.log(error);
-        resourceUrl = null;
-      });
+    );
+    return publicUrl;
+  } catch (error) {
+    // object not found, will upload
   }
 
-  return resourceUrl === "" ? null : resourceUrl;
+  try {
+    await s3.send(
+      new PutObjectCommand({
+        Bucket: bucket,
+        Key: key,
+        Body: bytes,
+        ContentType: contentType,
+      })
+    );
+    return publicUrl;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function uploadFileToS3({
+  file,
+}: {
+  file: File;
+}): Promise<string | null> {
+  try {
+    const bytes = Buffer.from(await file.arrayBuffer());
+    const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
+    const contentType =
+      file.type || CONTENT_TYPES[ext] || "application/octet-stream";
+
+    // Deduplicated upload: use a hash key and return existing URL if present
+    return uploadBytesToS3({ bytes, contentType });
+  } catch (error) {
+    console.error("uploadFileToS3 failed", error);
+    return null;
+  }
 }

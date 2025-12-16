@@ -10,14 +10,13 @@ import { User } from "next-auth";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
-
   const user = useMemo(() => session?.user as User, [session]);
 
   return (
     <>
       <header
         className={`flex flex-wrap md:flex-nowrap sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 lg:px-4 ${
-          status !== "authenticated" ? "bg-white" : "bg-(--background)"
+          status == "unauthenticated" ? "bg-white" : "bg-(--background)"
         } z-999`}
       >
         <div className="flex flex-1 md:flex-none shrink-0 gap-2 mr-4 xl:mr-0">

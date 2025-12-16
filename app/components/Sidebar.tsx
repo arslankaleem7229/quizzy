@@ -1,8 +1,8 @@
-import { folders, primaryNav, quickLinks } from "../temp_data";
+import { folders, primaryNav, quickLinks } from "../(home)/latest/temp_data";
 
 const Sidebar = () => {
   return (
-    <aside className="hidden lg:flex w-20 2xl:min-w-64 flex-col border-r border-(--foreground)/5 bg-(--background) px-3 py-10">
+    <aside className="hidden h-full lg:flex w-20 2xl:min-w-64 flex-col border-r border-(--foreground)/5 bg-(--background) px-3 py-10">
       <nav className="text-sm">
         {primaryNav.map((item) => (
           <SidebarButton key={item.label} item={item} />

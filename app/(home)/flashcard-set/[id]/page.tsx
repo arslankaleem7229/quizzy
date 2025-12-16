@@ -110,7 +110,7 @@ const RemainingSection = ({
             >
               <div className="flex flex-col w-full md:flex-row pr-4 md:pr-0 ">
                 {hasAttachements && optionImages.length > 0 ? (
-                  <div className="relative h-5 w-5">
+                  <div className="flex-1 px-2 relative h-5 w-5">
                     <Image
                       src={optionImages[0].url}
                       alt="answer-image"
@@ -127,7 +127,7 @@ const RemainingSection = ({
                 )}
                 <div className="md:border-(--background) md:border md:py-0 py-2" />
                 {hasAttachements && questionImages ? (
-                  <div className="relative h-25 w-25">
+                  <div className="flex-2 px-5 relative h-35 w-35">
                     <Image
                       src={questionImages[0].url}
                       alt="answer-image"

@@ -6,7 +6,7 @@ export const quizWithLocalizationInclude = {
       questions: {
         include: {
           options: {
-            include: { attachments: {} },
+            include: { attachments: true },
             orderBy: { orderIndex: "asc" as const },
           },
           attachments: true,
@@ -46,6 +46,35 @@ export const quizWithoutLocalizationInclude = {
   },
 } satisfies Prisma.QuizInclude;
 
+export const localizationWithQuestionsInclude = {
+  questions: {
+    include: {
+      options: {
+        include: { attachments: {} },
+        orderBy: { orderIndex: "asc" as const },
+      },
+      attachments: true,
+    },
+    orderBy: { orderIndex: "asc" as const },
+  },
+} satisfies Prisma.QuizLocalizationInclude;
+
+export const attemptWithAnswersInclude = {
+  answers: true,
+  quiz: {
+    select: {
+      id: true,
+      slug: true,
+      createdById: true,
+    },
+  },
+  user: { select: userBasics },
+} satisfies Prisma.AttemptInclude;
+
+export const reviewWithUserInclude = {
+  user: { select: userBasics },
+} satisfies Prisma.ReviewInclude;
+
 //FOR FRONT END ONLY
 
 export type UserBasic = Prisma.UserGetPayload<{
@@ -66,9 +95,59 @@ export type QuizQuestion = QuizLocalization["questions"][number];
 export type QuizOption = QuizQuestion["options"][number];
 export type QuizAttachment = QuizQuestion["attachments"][number];
 
+export type LocalizationWithQuestions = Prisma.QuizLocalizationGetPayload<{
+  include: typeof localizationWithQuestionsInclude;
+}>;
+
+export type AttemptWithAnswers = Prisma.AttemptGetPayload<{
+  include: typeof attemptWithAnswersInclude;
+}>;
+
+export type ReviewWithUser = Prisma.ReviewGetPayload<{
+  include: typeof reviewWithUserInclude;
+}>;
+
+export const recentAttemptInclude = {
+  ...attemptWithAnswersInclude,
+  quiz: {
+    select: {
+      id: true,
+      slug: true,
+      createdById: true,
+      localizations: {
+        select: {
+          language: true,
+          title: true,
+          description: true,
+        },
+      },
+    },
+  },
+} satisfies Prisma.AttemptInclude;
+
+type RecentAttempt = Prisma.AttemptGetPayload<{
+  include: typeof recentAttemptInclude;
+}>;
+
 //FOR BACKED ONLY
 export type QuizResponse = ApiResponse<QuizWithLocalization>;
 export type QuizzesResponse = ApiResponse<QuizWithoutLocalization[]>;
+export type RecentListResponse = ApiResponse<RecentAttempt[]>;
+export type RecentItemResponse = ApiResponse<RecentAttempt>;
+export type AttemptDetailResponse = ApiResponse<{
+  attempt: AttemptWithAnswers;
+  localization: LocalizationWithQuestions;
+}>;
+export type AttemptsResponse = ApiResponse<AttemptWithAnswers[]>;
+export type ReviewResponse = ApiResponse<ReviewWithUser>;
+
+// API RESPONSE TYPE
+export type ReviewsResponse = ApiResponse<{
+  reviews: ReviewWithUser[];
+  averageRating: number;
+  total: number;
+  userReview?: ReviewWithUser | null;
+}>;
 
 export type ApiResponse<T> =
   | {
