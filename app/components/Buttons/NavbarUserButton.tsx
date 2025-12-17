@@ -1,15 +1,4 @@
-"use client";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import {
-  MouseEvent,
-  MouseEventHandler,
-  ReactNode,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { FaTrophy } from "react-icons/fa";
@@ -21,57 +10,15 @@ import { BsStars } from "react-icons/bs";
 import { useTheme } from "next-themes";
 import { User } from "next-auth";
 import { useMounted } from "@/app/hooks/useMounted";
+import { CustomDropdown } from "../dropdown/CustomDropdown";
 
 const NavbarUserButtonContent = ({ user }: { user: User }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const triggerRef = useRef<HTMLButtonElement | null>(null);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
-
-  const { resolvedTheme, setTheme } = useTheme();
-  const closeDropdown = () => setIsOpen(false);
-
-  const currentTheme =
-    resolvedTheme && (resolvedTheme === "light" || resolvedTheme === "dark")
-      ? resolvedTheme
-      : "dark";
-
-  const isLightMode = currentTheme === "light";
-
-  const toggleTheme = () => setTheme(isLightMode ? "dark" : "light");
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node) &&
-        !triggerRef.current?.contains(event.target as Node)
-      ) {
-        closeDropdown();
-      }
-    };
-
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeDropdown();
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEsc);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEsc);
-    };
-  }, []);
-
   const mounted = useMounted();
+  const { resolvedTheme, setTheme } = useTheme();
 
   if (!mounted) return null;
 
-  if (status === "loading") {
-    return null;
-  }
+  const isLightMode = resolvedTheme === "light";
 
   if (!user) {
     return (
@@ -82,150 +29,124 @@ const NavbarUserButtonContent = ({ user }: { user: User }) => {
   }
 
   return (
-    <div className="relative">
-      <button
-        ref={triggerRef}
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="btn-primary relative h-11 w-11 rounded-full flex items-center justify-center overflow-hidden"
-        aria-haspopup="menu"
-        aria-expanded={isOpen}
-      >
-        {user?.image ? (
-          <Image
-            className="object-cover"
-            src={user.image}
-            alt={user?.name ?? "userImage"}
-            fill
-          />
-        ) : (
-          <span className="font-semibold">
-            {user.name?.charAt(0)?.toUpperCase() ?? "U"}
-          </span>
-        )}
-      </button>
-
-      {isOpen ? (
-        <div
-          ref={dropdownRef}
-          className="absolute right-0 mt-3 w-80 rounded-2xl border border-(--foreground)/20 bg-(--background) shadow-2xl overflow-hidden z-50"
-          role="menu"
+    <CustomDropdown
+      trigger={({ ref, onClick, isOpen }) => (
+        <button
+          ref={ref}
+          onClick={onClick}
+          className="relative btn-primary h-11 w-11 rounded-full flex items-center justify-center overflow-hidden"
+          aria-haspopup="menu"
+          aria-expanded={isOpen}
         >
-          <div className="px-4 py-3 flex items-center gap-3 border-b border-(--foreground)/20">
-            <div className="relative h-12 w-12 rounded-full flex items-center justify-center overflow-hidden text-lg font-semibold">
-              {user?.image ? (
-                <Image
-                  className="object-cover"
-                  src={user.image}
-                  alt={user?.name ?? "userImage"}
-                  fill
-                />
-              ) : (
-                <span>{user.name?.charAt(0)?.toUpperCase() ?? "U"}</span>
-              )}
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold text-(--textColor)">
-                {user.name}
-              </span>
-              <span className="text-xs text-gray-300">{user.email}</span>
-            </div>
-          </div>
+          {user?.image ? (
+            <Image
+              src={user.image}
+              alt={user.name ?? "user"}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <span className="font-semibold">
+              {user?.name?.charAt(0)?.toUpperCase() ?? "U"}
+            </span>
+          )}
+        </button>
+      )}
+    >
+      {({ close }) => (
+        <div className="w-80 rounded-2xl border border-(--foreground)/20 bg-(--background) shadow-2xl overflow-hidden">
+          <UserHeader user={user} />
 
           <nav className="flex flex-col text-sm">
-            <NavBarDropDownButton
-              label={"Achievements"}
-              onclick={closeDropdown}
-            >
-              <FaTrophy className="text-lg " />
-            </NavBarDropDownButton>
-            <Link href={"/settings"}>
-              <NavBarDropDownButton label={"Settings"} onclick={closeDropdown}>
+            <DropdownButton label="Achievements">
+              <FaTrophy className="text-lg" />
+            </DropdownButton>
+
+            <Link href="/settings">
+              <DropdownButton label="Settings">
                 <FiSettings className="text-lg" />
-              </NavBarDropDownButton>
+              </DropdownButton>
             </Link>
-            <NavBarDropDownButton
+
+            <DropdownButton
               label={isLightMode ? "Dark mode" : "Light mode"}
-              onclick={toggleTheme}
+              onClick={() => setTheme(isLightMode ? "dark" : "light")}
             >
               {isLightMode ? (
                 <FiMoon className="text-lg" />
               ) : (
                 <FiSun className="text-lg" />
               )}
-            </NavBarDropDownButton>
+            </DropdownButton>
 
-            <div className="border-t border-(--foreground)/20" />
+            <Divider />
 
-            <NavBarDropDownButton
-              label={"Log out"}
-              onclick={() => {
-                closeDropdown();
-                signOut({ callbackUrl: "/" });
-              }}
+            <DropdownButton
+              label="Log out"
+              onClick={() => signOut({ callbackUrl: "/" })}
             >
               <RiLogoutBoxLine className="text-lg" />
-            </NavBarDropDownButton>
+            </DropdownButton>
 
-            <div className="border-t border-(--foreground)/20" />
+            <Divider />
 
-            <NavBarDropDownButton
-              label={"Privacy policy"}
-              onclick={closeDropdown}
-            >
+            <DropdownButton label="Privacy policy">
               <MdOutlinePrivacyTip className="text-lg" />
-            </NavBarDropDownButton>
+            </DropdownButton>
 
-            <NavBarDropDownButton
-              label={"Help and feedback"}
-              onclick={closeDropdown}
-            >
+            <DropdownButton label="Help and feedback">
               <MdOutlineFeedback className="text-lg" />
-            </NavBarDropDownButton>
+            </DropdownButton>
 
-            <Link href={"/payment"} className="flex max-w-full">
-              <NavBarDropDownButton label={"Upgrade"} onclick={closeDropdown}>
+            <Link href="/payment">
+              <DropdownButton label="Upgrade">
                 <BsStars className="text-lg text-[#f4c64e]" />
-              </NavBarDropDownButton>
+              </DropdownButton>
             </Link>
           </nav>
         </div>
-      ) : null}
-    </div>
+      )}
+    </CustomDropdown>
   );
 };
 
-const NavBarDropDownButton = ({
+const Divider = () => <div className="border-t border-(--foreground)/20" />;
+
+const UserHeader = ({ user }: { user: User }) => (
+  <div className="px-4 py-3 flex items-center gap-3 border-b border-(--foreground)/20">
+    <div className="relative h-12 w-12 rounded-full overflow-hidden">
+      {user.image ? (
+        <Image src={user.image} alt={user.name ?? "user"} fill />
+      ) : (
+        <span>{user.name?.charAt(0)?.toUpperCase() ?? "U"}</span>
+      )}
+    </div>
+    <div className="flex flex-col">
+      <span className="text-sm text-(--textColor) font-semibold">
+        {user.name}
+      </span>
+      <span className="text-xs text-gray-300">{user.email}</span>
+    </div>
+  </div>
+);
+
+const DropdownButton = ({
   label,
-  onclick,
+  onClick,
   children,
 }: {
   label: string;
-  onclick: MouseEventHandler<HTMLButtonElement>;
-  children: ReactNode;
-}) => {
-  return (
-    <button
-      type="button"
-      className="w-full flex items-center gap-3 px-4 py-2.5 text-left text-(--textColor) hover:bg-(--foreground)/10 transition-colors"
-      onClick={onclick}
-    >
-      {children}
-      <span>{label}</span>
-    </button>
-  );
-};
-
-// const NavbarUserButton = () => {
-//   return (
-//     <ThemeProvider
-//       attribute="data-theme"
-//       defaultTheme="dark"
-//       enableSystem={false}
-//       disableTransitionOnChange
-//     >
-//       <NavbarUserButtonContent />
-//     </ThemeProvider>
-//   );
-// };
+  onClick?: () => void;
+  children: React.ReactNode;
+}) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className="w-full flex items-center gap-3 px-4 py-2.5 text-left text-(--textColor) hover:bg-(--foreground)/10 transition-colors"
+  >
+    {children}
+    <span>{label}</span>
+  </button>
+);
 
 export default NavbarUserButtonContent;
