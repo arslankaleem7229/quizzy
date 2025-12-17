@@ -1,11 +1,27 @@
-"use client";
-
+import { cookies } from "next/headers";
 import AccountAndPrivacySetting from "./AccountAndPrivacySetting";
 import AppearanceSetting from "./AppearanceSetting";
 import NotificationSetting from "./NotificationSetting";
 import PersonalInfoSetting from "./PersonalInfoSetting";
+import { UserWithPreferenceResponse } from "@/lib/types/api";
 
-const SettingsPage = () => {
+export default async function SettingsPage() {
+  const res = await fetch(process.env.APP_URL + "/api/settings", {
+    cache: "no-store",
+    credentials: "include",
+    headers: {
+      cookie: (await cookies()).toString(),
+    },
+  });
+
+  if (!res.ok) throw new Error("Failed to load user details");
+
+  const data: UserWithPreferenceResponse = await res.json();
+
+  if (!data.success) throw new Error("Something went wrong");
+
+  const user = data.data;
+
   return (
     <main className="min-h-screen w-full bg-(--background) text-(--textColor)">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-5 md:gap-10 px-4 pb-24 pt-5 md:pt-8 lg:px-0">
@@ -33,16 +49,15 @@ const SettingsPage = () => {
           </div>
         </section>
 
-        <PersonalInfoSetting />
+        <PersonalInfoSetting
+          userImage={user.image ?? ""}
+          images={user.images}
+          name={user.name ?? ""}
+        />
         <AppearanceSetting />
         <NotificationSetting />
         <AccountAndPrivacySetting />
       </div>
     </main>
   );
-};
-
-export default SettingsPage;
-function setTheme(value: string): void {
-  throw new Error("Function not implemented.");
 }

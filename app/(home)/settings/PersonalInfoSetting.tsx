@@ -1,39 +1,53 @@
-import React, { useMemo, useState } from "react";
+"use client";
 import SettingEditButtonRow from "./components/SettingEditButtonRow";
 import SettingDropDownRow from "./components/SettingDropDownRow";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
 import { HiOutlinePlus } from "react-icons/hi2";
+import { avatars } from "./avatars";
+import { UserWithPreferenceResponse } from "@/lib/types/api";
 
-const avatarLetters = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-];
+type props = {
+  userImage: string;
+  images: string[];
+  name: string;
+};
 
-const PersonalInfoSetting = () => {
-  const [selectedAvatar, setSelectedAvatar] = useState("A");
+export default function PersonalInfoSetting({ userImage, name }: props) {
+  /*TODO: Add Loader Logic */
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-  const { data: session } = useSession();
+    const formData = new FormData();
+    formData.append("profilePicture", file);
 
-  const user = useMemo(() => session?.user, [session]);
+    const res = await fetch("/api/settings", {
+      method: "PATCH",
+      body: formData,
+    });
+    if (!res.ok) {
+      throw new Error("Request failed");
+    }
+
+    const result: UserWithPreferenceResponse = await res.json();
+    console.log(result);
+  };
+
+  const handleClick = async (url: string) => {
+    try {
+      const res = await fetch("/api/settings", {
+        method: "PATCH",
+        body: JSON.stringify({ url: url }),
+      });
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+      const result: UserWithPreferenceResponse = await res.json();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="space-y-4">
@@ -44,38 +58,45 @@ const PersonalInfoSetting = () => {
           <div className="flex flex-col md:flex-row gap-5">
             <div className="relative shrink-0 flex h-24 w-24 items-center justify-center rounded-full bg-[#2e3856] text-5xl font-medium uppercase overflow-hidden">
               {/* {selectedAvatar} */}
-              {user?.image ? (
+              {userImage ? (
                 <Image
-                  src={user!.image!}
+                  src={userImage}
                   alt="userImage"
                   fill
                   className="object-cover"
                 />
               ) : (
-                user?.name?.charAt(0).toUpperCase()
+                name.charAt(0).toUpperCase()
               )}
             </div>
             <div className="flex flex-wrap gap-2">
-              {avatarLetters.map((letter) => (
-                <button
-                  key={letter}
-                  type="button"
-                  onClick={() => setSelectedAvatar(letter)}
-                  className={`flex h-12 w-12 items-center justify-center rounded-full text-sm font-semibold uppercase transition ${
-                    selectedAvatar === letter
-                      ? "bg-(--primary) text-white ring-2 ring-(--foreground)/70"
-                      : "bg-[#1d2246] text-white/80 hover:opacity-80"
-                  }`}
-                >
-                  {letter}
-                </button>
-              ))}
-              <button
-                type="button"
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-(--foreground)/30 text-(--foreground)/70 transition hover:border-(--foreground)"
-              >
+              {avatars.map((avatar) => {
+                console.log(avatar);
+                return (
+                  <button
+                    key={avatar}
+                    type="button"
+                    onClick={() => handleClick(avatar)}
+                    className={`relative flex h-12 w-12 m-1 items-center justify-center rounded-full text-sm font-semibold uppercase transition overflow-hidden`}
+                  >
+                    <Image
+                      src={avatar}
+                      alt={avatar}
+                      fill
+                      className="object-cover"
+                    />
+                  </button>
+                );
+              })}
+              <label className="flex h-12 w-12 m-1 items-center justify-center rounded-full border border-dashed border-(--foreground)/30 text-(--foreground)/70 transition hover:border-(--foreground)">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleChange}
+                  className="hidden"
+                />
                 <HiOutlinePlus className="h-5 w-5" />
-              </button>
+              </label>
             </div>
           </div>
         </div>
@@ -106,6 +127,4 @@ const PersonalInfoSetting = () => {
       </div>
     </section>
   );
-};
-
-export default PersonalInfoSetting;
+}

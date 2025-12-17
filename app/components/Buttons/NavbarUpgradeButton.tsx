@@ -14,7 +14,7 @@ const NavbarUpgradeButton = () => {
     <Link
       href={"/payment"}
       type="button"
-      className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffcd1f] text-[#0b1034] font-semibold text-sm shadow-lg hover:brightness-95 transition-all border border-[#f7d878]"
+      className="hidden xl:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffcd1f] text-[#0b1034] font-semibold text-sm shadow-lg hover:brightness-95 transition-all border border-[#f7d878]"
     >
       Upgrade: Free 7-day trial
     </Link>

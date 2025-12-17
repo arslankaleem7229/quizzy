@@ -83,6 +83,7 @@ export const getUserWithPreference = {
   isActive: true,
   email: true,
   emailVerified: true,
+  images: true,
   role: true,
   notificationSettings: true,
   userPreferences: true,

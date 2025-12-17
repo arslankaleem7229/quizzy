@@ -4,7 +4,7 @@ import z from "zod";
 export const settingsSchema = z
   .object({
     profilePicture: z.file().nullable().optional(),
-    url: z.url().nullable().optional(),
+    url: z.string().nullable().optional(),
     username: z.string().min(3).max(32).optional(),
     email: z.email().optional(),
     accountType: z.enum(UserRole).optional(),

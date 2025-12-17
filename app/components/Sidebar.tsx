@@ -2,33 +2,31 @@ import { folders, primaryNav, quickLinks } from "../(home)/latest/temp_data";
 
 const Sidebar = () => {
   return (
-    <aside className="hidden h-full lg:flex w-20 2xl:min-w-64 flex-col border-r border-(--foreground)/5 bg-(--background) px-3 py-10">
-      <nav className="text-sm">
-        {primaryNav.map((item) => (
-          <SidebarButton key={item.label} item={item} />
-        ))}
-      </nav>
-
-      <SidebarDivider />
-
-      <div className="2xl:mt-6 hidden 2xl:flex text-sm font-medium tracking-wide text-(--textColor)/50">
-        Your folders
-      </div>
-      <div className="mt-8 2xl:mt-3 space-y-2 text-sm flex">
-        {folders.map((item) => (
-          <SidebarButton key={item.label} item={item} />
-        ))}
-      </div>
-
-      <SidebarDivider />
-
-      <div className="2xl:mt-6 hidden 2xl:flex text-sm font-medium tracking-wide text-(--textColor)/50">
-        Start here
-      </div>
-      <div className="mt-3 space-y-2 text-sm">
-        {quickLinks.map((link) => (
-          <SidebarButton key={link.label} item={link} />
-        ))}
+    <aside className="relative hidden h-full lg:flex w-20 2xl:min-w-64 flex-col border-r border-(--foreground)/5 bg-(--background) px-3 transition-[width] duration-300 ease-out">
+      <div className="sticky top-28 md:top-20 flex w-full flex-col scroll-none">
+        <nav className="text-sm">
+          {primaryNav.map((item) => (
+            <SidebarButton key={item.label} item={item} />
+          ))}
+        </nav>
+        <SidebarDivider />
+        <div className="2xl:mt-6 hidden 2xl:flex text-sm font-medium tracking-wide text-(--textColor)/50">
+          Your folders
+        </div>
+        <div className="mt-8 2xl:mt-3 space-y-2 text-sm flex">
+          {folders.map((item) => (
+            <SidebarButton key={item.label} item={item} />
+          ))}
+        </div>
+        <SidebarDivider />
+        <div className="2xl:mt-6 hidden 2xl:flex text-sm font-medium tracking-wide text-(--textColor)/50">
+          Start here
+        </div>
+        <div className="mt-3 space-y-2 text-sm">
+          {quickLinks.map((link) => (
+            <SidebarButton key={link.label} item={link} />
+          ))}
+        </div>
       </div>
     </aside>
   );

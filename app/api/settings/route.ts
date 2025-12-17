@@ -39,14 +39,12 @@ export async function PATCH(request: NextRequest) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
-  const contentType = request.headers.get("content-type") ?? "";
+  const contentType = request.headers.get("Content-Type") ?? "";
   const isMultipart = contentType.includes("multipart/form-data");
 
-  const formData = await request.formData();
-  let rawBody: unknown;
-
-  try {
-    if (isMultipart) {
+  if (isMultipart) {
+    const formData = await request.formData();
+    try {
       const profilePicture = await resolveProfilePictureAttachment(formData);
       if (!profilePicture) {
         return NextResponse.json<UserWithPreferenceResponse>(
@@ -75,28 +73,30 @@ export async function PATCH(request: NextRequest) {
           { status: 200 }
         );
       }
-    }
-  } catch (error) {
-    return NextResponse.json<UserWithPreferenceResponse>(
-      {
-        success: false,
-        error: {
-          message: `Invalid or missing JSON body: ${error}`,
-          code: "INVALID_BODY",
+    } catch (error) {
+      return NextResponse.json<UserWithPreferenceResponse>(
+        {
+          success: false,
+          error: {
+            message: `Invalid or missing JSON body: ${error}`,
+            code: "INVALID_BODY",
+          },
         },
-      },
-      { status: 400 }
-    );
+        { status: 400 }
+      );
+    }
   }
 
+  const rawBody = await request.json();
+  console.log(rawBody);
   const parsed = settingsSchema.safeParse(rawBody);
 
-  if (!parsed.success) {
+  if (!parsed || !parsed.success) {
     return NextResponse.json<UserWithPreferenceResponse>(
       {
         success: false,
         error: {
-          message: zodErrorsToString(parsed.error),
+          message: zodErrorsToString(parsed!.error),
           code: "INVALID_BODY",
         },
       },
@@ -113,6 +113,7 @@ export async function PATCH(request: NextRequest) {
         ...(data.username ? { username: data.username } : {}),
         ...(data.email ? { email: data.email } : {}),
         ...(data.accountType ? { role: data.accountType } : {}),
+        ...(data.url ? { image: data.url } : {}),
         userPreferences: {
           create: {
             ...(data.theme ? { theme: data.theme } : {}),
@@ -144,7 +145,7 @@ export async function PATCH(request: NextRequest) {
       update: {
         ...(data.username ? { username: data.username } : {}),
         ...(data.email ? { email: data.email } : {}),
-        ...(profilePicture !== undefined ? { image: profilePicture } : {}),
+        ...(data.url !== undefined ? { image: data.url } : {}),
         ...(data.accountType ? { role: data.accountType } : {}),
         userPreferences: {
           update: {
