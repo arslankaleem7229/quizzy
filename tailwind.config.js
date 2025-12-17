@@ -3,6 +3,8 @@
 // Retrieved 2025-12-16, License - CC BY-SA 4.0
 
 module.exports = {
+  plugins: [],
+  content: [],
   theme: {
     extend: {
       transitionProperty: {

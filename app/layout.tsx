@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Navbar from "./Navbar";
 import "@/app/globals.css";
-import AuthProvider from "./auth/Provider";
-import AppThemeProvider from "./AppThemeProvider";
 import "@/lib/utils/string.extensions";
 import { cookies } from "next/headers";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Quizzy",
@@ -24,12 +23,10 @@ export default async function RootLayout({
           isAuthed ? "bg-(--background)" : "bg-white"
         } text-black transition-colors`}
       >
-        <AuthProvider>
-          <AppThemeProvider>
-            <Navbar />
-            <div className="flex ">{children}</div>
-          </AppThemeProvider>
-        </AuthProvider>
+        <Providers>
+          <Navbar />
+          <div className="flex ">{children}</div>
+        </Providers>
       </body>
     </html>
   );
