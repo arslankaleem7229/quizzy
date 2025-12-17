@@ -49,14 +49,10 @@ export default async function SettingsPage() {
           </div>
         </section>
 
-        <PersonalInfoSetting
-          userImage={user.image ?? ""}
-          images={user.images}
-          name={user.name ?? ""}
-        />
-        <AppearanceSetting />
-        <NotificationSetting />
-        <AccountAndPrivacySetting />
+        <PersonalInfoSetting user={user} />
+        <AppearanceSetting user={user} />
+        <NotificationSetting user={user} />
+        <AccountAndPrivacySetting user={user} />
       </div>
     </main>
   );

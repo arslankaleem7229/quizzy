@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import SocialLoginButtons from "@/app/components/Buttons/SocialLoginButtons";
-import DOBDropdown from "@/app/components/Inputs/DOBDropdown";
-import EmailField from "@/app/components/Inputs/EmailField";
-import PasswordField from "@/app/components/Inputs/PasswordField";
+import SocialLoginButtons from "@/app/components/buttons/SocialLoginButtons";
+import DOBDropdown from "@/app/components/inputs/DOBDropdown";
+import EmailField from "@/app/components/inputs/EmailField";
+import PasswordField from "@/app/components/inputs/PasswordField";
 
 const SignupModal = () => {
   const router = useRouter();

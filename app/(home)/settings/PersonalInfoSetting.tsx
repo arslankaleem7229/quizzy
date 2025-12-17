@@ -4,22 +4,42 @@ import SettingDropDownRow from "./components/SettingDropDownRow";
 import Image from "next/image";
 import { HiOutlinePlus } from "react-icons/hi2";
 import { avatars } from "./avatars";
-import { UserWithPreferenceResponse } from "@/lib/types/api";
+import {
+  UserWithPreference,
+  UserWithPreferenceResponse,
+} from "@/lib/types/api";
 import { useState } from "react";
 import { Spinner } from "@heroui/spinner";
+import { UserRole } from "@/app/generated/prisma";
 
 type props = {
-  userImage: string;
-  images: string[];
-  name: string;
+  user: UserWithPreference;
 };
 
-export default function PersonalInfoSetting({
-  userImage,
-  name,
-  images,
-}: props) {
+type UpdateUserSettingsPayload = {
+  username?: string;
+  email?: string;
+  url?: string;
+  accountType?: string;
+
+  theme?: string;
+  language?: string;
+
+  notifications?: {
+    emailFrequency?: string;
+    productUpdates?: boolean;
+    salesPromotions?: boolean;
+    streaksBadges?: boolean;
+    reminders?: boolean;
+  };
+};
+
+export default function PersonalInfoSetting({ user }: props) {
   const [isLoading, setIsLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState(user);
+
+  const { image, email, role, username, name, images } = currentUser;
+  const userImage = image;
   const [currentImage, setCurrentImage] = useState(userImage);
 
   const [availableImages, setAvailableImages] = useState<string[]>(() => {
@@ -31,7 +51,7 @@ export default function PersonalInfoSetting({
     );
   });
 
-  const updateCurrentImage = (nextImage: string) => {
+  const updateCurrentImage = (nextImage: string | null) => {
     setCurrentImage((prevCurrent) => {
       setAvailableImages((prevAvailable) => {
         const updated = prevAvailable.filter(
@@ -59,6 +79,38 @@ export default function PersonalInfoSetting({
       });
       return nextImage;
     });
+  };
+
+  const handleUpdates = async (
+    payload: UpdateUserSettingsPayload
+  ): Promise<boolean> => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/settings", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+
+      const result: UserWithPreferenceResponse = await res.json();
+      if (result.success) {
+        setCurrentUser(result.data ?? user);
+        return true;
+      } else {
+        throw new Error(result.error.message);
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    } finally {
+      setIsLoading(false);
+      return false;
+    }
   };
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -138,7 +190,7 @@ export default function PersonalInfoSetting({
                   )}
                 </>
               ) : (
-                name.charAt(0).toUpperCase()
+                name?.charAt(0).toUpperCase()
               )}
             </div>
             <div className="flex flex-wrap gap-2">
@@ -179,25 +231,27 @@ export default function PersonalInfoSetting({
           </div>
         </div>
         <div className="">
-          <SettingEditButtonRow label="Username" value="arslankaleem">
+          <SettingEditButtonRow
+            label="Username"
+            value={username ?? email ?? ""}
+          >
             Edit
           </SettingEditButtonRow>
           <SettingEditButtonRow
             label="Email"
-            value="arslankaleem7@gmail.com"
+            value={email ?? ""}
             enableTopBorder={false}
           >
             Edit
           </SettingEditButtonRow>
           <SettingDropDownRow
             label={"Account type"}
-            value={"Student"}
-            actionLabel="Student"
-          >
-            <option key={"Student"} value={"Student"}>
-              {"Student"}
-            </option>
-          </SettingDropDownRow>
+            value={role}
+            options={[UserRole.STUDENT, UserRole.TEACHER]}
+            isLoading={isLoading}
+            onClick={(option) => handleUpdates({ accountType: option })}
+          />
+
           <SettingEditButtonRow label="School information" value="Not set">
             Edit
           </SettingEditButtonRow>

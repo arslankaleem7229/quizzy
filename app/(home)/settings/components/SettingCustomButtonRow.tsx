@@ -8,7 +8,7 @@ const SettingCustomButtonRow = ({
   children,
 }: {
   label: string;
-  desc: string;
+  desc?: string;
   enableTopBorder?: boolean;
   enableBottomBorder?: boolean;
 
@@ -22,7 +22,7 @@ const SettingCustomButtonRow = ({
     >
       <div>
         <p className="font-medium"> {label} </p>
-        <p className="text-sm font-light tracking-wide">{desc}</p>
+        {desc && <p className="text-sm font-light tracking-wide">{desc}</p>}
       </div>
       <div className="inline-flex gap-2 items-center rounded-full bg-(--capsule) text-sm font-semibold transition text-white">
         {children}

@@ -1,9 +1,9 @@
 "use client";
 import Logo from "./components/Logo";
-import SearchField from "./components/Inputs/SearchField";
-import NavbarUserButton from "./components/Buttons/NavbarUserButton";
-import NavbarCreateButton from "./components/Buttons/NavbarCreateButton";
-import NavbarUpgradeButton from "./components/Buttons/NavbarUpgradeButton";
+import SearchField from "./components/inputs/SearchField";
+import NavbarUserButton from "./components/buttons/NavbarUserButton";
+import NavbarCreateButton from "./components/buttons/NavbarCreateButton";
+import NavbarUpgradeButton from "./components/buttons/NavbarUpgradeButton";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
 import { User } from "next-auth";
