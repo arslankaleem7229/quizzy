@@ -87,9 +87,23 @@ export async function PATCH(request: NextRequest) {
     }
   }
 
-  const rawBody = await request.json();
-  console.log(rawBody);
-  const parsed = settingsSchema.safeParse(rawBody);
+  let parsed;
+
+  try {
+    const rawBody = await request.json();
+    parsed = settingsSchema.safeParse(rawBody);
+  } catch {
+    return NextResponse.json<UserWithPreferenceResponse>(
+      {
+        success: false,
+        error: {
+          message: "JSON PARSE FAILED",
+          code: "INVALID_FILE",
+        },
+      },
+      { status: 400 }
+    );
+  }
 
   if (!parsed || !parsed.success) {
     return NextResponse.json<UserWithPreferenceResponse>(
@@ -105,6 +119,8 @@ export async function PATCH(request: NextRequest) {
   }
 
   const data = parsed.data;
+
+  console.log(data.notifications?.streaksBadges !== undefined);
 
   try {
     const user = await prisma.user.upsert({
@@ -125,18 +141,18 @@ export async function PATCH(request: NextRequest) {
             ...(data.notifications?.emailFrequency
               ? { emailFrequency: data.notifications?.emailFrequency }
               : {}),
-            ...(data.notifications?.productUpdates
+            ...(data.notifications?.productUpdates !== null
               ? { featuresAndTips: data.notifications?.productUpdates }
               : {}),
-            ...(data.notifications?.salesPromotions
+            ...(data.notifications?.salesPromotions !== null
               ? {
                   salesAndPromotions: data.notifications?.salesPromotions,
                 }
               : {}),
-            ...(data.notifications?.streaksBadges
+            ...(data.notifications?.streaksBadges !== null
               ? { streaksAndBadges: data.notifications?.streaksBadges }
               : {}),
-            ...(data.notifications?.reminders
+            ...(data.notifications?.reminders !== null
               ? { studyReminders: data.notifications?.reminders }
               : {}),
           },
@@ -163,18 +179,18 @@ export async function PATCH(request: NextRequest) {
               ...(data.notifications?.emailFrequency
                 ? { emailFrequency: data.notifications?.emailFrequency }
                 : {}),
-              ...(data.notifications?.productUpdates
+              ...(data.notifications?.productUpdates !== null
                 ? { featuresAndTips: data.notifications?.productUpdates }
                 : {}),
-              ...(data.notifications?.salesPromotions
+              ...(data.notifications?.salesPromotions !== null
                 ? {
                     salesAndPromotions: data.notifications?.salesPromotions,
                   }
                 : {}),
-              ...(data.notifications?.streaksBadges
+              ...(data.notifications?.streaksBadges !== null
                 ? { streaksAndBadges: data.notifications?.streaksBadges }
                 : {}),
-              ...(data.notifications?.reminders
+              ...(data.notifications?.reminders !== null
                 ? { studyReminders: data.notifications?.reminders }
                 : {}),
             },

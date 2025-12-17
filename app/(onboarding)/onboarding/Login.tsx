@@ -3,14 +3,21 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import SocialLoginButtons from "@/app/components/Buttons/SocialLoginButtons";
-import EmailField from "@/app/components/Inputs/EmailField";
-import PasswordField from "@/app/components/Inputs/PasswordField";
+import SocialLoginButtons from "@/app/components/buttons/SocialLoginButtons";
+import EmailField from "@/app/components/inputs/EmailField";
+import PasswordField from "@/app/components/inputs/PasswordField";
+import { useSearchParams } from "next/navigation";
 
 const LoginModal = () => {
   const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const paramsError = searchParams.get("error");
+  const [error, setError] = useState<string | null>(
+    paramsError === "inactive"
+      ? "Your account is inactive. Contact support."
+      : null
+  );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,12 +48,35 @@ const LoginModal = () => {
     router.replace("/latest");
   };
 
+  const handleLoginWithSocial = ({
+    provider,
+  }: {
+    provider: "google" | "facebook" | "apple";
+  }) => {
+    signIn(provider).catch((reason) => {
+      console.log("FUCK" + reason);
+      setError(reason.message);
+    });
+  };
+
   return (
     <div>
       <div className="flex flex-col gap-5 w-full">
-        <SocialLoginButtons provider="google" action="login" />
-        <SocialLoginButtons provider="facebook" action="login" />
-        <SocialLoginButtons provider="apple" action="login" />
+        <SocialLoginButtons
+          provider="google"
+          action="login"
+          onClick={() => handleLoginWithSocial({ provider: "google" })}
+        />
+        <SocialLoginButtons
+          provider="facebook"
+          action="login"
+          onClick={() => handleLoginWithSocial({ provider: "facebook" })}
+        />
+        <SocialLoginButtons
+          provider="apple"
+          action="login"
+          onClick={() => handleLoginWithSocial({ provider: "apple" })}
+        />
       </div>
 
       <div className="flex items-center w-full my-8">

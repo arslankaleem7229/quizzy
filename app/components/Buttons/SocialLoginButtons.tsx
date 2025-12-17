@@ -10,20 +10,18 @@ type ProviderAction = "login" | "signup";
 const SocialLoginButtons = ({
   provider,
   action,
+  onClick,
 }: {
   provider: Provider;
   action: ProviderAction;
+  onClick: () => void;
 }) => {
   const isGoogle: boolean = provider === "google";
   const isFacebook: boolean = provider === "facebook";
   const isApple: boolean = provider === "apple";
   return (
     <button
-      onClick={() => {
-        if (isGoogle) signIn("google");
-        if (isFacebook) signIn("facebook");
-        if (isApple) signIn("apple");
-      }}
+      onClick={onClick}
       className="social-btn-txt flex items-center justify-center gap-3 bg-gray-100 rounded-full py-4 hover:bg-gray-200"
     >
       <Image

@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -7,7 +8,7 @@ import bcrypt from "bcrypt";
 import { encode } from "next-auth/jwt";
 
 type CredentialsInput = {
-  email?: string; // used as email or username identifier from form
+  email?: string;
   password?: string;
   name?: string;
   username?: string;
@@ -31,6 +32,10 @@ const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
     }),
 
     CredentialsProvider({
@@ -133,11 +138,23 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ user }) {
+      if (!user || !user.isActive) {
+        return "/login?error=inactive";
+      }
+      return true;
+    },
+
     async jwt({ token, user }) {
-      if (user) {
+      if (!user || !user.isActive) {
+        /*TODO: Add proper logic with proper message  */
+        throw new Error("Account is inactive");
+      } else {
         token.id = user.id;
         token.username = user.username;
+        token.email = user.email;
       }
+
       return token;
     },
     async session({ session, token }) {
