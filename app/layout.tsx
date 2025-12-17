@@ -3,7 +3,8 @@ import Navbar from "./Navbar";
 import "@/app/globals.css";
 import "@/lib/utils/string.extensions";
 import { cookies } from "next/headers";
-import { Providers } from "./providers";
+import { Providers } from "./providers/providers";
+import { GlobalDrawer } from "./components/drawer/GlobalDrawer";
 
 export const metadata: Metadata = {
   title: "Quizzy",
@@ -26,6 +27,7 @@ export default async function RootLayout({
         <Providers>
           <Navbar />
           <div className="flex ">{children}</div>
+          <GlobalDrawer />
         </Providers>
       </body>
     </html>
