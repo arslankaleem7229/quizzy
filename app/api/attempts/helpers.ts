@@ -1,40 +1,9 @@
-import { localizationWithQuestionsInclude, LocalizationWithQuestions } from "@/lib/types/api";
 import prisma from "@/prisma/client";
-import {
-  Prisma,
-  QuestionType,
-} from "@/app/generated/prisma/client";
+import { Prisma, QuestionType } from "@/app/generated/prisma/client";
 
 export type QuestionWithOptions = Prisma.QuestionGetPayload<{
   include: { options: true };
 }>;
-
-export async function findLocalizationForAttempt(
-  quizId: string,
-  language?: string
-): Promise<LocalizationWithQuestions | null> {
-  const preferred = language
-    ? await prisma.quizLocalization.findFirst({
-        where: { quizId, language },
-        include: localizationWithQuestionsInclude,
-      })
-    : null;
-
-  if (preferred) return preferred;
-
-  const english = await prisma.quizLocalization.findFirst({
-    where: { quizId, language: "en" },
-    include: localizationWithQuestionsInclude,
-  });
-
-  if (english) return english;
-
-  return prisma.quizLocalization.findFirst({
-    where: { quizId },
-    include: localizationWithQuestionsInclude,
-    orderBy: { language: "asc" },
-  });
-}
 
 export function evaluateAnswerCorrectness(
   question: QuestionWithOptions,
@@ -87,7 +56,7 @@ export async function calculateAttemptStats(
       select: { pointsEarned: true, questionId: true },
     }),
     prisma.question.findMany({
-      where: { localization: { quizId, language } },
+      where: { localization: { quizId: quizId, language: language } },
       select: { id: true, points: true },
     }),
   ]);

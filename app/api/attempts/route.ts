@@ -6,15 +6,16 @@ import {
   AttemptDetailResponse,
   attemptWithAnswersInclude,
   AttemptsResponse,
+  localizationWithQuestionsInclude,
 } from "@/lib/types/api";
 import { AttemptStatus } from "@/app/generated/prisma/client";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
-import { calculateAttemptStats, findLocalizationForAttempt } from "./helpers";
+import { calculateAttemptStats } from "./helpers";
 
 const startAttemptSchema = z.object({
   quizId: z.string().min(1),
   language: z.string().min(1).optional(),
-  forceNew: z.boolean().optional(),
+  isNew: z.boolean().optional().default(true),
 });
 
 export async function GET(request: NextRequest) {
@@ -25,7 +26,12 @@ export async function GET(request: NextRequest) {
   const statusParam = searchParams.get("status");
   const quizId = searchParams.get("quizId") ?? undefined;
 
-  if (statusParam && !Object.values(AttemptStatus).includes(statusParam as any)) {
+  if (
+    statusParam &&
+    !Object.values(AttemptStatus).includes(
+      statusParam as "IN_PROGRESS" | "COMPLETED" | "CANCELLED"
+    )
+  ) {
     return NextResponse.json<AttemptsResponse>(
       {
         success: false,
@@ -66,7 +72,9 @@ export async function POST(request: NextRequest) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
-  const parsed = startAttemptSchema.safeParse(await request.json());
+  const req = await request.json();
+  console.log(req);
+  const parsed = startAttemptSchema.safeParse(req);
 
   if (!parsed.success) {
     return NextResponse.json<AttemptDetailResponse>(
@@ -120,10 +128,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const localization = await findLocalizationForAttempt(
-      quiz.id,
-      data.language
-    );
+    const localization = await prisma.quizLocalization.findUnique({
+      where: {
+        quizId_language: {
+          quizId: quiz.id,
+          language: data.language ?? "en",
+        },
+      },
+      include: localizationWithQuestionsInclude,
+    });
 
     if (!localization) {
       return NextResponse.json<AttemptDetailResponse>(
@@ -135,31 +148,38 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (data.forceNew) {
-      await prisma.attempt.updateMany({
-        where: {
-          userId,
-          quizId: quiz.id,
-          status: AttemptStatus.IN_PROGRESS,
-        },
-        data: { status: AttemptStatus.CANCELLED },
-      });
-    }
+    // if (data.isNew) {
+    //   await prisma.attempt.updateMany({
+    //     where: {
+    //       userId,
+    //       quizId: quiz.id,
+    //       language: data.language ?? "en",
+    //       status: AttemptStatus.IN_PROGRESS,
+    //     },
+    //     data: { status: AttemptStatus.CANCELLED },
+    //   });
+    // }
 
     const existing = await prisma.attempt.findFirst({
       where: {
         userId,
         quizId: quiz.id,
-        language: localization.language,
+        language: data.language,
         status: AttemptStatus.IN_PROGRESS,
       },
       include: attemptWithAnswersInclude,
       orderBy: { updatedAt: "desc" },
     });
 
-    if (existing && !data.forceNew) {
+    if (existing) {
       return NextResponse.json<AttemptDetailResponse>(
-        { success: true, data: { attempt: existing, localization } },
+        {
+          success: true,
+          data: {
+            attempt: existing,
+            localization: localization,
+          },
+        },
         { status: 200 }
       );
     }
@@ -171,7 +191,7 @@ export async function POST(request: NextRequest) {
 
     const attempt = await prisma.attempt.create({
       data: {
-        userId,
+        userId: userId,
         quizId: quiz.id,
         language: localization.language,
         status: AttemptStatus.IN_PROGRESS,

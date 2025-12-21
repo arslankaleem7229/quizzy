@@ -11,17 +11,16 @@ export async function GET(
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
+  const language = request.nextUrl.searchParams.get("language") || "en";
+
   try {
     const quiz = await prisma.quiz.findUnique({
       where: { id: id },
-      // , localizations: { every: { language: "en" } }
       include: {
         ...quizWithLocalizationInclude,
         localizations: {
           ...quizWithLocalizationInclude.localizations,
-          where: {
-            language: "en",
-          },
+          where: { language: language },
         },
       },
     });

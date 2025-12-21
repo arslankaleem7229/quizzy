@@ -5,11 +5,11 @@ import recentAttemptSchema from "./recent.schema";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
 import { AttemptStatus } from "@/app/generated/prisma/client";
 import {
+  localizationWithQuestionsInclude,
   recentAttemptInclude,
   RecentItemResponse,
   RecentListResponse,
 } from "@/lib/types/api";
-import { findLocalizationForAttempt } from "../attempts/helpers";
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
 
   const userId = auth.token.id;
   const payload = parsed.data;
-  const targetStatus = payload.status ?? "IN_PROGRESS";
+  const targetStatus = payload.status ?? AttemptStatus.IN_PROGRESS;
 
   if (!userId) {
     return NextResponse.json<RecentItemResponse>(
@@ -128,11 +128,25 @@ export async function POST(request: NextRequest) {
         { status: 403 }
       );
     }
-
-    const localization = await findLocalizationForAttempt(
-      quiz.id,
-      payload.language
-    );
+    let localization;
+    try {
+      const quizId = payload.quizId;
+      localization = await prisma.quizLocalization.findFirst({
+        where: { quizId: quizId, language: payload.language ?? "en" },
+        include: localizationWithQuestionsInclude,
+      });
+    } catch (error) {
+      return NextResponse.json<RecentItemResponse>(
+        {
+          success: false,
+          error: {
+            message: "Quiz localization not found",
+            code: "NOT_FOUND",
+          },
+        },
+        { status: 404 }
+      );
+    }
 
     if (!localization) {
       return NextResponse.json<RecentItemResponse>(

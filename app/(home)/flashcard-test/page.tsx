@@ -1,6 +1,8 @@
 // TODO: cleanup the stuff after finishing backend. Many components named `Flashcard` making it difficult for dev and making bad routing names
 "use client";
 
+// TODO: User progress is still incomplete
+
 import { useState } from "react";
 import { TestFlashcard } from "./components/TestFlashcard";
 import FlashcardNavButton from "./components/FlashcardNavButton";
