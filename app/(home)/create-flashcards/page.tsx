@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
-
+import { useRouter } from "next/navigation";
 import {
   HiOutlinePlus,
   HiOutlineLockClosed,
@@ -14,9 +14,25 @@ import {
 } from "react-icons/hi2";
 import SmartAssistPanel from "./SmartAssistPanel";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import SortableCard from "./SortableCard";
+import SortableCard, { FlashcardCard } from "./SortableCard";
+import { QuizResponse } from "@/lib/types/api";
 
-const cardTemplate = () => ({ id: Math.random().toString(36).slice(2, 10) });
+const DEFAULT_LANGUAGE = "en";
+
+const createCard = (): FlashcardCard => ({
+  id: Math.random().toString(36).slice(2, 10),
+  term: "",
+  definition: "",
+  hint: "",
+  explanation: "",
+});
+
+const createSlug = (value: string) =>
+  value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || value.trim();
 
 type IconComponent = React.ComponentType<{ className?: string }>;
 
@@ -24,30 +40,67 @@ const ActionIcon = ({
   icon: Icon,
   label,
   onClick,
+  disabled = false,
 }: {
   icon: IconComponent;
   label: string;
   onClick?: () => void;
+  disabled?: boolean;
 }) => (
   <button
-    className="flex h-10 w-10 items-center justify-center rounded-full bg-(--capsule) font-bold transition hover:bg-[#262f55] hover:text-white"
+    className={`flex h-10 w-10 items-center justify-center rounded-full bg-(--capsule) font-bold transition hover:bg-[#262f55] hover:text-white ${
+      disabled ? "opacity-50 cursor-not-allowed hover:bg-(--capsule)" : ""
+    }`}
     aria-label={label}
     type="button"
     onClick={onClick}
+    disabled={disabled}
   >
     <Icon className="h-6 w-6" />
   </button>
 );
 
 const CreateFlashcardsPage = () => {
-  const [cards, setCards] = useState([cardTemplate(), cardTemplate()]);
+  const router = useRouter();
+  const [cards, setCards] = useState<FlashcardCard[]>(() => [
+    createCard(),
+    createCard(),
+  ]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSmartAssistOpen, setIsSmartAssistOpen] = useState(true);
 
-  const addCard = () => setCards((prev) => [...prev, cardTemplate()]);
+  const addCard = () => setCards((prev) => [...prev, createCard()]);
   const removeCard = (id: string) => {
+    setError(null);
     setCards((prev) =>
       prev.length > 1 ? prev.filter((card) => card.id !== id) : prev
     );
+  };
+
+  const updateCard = (id: string, updates: Partial<FlashcardCard>) => {
+    setError(null);
+    setCards((prev) =>
+      prev.map((card) => (card.id === id ? { ...card, ...updates } : card))
+    );
+  };
+
+  const clearCards = () => {
+    setError(null);
+    setCards([createCard(), createCard()]);
+  };
+
+  const shuffleCards = () => {
+    setCards((prev) => {
+      const next = [...prev];
+      for (let i = next.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [next[i], next[j]] = [next[j], next[i]];
+      }
+      return next;
+    });
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -62,6 +115,113 @@ const CreateFlashcardsPage = () => {
 
     setCards((prev) => arrayMove(prev, oldIndex, newIndex));
   };
+
+  const validateCards = () => {
+    const normalizedCards = cards
+      .map((card) => ({
+        ...card,
+        term: card.term.trim(),
+        definition: card.definition.trim(),
+        hint: card.hint?.trim(),
+        explanation: card.explanation?.trim(),
+      }))
+      .filter((card) => card.term || card.definition);
+
+    if (!title.trim()) {
+      return { isValid: false, message: "Please add a title for your set." };
+    }
+
+    if (normalizedCards.length === 0) {
+      return { isValid: false, message: "Add at least one flashcard." };
+    }
+
+    if (normalizedCards.some((card) => !card.term || !card.definition)) {
+      return {
+        isValid: false,
+        message: "Every card needs both a term and a definition.",
+      };
+    }
+
+    return { isValid: true, cards: normalizedCards };
+  };
+
+  const handleCreate = async (shouldPractice: boolean) => {
+    if (isSubmitting) return;
+
+    const validation = validateCards();
+    if (!validation.isValid) {
+      setError(validation.message ?? "Check your flashcards and try again.");
+      return;
+    }
+
+    const payload = {
+      title: title.trim(),
+      description: description.trim() || undefined,
+      language: DEFAULT_LANGUAGE,
+      slug: createSlug(title.trim()),
+      isPublished: true,
+      questions:
+        validation.cards?.map((card) => ({
+          term: card.term,
+          definition: card.definition,
+          questionType: "SINGLE_CHOICE" as const,
+          ...(card.hint ? { hint: card.hint } : {}),
+          ...(card.explanation ? { explanation: card.explanation } : {}),
+        })) ?? [],
+    };
+
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/quizz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+
+      const result: QuizResponse = await res.json();
+
+      if (!result.success) {
+        throw new Error(result.error.message);
+      }
+
+      const quizId = result.data.id;
+      const destination = shouldPractice
+        ? `/flashcard-set/${quizId}#practice`
+        : `/flashcard-set/${quizId}`;
+
+      router.push(destination);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message || "Failed to create flashcard set"
+          : "Failed to create flashcard set"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const trimmedTitle = title.trim();
+  const normalizedCards = cards
+    .map((card) => ({
+      term: card.term.trim(),
+      definition: card.definition.trim(),
+    }))
+    .filter((card) => card.term || card.definition);
+  const canSubmit =
+    trimmedTitle.length > 0 &&
+    normalizedCards.length > 0 &&
+    normalizedCards.every((card) => card.term && card.definition) &&
+    !isSubmitting;
+  const disableActions = isSubmitting || cards.length === 0;
 
   return (
     <main className="w-full min-h-screen bg-(--background) text-(--textColor)">
@@ -80,27 +240,46 @@ const CreateFlashcardsPage = () => {
               <div className="sm:flex gap-3 shrink-0">
                 <button
                   type="button"
-                  className="sm:block hidden rounded-full bg-(--capsule) px-6 py-3 text-sm font-medium transition hover:bg-(--cardColorHover)"
+                  className="sm:block hidden rounded-full bg-(--capsule) px-6 py-3 text-sm font-medium transition hover:bg-(--cardColorHover) disabled:opacity-60"
+                  onClick={() => handleCreate(false)}
+                  disabled={!canSubmit}
                 >
-                  Create
+                  {isSubmitting ? "Creating..." : "Create"}
                 </button>
                 <button
                   type="button"
-                  className="rounded-full btn-primary  px-6 py-3 text-sm font-medium text-white transition"
+                  className="rounded-full btn-primary  px-6 py-3 text-sm font-medium text-white transition disabled:opacity-60"
+                  onClick={() => handleCreate(true)}
+                  disabled={!canSubmit}
                 >
-                  Create and practice
+                  {isSubmitting ? "Creating..." : "Create and practice"}
                 </button>
               </div>
             </div>
+            {error && (
+              <p className="mb-2 text-sm text-red-400">{error}</p>
+            )}
             {/* title and desc */}
             <div className="space-y-2">
               <input
                 placeholder="Title"
+                value={title}
+                onChange={(event) => {
+                  setTitle(event.target.value);
+                  if (error) setError(null);
+                }}
+                disabled={isSubmitting}
                 className="w-full rounded-lg border bg-(--cardColor) p-4 text-base font-normal border-transparent focus:outline-none focus:ring-[#a8b1ff] focus:ring-2 "
               />
               <textarea
                 placeholder="Add a description..."
                 rows={3}
+                value={description}
+                onChange={(event) => {
+                  setDescription(event.target.value);
+                  if (error) setError(null);
+                }}
+                disabled={isSubmitting}
                 className="w-full rounded-lg border border-transparent bg-(--cardColor) p-4 text-base focus:outline-none focus:ring-[#a8b1ff] focus:ring-2 resize-none"
               />
             </div>
@@ -142,8 +321,18 @@ const CreateFlashcardsPage = () => {
 
                 <div className="flex items-center gap-2">
                   <ActionIcon icon={HiOutlineCog6Tooth} label="Settings" />
-                  <ActionIcon icon={HiOutlineArrowsRightLeft} label="Shuffle" />
-                  <ActionIcon icon={HiOutlineTrash} label="Delete all" />
+                  <ActionIcon
+                    icon={HiOutlineArrowsRightLeft}
+                    label="Shuffle"
+                    onClick={shuffleCards}
+                    disabled={disableActions || cards.length < 2}
+                  />
+                  <ActionIcon
+                    icon={HiOutlineTrash}
+                    label="Delete all"
+                    onClick={clearCards}
+                    disabled={disableActions}
+                  />
                 </div>
               </div>
             </div>
@@ -161,6 +350,8 @@ const CreateFlashcardsPage = () => {
                       card={card}
                       index={index}
                       removeCard={removeCard}
+                      onChange={updateCard}
+                      disabled={isSubmitting}
                     />
                   ))}
                 </div>
@@ -172,7 +363,8 @@ const CreateFlashcardsPage = () => {
               <button
                 type="button"
                 onClick={addCard}
-                className="rounded-full bg-(--capsule) px-8 py-3 text-base font-semibold transition hover:bg-[#3a4173]"
+                disabled={isSubmitting}
+                className="rounded-full bg-(--capsule) px-8 py-3 text-base font-semibold transition hover:bg-[#3a4173] disabled:opacity-60"
               >
                 Add a card
               </button>

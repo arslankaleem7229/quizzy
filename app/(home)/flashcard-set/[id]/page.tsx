@@ -18,17 +18,27 @@ const studyModes = [
   { id: "match", label: "Match" },
 ];
 
-export default async function FlashcardSetPage(context: {
+export default async function FlashcardSetPage({
+  params,
+  searchParams,
+}: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ language?: string }>;
 }) {
-  const { id } = await context.params;
-  const res = await fetch(process.env.APP_URL + `/api/quizz/${id}`, {
-    cache: "no-store",
-    credentials: "include",
-    headers: {
-      cookie: (await cookies()).toString(),
-    },
-  });
+  const language = (await searchParams).language ?? "en";
+  const { id } = await params;
+
+  const cookieHeader = (await cookies()).toString();
+  const res = await fetch(
+    process.env.APP_URL + `/api/quizz/${id}?language=${language}`,
+    {
+      cache: "no-store",
+      credentials: "include",
+      headers: {
+        cookie: cookieHeader,
+      },
+    }
+  );
 
   if (!res.ok) throw new Error(`Failed to load quizzes ${res.body}`);
 
@@ -36,6 +46,27 @@ export default async function FlashcardSetPage(context: {
 
   if (response.success) {
     const quiz = response.data;
+    const localization = quiz.localizations[0];
+
+    if (localization) {
+      try {
+        const result = await fetch(process.env.APP_URL + "/api/attempts", {
+          method: "POST",
+          cache: "no-store",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            // cookie: cookieHeader,
+          },
+          body: JSON.stringify({ quizId: quiz.id, language: language }),
+        });
+
+        console.log(await result.json());
+      } catch (error) {
+        console.error("Failed to log recent attempt", error);
+      }
+    }
+
     return (
       <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor) pb-10">
         <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
@@ -95,9 +126,7 @@ const RemainingSection = ({
       <div className="space-y-4">
         {questions.map((question) => {
           const hasAttachements = question.attachments.length > 0;
-          if (hasAttachements) {
-            console.log(question);
-          }
+
           const questionImages = question.attachments.filter(
             (a) => a.questionId
           );

@@ -7,16 +7,28 @@ import {
   HiOutlineTrash,
 } from "react-icons/hi2";
 
+export type FlashcardCard = {
+  id: string;
+  term: string;
+  definition: string;
+  hint?: string;
+  explanation?: string;
+};
+
 interface SortableCardProps {
-  card: { id: string };
+  card: FlashcardCard;
   index: number;
   removeCard: (id: string) => void;
+  onChange: (id: string, updates: Partial<FlashcardCard>) => void;
+  disabled?: boolean;
 }
 
 export default function SortableCard({
   card,
   index,
   removeCard,
+  onChange,
+  disabled = false,
 }: SortableCardProps) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: card.id });
@@ -61,6 +73,7 @@ export default function SortableCard({
             className="flex h-5 w-5"
             onClick={() => removeCard(card.id)}
             aria-label="Remove card"
+            disabled={disabled}
           >
             <HiOutlineTrash className="h-5 w-5" />
           </button>
@@ -71,6 +84,11 @@ export default function SortableCard({
         <div className="flex-1">
           <input
             placeholder="Enter term"
+            value={card.term}
+            onChange={(event) =>
+              onChange(card.id, { term: event.target.value })
+            }
+            disabled={disabled}
             className={`w-full rounded-lg border border-transparent 
         ${
           current === "light" ? "bg-(--cardColor)" : "bg-(--background)"
@@ -83,6 +101,11 @@ export default function SortableCard({
           <div className="flex-1">
             <input
               placeholder="Enter definition"
+              value={card.definition}
+              onChange={(event) =>
+                onChange(card.id, { definition: event.target.value })
+              }
+              disabled={disabled}
               className={`w-full rounded-lg border border-transparent 
         ${
           current === "light" ? "bg-(--cardColor)" : "bg-(--background)"

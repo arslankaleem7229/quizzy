@@ -115,6 +115,7 @@ model Quiz {
 model QuizLocalization {
   id            String @id @default(cuid())
   quizId        String @map("quiz_id")
+  // TODO: Add language enums for better query handling
   language      String @default("en")
   title         String
   description   String
