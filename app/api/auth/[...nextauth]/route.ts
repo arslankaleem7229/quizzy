@@ -6,6 +6,8 @@ import prisma from "@/prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { encode } from "next-auth/jwt";
+import { getUserWithPreference } from "@/lib/types/api";
+import { UserRole } from "@/app/generated/prisma";
 
 type CredentialsInput = {
   email?: string;
@@ -13,6 +15,7 @@ type CredentialsInput = {
   name?: string;
   username?: string;
   dob?: string;
+  role: UserRole;
   action?: "login" | "signup";
 };
 
@@ -99,6 +102,7 @@ const authOptions: NextAuthOptions = {
               username: username || identifier,
               dob: dobDate,
               hashedPassword,
+              type: "student",
             },
           });
 
@@ -107,7 +111,7 @@ const authOptions: NextAuthOptions = {
 
         const user = await prisma.user.findFirst({
           where: { OR: [{ email: identifier }, { username: identifier }] },
-          include: { accounts: true },
+          include: getUserWithPreference,
         });
 
         if (!user) {
@@ -146,10 +150,7 @@ const authOptions: NextAuthOptions = {
     },
 
     async jwt({ token, user }) {
-      if (!user || !user.isActive) {
-        /*TODO: Add proper logic with proper message  */
-        throw new Error("Account is inactive");
-      } else {
+      if (user) {
         token.id = user.id;
         token.username = user.username;
         token.email = user.email;
