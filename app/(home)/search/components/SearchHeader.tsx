@@ -1,5 +1,3 @@
-import React from "react";
-
 const tabs = [
   "All results",
   "Flashcard sets",
@@ -11,16 +9,24 @@ const tabs = [
   "Classes",
 ];
 
-const SearchHeader = () => {
-  const query = "sajnasd";
+const SearchHeader = ({ query, total }: { query: string; total: number }) => {
   return (
     <div className="space-y-4">
-      <p className="text-lg text-(--grayText)">
-        Results for{" "}
-        <span className="font-semibold text-(--forground)">
-          &quot;{query}&quot;
-        </span>
-      </p>
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <p className="text-lg text-(--grayText)">
+          {query ? (
+            <>
+              {total} results for
+              <span className="font-semibold text-(--forground)">
+                &quot;{query}&quot;
+              </span>
+            </>
+          ) : (
+            "Search for flashcards, tests and more"
+          )}
+        </p>
+      </div>
+
       <div className="flex justify-between text-sm border-(--grayText) border-b-2 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {tabs.map((tab) => (
           <button
