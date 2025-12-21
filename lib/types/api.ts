@@ -50,7 +50,7 @@ export const localizationWithQuestionsInclude = {
   questions: {
     include: {
       options: {
-        include: { attachments: {} },
+        include: { attachments: true },
         orderBy: { orderIndex: "asc" as const },
       },
       attachments: true,
@@ -157,14 +157,31 @@ export const recentAttemptInclude = {
           language: true,
           title: true,
           description: true,
+          questionCount: true,
         },
       },
     },
   },
 } satisfies Prisma.AttemptInclude;
 
-type RecentAttempt = Prisma.AttemptGetPayload<{
+export type RecentAttempt = Prisma.AttemptGetPayload<{
   include: typeof recentAttemptInclude;
+}>;
+
+export const searchQuizInclude = {
+  quiz: {
+    select: {
+      id: true,
+      slug: true,
+      totalQuestions: true,
+
+      createdBy: { select: userBasics },
+    },
+  },
+} satisfies Prisma.QuizLocalizationInclude;
+
+export type SearchQuizResult = Prisma.QuizLocalizationGetPayload<{
+  include: typeof searchQuizInclude;
 }>;
 
 //FOR BACKED ONLY
@@ -172,6 +189,7 @@ export type QuizResponse = ApiResponse<QuizWithLocalization>;
 export type QuizzesResponse = ApiResponse<QuizWithoutLocalization[]>;
 export type RecentListResponse = ApiResponse<RecentAttempt[]>;
 export type RecentItemResponse = ApiResponse<RecentAttempt>;
+export type SearchResponse = ApiResponse<SearchQuizResult[]>;
 export type AttemptDetailResponse = ApiResponse<{
   attempt: AttemptWithAnswers;
   localization: LocalizationWithQuestions;
