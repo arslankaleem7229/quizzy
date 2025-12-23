@@ -1,0 +1,383 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model User {
+  id             String    @id @default(cuid())
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime? @map("email_verified")
+  image          String?
+  images         String[]  @default([])
+  hashedPassword String?
+  username       String?   @unique
+  dob            DateTime?
+  role           UserRole  @default(STUDENT)
+  isActive       Boolean   @default(true)
+
+  accounts Account[]
+  sessions Session[]
+  quizzes  Quiz[]     @relation("QuizCreator")
+  attempts Attempt[]
+  reviews  Review[]
+  jobs     GenAIJob[]
+
+  createdAt            DateTime              @default(now()) @map("created_at")
+  updatedAt            DateTime              @updatedAt @map("updated_at")
+  notificationSettings NotificationSettings?
+  userPreferences      UserPreferences?
+
+  @@index([email])
+  @@index([username])
+  @@index([role, isActive])
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Quiz {
+  id          String @id @default(cuid())
+  slug        String @unique
+  createdById String @map("created_by_id")
+
+  createdBy     User               @relation("QuizCreator", fields: [createdById], references: [id])
+  localizations QuizLocalization[]
+  attempts      Attempt[]
+  reviews       Review[]
+  genAIJobs     GenAIJob[]
+
+  //for later usage for dashboard
+  isPublished    Boolean @default(false)
+  isActive       Boolean @default(true)
+  totalQuestions Int     @default(0)
+  totalAttempts  Int     @default(0)
+  avgRating      Float?  @default(0)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([slug])
+  @@index([createdById, isPublished])
+  @@index([isPublished, isActive])
+  @@index([avgRating])
+  @@map("quizzes")
+}
+
+// rather than sets for each language that causing querying difficult
+model QuizLocalization {
+  id            String @id @default(cuid())
+  quizId        String @map("quiz_id")
+  // TODO: Add language enums for better query handling
+  language      String @default("en")
+  title         String
+  description   String
+  questionCount Int    @default(0)
+
+  quiz      Quiz       @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  questions Question[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([quizId, language])
+  @@index([quizId, language])
+  @@index([language])
+  @@map("quiz_localizations")
+}
+
+model Question {
+  id             String       @id @default(cuid())
+  localizationId String       @map("localization_id")
+  questionText   String
+  questionType   QuestionType @map("question_type")
+  explanation    String?
+  hint           String?
+  hasAttachment  Boolean      @default(false) @map("has_attachment")
+
+  //for later on dahboards
+  points          Int  @default(1)
+  orderIndex      Int  @default(0) @map("order_index")
+  difficultyLevel Int? @default(1) @map("difficulty_level")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  localization QuizLocalization @relation(fields: [localizationId], references: [id], onDelete: Cascade)
+  options      QuestionOption[]
+  attachments  Attachment[]
+  answers      Answer[]
+
+  @@index([localizationId, orderIndex])
+  @@index([questionType])
+  @@map("questions")
+}
+
+model QuestionOption {
+  id            String  @id @default(cuid())
+  questionId    String  @map("question_id")
+  optionText    String
+  isCorrect     Boolean @default(false) @map("is_correct")
+  hasAttachment Boolean @default(false) @map("has_attachment")
+
+  orderIndex Int @default(autoincrement()) @map("order_index")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  question    Question     @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  attachments Attachment[]
+
+  @@index([questionId, orderIndex])
+  @@index([questionId, isCorrect])
+  @@map("question_options")
+}
+
+model Attachment {
+  id             String         @id @default(cuid())
+  url            String
+  fileName       String?        @map("file_name")
+  mimeType       String?        @map("mime_type")
+  fileSize       Int?           @map("file_size")
+  attachmentType AttachmentType @map("attachment_type")
+  questionId     String?        @map("question_id")
+  optionId       String?        @map("option_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  question Question?       @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  option   QuestionOption? @relation(fields: [optionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId])
+  @@index([optionId])
+  @@index([attachmentType])
+  @@map("attachments")
+}
+
+model Attempt {
+  id       String        @id @default(cuid())
+  userId   String        @map("user_id")
+  quizId   String        @map("quiz_id")
+  language String        @default("en")
+  status   AttemptStatus @default(IN_PROGRESS)
+
+  //for dashboard analytics
+  score      Int?
+  maxScore   Int?   @map("max_score")
+  percentage Float?
+  timeSpent  Int?   @map("time_spent")
+
+  startedAt   DateTime  @default(now()) @map("started_at")
+  completedAt DateTime? @map("completed_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz    Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  answers Answer[]
+
+  @@index([userId, status])
+  @@index([quizId, status])
+  @@index([userId, quizId, completedAt])
+  @@index([completedAt])
+  @@map("attempts")
+}
+
+model Answer {
+  id                String   @id @default(cuid())
+  attemptId         String   @map("attempt_id")
+  questionId        String   @map("question_id")
+  selectedOptionIds String[] @default([]) @map("selected_option_ids")
+
+  isCorrect    Boolean? @map("is_correct")
+  pointsEarned Int?     @default(0) @map("points_earned")
+
+  answeredAt DateTime @default(now()) @map("answered_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  attempt  Attempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, questionId])
+  @@index([attemptId])
+  @@index([questionId])
+  @@map("answers")
+}
+
+model Review {
+  id     String @id @default(cuid())
+  userId String @map("user_id")
+  quizId String @map("quiz_id")
+  rating Int    @default(0)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, quizId])
+  @@index([quizId, rating])
+  @@index([quizId, createdAt])
+  @@map("reviews")
+}
+
+model UserPreferences {
+  id       String @id @default(cuid())
+  userId   String @unique @map("user_id")
+  theme    Theme  @default(AUTO)
+  language String @default("en") @db.VarChar(10)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+model NotificationSettings {
+  id     String @id @default(cuid())
+  userId String @unique @map("user_id")
+
+  studyReminders   Boolean @default(true) @map("study_reminders")
+  streaksAndBadges Boolean @default(true) @map("streaks_and_badges")
+
+  featuresAndTips    Boolean @default(true) @map("features_and_tips")
+  salesAndPromotions Boolean @default(false) @map("sales_and_promotions")
+
+  emailFrequency EmailFrequency @default(DAILY) @map("email_frequency")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notification_settings")
+}
+
+model GenAIJob {
+  id          String    @id @default(uuid())
+  userId      String    @map("user_id")
+  status      JobStatus @default(PENDING)
+  title       String?
+  description String?
+  language    String?   @default("en")
+  inputText   String?   @map("input_text") @db.Text
+  fileName    String?   @map("file_name")
+  quizId      String?   @unique @map("quiz_id")
+  aiResponse  Json?     @map("ai_response")
+
+  errorMessage String? @map("error_message") @db.Text
+  retryCount   Int     @default(0) @map("retry_count")
+
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  startedAt   DateTime? @map("started_at")
+  completedAt DateTime? @map("completed_at")
+
+  quiz Quiz? @relation(fields: [quizId], references: [id], onDelete: SetNull)
+  user User  @relation(fields: [userId], references: [id])
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([status, createdAt])
+  @@map("gen_ai_job")
+}
+
+// all enums under this
+
+enum JobStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum EmailFrequency {
+  INSTANT
+  DAILY
+  WEEKLY
+  NEVER
+}
+
+enum Theme {
+  DARK
+  LIGHT
+  AUTO
+}
+
+enum AttachmentType {
+  QUESTION_IMAGE
+  OPTION_IMAGE
+  QUESTION_AUDIO
+  QUESTION_GIF
+  OPTION_GIF
+}
+
+enum QuestionType {
+  SINGLE_CHOICE
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+}
+
+enum UserRole {
+  STUDENT
+  TEACHER
+  ADMIN
+}
+
+enum AttemptStatus {
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
