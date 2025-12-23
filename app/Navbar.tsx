@@ -1,5 +1,5 @@
 "use client";
-import Logo from "./components/Logo";
+import Logo from "@/public/Quizzy.svg";
 import SearchField from "./components/inputs/SearchField";
 import NavbarUserButton from "./components/buttons/NavbarUserButton";
 import NavbarCreateButton from "./components/buttons/NavbarCreateButton";
@@ -7,6 +7,8 @@ import NavbarUpgradeButton from "./components/buttons/NavbarUpgradeButton";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
 import { User } from "next-auth";
+import Image from "next/image";
+import Link from "next/link";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -25,7 +27,9 @@ const Navbar = () => {
           } z-999`}
         >
           <div className="flex flex-1 md:flex-none shrink-0 gap-2 mr-4 xl:mr-0">
-            <Logo />
+            <Link href={"/"}>
+              <Image src={Logo} alt="logo" width={100} height={100} />
+            </Link>
             <div className="hidden lg:flex gap-2">
               <button className="btn-text">Study tools</button>
               <button className="btn-text">Subject areas</button>

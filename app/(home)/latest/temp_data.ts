@@ -1,20 +1,3 @@
-export const primaryNav = [
-  { label: "Home", icon: "/sidebar-icons/home.png", active: true },
-  { label: "Your library", icon: "/sidebar-icons/folder.png" },
-  { label: "Notifications", icon: "/sidebar-icons/bell.png" },
-];
-
-export const folders = [
-  { label: "New folder", icon: "/sidebar-icons/plus.png" },
-];
-
-export const quickLinks = [
-  { label: "Flashcards", icon: "/sidebar-icons/flash-cards.png" },
-  { label: "Study Guides", icon: "/sidebar-icons/study-guides.png" },
-  { label: "Practice Tests", icon: "/sidebar-icons/checklist.png" },
-  { label: "Expert solutions", icon: "/sidebar-icons/book.png" },
-];
-
 export const textbooks = [
   {
     title: "AQA GCSE Physics",

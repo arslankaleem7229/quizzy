@@ -59,18 +59,6 @@ export const localizationWithQuestionsInclude = {
   },
 } satisfies Prisma.QuizLocalizationInclude;
 
-export const attemptWithAnswersInclude = {
-  answers: true,
-  quiz: {
-    select: {
-      id: true,
-      slug: true,
-      createdById: true,
-    },
-  },
-  user: { select: userBasics },
-} satisfies Prisma.AttemptInclude;
-
 export const reviewWithUserInclude = {
   user: { select: userBasics },
 } satisfies Prisma.ReviewInclude;
@@ -105,6 +93,63 @@ export const getUserWithAccounts = {
   userPreferences: true,
 } satisfies Prisma.UserSelect;
 
+export const attemptWithAnswersInclude = {
+  answers: true,
+  quiz: {
+    select: {
+      id: true,
+      slug: true,
+      createdById: true,
+    },
+  },
+
+  user: { select: userBasics },
+} satisfies Prisma.AttemptInclude;
+
+export const getAttemptPayload = {
+  maxScore: true,
+  score: true,
+  language: true,
+  percentage: true,
+  answers: true,
+  quizId: true,
+  quiz: {
+    include: {
+      createdBy: true,
+    },
+  },
+} satisfies Prisma.AttemptSelect;
+
+export const recentAttemptInclude = {
+  ...attemptWithAnswersInclude,
+  quiz: {
+    select: {
+      id: true,
+      slug: true,
+      createdById: true,
+      localizations: {
+        select: {
+          language: true,
+          title: true,
+          description: true,
+          questionCount: true,
+        },
+      },
+    },
+  },
+} satisfies Prisma.AttemptInclude;
+
+export const searchQuizInclude = {
+  quiz: {
+    select: {
+      id: true,
+      slug: true,
+      totalQuestions: true,
+      createdBy: { select: userBasics },
+    },
+  },
+} satisfies Prisma.QuizLocalizationInclude;
+
 //FOR FRONT END ONLY
 
 export type UserBasic = Prisma.UserGetPayload<{
@@ -113,6 +158,10 @@ export type UserBasic = Prisma.UserGetPayload<{
 
 export type QuizWithLocalization = Prisma.QuizGetPayload<{
   include: typeof quizWithLocalizationInclude;
+}>;
+
+export type GetAttemptDetails = Prisma.AttemptGetPayload<{
+  include: typeof getAttemptPayload;
 }>;
 
 export type QuizWithoutLocalization = Prisma.QuizGetPayload<{
@@ -145,40 +194,9 @@ export type ReviewWithUser = Prisma.ReviewGetPayload<{
   include: typeof reviewWithUserInclude;
 }>;
 
-export const recentAttemptInclude = {
-  ...attemptWithAnswersInclude,
-  quiz: {
-    select: {
-      id: true,
-      slug: true,
-      createdById: true,
-      localizations: {
-        select: {
-          language: true,
-          title: true,
-          description: true,
-          questionCount: true,
-        },
-      },
-    },
-  },
-} satisfies Prisma.AttemptInclude;
-
 export type RecentAttempt = Prisma.AttemptGetPayload<{
   include: typeof recentAttemptInclude;
 }>;
-
-export const searchQuizInclude = {
-  quiz: {
-    select: {
-      id: true,
-      slug: true,
-      totalQuestions: true,
-
-      createdBy: { select: userBasics },
-    },
-  },
-} satisfies Prisma.QuizLocalizationInclude;
 
 export type SearchQuizResult = Prisma.QuizLocalizationGetPayload<{
   include: typeof searchQuizInclude;
@@ -190,10 +208,13 @@ export type QuizzesResponse = ApiResponse<QuizWithoutLocalization[]>;
 export type RecentListResponse = ApiResponse<RecentAttempt[]>;
 export type RecentItemResponse = ApiResponse<RecentAttempt>;
 export type SearchResponse = ApiResponse<SearchQuizResult[]>;
+export type GetAttemptResponse = ApiResponse<GetAttemptDetails>;
+
 export type AttemptDetailResponse = ApiResponse<{
   attempt: AttemptWithAnswers;
   localization: LocalizationWithQuestions;
 }>;
+
 export type AttemptsResponse = ApiResponse<AttemptWithAnswers[]>;
 export type ReviewResponse = ApiResponse<ReviewWithUser>;
 export type UserWithPreferenceResponse = ApiResponse<UserWithPreference>;

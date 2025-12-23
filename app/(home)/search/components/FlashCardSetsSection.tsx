@@ -48,9 +48,10 @@ const FlashCardSetsSection = ({
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {data.map((item, index) => {
             const isStatic = !("quiz" in item);
+
             const title = isStatic
               ? item.title
-              : item.title || item.quiz.slug.slugify();
+              : item.title || item.quiz.slug?.slugify();
             const terms = isStatic
               ? item.terms
               : item.questionCount ?? item.quiz.totalQuestions;
@@ -59,10 +60,12 @@ const FlashCardSetsSection = ({
               : item.quiz.createdBy.name ?? item.quiz.createdBy.username ?? "—";
             const role = isStatic
               ? item.authorRole
-              : item.quiz.createdBy.role ?? "";
+              : item.quiz.createdBy?.role ?? "";
             const href = isStatic
               ? "#"
-              : `/flashcard-set/${item.quiz.id}?language=${item.language}`;
+              : `/flashcard-set/${item.quiz.id}?language=${
+                  item.language ?? "en"
+                }`;
 
             return (
               <Link

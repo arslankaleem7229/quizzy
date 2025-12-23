@@ -1,5 +1,5 @@
 import { SpeakerWaveIcon, StarIcon } from "@heroicons/react/16/solid";
-import FlashcardTestPage from "../../flashcard-test/page";
+import FlashcardTestPage from "../../flashcard-test/[id]/page";
 import FlashcardTestHeader from "./../components/FlashcardTestHeader";
 import BreadCrumbs from "./../components/BreadCrumbs";
 import UserAvatarIcon from "./../components/UserAvatarIcon";
@@ -8,11 +8,17 @@ import FlashCardSetsSection from "../../search/components/FlashCardSetsSection";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import { QuizLocalization, QuizResponse } from "@/lib/types/api";
+import Link from "next/link";
 
 const studyModes = [
-  { id: "flashcards", label: "Flashcards", enabled: true },
-  { id: "learn", label: "Learn", enabled: true },
-  { id: "test", label: "Test", enabled: true },
+  {
+    id: "flashcards",
+    label: "Flashcards",
+    ref: "/flashcard-test/",
+    enabled: true,
+  },
+  { id: "learn", label: "Learn", ref: "/learn/", enabled: true },
+  { id: "test", label: "Test", enabled: false },
   { id: "blocks", label: "Blocks" },
   { id: "blast", label: "Blast" },
   { id: "match", label: "Match" },
@@ -56,7 +62,7 @@ export default async function FlashcardSetPage({
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            // cookie: cookieHeader,
+            cookie: cookieHeader,
           },
           body: JSON.stringify({ quizId: quiz.id, language: language }),
         });
@@ -75,18 +81,26 @@ export default async function FlashcardSetPage({
 
           <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
             {studyModes.map((mode) => (
-              <button
+              <Link
+                href={`${mode.ref}${quiz.id}`}
                 key={mode.id}
-                disabled={!mode.enabled}
-                className="rounded-lg bg-(--cardColor) p-5 font-medium tracking-wide transition hover:border-b-2 border-(--primary) disabled:bg-gray-700 disabled:hover:border-b-0"
+                aria-disabled={!mode.enabled}
+                className={`rounded-lg bg-(--cardColor) p-5 font-medium
+                tracking-wide transition border-b-2 border-transparent 
+                text-center
+                ${
+                  !mode.enabled
+                    ? "pointer-events-none hover:border-b-0 bg-gray-700"
+                    : "hover:border-(--primary)"
+                }`}
               >
                 {mode.label}
-              </button>
+              </Link>
             ))}
           </div>
 
           <FlashcardTestPage
-            questions={quiz.localizations[0].questions}
+            questionsProp={quiz.localizations[0].questions}
             classname=""
           />
 

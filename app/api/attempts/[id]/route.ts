@@ -5,67 +5,57 @@ import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import {
   AttemptDetailResponse,
   attemptWithAnswersInclude,
+  getAttemptPayload,
+  GetAttemptResponse,
+  localizationWithQuestionsInclude,
 } from "@/lib/types/api";
 import { AttemptStatus } from "@/app/generated/prisma/client";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
-import {
-  calculateAttemptStats,
-  findLocalizationForAttempt,
-} from "../helpers";
+import { calculateAttemptStats } from "../helpers";
 
 const updateAttemptSchema = z.object({
-  status: z.nativeEnum(AttemptStatus).optional(),
+  status: z.enum(AttemptStatus).optional(),
   timeSpent: z.number().int().nonnegative().optional(),
 });
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
+  const attemptId = (await params).id;
+
+  if (!attemptId) {
+    return NextResponse.json<GetAttemptResponse>(
+      {
+        success: false,
+        error: { message: "Attempt not found", code: "NOT_FOUND" },
+      },
+      { status: 404 }
+    );
+  }
+
   try {
-    const attempt = await prisma.attempt.findUnique({
-      where: { id: params.id },
-      include: attemptWithAnswersInclude,
+    const attempts = await prisma.attempt.findUnique({
+      where: {
+        id: attemptId,
+        userId: auth.token.id,
+      },
+      select: getAttemptPayload,
     });
 
-    if (!attempt || attempt.userId !== auth.token.id) {
-      return NextResponse.json<AttemptDetailResponse>(
-        {
-          success: false,
-          error: { message: "Attempt not found", code: "NOT_FOUND" },
-        },
-        { status: 404 }
-      );
-    }
-
-    const localization = await findLocalizationForAttempt(
-      attempt.quizId,
-      attempt.language
-    );
-
-    if (!localization) {
-      return NextResponse.json<AttemptDetailResponse>(
-        {
-          success: false,
-          error: { message: "Localization not found", code: "NOT_FOUND" },
-        },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json<AttemptDetailResponse>(
-      { success: true, data: { attempt, localization } },
+    return NextResponse.json<GetAttemptResponse>(
+      { success: true, data: attempts },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Failed to load attempt", error);
-    return NextResponse.json<AttemptDetailResponse>(
+    console.error("Failed to fetch attempts", error);
+    return NextResponse.json<GetAttemptResponse>(
       {
         success: false,
-        error: { message: "Failed to load attempt", code: "INTERNAL_ERROR" },
+        error: { message: "Failed to fetch attempts", code: "INTERNAL_ERROR" },
       },
       { status: 500 }
     );
@@ -74,10 +64,12 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
+
+  const language = request.nextUrl.searchParams.get("language") || "en";
 
   const parsed = updateAttemptSchema.safeParse(await request.json());
 
@@ -95,8 +87,13 @@ export async function PATCH(
   }
 
   try {
-    const attempt = await prisma.attempt.findUnique({
-      where: { id: params.id },
+    const attempt = await prisma.attempt.findFirst({
+      where: {
+        quizId: (await params).id,
+        language: language,
+        userId: auth.token.id,
+        status: AttemptStatus.IN_PROGRESS,
+      },
       include: attemptWithAnswersInclude,
     });
 
@@ -110,10 +107,15 @@ export async function PATCH(
       );
     }
 
-    const localization = await findLocalizationForAttempt(
-      attempt.quizId,
-      attempt.language
-    );
+    const localization = await prisma.quizLocalization.findUnique({
+      where: {
+        quizId_language: {
+          quizId: attempt.quizId,
+          language: language,
+        },
+      },
+      include: localizationWithQuestionsInclude,
+    });
 
     if (!localization) {
       return NextResponse.json<AttemptDetailResponse>(
@@ -128,7 +130,7 @@ export async function PATCH(
     const stats = await calculateAttemptStats(
       attempt.id,
       attempt.quizId,
-      localization.language
+      language
     );
 
     const nextStatus =
@@ -180,7 +182,10 @@ export async function PATCH(
     }
 
     return NextResponse.json<AttemptDetailResponse>(
-      { success: true, data: { attempt: updated, localization } },
+      {
+        success: true,
+        data: { attempt: updated, localization: localization },
+      },
       { status: 200 }
     );
   } catch (error) {
@@ -201,6 +206,8 @@ export async function DELETE(
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
+
+  const language = request.nextUrl.searchParams.get("language") || "en";
 
   try {
     const attempt = await prisma.attempt.findUnique({
@@ -223,14 +230,25 @@ export async function DELETE(
       include: attemptWithAnswersInclude,
     });
 
-    const localization = await findLocalizationForAttempt(
-      attempt.quizId,
-      attempt.language
-    );
+    const localization = await prisma.quizLocalization.findUnique({
+      where: {
+        quizId_language: {
+          quizId: attempt.quizId,
+          language: language,
+        },
+      },
+      include: localizationWithQuestionsInclude,
+    });
 
     return NextResponse.json<AttemptDetailResponse>(
       localization
-        ? { success: true, data: { attempt: updated, localization } }
+        ? {
+            success: true,
+            data: {
+              attempt: updated,
+              localization,
+            },
+          }
         : {
             success: false,
             error: { message: "Localization not found", code: "NOT_FOUND" },

@@ -5,13 +5,13 @@ import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import {
   AttemptDetailResponse,
   attemptWithAnswersInclude,
+  localizationWithQuestionsInclude,
 } from "@/lib/types/api";
 import { AttemptStatus } from "@/app/generated/prisma/client";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
 import {
   calculateAttemptStats,
   evaluateAnswerCorrectness,
-  findLocalizationForAttempt,
 } from "../../helpers";
 
 const answerSchema = z.object({
@@ -21,10 +21,12 @@ const answerSchema = z.object({
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
+
+  const language = request.nextUrl.searchParams.get("language") || "en";
 
   const parsed = answerSchema.safeParse(await request.json());
 
@@ -45,7 +47,7 @@ export async function POST(
 
   try {
     const attempt = await prisma.attempt.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
       include: attemptWithAnswersInclude,
     });
 
@@ -85,7 +87,10 @@ export async function POST(
       return NextResponse.json<AttemptDetailResponse>(
         {
           success: false,
-          error: { message: "Question not found for this attempt", code: "NOT_FOUND" },
+          error: {
+            message: "Question not found for this attempt",
+            code: "NOT_FOUND",
+          },
         },
         { status: 404 }
       );
@@ -159,10 +164,15 @@ export async function POST(
       });
     }
 
-    const localization = await findLocalizationForAttempt(
-      attempt.quizId,
-      attempt.language
-    );
+    const localization = await prisma.quizLocalization.findUnique({
+      where: {
+        quizId_language: {
+          quizId: attempt.quizId,
+          language: language,
+        },
+      },
+      include: localizationWithQuestionsInclude,
+    });
 
     if (!localization) {
       return NextResponse.json<AttemptDetailResponse>(

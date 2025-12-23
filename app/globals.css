@@ -6,7 +6,7 @@
 :root {
   --background: #0a092d;
   --foreground: #ffffff;
-  --primary: #4255ff;
+  --primary: #2293e5;
   --primaryHover: #423ed8;
   --cardColor: #2e3856;
   --cardColorHover: #586380;
@@ -17,7 +17,7 @@
 :root[data-theme="light"] {
   --background: #ffffff;
   --foreground: #0a092d;
-  --primary: #4255ff;
+  --primary: #2293e5;
   --primaryHover: #423ed8;
   --cardColor: #f6f7fb;
   --cardColorHover: #edeff4;
@@ -30,7 +30,7 @@
 :root[data-theme="dark"] {
   --background: #0a092d;
   --foreground: #ffffff;
-  --primary: #4255ff;
+  --primary: #2293e5;
   --primaryHover: #423ed8;
   --cardColor: #2e3856;
   --cardColorHover: #586380;

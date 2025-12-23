@@ -5,7 +5,6 @@ import prisma from "@/prisma/client";
 import {
   AttemptDetailResponse,
   attemptWithAnswersInclude,
-  AttemptsResponse,
   localizationWithQuestionsInclude,
 } from "@/lib/types/api";
 import { AttemptStatus } from "@/app/generated/prisma/client";
@@ -18,62 +17,11 @@ const startAttemptSchema = z.object({
   isNew: z.boolean().optional().default(true),
 });
 
-export async function GET(request: NextRequest) {
-  const auth = await verifyApiAuth(request);
-  if (!auth.authorized) return auth.response;
-
-  const { searchParams } = new URL(request.url);
-  const statusParam = searchParams.get("status");
-  const quizId = searchParams.get("quizId") ?? undefined;
-
-  if (
-    statusParam &&
-    !Object.values(AttemptStatus).includes(
-      statusParam as "IN_PROGRESS" | "COMPLETED" | "CANCELLED"
-    )
-  ) {
-    return NextResponse.json<AttemptsResponse>(
-      {
-        success: false,
-        error: { message: "Invalid status filter", code: "INVALID_QUERY" },
-      },
-      { status: 400 }
-    );
-  }
-
-  try {
-    const attempts = await prisma.attempt.findMany({
-      where: {
-        userId: auth.token.id,
-        ...(quizId ? { quizId } : {}),
-        ...(statusParam ? { status: statusParam as AttemptStatus } : {}),
-      },
-      orderBy: { updatedAt: "desc" },
-      include: attemptWithAnswersInclude,
-    });
-
-    return NextResponse.json<AttemptsResponse>(
-      { success: true, data: attempts },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Failed to fetch attempts", error);
-    return NextResponse.json<AttemptsResponse>(
-      {
-        success: false,
-        error: { message: "Failed to fetch attempts", code: "INTERNAL_ERROR" },
-      },
-      { status: 500 }
-    );
-  }
-}
-
 export async function POST(request: NextRequest) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
   const req = await request.json();
-  console.log(req);
   const parsed = startAttemptSchema.safeParse(req);
 
   if (!parsed.success) {
@@ -148,18 +96,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // if (data.isNew) {
-    //   await prisma.attempt.updateMany({
-    //     where: {
-    //       userId,
-    //       quizId: quiz.id,
-    //       language: data.language ?? "en",
-    //       status: AttemptStatus.IN_PROGRESS,
-    //     },
-    //     data: { status: AttemptStatus.CANCELLED },
-    //   });
-    // }
-
     const existing = await prisma.attempt.findFirst({
       where: {
         userId,
@@ -217,7 +153,10 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json<AttemptDetailResponse>(
-      { success: true, data: { attempt: hydratedAttempt, localization } },
+      {
+        success: true,
+        data: { attempt: hydratedAttempt, localization: localization },
+      },
       { status: 201 }
     );
   } catch (error) {

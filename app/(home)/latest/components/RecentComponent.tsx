@@ -1,4 +1,5 @@
 import { RecentAttempt } from "@/lib/types/api";
+import Link from "next/link";
 
 export default async function RecentComponent({
   recents,
@@ -38,15 +39,11 @@ export default async function RecentComponent({
             "en-US",
             { month: "short", day: "numeric" }
           );
-          // const meta = [
-          //  ,
-          //   termsCount ? `${termsCount} terms` : null,
-          //   formattedDate,
-          // ].filter((item): item is string => Boolean(item));
 
           return (
-            <div
+            <Link
               key={attempt.id}
+              href={`/flashcard-set/${attempt.quizId}`}
               className={`rounded-lg hover:bg-(--cardColorHover) px-3 py-2 transition duration-0`}
             >
               <div className="flex flex-row items-center gap-4">
@@ -92,7 +89,7 @@ export default async function RecentComponent({
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

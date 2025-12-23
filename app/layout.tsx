@@ -5,6 +5,7 @@ import "@/lib/utils/string.extensions";
 import { cookies } from "next/headers";
 import { Providers } from "./providers/providers";
 import { GlobalDrawer } from "./components/drawer/GlobalDrawer";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Quizzy",
@@ -24,9 +25,13 @@ export default async function RootLayout({
           isAuthed ? "bg-(--background)" : "bg-white"
         } text-black transition-colors`}
       >
+        <Script
+          src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"
+          strategy="afterInteractive"
+        />
         <Providers>
           <Navbar />
-          <div className="flex ">{children}</div>
+          <div className="flex pt-10 lg:pt-0">{children}</div>
           <GlobalDrawer />
         </Providers>
       </body>

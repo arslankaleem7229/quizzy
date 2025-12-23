@@ -1,5 +1,6 @@
 import prisma from "@/prisma/client";
 import { Prisma, QuestionType } from "@/app/generated/prisma/client";
+import { localizationWithQuestionsInclude } from "@/lib/types/api";
 
 export type QuestionWithOptions = Prisma.QuestionGetPayload<{
   include: { options: true };
