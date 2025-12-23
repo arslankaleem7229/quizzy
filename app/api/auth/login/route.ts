@@ -61,7 +61,7 @@ export async function POST(req: Request) {
         id: user.id,
         username: user.username,
         email: user.email,
-        type: "access_token",
+        role: user.role,
       },
       secret: process.env.NEXTAUTH_SECRET!,
       maxAge: 60 * 60 * 24 * 30,

@@ -67,7 +67,12 @@ const authOptions: NextAuthOptions = {
         },
         password: { label: "Password", type: "password" },
       },
+
       async authorize(credentials) {
+        if (!credentials) {
+          return null;
+        }
+
         const { email, password, name, username, dob, action } =
           credentials as CredentialsInput;
 
@@ -102,16 +107,25 @@ const authOptions: NextAuthOptions = {
               username: username || identifier,
               dob: dobDate,
               hashedPassword,
-              type: "student",
+              role: UserRole.STUDENT,
             },
           });
 
-          return newUser;
+          return {
+            id: newUser.id,
+            email: newUser.email,
+            username: newUser.username,
+            role: newUser.role,
+            isActive: newUser.isActive,
+          };
         }
 
         const user = await prisma.user.findFirst({
           where: { OR: [{ email: identifier }, { username: identifier }] },
-          include: getUserWithPreference,
+          select: {
+            hashedPassword: true,
+            ...getUserWithPreference,
+          },
         });
 
         if (!user) {
@@ -137,7 +151,13 @@ const authOptions: NextAuthOptions = {
           throw new Error("Wrong password");
         }
 
-        return user;
+        return {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+          role: user.role,
+          isActive: user.isActive,
+        };
       },
     }),
   ],
@@ -163,7 +183,7 @@ const authOptions: NextAuthOptions = {
         session.user = {
           id: token.id,
           username: token.username,
-          type: "student",
+          role: token.role,
           name: token.name ?? null,
           email: token.email ?? null,
           image: token.picture ?? null,
@@ -171,7 +191,7 @@ const authOptions: NextAuthOptions = {
       } else {
         session.user.id = token.id;
         session.user.username = token.username;
-        session.user.type = "student";
+        session.user.role = token.role;
       }
 
       if (process.env.NEXTAUTH_SECRET) {

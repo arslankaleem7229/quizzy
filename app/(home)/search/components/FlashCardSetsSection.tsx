@@ -58,6 +58,9 @@ const FlashCardSetsSection = ({
             const author = isStatic
               ? item.author
               : item.quiz.createdBy.name ?? item.quiz.createdBy.username ?? "—";
+            const url = isStatic
+              ? `/avatars/${(index % 20) + 1}.jpg`
+              : item.quiz.createdBy.image;
             const role = isStatic
               ? item.authorRole
               : item.quiz.createdBy?.role ?? "";
@@ -90,11 +93,7 @@ const FlashCardSetsSection = ({
                 <div className="mt-6 flex items-center justify-between gap-3">
                   <div className="flex min-w-0 flex-1 flex-row flex-nowrap items-center gap-3">
                     <div className="shrink-0 relative h-10 w-10 rounded-full overflow-clip">
-                      <Image
-                        src={`/avatars/${(index % 20) + 1}.jpg`}
-                        alt={author}
-                        fill
-                      />
+                      {url && <Image src={url} alt={author} fill />}
                     </div>
                     <div className="flex flex-col">
                       <p className="text-sm text-(--grayText) overflow-clip line-clamp-1">
