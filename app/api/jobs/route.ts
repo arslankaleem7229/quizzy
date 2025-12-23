@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const jobs = await prisma.genAIJob.findMany({
-      where: { userId },
+      where: { userId, status: "PENDING" },
       orderBy: { createdAt: "desc" },
       take: 20,
       select: {
@@ -23,6 +23,40 @@ export async function GET(req: NextRequest) {
         quizId: true,
         errorMessage: true,
       },
+    });
+
+    jobs.forEach((job) => {
+      if (job.status === "PROCESSING") {
+        global.io?.to(`user:${userId}`).emit("job-update", {
+          jobId: job.id,
+          status: "processing",
+          message: "Generating your quiz...",
+        });
+      }
+
+      if (job.status === "COMPLETED") {
+        global.io?.to(`user:${userId}`).emit("job-update", {
+          jobId: job.id,
+          status: "completed",
+          quizId: job.quizId,
+        });
+      }
+
+      if (job.status === "FAILED") {
+        global.io?.to(`user:${userId}`).emit("job-update", {
+          jobId: job.id,
+          status: "failed",
+          error: job.errorMessage,
+        });
+      }
+
+      if (job.status === "PENDING") {
+        global.io?.to(`user:${userId}`).emit("job-update", {
+          jobId: job.id,
+          status: "queued",
+          error: job.errorMessage,
+        });
+      }
     });
 
     return NextResponse.json({

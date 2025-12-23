@@ -50,7 +50,6 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
         <FlashCardSetsSection
           header={query ? "Results" : "Flashcard sets"}
           results={results}
-          query={query}
           isSearching={false}
         />
         {/* TODO: Change of schema for practce/flashcard/books/guides/questions */}

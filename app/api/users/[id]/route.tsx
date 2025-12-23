@@ -11,9 +11,7 @@ export async function GET(
   if (!auth.authorized) return auth.response;
 
   const user = await prisma.user.findUnique({
-    where: {
-      id: parseInt(params.id),
-    },
+    where: { id: params.id },
   });
 
   if (!user)
@@ -49,7 +47,7 @@ export async function PUT(
     return NextResponse.json(validation.error.issues, { status: 400 });
 
   const user = await prisma.user.findUnique({
-    where: { id: parseInt(params.id) },
+    where: { id: params.id },
   });
 
   if (!user)
@@ -85,7 +83,7 @@ export async function DELETE(
     return NextResponse.json(validation.error.issues, { status: 400 });
 
   const user = await prisma.user.findUnique({
-    where: { id: parseInt(params.id) },
+    where: { id: params.id },
   });
 
   if (!user)

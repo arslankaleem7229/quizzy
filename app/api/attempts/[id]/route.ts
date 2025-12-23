@@ -46,6 +46,16 @@ export async function GET(
       select: getAttemptPayload,
     });
 
+    if (!attempts) {
+      return NextResponse.json<GetAttemptResponse>(
+        {
+          success: false,
+          error: { message: "No attempt found", code: "NOT_FOUND" },
+        },
+        { status: 200 }
+      );
+    }
+
     return NextResponse.json<GetAttemptResponse>(
       { success: true, data: attempts },
       { status: 200 }

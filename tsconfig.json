@@ -36,9 +36,10 @@
     ".next",
     "build",
     "generated",
-    "app/api/seed/old.route.ts",
+    "app/api/seed",
     "lib/types/api-v0",
     "prisma/old_schema",
-    "gutter"
+    "gutter",
+    "app/api/process"
   ]
 }

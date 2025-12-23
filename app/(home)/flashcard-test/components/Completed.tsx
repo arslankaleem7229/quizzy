@@ -17,7 +17,7 @@ type CompletedProps = {
   completedCount?: number;
   remainingQuestion?: number;
   quizId: string | null | undefined;
-  attemptId: string | null | undefined;
+  attemptId?: string | null | undefined;
   onRestart?: () => void;
   onBack?: () => void;
 };

@@ -2,6 +2,7 @@ services:
   app:
     build: .
     container_name: quizzy-node
+    command: node server.ts
     working_dir: /app
     volumes:
       - .:/app
@@ -20,10 +21,21 @@ services:
       SHADOW_DATABASE_URL: postgres://postgres:password@localhost:5432/shadow_db
       NODE_ENV: development
 
-    command: node server.ts
-
     depends_on:
+      - redis
       - postgres
+
+  # worker:
+  #   build: .
+  #   container_name: worker
+  #   command: npx tsx worker/gen-ai-worker.ts
+
+  #   env_file:
+  #     - .env
+  #     - .env.docker
+  #   depends_on:
+  #     - redis
+  #     - postgres
 
   postgres:
     image: postgres:17
@@ -45,17 +57,6 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
-
-    # Redis UI (for demo visualization)
-  redis-commander:
-    image: rediscommander/redis-commander:latest
-    container_name: quizzy-redis-ui
-    environment:
-      - REDIS_HOSTS=local:redis:6379
-    ports:
-      - "8081:8081"
-    depends_on:
-      - redis
 
 volumes:
   postgres_data:

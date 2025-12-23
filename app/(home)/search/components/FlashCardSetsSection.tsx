@@ -1,24 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SearchQuizResult } from "@/lib/types/api";
-import { flashcardSets } from "../flashcardsdata";
 
 type FlashCardSetsSectionProps = {
   header?: string;
   results?: SearchQuizResult[];
   isSearching?: boolean;
-  query?: string;
 };
 
 const FlashCardSetsSection = ({
   header,
   results,
   isSearching = false,
-  query = "",
 }: FlashCardSetsSectionProps) => {
   const hasResults = (results?.length ?? 0) > 0;
-  const shouldShowStatic = !query && !hasResults;
-  const data = hasResults ? results! : shouldShowStatic ? flashcardSets : [];
+  const data = hasResults ? results! : [];
   const hasData = data.length > 0;
 
   return (
@@ -46,33 +42,18 @@ const FlashCardSetsSection = ({
 
       {hasData && (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {data.map((item, index) => {
-            const isStatic = !("quiz" in item);
-
-            const title = isStatic
-              ? item.title
-              : item.title || item.quiz.slug?.slugify();
-            const terms = isStatic
-              ? item.terms
-              : item.questionCount ?? item.quiz.totalQuestions;
-            const author = isStatic
-              ? item.author
-              : item.quiz.createdBy.name ?? item.quiz.createdBy.username ?? "—";
-            const url = isStatic
-              ? `/avatars/${(index % 20) + 1}.jpg`
-              : item.quiz.createdBy.image;
-            const role = isStatic
-              ? item.authorRole
-              : item.quiz.createdBy?.role ?? "";
-            const href = isStatic
-              ? "#"
-              : `/flashcard-set/${item.quiz.id}?language=${
-                  item.language ?? "en"
-                }`;
+          {data.map((item) => {
+            const title = item?.quiz.slug?.slugify();
+            const terms = item.quiz.totalQuestions;
+            const author =
+              item.quiz.createdBy.name ?? item.quiz.createdBy.username ?? "—";
+            const url = item.quiz.createdBy.image;
+            const role = item.quiz.createdBy?.role ?? "";
+            const href = `/flashcard-set/${item.quiz.id}`;
 
             return (
               <Link
-                key={isStatic ? item.id : index}
+                key={item.quiz.id}
                 href={href}
                 className="flex h-full min-h-[200px] flex-col rounded-lg border-(--grayText)/10 border-2 bg-(--cardColor) p-5 transition hover:-translate-0.5"
               >

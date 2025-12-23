@@ -15,3 +15,10 @@ OPTIONAL:
 - try free providers
 - Notifications
 - Mobile App
+
+docker stop $(docker ps -aq) && \  
+docker rm $(docker ps -aq) && \
+docker rmi -f $(docker images -aq) && \
+docker volume prune -f && \
+docker builder prune -a -f && \
+docker system prune -a --volumes -f

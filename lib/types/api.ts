@@ -30,6 +30,7 @@ export const userBasics = {
   name: true,
   username: true,
   image: true,
+  role: true,
 } satisfies Prisma.UserSelect;
 
 export const quizWithoutLocalizationInclude = {
@@ -114,7 +115,7 @@ export const getAttemptPayload = {
   answers: true,
   quizId: true,
   quiz: {
-    include: {
+    select: {
       createdBy: true,
     },
   },
@@ -161,7 +162,7 @@ export type QuizWithLocalization = Prisma.QuizGetPayload<{
 }>;
 
 export type GetAttemptDetails = Prisma.AttemptGetPayload<{
-  include: typeof getAttemptPayload;
+  select: typeof getAttemptPayload;
 }>;
 
 export type QuizWithoutLocalization = Prisma.QuizGetPayload<{
@@ -169,7 +170,7 @@ export type QuizWithoutLocalization = Prisma.QuizGetPayload<{
 }>;
 
 export type UserWithPreference = Prisma.UserGetPayload<{
-  include: typeof getUserWithPreference;
+  select: typeof getUserWithPreference;
 }>;
 
 export type UserPreferences = UserWithPreference["userPreferences"];
@@ -199,7 +200,7 @@ export type RecentAttempt = Prisma.AttemptGetPayload<{
 }>;
 
 export type SearchQuizResult = Prisma.QuizLocalizationGetPayload<{
-  include: typeof searchQuizInclude;
+  select: typeof searchQuizInclude;
 }>;
 
 //FOR BACKED ONLY

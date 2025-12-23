@@ -60,6 +60,7 @@ export async function POST(req: Request) {
         username: user.username,
         email: user.email,
         type: "Bearer",
+        role: user.role,
       },
       secret: process.env.NEXTAUTH_SECRET!,
       maxAge: 60 * 60 * 24 * 30, // 30 days

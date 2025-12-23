@@ -1,4 +1,4 @@
-import "@/src/workers/gen-ai-worker";
+import "@/lib/worker/gen-ai-worker";
 
 console.log("Worker process started");
 console.log("Process ID:", process.pid);

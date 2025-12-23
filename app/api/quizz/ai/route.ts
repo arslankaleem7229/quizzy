@@ -3,7 +3,7 @@ import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { QuizResponse } from "@/lib/types/api";
 import { readFileContent } from "@/lib/ai/openai";
-import { quizzGenQueue } from "@/lib/queue";
+import { getQuizzGenQueue } from "@/lib/worker/queue";
 
 type AiQuizPayload = {
   title?: string;
@@ -133,24 +133,23 @@ export async function POST(request: NextRequest) {
 
     console.log(`[API] Created job ${job.id} for user ${userId}`);
 
-    await quizzGenQueue.add(
-      "generate-quiz",
-      {
-        jobId: job.id,
-        userId,
-        title: payload.title,
-        description: payload.description,
-        language: payload.language || "en",
-        inputText: material,
-        fileName: payload.file?.name,
-      },
-      {
-        jobId: job.id,
-        priority: 1,
-      }
-    );
+    const queue = getQuizzGenQueue();
+    await queue.add("quizz-generation", {
+      jobId: job.id,
+      userId,
+      title: payload.title,
+      description: payload.description,
+      language: payload.language || "en",
+      inputText: material,
+      fileName: payload.file?.name,
+    });
 
     console.log(`[API] Job ${job.id} added to queue`);
+
+    global.io?.to(`user:${userId}`).emit("job-update", {
+      jobId: job.id,
+      status: "queued",
+    });
 
     return NextResponse.json(
       {

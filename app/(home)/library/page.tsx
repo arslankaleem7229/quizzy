@@ -3,7 +3,7 @@ import PopularTextbooks from "../latest/components/PopularTextbooks";
 import {
   SearchQuizResult,
   QuizzesResponse,
-  QuizWithoutLocalization,
+  SearchResponse,
 } from "@/lib/types/api";
 import ClassesSection from "../search/components/ClassesSection";
 import FlashCardSetsSection from "../search/components/FlashCardSetsSection";
@@ -24,12 +24,10 @@ const UserLibrary = async () => {
     });
 
     if (res.ok) {
-      const json: QuizzesResponse = await res.json();
+      const json: SearchResponse = await res.json();
 
       if (json.success) {
-        results = json.data.map((quiz) => {
-          return { quiz };
-        });
+        results = json.data ?? [];
       }
     }
   } catch (error) {
@@ -43,7 +41,6 @@ const UserLibrary = async () => {
         <FlashCardSetsSection
           header={"Flashcard sets"}
           results={results}
-          query={"query"}
           isSearching={false}
         />
         {/* TODO: Change of schema for practce/flashcard/books/guides/questions */}

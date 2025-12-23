@@ -14,7 +14,7 @@ const SocialLoginButtons = ({
 }: {
   provider: Provider;
   action: ProviderAction;
-  onClick: () => void;
+  onClick?: () => void;
 }) => {
   const isGoogle: boolean = provider === "google";
   const isFacebook: boolean = provider === "facebook";

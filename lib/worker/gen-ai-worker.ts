@@ -5,19 +5,23 @@ import { QuestionType, JobStatus, Prisma } from "@/app/generated/prisma";
 import { quizWithLocalizationInclude } from "@/lib/types/api";
 import { callOpenAI, slugify } from "@/lib/ai/openai";
 import type { Server } from "socket.io";
-import { GenAIJobData } from "@/lib/queue";
+import { GenAIJobData } from "@/lib/worker/queue";
 import { normalizeOptions } from "@/app/api/quizz/options.helper";
+import "dotenv/config";
 
 declare global {
   var io: Server | undefined;
 }
 
 const connection = new Redis({
-  host: process.env.REDIS_HOST || "localhost",
-  port: parseInt(process.env.REDIS_PORT || "6379"),
+  host: process.env.REDIS_HOST!,
+  port: parseInt(process.env.REDIS_PORT!),
   password: process.env.REDIS_PASSWORD,
   maxRetriesPerRequest: null,
 });
+
+console.log("Redis host:", process.env.REDIS_HOST);
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 connection.on("connect", () => {
   console.log("[Worker] Redis connected");
@@ -52,9 +56,8 @@ export const aiWorker = new Worker<GenAIJobData>(
           message: "Generating your quiz...",
         });
       } else {
-        console.log("FUCKed");
+        console.log("FUCKED");
       }
-
       console.log(`Calling AI API...`);
       const startTime = Date.now();
 

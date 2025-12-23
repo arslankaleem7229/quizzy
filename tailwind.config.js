@@ -2,14 +2,12 @@
 // Posted by insertcoin
 // Retrieved 2025-12-16, License - CC BY-SA 4.0
 
-module.exports = {
-  plugins: [],
-  content: [],
-  theme: {
-    extend: {
-      transitionProperty: {
-        width: "width",
-      },
+export const plugins = [];
+export const content = [];
+export const theme = {
+  extend: {
+    transitionProperty: {
+      width: "width",
     },
   },
 };

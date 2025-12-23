@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { socket } from "@/lib/socket";
 import { JobStatus, JobStatusBanner } from "./JobStatusSnackbar";
+import { getQuizzGenQueue } from "@/lib/worker/queue";
 
 const MAX_CHARACTERS = 100000;
 const DEFAULT_LANGUAGE = "en";
@@ -114,6 +115,7 @@ const GenerateByAI = () => {
         if (!res.ok) return;
 
         const data: JobsListResponse = await res.json();
+
         if (!data.success) return;
 
         const activeJob = data.data.find(
@@ -132,6 +134,7 @@ const GenerateByAI = () => {
           error: activeJob.errorMessage ?? undefined,
           quizId: activeJob.quizId ?? undefined,
         });
+
         socket.emit("subscribe-job", activeJob.id);
       } catch (err) {
         console.log(err);
