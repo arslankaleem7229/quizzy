@@ -1,22 +1,17 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { XIcon } from "lucide-react";
 import { useEffect } from "react";
+import EmailField from "../inputs/EmailField";
 
 interface FramerDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  title?: string;
 }
 
-export function FramerDrawer({
-  isOpen,
-  onClose,
-  children,
-  title,
-}: FramerDrawerProps) {
+export function FramerDrawer({ isOpen, onClose, children }: FramerDrawerProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -57,25 +52,14 @@ export function FramerDrawer({
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
             className="fixed inset-x-0 bottom-0 z-50 md:hidden"
           >
-            <div className="bg-white dark:bg-gray-900 rounded-t-3xl shadow-2xl max-h-[90vh] flex flex-col">
+            <div className="bg-(--background) rounded-t-3xl shadow-2xl max-h-[90vh] flex flex-col">
               <div className="flex justify-center pt-3 pb-2">
-                <div className="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full" />
+                <div className="w-12 h-1.5 bg-(--grayText) rounded-full" />
               </div>
 
-              {title && (
-                <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    {title}
-                  </h2>
-                  <button
-                    onClick={onClose}
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-              )}
-              <div className="flex-1 overflow-y-auto px-6 py-4">{children}</div>
+              <div className="flex-1 overflow-y-scroll px-6 py-4">
+                {children}
+              </div>
             </div>
           </motion.div>
 
@@ -87,22 +71,8 @@ export function FramerDrawer({
             className="hidden md:flex fixed inset-0 z-50 items-center justify-center p-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
-              {title && (
-                <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    {title}
-                  </h2>
-                  <button
-                    onClick={onClose}
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-              )}
-
-              <div className="flex-1 overflow-y-auto px-6 py-6">{children}</div>
+            <div className="bg-(--background) rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+              {children}
             </div>
           </motion.div>
         </>

@@ -11,6 +11,8 @@ import {
 import { useState } from "react";
 import { Spinner } from "@heroui/spinner";
 import { UserRole } from "@/app/generated/prisma";
+import { useDrawer } from "@/app/providers/DrawerProvider";
+import { XIcon } from "lucide-react";
 
 type props = {
   user: UserWithPreference;
@@ -37,6 +39,10 @@ type UpdateUserSettingsPayload = {
 export default function PersonalInfoSetting({ user }: props) {
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState(user);
+  const [error, setError] = useState<string | null | undefined>(null);
+  const [newUsername, setNewUsername] = useState<string | null>(null);
+
+  const { openDrawer, closeDrawer } = useDrawer();
 
   const { image, email, role, username, name, images } = currentUser;
   const userImage = image;
@@ -102,9 +108,11 @@ export default function PersonalInfoSetting({ user }: props) {
         setCurrentUser(result.data ?? user);
         return true;
       } else {
+        setError(result.error.message);
         throw new Error(result.error.message);
       }
     } catch (error) {
+      setError(error?.toString());
       console.log(error);
       return false;
     } finally {
@@ -165,6 +173,49 @@ export default function PersonalInfoSetting({ user }: props) {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleOpenUsername = () => {
+    openDrawer(
+      <div className="flex-1 overflow-y-auto px-6 py-6">
+        <div className="flex flex-col space-y-4 bg-(--background)">
+          <button
+            className="flex justify-end items-end"
+            onClick={() => closeDrawer()}
+          >
+            <XIcon className="h-8 w-8 p-2 bg-(--grayText)/20 text-white rounded-full" />
+          </button>
+          <h1 className="text-(--textColor) text-2xl font-bold">
+            Change username
+          </h1>
+          <div className="flex-1 py-2 flex justify-center">
+            <div className="w-full flex bg-gray-100 rounded ">
+              <input
+                type="email"
+                onChange={(e) => setNewUsername(e.target.value)}
+                placeholder={"enter username"}
+                className="email-input w-full px-3 py-4 rounded text-black outline-none placeholder:text-base placeholder:font-medium placeholder:text-gray-400 placeholder:tracking-wider"
+              />
+              {error && <p className="text-red-500">{error}</p>}
+            </div>
+          </div>
+          <div className="flex justify-end">
+            <button
+              className="bg-(--primary) rounded-full py-2 px-4"
+              onClick={() => {
+                if (newUsername) {
+                  handleUpdates({ username: newUsername }).then(() =>
+                    closeDrawer()
+                  );
+                }
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -234,6 +285,7 @@ export default function PersonalInfoSetting({ user }: props) {
           <SettingEditButtonRow
             label="Username"
             value={username ?? email ?? ""}
+            onAction={handleOpenUsername}
           >
             Edit
           </SettingEditButtonRow>

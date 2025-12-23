@@ -120,8 +120,6 @@ export async function PATCH(request: NextRequest) {
 
   const data = parsed.data;
 
-  console.log(data.notifications?.streaksBadges !== undefined);
-
   try {
     const user = await prisma.user.upsert({
       where: { id: auth.token.id },

@@ -60,9 +60,10 @@ model User {
 
   accounts Account[]
   sessions Session[]
-  quizzes  Quiz[]    @relation("QuizCreator")
+  quizzes  Quiz[]     @relation("QuizCreator")
   attempts Attempt[]
   reviews  Review[]
+  jobs     GenAIJob[]
 
   createdAt            DateTime              @default(now()) @map("created_at")
   updatedAt            DateTime              @updatedAt @map("updated_at")
@@ -93,6 +94,7 @@ model Quiz {
   localizations QuizLocalization[]
   attempts      Attempt[]
   reviews       Review[]
+  genAIJobs     GenAIJob[]
 
   //for later usage for dashboard
   isPublished    Boolean @default(false)
@@ -303,7 +305,42 @@ model NotificationSettings {
   @@map("notification_settings")
 }
 
+model GenAIJob {
+  id          String    @id @default(uuid())
+  userId      String    @map("user_id")
+  status      JobStatus @default(PENDING)
+  title       String?
+  description String?
+  language    String?   @default("en")
+  inputText   String?   @map("input_text") @db.Text
+  fileName    String?   @map("file_name")
+  quizId      String?   @unique @map("quiz_id")
+  aiResponse  Json?     @map("ai_response")
+
+  errorMessage String? @map("error_message") @db.Text
+  retryCount   Int     @default(0) @map("retry_count")
+
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  startedAt   DateTime? @map("started_at")
+  completedAt DateTime? @map("completed_at")
+
+  quiz Quiz? @relation(fields: [quizId], references: [id], onDelete: SetNull)
+  user User  @relation(fields: [userId], references: [id])
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([status, createdAt])
+  @@map("gen_ai_job")
+}
+
 // all enums under this
+
+enum JobStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
 
 enum EmailFrequency {
   INSTANT

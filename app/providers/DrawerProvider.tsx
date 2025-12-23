@@ -5,7 +5,6 @@ import { createContext, useContext, useState, ReactNode } from "react";
 interface DrawerContextType {
   isOpen: boolean;
   content: ReactNode | null;
-  title: string;
   openDrawer: (content: ReactNode, title?: string) => void;
   closeDrawer: () => void;
 }
@@ -15,11 +14,9 @@ const DrawerContext = createContext<DrawerContextType | undefined>(undefined);
 export function DrawerProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState<ReactNode | null>(null);
-  const [title, setTitle] = useState("");
 
-  const openDrawer = (content: ReactNode, title: string = "") => {
+  const openDrawer = (content: ReactNode) => {
     setContent(content);
-    setTitle(title);
     setIsOpen(true);
   };
 
@@ -27,13 +24,12 @@ export function DrawerProvider({ children }: { children: ReactNode }) {
     setIsOpen(false);
     setTimeout(() => {
       setContent(null);
-      setTitle("");
     }, 200);
   };
 
   return (
     <DrawerContext.Provider
-      value={{ isOpen, content, title, openDrawer, closeDrawer }}
+      value={{ isOpen, content, openDrawer, closeDrawer }}
     >
       {children}
     </DrawerContext.Provider>

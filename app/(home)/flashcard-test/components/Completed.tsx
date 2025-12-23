@@ -5,11 +5,12 @@ import {
 } from "@heroicons/react/24/solid";
 import ConfettiIcon from "@/public/icons/confetti-icon.svg";
 import Image from "next/image";
-import { CheckCircle2Icon } from "lucide-react";
+import { CheckCircle2Icon, CircleX } from "lucide-react";
 import Link from "next/link";
 import ConfettiOnMount from "./ConfettiOnMount";
 import { GetAttemptResponse } from "@/lib/types/api";
 import { useEffect, useState } from "react";
+import { IoCloseCircle } from "react-icons/io5";
 
 type CompletedProps = {
   totalQuestions?: number;
@@ -161,17 +162,25 @@ function ResultStats({
     <div className="flex w-full flex-col gap-5">
       <p className="text font-bold">How you&apos;re doing</p>
       <div className="flex flex-row gap-5 h-25">
-        <CheckCircle2Icon className="flex w-25 h-full text-emerald-300" />
+        {isAttempt &&
+        (completedCount ??
+          0 < (totalQuestions ?? 0) - (completedCount ?? 0)) ? (
+          <CircleX className="flex w-25 h-full text-red-500" />
+        ) : (
+          <CheckCircle2Icon className="flex w-25 h-full text-emerald-300" />
+        )}
         <div className="flex flex-1 flex-col gap-2">
           <div className="flex items-center justify-between rounded-full font-medium bg-emerald-300/20 text-emerald-300 px-4 py-1 text-sm">
             <span>{isAttempt ? "Answered Correctly" : "Completed"}</span>
-            <span>{totalQuestions}</span>
+            <span>{isAttempt ? completedCount : totalQuestions}</span>
           </div>
-          <div className="flex items-center justify-between rounded-full font-medium bg-white/10 px-4 py-1 text-sm">
+          <div
+            className={`flex items-center justify-between rounded-full font-medium ${
+              isAttempt ? "bg-red-500/20" : "bg-white/10"
+            } px-4 py-1 text-sm`}
+          >
             <span>{isAttempt ? "Wrong Answers" : "Terms remaining"}</span>
-            <span>
-              {Math.min((totalQuestions ?? 0) - (completedCount ?? 0), 0)}
-            </span>
+            <span>{(totalQuestions ?? 0) - (completedCount ?? 0)}</span>
           </div>
           <div className="flex"></div>
         </div>

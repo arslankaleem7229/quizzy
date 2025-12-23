@@ -40,9 +40,8 @@ export default function DOBDropdown({
     { label: "Nov", value: "11" },
     { label: "Dec", value: "12" },
   ];
-  const years = Array.from(
-    { length: 100 },
-    (_, i) => String(new Date().getFullYear() - i)
+  const years = Array.from({ length: 100 }, (_, i) =>
+    String(new Date().getFullYear() - i)
   );
 
   const handleChange = (partial: Partial<DOBValue>) => {

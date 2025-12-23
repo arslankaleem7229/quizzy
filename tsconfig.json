@@ -38,6 +38,7 @@
     "generated",
     "app/api/seed/old.route.ts",
     "lib/types/api-v0",
-    "prisma/old_schema"
+    "prisma/old_schema",
+    "gutter"
   ]
 }

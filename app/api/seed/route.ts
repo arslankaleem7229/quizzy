@@ -204,7 +204,7 @@ export async function POST(request: NextRequest) {
       0
     );
 
-    console.log(`✅ Successfully seeded quiz: ${quiz.slug}`);
+    console.log(`Successfully seeded quiz: ${quiz.slug}`);
 
     return NextResponse.json({
       success: true,

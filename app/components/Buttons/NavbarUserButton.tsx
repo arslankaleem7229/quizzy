@@ -54,7 +54,10 @@ const NavbarUserButtonContent = ({ user }: { user: User }) => {
       )}
     >
       {({ close }) => (
-        <div className="w-80 rounded-2xl border border-(--foreground)/20 bg-(--background) shadow-2xl overflow-hidden">
+        <div
+          className="w-80 rounded-2xl border border-(--foreground)/20 bg-(--background) shadow-2xl overflow-hidden"
+          onClick={close}
+        >
           <UserHeader user={user} />
 
           <nav className="flex flex-col text-sm">

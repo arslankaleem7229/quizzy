@@ -20,7 +20,7 @@ services:
       SHADOW_DATABASE_URL: postgres://postgres:password@localhost:5432/shadow_db
       NODE_ENV: development
 
-    command: npm run dev
+    command: node server.ts
 
     depends_on:
       - postgres
@@ -38,5 +38,25 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - /Users/arslankaleem/Workspace/Junk/linkedin-skill-assessments-quizzes
 
+  redis:
+    image: redis:8.4-alpine
+    container_name: quizzy-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+    # Redis UI (for demo visualization)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: quizzy-redis-ui
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+
 volumes:
   postgres_data:
+  redis_data:
