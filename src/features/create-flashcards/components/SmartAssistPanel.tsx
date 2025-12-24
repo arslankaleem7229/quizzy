@@ -4,12 +4,9 @@ import { useState } from "react";
 import { HiX } from "react-icons/hi";
 import { LuCirclePlus } from "react-icons/lu";
 import { HiOutlineSparkles } from "react-icons/hi2";
+import { SmartAssistPanelProps } from "../types";
 
-type SmartAssistPanelProps = {
-  onClose?: () => void;
-};
-
-const SmartAssistPanel = ({ onClose }: SmartAssistPanelProps) => {
+export function SmartAssistPanel({ onClose }: SmartAssistPanelProps) {
   const [notes, setNotes] = useState("");
 
   return (
@@ -96,6 +93,4 @@ const SmartAssistPanel = ({ onClose }: SmartAssistPanelProps) => {
       </p>
     </aside>
   );
-};
-
-export default SmartAssistPanel;
+}

@@ -1,3 +1,4 @@
+"use client";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useTheme } from "next-themes";
@@ -6,22 +7,7 @@ import {
   HiOutlinePhoto,
   HiOutlineTrash,
 } from "react-icons/hi2";
-
-export type FlashcardCard = {
-  id: string;
-  term: string;
-  definition: string;
-  hint?: string;
-  explanation?: string;
-};
-
-interface SortableCardProps {
-  card: FlashcardCard;
-  index: number;
-  removeCard: (id: string) => void;
-  onChange: (id: string, updates: Partial<FlashcardCard>) => void;
-  disabled?: boolean;
-}
+import { SortableCardProps } from "../types";
 
 export default function SortableCard({
   card,
