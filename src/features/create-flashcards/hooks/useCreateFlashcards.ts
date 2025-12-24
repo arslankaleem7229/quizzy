@@ -55,8 +55,8 @@ export function useCreateFlashcards({
         const quizId = await createFlashcardSet(payload);
 
         const destination = shouldPractice
-          ? `/flashcard-set/${quizId}#practice`
-          : `/flashcard-set/${quizId}`;
+          ? `/flashcard-sets/${quizId}#practice`
+          : `/flashcard-sets/${quizId}`;
 
         router.push(destination);
       } catch (err) {

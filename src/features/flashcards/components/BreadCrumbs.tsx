@@ -7,7 +7,7 @@ const breadcrumbs = [
   "Computer Security and Reliability",
 ];
 
-const BreadCrumbs = () => {
+export function BreadCrumbs() {
   return (
     <div className="flex justify-between items-center">
       <div className="flex flex-wrap gap-2 text-sm text-(--grayText)">
@@ -24,6 +24,4 @@ const BreadCrumbs = () => {
       <FlashCardTestHeaderButtonRow classname="hidden lg:flex lg:justify-end" />
     </div>
   );
-};
-
-export default BreadCrumbs;
+}

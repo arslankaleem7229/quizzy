@@ -2,10 +2,10 @@ import { StarIcon, EllipsisHorizontalIcon } from "@heroicons/react/16/solid";
 import { CiBookmark } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { MdGroups } from "react-icons/md";
-import UserAvatarIcon from "./UserAvatarIcon";
-import { QuizWithLocalization } from "@/lib/types/api";
+import { UserAvatarIcon } from "./UserAvatarIcon";
+import { FlashcardTestHeaderProps } from "../types";
 
-const FlashcardTestHeader = ({ quiz }: { quiz: QuizWithLocalization }) => {
+export function FlashcardSetsHeader({ quiz }: FlashcardTestHeaderProps) {
   return (
     <header className="space-y-3">
       <div className="flex flex-wrap items-center">
@@ -24,16 +24,16 @@ const FlashcardTestHeader = ({ quiz }: { quiz: QuizWithLocalization }) => {
           classname="flex flex-row lg:hidden"
         />
       </div>
-      <FlashCardTestHeaderButtonRow classname="flex justify-start lg:hidden" />
+      <FlashCardSetsHeaderButtonRow classname="flex justify-start lg:hidden" />
     </header>
   );
-};
+}
 
-export const FlashCardTestHeaderButtonRow = ({
+export function FlashCardSetsHeaderButtonRow({
   classname,
 }: {
   classname: string;
-}) => {
+}) {
   return (
     <div className={`${classname} items-center gap-2 text-sm`}>
       <button className="flex gap-2 justify-center items-center rounded-full bg-(--capsule) px-4 py-2.5">
@@ -52,6 +52,4 @@ export const FlashCardTestHeaderButtonRow = ({
       </button>
     </div>
   );
-};
-
-export default FlashcardTestHeader;
+}

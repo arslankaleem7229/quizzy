@@ -1,28 +1,14 @@
 import { SpeakerWaveIcon, StarIcon } from "@heroicons/react/16/solid";
 import FlashcardTestPage from "../../flashcard-test/[id]/page";
-import FlashcardTestHeader from "@/features/flashcards/components/FlashcardTestHeader";
-import BreadCrumbs from "@/features/flashcards/components/BreadCrumbs";
-import UserAvatarIcon from "@/features/flashcards/components/UserAvatarIcon";
+import { FlashcardTestHeader } from "@/features/flashcards/components/FlashcardTestHeader";
+import { BreadCrumbs } from "@/features/flashcards/components/BreadCrumbs";
+import { UserAvatarIcon } from "@/features/flashcards/components/UserAvatarIcon";
 import FlashCardSetsSection from "@/features/search/components/FlashCardSetsSection";
 
-import { cookies } from "next/headers";
 import Image from "next/image";
-import { QuizLocalization, QuizResponse } from "@/lib/types/api";
-import Link from "next/link";
-
-const studyModes = [
-  {
-    id: "flashcards",
-    label: "Flashcards",
-    ref: "/flashcard-test/",
-    enabled: true,
-  },
-  { id: "learn", label: "Learn", ref: "/learn/", enabled: true },
-  { id: "test", label: "Test", enabled: false },
-  { id: "blocks", label: "Blocks" },
-  { id: "blast", label: "Blast" },
-  { id: "match", label: "Match" },
-];
+import { QuizLocalization } from "@/lib/types";
+import { fetchFlashcards } from "@/features/flashcards/services/fetchFlashcards";
+import { ModesButton } from "@/features/flashcards";
 
 export default async function FlashcardSetPage({
   params,
@@ -34,89 +20,33 @@ export default async function FlashcardSetPage({
   const language = (await searchParams).language ?? "en";
   const { id } = await params;
 
-  const cookieHeader = (await cookies()).toString();
-  const res = await fetch(
-    process.env.APP_URL + `/api/quizz/${id}?language=${language}`,
-    {
-      cache: "no-store",
-      credentials: "include",
-      headers: {
-        cookie: cookieHeader,
-      },
-    }
+  const quiz = await fetchFlashcards({ id, language });
+
+  return (
+    <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor) pb-10">
+      <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
+        <BreadCrumbs />
+        <FlashcardTestHeader quiz={quiz} />
+
+        <ModesButton id={id} />
+
+        <FlashcardTestPage
+          questionsProp={quiz.localizations[0].questions}
+          classname=""
+        />
+
+        <UserAvatarIcon
+          user={quiz.createdBy}
+          createdAt={quiz.createdAt}
+          classname="hidden lg:flex"
+        />
+
+        <FlashCardSetsSection header="Student also studied" />
+
+        <RemainingSection localization={quiz.localizations[0]} />
+      </div>
+    </main>
   );
-
-  if (!res.ok) throw new Error(`Failed to load quizzes ${res.body}`);
-
-  const response: QuizResponse = await res.json();
-
-  if (response.success) {
-    const quiz = response.data;
-    const localization = quiz.localizations[0];
-
-    if (localization) {
-      try {
-        const result = await fetch(process.env.APP_URL + "/api/attempts", {
-          method: "POST",
-          cache: "no-store",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            cookie: cookieHeader,
-          },
-          body: JSON.stringify({ quizId: quiz.id, language: language }),
-        });
-
-        console.log(await result.json());
-      } catch (error) {
-        console.error("Failed to log recent attempt", error);
-      }
-    }
-
-    return (
-      <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor) pb-10">
-        <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
-          <BreadCrumbs />
-          <FlashcardTestHeader quiz={quiz} />
-
-          <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
-            {studyModes.map((mode) => (
-              <Link
-                href={`${mode.ref}${quiz.id}`}
-                key={mode.id}
-                aria-disabled={!mode.enabled}
-                className={`rounded-lg bg-(--cardColor) p-5 font-medium
-                tracking-wide transition border-b-2 border-transparent 
-                text-center
-                ${
-                  !mode.enabled
-                    ? "pointer-events-none hover:border-b-0 bg-gray-700"
-                    : "hover:border-(--primary)"
-                }`}
-              >
-                {mode.label}
-              </Link>
-            ))}
-          </div>
-
-          <FlashcardTestPage
-            questionsProp={quiz.localizations[0].questions}
-            classname=""
-          />
-
-          <UserAvatarIcon
-            user={quiz.createdBy}
-            createdAt={quiz.createdAt}
-            classname="hidden lg:flex"
-          />
-
-          <FlashCardSetsSection header="Student also studied" />
-
-          <RemainingSection localization={quiz.localizations[0]} />
-        </div>
-      </main>
-    );
-  }
 }
 
 const RemainingSection = ({

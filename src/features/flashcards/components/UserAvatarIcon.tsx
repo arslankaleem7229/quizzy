@@ -1,19 +1,15 @@
-import { QuizCreator } from "@/lib/types/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Image from "next/image";
+import { UserAvatarIconProps } from "../types";
 
 dayjs.extend(relativeTime);
 
-const UserAvatarIcon = ({
+export function UserAvatarIcon({
   classname,
   user,
   createdAt,
-}: {
-  classname: string;
-  user: QuizCreator;
-  createdAt: Date;
-}) => {
+}: UserAvatarIconProps) {
   return (
     <div className={`${classname}  md:flex-wrap items-center gap-1 md:gap-3`}>
       {!user.image ? (
@@ -40,6 +36,4 @@ const UserAvatarIcon = ({
       </div>
     </div>
   );
-};
-
-export default UserAvatarIcon;
+}
