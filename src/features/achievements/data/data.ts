@@ -1,24 +1,6 @@
-export type Badges = {
-  id: string;
-  title: string;
-  value?: string;
-  translate?: boolean;
-  icon: string;
-  locked: boolean;
-  subtitle: string;
-  lockedDate?: string;
-};
+import type { Badge, AchievementSection } from "../types";
 
-export type AchievementSection = {
-  header: string;
-  components: AchievementHeader[];
-};
-export type AchievementHeader = {
-  title: string;
-  items: Badges[];
-};
-
-export const studyingBadges: Badges[] = [
+export const studyingBadges: Badge[] = [
   {
     id: "flashcard-whiz",
     title: "Flashcard whiz",
@@ -94,7 +76,7 @@ export const studyingBadges: Badges[] = [
   },
 ];
 
-export const dailyStreaks: Badges[] = [
+export const dailyStreaks: Badge[] = [
   {
     id: "3-day",
     value: "3",
@@ -187,7 +169,7 @@ export const dailyStreaks: Badges[] = [
   },
 ];
 
-export const weeklyStreaks: Badges[] = [
+export const weeklyStreaks: Badge[] = [
   {
     id: "3-week",
     value: "3",
@@ -334,7 +316,7 @@ export const weeklyStreaks: Badges[] = [
   },
 ];
 
-export const setsStudied: Badges[] = [
+export const setsStudied: Badge[] = [
   {
     id: "set-1",
     value: "1",
@@ -601,7 +583,7 @@ export const setsStudied: Badges[] = [
   },
 ];
 
-export const roundsStudied: Badges[] = [
+export const roundsStudied: Badge[] = [
   {
     id: "round-1",
     value: "1",
@@ -865,7 +847,7 @@ export const roundsStudied: Badges[] = [
   },
 ];
 
-export const studyGuides: Badges[] = [
+export const studyGuides: Badge[] = [
   {
     id: "guide-1",
     value: "1",
