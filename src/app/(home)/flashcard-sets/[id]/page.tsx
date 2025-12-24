@@ -1,6 +1,6 @@
 import { SpeakerWaveIcon, StarIcon } from "@heroicons/react/16/solid";
-import FlashcardTestPage from "../../flashcard-test/[id]/page";
-import { FlashcardTestHeader } from "@/features/flashcards/components/FlashcardTestHeader";
+import { FlashcardTestComponent } from "../../flashcard-test/[id]/page";
+import { FlashcardSetsHeader } from "@/features/flashcards/components/FlashcardSetsHeader";
 import { BreadCrumbs } from "@/features/flashcards/components/BreadCrumbs";
 import { UserAvatarIcon } from "@/features/flashcards/components/UserAvatarIcon";
 import FlashCardSetsSection from "@/features/search/components/FlashCardSetsSection";
@@ -26,13 +26,15 @@ export default async function FlashcardSetPage({
     <main className="flex w-full min-h-screen px-10 bg-(--background) text-(--textColor) pb-10">
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 md:px-4 pt-4 lg:px-0">
         <BreadCrumbs />
-        <FlashcardTestHeader quiz={quiz} />
+        <FlashcardSetsHeader quiz={quiz} />
 
         <ModesButton id={id} />
 
-        <FlashcardTestPage
+        <FlashcardTestComponent
           questionsProp={quiz.localizations[0].questions}
           classname=""
+          quizId=""
+          language=""
         />
 
         <UserAvatarIcon

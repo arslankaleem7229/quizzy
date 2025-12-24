@@ -1,4 +1,4 @@
-import { QuizCreator, QuizQuestion, QuizWithLocalization } from "@/lib/types";
+import { QuizCreator, QuizWithLocalization } from "@/lib/types";
 
 export interface FlashcardCard {
   id: string;
@@ -8,23 +8,14 @@ export interface FlashcardCard {
   explanation?: string;
 }
 
-export interface FlashcardSetsProps {
-  classname?: string;
-  questionsProp?: QuizQuestion[];
-}
-
-export interface FlashCardSetsHeaderButtonRowProps {
-  classname: string;
-}
-
-export interface FlashcardSetsHeaderProps {
-  quiz: QuizWithLocalization;
-}
-
 export interface UserAvatarIconProps {
   classname: string;
   user: QuizCreator;
   createdAt: Date;
+}
+
+export interface FlashcardSetsHeaderProps {
+  quiz: QuizWithLocalization;
 }
 
 export interface UserAvatarIconProps {
@@ -43,6 +34,6 @@ export interface CreateAttemptPayload {
   language: string;
 }
 
-export interface FlashcardTestHeaderProps {
+export interface FlashcardSetHeaderProps {
   quiz: QuizWithLocalization;
 }

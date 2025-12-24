@@ -3,9 +3,9 @@ import { CiBookmark } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { MdGroups } from "react-icons/md";
 import { UserAvatarIcon } from "./UserAvatarIcon";
-import { FlashcardTestHeaderProps } from "../types";
+import { FlashcardSetsHeaderProps } from "../types";
 
-export function FlashcardSetsHeader({ quiz }: FlashcardTestHeaderProps) {
+export function FlashcardSetsHeader({ quiz }: FlashcardSetsHeaderProps) {
   return (
     <header className="space-y-3">
       <div className="flex flex-wrap items-center">

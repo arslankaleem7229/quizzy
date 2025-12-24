@@ -2,105 +2,47 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  useFlashcardTest,
+  Completed,
+  TestFlashcard,
+  FlashcardNavButton,
+} from "@/features/test";
+import { FlashcardTestPageProps } from "@/features/test/types";
 import { useParams, useSearchParams } from "next/navigation";
-import { TestFlashcard } from "@/features/flashcards/components/test/TestFlashcard";
-import FlashcardNavButton from "@/features/flashcards/components/test/FlashcardNavButton";
-import { QuizQuestion, QuizResponse } from "@/lib/types/api";
-import Completed from "@/features/flashcards/components/test/Completed";
 
-type FlashcardTestPageProps = {
-  classname?: string;
-  questionsProp?: QuizQuestion[];
-};
-
-export default function FlashcardTestPage({
-  classname,
-  questionsProp,
-}: FlashcardTestPageProps) {
-  const quizId = useParams()?.id;
+export default function FlashcardTestPage() {
+  const paramsId = useParams()?.id;
+  const quizId = Array.isArray(paramsId) ? paramsId[0] : paramsId;
   const language = useSearchParams()?.get("language") ?? "en";
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [questions, setQuestions] = useState<QuizQuestion[]>(
-    questionsProp ?? []
-  );
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [isLoading, setIsLoading] = useState(!questionsProp?.length);
-  const [error, setError] = useState<string | null>(null);
+  return <FlashcardTestComponent quizId={quizId ?? ""} language={language} />;
+}
 
-  useEffect(() => {
-    if (questionsProp?.length) {
-      setQuestions(questionsProp);
-      setIsLoading(false);
-    }
-  }, [questionsProp]);
-
-  useEffect(() => {
-    if (questions.length) {
-      setCurrentIndex(0);
-      setIsFlipped(false);
-    }
-  }, [questions.length]);
-
-  useEffect(() => {
-    if (questionsProp?.length) return;
-
-    if (!quizId) return;
-
-    const fetchQuiz = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const response = await fetch(
-          `/api/quizz/${quizId}?language=${language}`,
-          { cache: "no-store", credentials: "include" }
-        );
-
-        if (!response.ok) {
-          setError("Failed to load quiz");
-          return;
-        }
-
-        const data: QuizResponse = await response.json();
-        if (data.success) {
-          const localization = data.data.localizations[0];
-
-          setQuestions(localization?.questions ?? []);
-        } else {
-          setError(data.error.message);
-        }
-      } catch (err) {
-        setError("Failed to load quiz");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchQuiz();
-  }, [language, questionsProp, quizId]);
-
-  const hasQuestions = questions.length > 0;
-  const currentCard = hasQuestions ? questions[currentIndex] : null;
-
-  const handleNext = () => {
-    if (!hasQuestions) return;
-    setIsFlipped(false);
-    if (currentIndex === questions.length - 1) {
-      setIsCompleted(true);
-    } else {
-      setCurrentIndex((next) => (next + 1) % questions.length);
-    }
-  };
-
-  const handlePrev = () => {
-    if (!hasQuestions) return;
-    setIsFlipped(false);
-    setCurrentIndex((prev) => (prev === 0 ? questions.length - 1 : prev - 1));
-  };
-
+export function FlashcardTestComponent({
+  classname,
+  questionsProp,
+  quizId,
+  language,
+}: FlashcardTestPageProps) {
+  const {
+    currentCard,
+    currentIndex,
+    isFlipped,
+    setIsFlipped,
+    isCompleted,
+    isLoading,
+    error,
+    totalQuestions,
+    goToNext,
+    goToPrevious,
+    restart,
+    exitCompletion,
+  } = useFlashcardTest({
+    quizId,
+    language,
+    initialQuestions: questionsProp,
+  });
   return (
     <main
       className={
@@ -119,14 +61,13 @@ export default function FlashcardTestPage({
 
           {isCompleted ? (
             <Completed
-              totalQuestions={questions.length}
-              quizId={quizId as string}
+              totalQuestions={totalQuestions}
+              quizId={quizId}
               onRestart={() => {
-                setIsCompleted(false);
-                setCurrentIndex(0);
+                restart();
               }}
               onBack={() => {
-                setIsCompleted(false);
+                exitCompletion();
               }}
             />
           ) : (
@@ -139,14 +80,14 @@ export default function FlashcardTestPage({
                   setIsFlipped={setIsFlipped}
                 />
                 <div className="flex items-center gap-10">
-                  <FlashcardNavButton isLeft={true} handleAction={handlePrev} />
-                  <h1 className="text-sm font-medium">
-                    {currentIndex + 1 + " / " + questions.length}
-                  </h1>
                   <FlashcardNavButton
-                    isLeft={false}
-                    handleAction={handleNext}
+                    isLeft={true}
+                    handleAction={goToPrevious}
                   />
+                  <h1 className="text-sm font-medium">
+                    {currentIndex + 1 + " / " + totalQuestions}
+                  </h1>
+                  <FlashcardNavButton isLeft={false} handleAction={goToNext} />
                 </div>
               </>
             )

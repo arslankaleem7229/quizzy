@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FlashCardTestHeaderButtonRow } from "./FlashcardTestHeader";
+import { FlashCardSetsHeaderButtonRow } from "./FlashcardSetsHeader";
 
 const breadcrumbs = [
   "Science",
@@ -21,7 +21,7 @@ export function BreadCrumbs() {
         ))}
       </div>
 
-      <FlashCardTestHeaderButtonRow classname="hidden lg:flex lg:justify-end" />
+      <FlashCardSetsHeaderButtonRow classname="hidden lg:flex lg:justify-end" />
     </div>
   );
 }
