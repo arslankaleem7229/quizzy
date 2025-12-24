@@ -1,5 +1,6 @@
 import { UserRole } from "@/app/generated/prisma";
-import { reviewWithUserInclude, ReviewWithUser } from "@/lib/types/api";
+import { reviewWithUserInclude } from "@/lib/types/review.includes";
+import { ReviewWithUser } from "@/types/api";
 import prisma from "@/prisma/client";
 
 export async function buildReviewBundle(

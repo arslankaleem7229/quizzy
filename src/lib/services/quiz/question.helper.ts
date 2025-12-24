@@ -1,5 +1,5 @@
 import { uploadFileToS3 } from "@/lib/utils/uploadToS3";
-import { AttachmentInput, QuestionInput } from "@/types/api/quiz.types";
+import { AttachmentInput, QuestionInput } from "@/types/api";
 
 export class BadRequestError extends Error {}
 

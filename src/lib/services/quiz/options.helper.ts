@@ -1,8 +1,4 @@
-import {
-  AttachmentInput,
-  QuestionInput,
-  OptionInput,
-} from "@/types/api/quiz.types";
+import { AttachmentInput, QuestionInput, OptionInput } from "@/types/api";
 
 export function normalizeOptions(
   question: QuestionInput,

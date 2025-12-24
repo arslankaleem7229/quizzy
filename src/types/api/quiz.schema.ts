@@ -44,3 +44,9 @@ export const createFlashcardSchema = z.object({
   isPublished: z.boolean().optional(),
   questions: z.array(questionSchema).min(1),
 });
+
+export type QuestionInput = z.infer<typeof questionSchema>;
+export type AttachmentInput = z.infer<typeof attachmentSchema>;
+export type OptionInput = z.infer<typeof optionSchema> & {
+  attachments: AttachmentInput[];
+};

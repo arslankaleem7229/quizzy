@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Badge } from "../types";
+import { Badge } from "../types";
 
 interface BadgeCardProps {
   badge: Badge;

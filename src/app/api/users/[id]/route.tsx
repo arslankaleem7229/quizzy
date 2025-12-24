@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
-import schema from "@/types/api/users.schema";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
+import { userSchema } from "@/types/api";
 
 export async function GET(
   request: NextRequest,
@@ -26,8 +26,8 @@ export async function POST(
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
-  const body = await request.body;
-  const validation = schema.safeParse(body);
+  const body = request.body;
+  const validation = userSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.issues, { status: 404 });
   return NextResponse.json({ id: params.id, name: "Arslan" });
@@ -42,7 +42,7 @@ export async function PUT(
 
   const body = await request.json();
 
-  const validation = schema.safeParse(body);
+  const validation = userSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.issues, { status: 400 });
 
@@ -78,7 +78,7 @@ export async function DELETE(
 
   const body = await request.json();
 
-  const validation = schema.safeParse(body);
+  const validation = userSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.issues, { status: 400 });
 

@@ -1,6 +1,5 @@
 import { uploadFileToS3 } from "@/lib/utils/uploadToS3";
 import { BadRequestError } from "../quiz/question.helper";
-import { ApiResponse, UserWithPreference } from "@/lib/types/api";
 
 export async function resolveProfilePictureAttachment(
   formData: FormData | null

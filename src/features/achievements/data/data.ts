@@ -1,4 +1,4 @@
-import type { Badge, AchievementSection } from "../types";
+import { Badge, AchievementSection } from "../types";
 
 export const studyingBadges: Badge[] = [
   {

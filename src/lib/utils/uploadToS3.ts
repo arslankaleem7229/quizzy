@@ -59,7 +59,7 @@ async function uploadBytesToS3({
     );
     return publicUrl;
   } catch (error) {
-    // object not found, will upload
+    console.log(error);
   }
 
   try {
@@ -73,6 +73,7 @@ async function uploadBytesToS3({
     );
     return publicUrl;
   } catch (error) {
+    console.log(error);
     return null;
   }
 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
-import schema from "@/types/api/users.schema";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
+import { userSchema } from "@/types/api";
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json();
 
-  const validation = schema.safeParse(body);
+  const validation = userSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.issues, { status: 400 });
 

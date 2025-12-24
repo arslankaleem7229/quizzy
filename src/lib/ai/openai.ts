@@ -1,4 +1,4 @@
-import { createFlashcardSchema } from "@/types/api/quiz.schemas";
+import { createFlashcardSchema } from "@/types/api";
 import OpenAI from "openai";
 
 const openai =
