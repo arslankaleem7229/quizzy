@@ -1,63 +1,25 @@
 "use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 import SocialLoginButtons from "@/components/common/buttons/SocialLoginButtons";
 import EmailField from "@/components/common/inputs/EmailField";
 import PasswordField from "@/components/common/inputs/PasswordField";
-import { useSearchParams } from "next/navigation";
 
-const LoginModal = () => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const searchParams = useSearchParams();
-  const paramsError = searchParams.get("error");
-  const [error, setError] = useState<string | null>(
-    paramsError === "inactive"
-      ? "Your account is inactive. Contact support."
-      : null
-  );
+import React from "react";
+import { AuthScreenProps } from "../types";
+import { useLogin } from "../hooks/useLogin";
 
+export default function LoginScreen({ onSuccess, onChange }: AuthScreenProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
     const formData = new FormData(e.currentTarget);
     const identifier = (formData.get("email") as string | null)?.trim() || "";
     const password = (formData.get("password") as string | null)?.trim() || "";
-
-    if (!identifier || !password) {
-      setError("Please enter your email/username and password.");
-      return;
+    const success = await loginWithCredentials({ identifier, password });
+    if (success) {
+      onSuccess();
     }
-
-    setLoading(true);
-    const res = await signIn("credentials", {
-      redirect: false,
-      action: "login",
-      email: identifier,
-      password,
-    });
-    setLoading(false);
-
-    if (res?.error) {
-      setError(res.error);
-      return;
-    }
-
-    router.replace("/latest");
   };
 
-  const handleLoginWithSocial = ({
-    provider,
-  }: {
-    provider: "google" | "facebook" | "apple";
-  }) => {
-    signIn(provider).catch((reason) => {
-      console.log("FUCK" + reason);
-      setError(reason.message);
-    });
-  };
+  const { loading, error, loginWithCredentials, loginWithSocial } = useLogin();
 
   return (
     <div>
@@ -65,17 +27,17 @@ const LoginModal = () => {
         <SocialLoginButtons
           provider="google"
           action="login"
-          onClick={() => handleLoginWithSocial({ provider: "google" })}
+          onClick={() => loginWithSocial({ provider: "google" })}
         />
         <SocialLoginButtons
           provider="facebook"
           action="login"
-          onClick={() => handleLoginWithSocial({ provider: "facebook" })}
+          onClick={() => loginWithSocial({ provider: "facebook" })}
         />
         <SocialLoginButtons
           provider="apple"
           action="login"
-          onClick={() => handleLoginWithSocial({ provider: "apple" })}
+          onClick={() => loginWithSocial({ provider: "apple" })}
         />
       </div>
 
@@ -118,9 +80,8 @@ const LoginModal = () => {
       </form>
 
       <button
+        onClick={onChange}
         className="btn-primary w-full p-5 bg-gray-100 my-2 text-gray-600 text-md font-semibold"
-        onClick={() => router.push("/signup")}
-        type="button"
       >
         New to Quizzy? Create an account
       </button>
@@ -129,6 +90,4 @@ const LoginModal = () => {
       </button>
     </div>
   );
-};
-
-export default LoginModal;
+}

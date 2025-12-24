@@ -11,10 +11,7 @@ export async function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const isAuthenticated = Boolean(token);
 
-  const isPublic =
-    pathname === "/" ||
-    pathname.startsWith("/login") ||
-    pathname.startsWith("/signup");
+  const isPublic = pathname === "/" || pathname.startsWith("/auth");
 
   const isProtected = !isPublic;
 
@@ -26,7 +23,7 @@ export async function proxy(req: NextRequest) {
 
   if (!isAuthenticated && isProtected) {
     const redirectTo = req.nextUrl.clone();
-    redirectTo.pathname = "/login";
+    redirectTo.pathname = "/auth";
     return NextResponse.redirect(redirectTo);
   }
 

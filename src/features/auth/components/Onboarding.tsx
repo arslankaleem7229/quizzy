@@ -5,9 +5,10 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import BgImage from "@/public/signup-bg-image.png";
 import UnderlineImage from "@/public/underline-svg.svg";
-import LoginModal from "./Login";
-import SignupModal from "./Signup";
+
 import { useRouter } from "next/navigation";
+import LoginScreen from "./Login";
+import SignupScreen from "./Signup";
 
 export default function Onboarding({ type }: { type?: "login" | "signup" }) {
   const router = useRouter();
@@ -70,7 +71,21 @@ export default function Onboarding({ type }: { type?: "login" | "signup" }) {
                 </div>
               </div>
             </div>
-            {formType === "login" ? <LoginModal /> : <SignupModal />}
+            {formType === "login" ? (
+              <LoginScreen
+                onSuccess={() => router.push("/latest")}
+                onChange={() => {
+                  setFormType("signup");
+                }}
+              />
+            ) : (
+              <SignupScreen
+                onSuccess={() => router.push("/latest")}
+                onChange={() => {
+                  setFormType("login");
+                }}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -1,22 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 import SocialLoginButtons from "@/components/common/buttons/SocialLoginButtons";
 import DOBDropdown from "@/components/common/inputs/DOBDropdown";
 import EmailField from "@/components/common/inputs/EmailField";
 import PasswordField from "@/components/common/inputs/PasswordField";
+import { AuthScreenProps } from "../types";
+import { useSignup } from "../hooks/useSignup";
 
-const SignupModal = () => {
-  const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+export default function SignupScreen({ onChange, onSuccess }: AuthScreenProps) {
   const [dob, setDob] = useState({ day: "", month: "", year: "" });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
 
     const formData = new FormData(e.currentTarget);
     const email = (formData.get("email") as string | null)?.trim() || "";
@@ -24,47 +20,40 @@ const SignupModal = () => {
     const password = (formData.get("password") as string | null)?.trim() || "";
     const confirmPassword =
       (formData.get("confirmPassword") as string | null)?.trim() || "";
-
-    if (!email || !username || !password || !confirmPassword) {
-      setError("All fields are required.");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
-
-    const { day, month, year } = dob;
-    const dobIso = day && month && year ? `${year}-${month}-${day}` : undefined;
-
-    setLoading(true);
-    const res = await signIn("credentials", {
-      redirect: false,
-      action: "signup",
+    const success = await signupWithCredentials({
       email,
       username,
-      name: username,
-      dob: dobIso,
       password,
+      confirmPassword,
+      dob,
     });
-    setLoading(false);
-
-    if (res?.error) {
-      setError(res.error);
-      return;
+    if (success) {
+      onSuccess();
     }
-
-    router.replace("/latest");
   };
+
+  const { loading, error, signupWithCredentials, signupWithProvider } =
+    useSignup();
 
   return (
     <div>
       <div className="space-x-15">
         <div className="flex flex-col gap-5 w-full">
-          <SocialLoginButtons provider="google" action="signup" />
-          <SocialLoginButtons provider="facebook" action="signup" />
-          <SocialLoginButtons provider="apple" action="signup" />
+          <SocialLoginButtons
+            provider="google"
+            action="signup"
+            onClick={() => signupWithProvider({ provider: "google" })}
+          />
+          <SocialLoginButtons
+            provider="facebook"
+            action="signup"
+            onClick={() => signupWithProvider({ provider: "facebook" })}
+          />
+          <SocialLoginButtons
+            provider="apple"
+            action="signup"
+            onClick={() => signupWithProvider({ provider: "apple" })}
+          />
         </div>
       </div>
 
@@ -105,7 +94,7 @@ const SignupModal = () => {
         />
 
         {error && (
-          <p className="text-sm text-red-500 mt-2" role="alert">
+          <p className="text-center text-sm text-red-500 mt-2" role="alert">
             {error}
           </p>
         )}
@@ -127,13 +116,11 @@ const SignupModal = () => {
 
       <button
         className="btn-primary w-full p-5 bg-gray-100 my-2 text-gray-600 text-md font-semibold"
-        onClick={() => router.push("/login")}
+        onClick={onChange}
         type="button"
       >
         Already have an account? Log in
       </button>
     </div>
   );
-};
-
-export default SignupModal;
+}
