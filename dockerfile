@@ -15,6 +15,7 @@ ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 
 RUN npm run build
 
+ENV DATABASE_URL="postgres://dummy:dummy@localhost:5432/dummy"
 # Prisma MUST be generated inside container
 RUN npx prisma generate
 
@@ -36,4 +37,4 @@ USER nextjs
 
 EXPOSE 3000
 
-CMD ["node", "server.ts"]
+CMD ["node", "server.js"]
