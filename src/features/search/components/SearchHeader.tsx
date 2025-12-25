@@ -16,7 +16,7 @@ const SearchHeader = ({ query, total }: { query?: string; total?: number }) => {
             (query ? (
               <>
                 {total} results for
-                <span className="font-semibold text-(--forground)">
+                <span className="font-semibold text-(--foreground)">
                   &quot;{query}&quot;
                 </span>
               </>

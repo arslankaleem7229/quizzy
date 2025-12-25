@@ -34,7 +34,7 @@ export const QuestionOption = memo(
             ? "border-rose-500 bg-rose-500/10 text-white"
             : state === "selected"
             ? "border-(--primary) bg-(--primary)/10 text-white"
-            : "border-(--grayText)/15 bg-transparent text-(--forground) hover:border-(--forground)/40"
+            : "border-(--grayText)/15 bg-transparent text-(--foreground) hover:border-(--foreground)/40"
         } ${isDisabled ? "cursor-not-allowed opacity-90" : ""}`}
       >
         <span className="flex h-8 w-8 items-center justify-center rounded-full text-sm">

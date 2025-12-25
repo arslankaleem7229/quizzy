@@ -8,11 +8,11 @@ export interface QuestionActionsProps {
 export const QuestionActions = memo(({ onSkip }: QuestionActionsProps) => {
   return (
     <div className="flex-1 flex flex-wrap items-center gap-4 text-sm text-(--grayText)">
-      <button className="inline-flex items-center gap-2 rounded-full border border-(--forground)/15 px-4 py-2 text-(--grayText)">
+      <button className="inline-flex items-center gap-2 rounded-full border border-(--foreground)/15 px-4 py-2 text-(--grayText)">
         <SpeakerWaveIcon className="h-5 w-5" />
         Listen
       </button>
-      <button className="inline-flex items-center gap-2 rounded-full border border-(--forground)/15 px-4 py-2 text-(--grayText)">
+      <button className="inline-flex items-center gap-2 rounded-full border border-(--foreground)/15 px-4 py-2 text-(--grayText)">
         <FlagIcon className="h-5 w-5" />
         Report
       </button>

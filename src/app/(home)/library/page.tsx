@@ -28,7 +28,7 @@ const UserLibrary = async () => {
         <UsersSection />
         <ClassesSection />
 
-        <div className="rounded-3xl border-(--forground)/10 border-2 bg-(--background) px-6 py-10 text-center text-sm text-(--grayText)">
+        <div className="rounded-3xl border-(--foreground)/10 border-2 bg-(--background) px-6 py-10 text-center text-sm text-(--grayText)">
           Use filters to jump into practice tests, textbooks, and more. You can
           fine-tune the search once content is ready.
         </div>

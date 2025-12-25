@@ -48,7 +48,7 @@ const StudyGuidesSection = () => {
               <div className="flex items-center gap-3">
                 <div className="relative h-10 w-10 rounded-full overflow-clip">
                   <Image
-                    src={`/avatars/${index + (1 % 20)}.jpg`}
+                    src={`/avatars/${(index + 1) % 20}.jpg`}
                     alt={set.author}
                     fill
                   />

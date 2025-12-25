@@ -8,7 +8,7 @@ export function FlashcardSetCard({ quizz }: FlashcardSetCardProps) {
       href={{
         pathname: `/flashcard-sets/${quizz.id}`,
       }}
-      className="rounded-lg hover:bg-(--cardColorHover) transition border-(--forground)/5 bg-(--foreground)/10 duration-0 px-5 py-4 h-40 flex flex-col justify-between items-start"
+      className="rounded-lg hover:bg-(--cardColorHover) transition border-(--foreground)/5 bg-(--foreground)/10 duration-0 px-5 py-4 h-40 flex flex-col justify-between items-start"
     >
       <div className="w-full">
         <div className="text-base font-medium overflow-hidden whitespace-nowrap text-ellipsis">
