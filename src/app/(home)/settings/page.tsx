@@ -1,26 +1,11 @@
-import { cookies } from "next/headers";
+import { getUserWithPref } from "@/features/settings";
 import AccountAndPrivacySetting from "@/features/settings/components/AccountAndPrivacySetting";
 import AppearanceSetting from "@/features/settings/components/AppearanceSetting";
 import NotificationSetting from "@/features/settings/components/NotificationSetting";
 import PersonalInfoSetting from "@/features/settings/components/PersonalInfoSetting";
-import { UserWithPreferenceResponse } from "@/lib/types/api";
 
 export default async function SettingsPage() {
-  const res = await fetch(process.env.APP_URL + "/api/settings", {
-    cache: "no-store",
-    credentials: "include",
-    headers: {
-      cookie: (await cookies()).toString(),
-    },
-  });
-
-  if (!res.ok) throw new Error("Failed to load user details");
-
-  const data: UserWithPreferenceResponse = await res.json();
-
-  if (!data.success) throw new Error("Something went wrong");
-
-  const user = data.data;
+  const user = await getUserWithPref();
 
   return (
     <main className="min-h-screen w-full bg-(--background) text-(--textColor)">

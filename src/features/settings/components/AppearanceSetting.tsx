@@ -1,75 +1,16 @@
 "use client";
 
-import {
-  UserWithPreference,
-  UserWithPreferenceResponse,
-} from "@/lib/types/api";
-import SettingDropDownRow from "./SettingDropDownRow";
 import { Theme } from "@/app/generated/prisma";
 import { useTheme } from "next-themes";
-import { useState } from "react";
+import { useUserSettings } from "../hooks";
+import { AppearanceSettingProps } from "../types";
+import SettingDropDownRow from "./SettingDropDownRow";
 
-type AppearanceProps = {
-  user: UserWithPreference;
-};
-
-type UpdateUserSettingsPayload = {
-  username?: string;
-  email?: string;
-  url?: string;
-  accountType?: string;
-
-  theme?: string;
-  language?: string;
-
-  notifications?: {
-    emailFrequency?: string;
-    productUpdates?: boolean;
-    salesPromotions?: boolean;
-    streaksBadges?: boolean;
-    reminders?: boolean;
-  };
-};
-
-const AppearanceSetting = ({ user }: AppearanceProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentUser, setCurrentUser] = useState(user);
-
+const AppearanceSetting = ({ user }: AppearanceSettingProps) => {
+  const { currentUser, isLoading, updateSettings } = useUserSettings(user);
   const { userPreferences } = currentUser;
 
   const { setTheme } = useTheme();
-
-  const handleUpdates = async (
-    payload: UpdateUserSettingsPayload
-  ): Promise<boolean> => {
-    setIsLoading(true);
-    try {
-      const res = await fetch("/api/settings", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) {
-        throw new Error("Request failed");
-      }
-
-      const result: UserWithPreferenceResponse = await res.json();
-      if (result.success) {
-        setCurrentUser(result.data ?? user);
-        return true;
-      } else {
-        throw new Error(result.error.message);
-      }
-    } catch (error) {
-      console.log(error);
-      return false;
-    } finally {
-      setIsLoading(false);
-      return false;
-    }
-  };
 
   const themeOptions = Object.values(Theme);
   return (
@@ -82,7 +23,7 @@ const AppearanceSetting = ({ user }: AppearanceProps) => {
           options={themeOptions}
           value={userPreferences?.theme ?? "DARK"}
           onClick={(option) => {
-            handleUpdates({ theme: option });
+            updateSettings({ theme: option });
             if (option !== Theme.AUTO) {
               setTheme(option.toLowerCase());
             }
@@ -93,7 +34,7 @@ const AppearanceSetting = ({ user }: AppearanceProps) => {
           label={"Language"}
           isLoading={isLoading}
           options={themeOptions}
-          value={user.userPreferences?.language ?? "en"}
+          value={currentUser.userPreferences?.language ?? "en"}
           onClick={(option) => console.log(option)}
         />
       </div>

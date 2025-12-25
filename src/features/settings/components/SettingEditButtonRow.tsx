@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
 
-import React from "react";
-
-const SettingEditButtonRow = ({
+export default function SettingEditButtonRow({
   label,
   value,
   onAction,
@@ -16,7 +14,7 @@ const SettingEditButtonRow = ({
   enableTopBorder?: boolean;
   enableBottomBorder?: boolean;
   children?: ReactNode;
-}) => {
+}) {
   return (
     <div
       className={`flex flex-row gap-2 ${
@@ -40,6 +38,4 @@ const SettingEditButtonRow = ({
       )}
     </div>
   );
-};
-
-export default SettingEditButtonRow;
+}

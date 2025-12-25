@@ -1,22 +1,15 @@
 "use client";
 import { CustomDropdown } from "@/components/common/dropdown/CustomDropdown";
 import { HiOutlineChevronDown } from "react-icons/hi2";
+import { SettingDropDownRowProps } from "../types";
 
-type SettingDropDownProps = {
-  label: string;
-  value: string;
-  options: string[];
-  isLoading?: boolean;
-  onClick?: (option: string) => void;
-};
-
-const SettingDropDownRow = ({
+export default function SettingDropDownRow({
   label,
   value,
   options,
   onClick,
   isLoading,
-}: SettingDropDownProps) => {
+}: SettingDropDownRowProps) {
   return (
     <div className="flex flex-row gap-2 last:border-none border-b-2 border-gray-700 pl-6 pr-10 py-6 items-center justify-between ">
       <div>
@@ -63,6 +56,4 @@ const SettingDropDownRow = ({
       </CustomDropdown>
     </div>
   );
-};
-
-export default SettingDropDownRow;
+}

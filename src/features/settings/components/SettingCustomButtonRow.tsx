@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-const SettingCustomButtonRow = ({
+export default function SettingCustomButtonRow({
   label,
   desc,
   enableTopBorder = false,
@@ -13,7 +13,7 @@ const SettingCustomButtonRow = ({
   enableBottomBorder?: boolean;
 
   children?: ReactNode;
-}) => {
+}) {
   return (
     <div
       className={`flex flex-row gap-2 ${enableTopBorder && "border-t-2 "} ${
@@ -29,6 +29,4 @@ const SettingCustomButtonRow = ({
       </div>
     </div>
   );
-};
-
-export default SettingCustomButtonRow;
+}

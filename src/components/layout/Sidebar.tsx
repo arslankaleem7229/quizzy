@@ -23,7 +23,7 @@ export const folders = [
   {
     label: "New folder",
     icon: "/sidebar-icons/plus.png",
-    href: "/create-flashcards",
+    href: "/create",
   },
 ];
 

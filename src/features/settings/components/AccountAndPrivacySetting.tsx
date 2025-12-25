@@ -1,114 +1,22 @@
 "use client";
-import { useState } from "react";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { HiOutlineTrash } from "react-icons/hi2";
 import SettingCustomButtonRow from "./SettingCustomButtonRow";
-import { signIn, signOut } from "next-auth/react";
-import {
-  DeleteAccountResponse,
-  UserWithPreference,
-  UserWithPreferenceResponse,
-} from "@/lib/types/api";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
+import { AccountAndPrivacySettingProps } from "../types";
+import { Toggle } from "./Toggle";
+import { useAccountPrivacySetting } from "../hooks";
 
-const Toggle = ({
-  isOn,
-  onToggle,
-}: {
-  isOn: boolean;
-  onToggle: () => void;
-}) => (
-  <button
-    type="button"
-    onClick={onToggle}
-    className={`relative inline-flex h-7 w-12 items-center rounded-full transition ${
-      isOn ? "bg-[#5465ff]" : "bg-[#2e3856]"
-    }`}
-  >
-    <span
-      className={`inline-block h-5 w-5 rounded-full bg-white transition ${
-        isOn ? "translate-x-6" : "translate-x-1"
-      }`}
-    />
-  </button>
-);
-
-type AccountSettingsPayload = {
-  id: string;
-  userId: string;
-  provider?: "google" | "facebook";
-};
-
-const AccountAndPrivacySetting = ({ user }: { user: UserWithPreference }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentUser, setCurrentUser] = useState(user);
-
-  const isFacebookConnected = currentUser.accounts.find(
-    (a) => a.provider.toLowerCase() == "facebook"
-  );
-  const isGoogleConnected = currentUser.accounts.find(
-    (a) => a.provider.toLowerCase() == "google"
-  );
-
-  const handleUpdates = async (
-    payload: AccountSettingsPayload
-  ): Promise<boolean> => {
-    setIsLoading(true);
-    try {
-      const res = await fetch("/api/settings/unlink", {
-        method: "Delete",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) {
-        throw new Error("Request failed");
-      }
-
-      const result: UserWithPreferenceResponse = await res.json();
-      if (result.success) {
-        setCurrentUser(result.data ?? user);
-        return true;
-      } else {
-        throw new Error(result.error.message);
-      }
-    } catch (error) {
-      console.log(error);
-      return false;
-    } finally {
-      setIsLoading(false);
-      return false;
-    }
-  };
-
-  const handleDelete = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch("/api/settings", {
-        method: "Delete",
-      });
-      if (!res.ok) {
-        throw new Error("Request failed");
-      }
-
-      const result: DeleteAccountResponse = await res.json();
-      if (result.success) {
-        signOut();
-      } else {
-        throw new Error(result.error.message);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const [privacyToggles, setPrivacyToggles] = useState({
-    showRealName: true,
-    googleSearch: false,
-  });
+const AccountAndPrivacySetting = ({ user }: AccountAndPrivacySettingProps) => {
+  const {
+    isLoading,
+    isGoogleConnected,
+    privacyToggles,
+    handleDelete,
+    isFacebookConnected,
+    handleUpdates,
+    setPrivacyToggles,
+  } = useAccountPrivacySetting({ user });
 
   return (
     <section className="space-y-4 text-(--textColor)">
