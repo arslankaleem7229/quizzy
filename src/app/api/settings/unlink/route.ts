@@ -1,13 +1,10 @@
-import {
-  DeleteAccountResponse,
-  getUserWithPreference,
-  UserWithPreferenceResponse,
-} from "@/lib/types/api";
+import { getUserWithPreference } from "@/lib/types/user.selects";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
+import { DeleteAccountResponse, UserWithPreferenceResponse } from "@/types/api";
 
 export const unlinkSchema = z
   .object({

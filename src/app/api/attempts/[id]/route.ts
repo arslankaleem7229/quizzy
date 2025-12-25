@@ -1,22 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import z from "zod";
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import {
-  AttemptDetailResponse,
   attemptWithAnswersInclude,
   getAttemptPayload,
-  GetAttemptResponse,
-  localizationWithQuestionsInclude,
-} from "@/lib/types/api";
+} from "@/lib/types/attempt.includes";
+import { localizationWithQuestionsInclude } from "@/lib/types/quiz.includes";
 import { AttemptStatus } from "@/app/generated/prisma/client";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
 import { calculateAttemptStats } from "@/lib/services/attempts/helpers";
-
-const updateAttemptSchema = z.object({
-  status: z.enum(AttemptStatus).optional(),
-  timeSpent: z.number().int().nonnegative().optional(),
-});
+import {
+  updateAttemptSchema,
+  type AttemptDetailResponse,
+  type GetAttemptResponse,
+} from "@/types/api";
 
 export async function GET(
   request: NextRequest,

@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
-import {
-  DeleteAccountResponse,
-  getUserWithPreference,
-  UserWithPreferenceResponse,
-} from "@/lib/types/api";
+import { getUserWithPreference } from "@/lib/types/user.selects";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
-import { settingsSchema } from "@/types/api/settings.schema";
 import { resolveProfilePictureAttachment } from "@/lib/services/settings/helper";
+import {
+  settingsSchema,
+  DeleteAccountResponse,
+  UserWithPreferenceResponse,
+} from "@/types/api";
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);

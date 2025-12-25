@@ -2,20 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import prisma from "@/prisma/client";
-import {
-  AttemptDetailResponse,
-  attemptWithAnswersInclude,
-  localizationWithQuestionsInclude,
-} from "@/lib/types/api";
+import { attemptWithAnswersInclude } from "@/lib/types/attempt.includes";
+import { localizationWithQuestionsInclude } from "@/lib/types/quiz.includes";
 import { AttemptStatus } from "@/app/generated/prisma/client";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
 import { calculateAttemptStats } from "@/lib/services/attempts/helpers";
-
-const startAttemptSchema = z.object({
-  quizId: z.string().min(1),
-  language: z.string().min(1).optional(),
-  isNew: z.boolean().optional().default(true),
-});
+import { startAttemptSchema, AttemptDetailResponse } from "@/types/api";
 
 export async function POST(request: NextRequest) {
   const auth = await verifyApiAuth(request);

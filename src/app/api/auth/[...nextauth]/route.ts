@@ -6,7 +6,7 @@ import prisma from "@/prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { encode } from "next-auth/jwt";
-import { getUserWithPreference } from "@/lib/types/api";
+import { getUserWithPreference } from "@/lib/types/user.selects";
 import { UserRole } from "@/app/generated/prisma";
 
 type CredentialsInput = {
@@ -163,6 +163,8 @@ const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user }) {
+      console.log(user);
+      // TODO: FIX this for new user or provider auth
       if (!user || !user.isActive) {
         return "/login?error=inactive";
       }

@@ -3,19 +3,18 @@ import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 
 import {
-  QuizResponse,
   quizWithoutLocalizationInclude,
-  QuizzesResponse,
   quizWithLocalizationInclude,
-} from "@/lib/types/api";
+} from "@/lib/types/quiz.includes";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
-import { createFlashcardSchema } from "@/types/api/quiz.schemas";
+import { createFlashcardSchema } from "@/types/api";
 import { QuestionType } from "@/app/generated/prisma";
 import { normalizeOptions } from "@/lib/services/quiz/options.helper";
 import {
   BadRequestError,
   prepareQuestionsWithUploads,
 } from "@/lib/services/quiz/question.helper";
+import { QuizResponse, QuizzesResponse } from "@/types/api";
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);

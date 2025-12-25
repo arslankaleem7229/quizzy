@@ -1,7 +1,8 @@
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
-import { QuizResponse, quizWithLocalizationInclude } from "@/lib/types/api";
+import { quizWithLocalizationInclude } from "@/lib/types/quiz.includes";
+import { QuizResponse } from "@/types/api";
 
 export async function GET(
   request: NextRequest,

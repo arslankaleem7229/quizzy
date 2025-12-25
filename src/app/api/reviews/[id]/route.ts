@@ -2,18 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
-import {
-  ReviewResponse,
-  reviewWithUserInclude,
-  ReviewsResponse,
-} from "@/lib/types/api";
+import { reviewWithUserInclude } from "@/lib/types/review.includes";
 import { UserRole } from "@/app/generated/prisma/client";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
 import {
   getUserRole,
   recomputeQuizRating,
 } from "@/lib/services/reviews/helpers";
-import { updateSchema } from "@/types/api/review.schema";
+import {
+  updateReviewSchema,
+  ReviewResponse,
+  ReviewsResponse,
+} from "@/types/api";
 
 export async function PATCH(
   request: NextRequest,
@@ -22,7 +22,7 @@ export async function PATCH(
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
-  const parsed = updateSchema.safeParse(await request.json());
+  const parsed = updateReviewSchema.safeParse(await request.json());
 
   if (!parsed.success) {
     return NextResponse.json<ReviewResponse>(

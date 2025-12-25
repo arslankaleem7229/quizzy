@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
-import { QuizResponse } from "@/lib/types/api";
+import { QuizResponse } from "@/types/api";
 import { readFileContent } from "@/lib/ai/openai";
 import { getQuizzGenQueue } from "@/lib/queue";
 

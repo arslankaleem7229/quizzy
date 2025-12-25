@@ -1,4 +1,5 @@
-import { SearchResponse, searchQuizInclude } from "@/lib/types/api";
+import { searchQuizInclude } from "@/lib/types/quiz.includes";
+import { SearchResponse } from "@/types/api";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";

@@ -3,7 +3,8 @@ import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 
 import { AttemptStatus } from "@/app/generated/prisma/client";
-import { recentAttemptInclude, RecentListResponse } from "@/lib/types/api";
+import { recentAttemptInclude } from "@/lib/types/attempt.includes";
+import { RecentListResponse } from "@/types/api";
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);

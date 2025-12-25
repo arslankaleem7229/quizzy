@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import z from "zod";
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
-import { ReviewsResponse, reviewWithUserInclude } from "@/lib/types/api";
+import { reviewWithUserInclude } from "@/lib/types/review.includes";
+import { createReviewSchema, ReviewsResponse } from "@/types/api";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
 import {
   buildReviewBundle,
   recomputeQuizRating,
 } from "@/lib/services/reviews/helpers";
-import { reviewSchema } from "@/types/api/review.schema";
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);
@@ -50,7 +49,7 @@ export async function POST(request: NextRequest) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
-  const parsed = reviewSchema.safeParse(await request.json());
+  const parsed = createReviewSchema.safeParse(await request.json());
 
   if (!parsed.success) {
     return NextResponse.json<ReviewsResponse>(

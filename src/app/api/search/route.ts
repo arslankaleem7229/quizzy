@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
-import { SearchResponse, searchQuizInclude } from "@/lib/types/api";
+import { searchQuizInclude } from "@/lib/types/quiz.includes";
+import { SearchResponse } from "@/types/api";
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);

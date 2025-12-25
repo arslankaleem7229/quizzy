@@ -1,23 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import z from "zod";
 import prisma from "@/prisma/client";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
-import {
-  AttemptDetailResponse,
-  attemptWithAnswersInclude,
-  localizationWithQuestionsInclude,
-} from "@/lib/types/api";
+import { attemptWithAnswersInclude } from "@/lib/types/attempt.includes";
+import { localizationWithQuestionsInclude } from "@/lib/types/quiz.includes";
 import { AttemptStatus } from "@/app/generated/prisma/client";
 import zodErrorsToString from "@/lib/utils/zodErrorstoString";
 import {
   calculateAttemptStats,
   evaluateAnswerCorrectness,
 } from "@/lib/services/attempts/helpers";
-
-const answerSchema = z.object({
-  questionId: z.string().min(1),
-  selectedOptionIds: z.array(z.string()).default([]),
-});
+import { AttemptDetailResponse, submitAnswerSchema } from "@/types/api";
 
 export async function POST(
   request: NextRequest,
@@ -28,7 +20,7 @@ export async function POST(
 
   const language = request.nextUrl.searchParams.get("language") || "en";
 
-  const parsed = answerSchema.safeParse(await request.json());
+  const parsed = submitAnswerSchema.safeParse(await request.json());
 
   if (!parsed.success) {
     return NextResponse.json<AttemptDetailResponse>(
