@@ -2,17 +2,17 @@ services:
   app:
     build: .
     container_name: quizzy-node
-    command: node server.ts
-    working_dir: /app
-    volumes:
-      - .:/app
-      - /app/node_modules
+    # command: node server.js
+    # working_dir: /app
+    # volumes:
+    #   - .:/app
+    #   - /app/node_modules
 
     ports:
       - "3000:3000"
 
     env_file:
-      - .env.production
+      - .env.docker
 
     environment:
       - DATABASE_URL=${DATABASE_URL}
@@ -56,12 +56,12 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: quizzy
+      POSTGRES_DB: quizzy-v1
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - /Users/arslankaleem/Workspace/Junk/linkedin-skill-assessments-quizzes
+
     restart: unless-stopped
 
   redis:
