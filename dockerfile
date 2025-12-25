@@ -16,6 +16,8 @@ ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 RUN npm run build
 
 ENV DATABASE_URL="postgres://dummy:dummy@localhost:5432/dummy"
+ENV SHADOW_DATABASE_URL="postgres://dummy:dummy@localhost:5432/shadow"
+
 # Prisma MUST be generated inside container
 RUN npx prisma generate
 
