@@ -1,4 +1,4 @@
-FROM node:24-alpine AS runner
+FROM node:24-alpine AS builder
 
 # Required for Prisma on Alpine
 RUN apk add --no-cache openssl libc6-compat
@@ -10,14 +10,15 @@ RUN npm ci
 
 COPY . .
 
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_APP_URL
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 
 RUN npm run build
-# 3ce0e590c9294b0db57e9d80230bca24
 
 # Prisma MUST be generated inside container
 RUN npx prisma generate
+
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 
