@@ -1,9 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { XIcon } from "lucide-react";
 import { useEffect } from "react";
-import EmailField from "../inputs/EmailField";
 
 interface FramerDrawerProps {
   isOpen: boolean;

@@ -1,4 +1,3 @@
-import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Apple from "@/public/social-icons/apple.png";
 import Facebook from "@/public/social-icons/facebook.png";
