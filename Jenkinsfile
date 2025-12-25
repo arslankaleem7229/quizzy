@@ -5,14 +5,6 @@ pipeline {
         APP_NAME = 'Quizzy'
         DOCKER_IMAGE = "${APP_NAME}:${BUILD_NUMBER}"
         
-        DEEPSEEK_API_BASE_URL = 'https://api.deepseek.com'
-        NEXT_PUBLIC_APP_URL = 'http://18.133.224.110:3000'
-        APP_URL = 'http://18.133.224.110:3000'
-        REDIS_HOST = 'redis'
-        REDIS_PORT = '6379'
-        S3_REGION = 'eu-west-2'
-        S3_BUCKET_NAME = 'amzn'
-        
         GOOGLE_CLIENT_ID = credentials('GOOGLE_CLIENT_ID')
         GOOGLE_CLIENT_SECRET = credentials('GOOGLE_CLIENT_SECRET')
         FACEBOOK_CLIENT_ID = credentials('FACEBOOK_CLIENT_ID')
