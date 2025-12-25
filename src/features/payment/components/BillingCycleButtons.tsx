@@ -1,3 +1,4 @@
+"use client";
 import { useBillingCycle } from "../hooks/useBillingCycle";
 
 export default function BillingCycleButtons() {
