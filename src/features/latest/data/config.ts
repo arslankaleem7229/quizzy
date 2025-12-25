@@ -1,0 +1,38 @@
+export const configs = {
+  pending: {
+    emoji: "⏳",
+    bg: "bg-yellow-50",
+    border: "border-yellow-200",
+    textColor: "text-yellow-800",
+    title: "Job Queued",
+    description: "Your request is in the queue...",
+    animate: false,
+  },
+  processing: {
+    emoji: "⚙️",
+    bg: "bg-blue-50",
+    border: "border-blue-200",
+    textColor: "text-blue-800",
+    title: "Processing",
+    description: "AI is generating your content...",
+    animate: true,
+  },
+  completed: {
+    emoji: "✅",
+    bg: "bg-green-50",
+    border: "border-green-200",
+    textColor: "text-green-800",
+    title: "Success!",
+    description: "Your content is ready",
+    animate: false,
+  },
+  failed: {
+    emoji: "❌",
+    bg: "bg-red-50",
+    border: "border-red-200",
+    textColor: "text-red-800",
+    title: "Failed",
+    description: "Something went wrong",
+    animate: false,
+  },
+};

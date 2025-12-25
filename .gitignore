@@ -31,7 +31,11 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env
+.env.docker
+.env.local
+.env.staging
+
 
 # vercel
 .vercel
@@ -42,4 +46,5 @@ next-env.d.ts
 /.vscode
 
 /app/generated/prisma
-/gutter
+/keys
+db_backup/
