@@ -1,19 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-export type JobStatus = "pending" | "processing" | "completed" | "failed";
-
-interface JobStatusBannerProps {
-  status: JobStatus;
-  message?: string;
-  error?: string;
-  onDismiss?: () => void;
-  autoHideDuration?: number;
-  actionLabel?: string;
-  onAction?: () => void;
-  stylingProps: string;
-}
+import { JobStatusBannerProps } from "../types";
+import { configs } from "../data/config";
 
 export function JobStatusBanner({
   status,
@@ -27,12 +16,10 @@ export function JobStatusBanner({
 }: JobStatusBannerProps) {
   const [isExiting, setIsExiting] = useState(false);
 
-  // Auto-hide only for completed status
   useEffect(() => {
     if (status === "completed" && autoHideDuration > 0) {
       const timer = setTimeout(() => {
         setIsExiting(true);
-        // Wait for exit animation, then dismiss
         setTimeout(() => {
           onDismiss?.();
         }, 300);
@@ -47,45 +34,6 @@ export function JobStatusBanner({
     setTimeout(() => {
       onDismiss?.();
     }, 300);
-  };
-
-  const configs = {
-    pending: {
-      emoji: "⏳",
-      bg: "bg-yellow-50",
-      border: "border-yellow-200",
-      textColor: "text-yellow-800",
-      title: "Job Queued",
-      description: message || "Your request is in the queue...",
-      animate: false,
-    },
-    processing: {
-      emoji: "⚙️",
-      bg: "bg-blue-50",
-      border: "border-blue-200",
-      textColor: "text-blue-800",
-      title: "Processing",
-      description: message || "AI is generating your content...",
-      animate: true,
-    },
-    completed: {
-      emoji: "✅",
-      bg: "bg-green-50",
-      border: "border-green-200",
-      textColor: "text-green-800",
-      title: "Success!",
-      description: message || "Your content is ready",
-      animate: false,
-    },
-    failed: {
-      emoji: "❌",
-      bg: "bg-red-50",
-      border: "border-red-200",
-      textColor: "text-red-800",
-      title: "Failed",
-      description: error || message || "Something went wrong",
-      animate: false,
-    },
   };
 
   const config = configs[status];
@@ -112,7 +60,9 @@ export function JobStatusBanner({
         </div>
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-sm mb-1">{config.title}</h3>
-          <p className="text-sm opacity-90">{config.description}</p>
+          <p className="text-sm opacity-90">
+            {(status === "failed" ? error : message) ?? config.description}
+          </p>
 
           {(status === "pending" || status === "processing") && (
             <p className="text-xs mt-2 opacity-75">
@@ -121,7 +71,6 @@ export function JobStatusBanner({
           )}
         </div>
 
-        {/* Dismiss button */}
         {(status === "completed" || status === "failed") && (
           <button
             onClick={handleDismiss}

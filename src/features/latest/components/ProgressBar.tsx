@@ -1,3 +1,5 @@
+import { useGetProgress } from "../hooks/useGetProgress";
+
 type ProgressBarProps = {
   totalQuestions: number;
   currentQuestion: number;
@@ -7,22 +9,15 @@ export default function ProgressBar({
   totalQuestions,
   currentQuestion,
 }: ProgressBarProps) {
-  const totalSegments = 6;
-  const progressPercentage = ((currentQuestion + 1) / totalQuestions) * 100;
-  const segmentGradients = [
-    "from-teal-400 to-teal-500",
-    "from-blue-400 to-blue-500",
-    "from-indigo-400 to-indigo-500",
-    "from-purple-400 to-purple-500",
-    "from-pink-400 to-pink-500",
-    "from-rose-400 to-rose-500",
-  ];
-
-  const currentSegmentIndex = Math.min(
-    Math.floor((progressPercentage / 100) * totalSegments),
-    totalSegments - 1
-  );
-  const currentGradient = segmentGradients[currentSegmentIndex];
+  const {
+    totalSegments,
+    currentGradient,
+    segmentGradients,
+    progressPercentage,
+  } = useGetProgress({
+    currentQuestion,
+    totalQuestions,
+  });
 
   return (
     <div className="w-full">
@@ -66,23 +61,6 @@ export default function ProgressBar({
           {totalQuestions}
         </span>
       </div>
-      {/* 
-      <div className="mt-8 flex gap-4">
-        <button
-          onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
-          className="rounded-lg bg-slate-700 px-4 py-2 text-sm text-white hover:bg-slate-600"
-        >
-          Previous
-        </button>
-        <button
-          onClick={() =>
-            setCurrentIndex(Math.min(totalQuestions - 1, currentIndex + 1))
-          }
-          className="rounded-lg bg-slate-700 px-4 py-2 text-sm text-white hover:bg-slate-600"
-        >
-          Next
-        </button>
-      </div> */}
     </div>
   );
 }
