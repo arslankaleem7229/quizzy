@@ -1,6 +1,6 @@
+import { SearchQuizResult } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
-import { SearchQuizResult } from "@/lib/types/api";
 
 type FlashCardSetsSectionProps = {
   header?: string;
@@ -49,7 +49,7 @@ const FlashCardSetsSection = ({
               item.quiz.createdBy.name ?? item.quiz.createdBy.username ?? "—";
             const url = item.quiz.createdBy.image;
             const role = item.quiz.createdBy?.role ?? "";
-            const href = `/flashcard-set/${item.quiz.id}`;
+            const href = `/flashcard-sets/${item.quiz.id}`;
 
             return (
               <Link

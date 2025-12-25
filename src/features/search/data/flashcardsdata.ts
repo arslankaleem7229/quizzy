@@ -10,6 +10,23 @@ type FlashcardSet = {
   lastStudied?: string;
 };
 
+export const userResults = [
+  {
+    id: "user-1",
+    name: "sajnasd",
+    flashcards: 0,
+    classes: 0,
+    color: "#6EE7B7",
+  },
+  {
+    id: "user-2",
+    name: "sakjnasd",
+    flashcards: 0,
+    classes: 0,
+    color: "#F472B6",
+  },
+];
+
 export const flashcardSets: FlashcardSet[] = [
   {
     id: "set-1",

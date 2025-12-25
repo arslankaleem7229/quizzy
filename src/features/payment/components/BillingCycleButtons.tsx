@@ -1,26 +1,8 @@
-"use client";
+import { useBillingCycle } from "../hooks/useBillingCycle";
 
-import { useEffect, useRef, useState } from "react";
-
-const BillingCycleButtons = () => {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">(
-    "annual"
-  );
-
-  const monthlyRef = useRef<HTMLButtonElement>(null);
-  const annualRef = useRef<HTMLButtonElement>(null);
-  const [activeWidth, setActiveWidth] = useState(0);
-  const [activeX, setActiveX] = useState(0);
-
-  useEffect(() => {
-    const el =
-      billingCycle === "monthly" ? monthlyRef.current : annualRef.current;
-    if (el) {
-      setActiveWidth(el.offsetWidth);
-      setActiveX(el.offsetLeft);
-    }
-  }, [billingCycle]);
-
+export default function BillingCycleButtons() {
+  const { activeWidth, activeX, monthlyRef, setBillingCycle, annualRef } =
+    useBillingCycle();
   return (
     <div className="mt-6 inline-flex rounded-full relative border-(--primary) border-2 p-1 text-sm font-medium text-(--textColor)">
       <div
@@ -47,6 +29,4 @@ const BillingCycleButtons = () => {
       </button>
     </div>
   );
-};
-
-export default BillingCycleButtons;
+}

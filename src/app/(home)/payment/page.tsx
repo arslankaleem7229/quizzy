@@ -1,10 +1,12 @@
-import Background from "@/features/payment/components/Background";
-import BillingCycleButtons from "@/features/payment/components/BillingCycleButtons";
-import BillingCards from "@/features/payment/components/BillingCards";
-import PaymentPoster from "@/features/payment/components/PaymentPoster";
-import PaymentFooterCard from "@/features/payment/components/PaymentFooterCard";
+import {
+  Background,
+  BillingCycleButtons,
+  BillingCards,
+  PaymentPoster,
+  PaymentFooterCard,
+} from "@/features/payment";
 
-const PaymentPage = () => {
+export default function PaymentPage() {
   return (
     <div className="bg-(--background) w-full">
       <Background />
@@ -33,6 +35,4 @@ const PaymentPage = () => {
       </main>
     </div>
   );
-};
-
-export default PaymentPage;
+}

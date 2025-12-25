@@ -6,8 +6,8 @@ import PracticeTestsSection from "@/features/search/components/PracticeTestsSect
 import QuestionsSection from "@/features/search/components/QuestionsSection";
 import UsersSection from "@/features/search/components/UsersSection";
 import ClassesSection from "@/features/search/components/ClassesSection";
-import PopularTextbooks from "@/features/quiz/components/PopularTextbooks";
-import { SearchResponse, SearchQuizResult } from "@/lib/types/api";
+import { PopularTextbooks } from "@/features/latest/components/PopularTextbooks";
+import { SearchResponse, SearchQuizResult } from "@/types/api";
 
 type SearchPageProps = {
   searchParams?: {

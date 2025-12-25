@@ -1,10 +1,6 @@
-import { cookies } from "next/headers";
-import PopularTextbooks from "@/features/quiz/components/PopularTextbooks";
-import {
-  SearchQuizResult,
-  QuizzesResponse,
-  SearchResponse,
-} from "@/lib/types/api";
+import { PopularTextbooks } from "@/features/latest/components/PopularTextbooks";
+import getUserLibrary from "@/features/library/services/getUserLibrary";
+
 import ClassesSection from "@/features/search/components/ClassesSection";
 import FlashCardSetsSection from "@/features/search/components/FlashCardSetsSection";
 import PracticeTestsSection from "@/features/search/components/PracticeTestsSection";
@@ -14,33 +10,14 @@ import StudyGuidesSection from "@/features/search/components/StudyGuidesSection"
 import UsersSection from "@/features/search/components/UsersSection";
 
 const UserLibrary = async () => {
-  let results: SearchQuizResult[] = [];
-  try {
-    const cookieHeader = (await cookies()).toString();
-    const res = await fetch(process.env.APP_URL + `/api/library`, {
-      cache: "no-store",
-      credentials: "include",
-      headers: { cookie: cookieHeader },
-    });
-
-    if (res.ok) {
-      const json: SearchResponse = await res.json();
-
-      if (json.success) {
-        results = json.data ?? [];
-      }
-    }
-  } catch (error) {
-    throw error;
-  }
-
+  const flashcards = await getUserLibrary();
   return (
     <main className="flex w-full min-h-screen bg-(--background)">
       <section className=" flex flex-1 flex-col px-4 py-8 lg:px-12 mx-auto w-full max-w-6xl gap-8">
         <SearchHeader />
         <FlashCardSetsSection
           header={"Flashcard sets"}
-          results={results}
+          results={flashcards}
           isSearching={false}
         />
         {/* TODO: Change of schema for practce/flashcard/books/guides/questions */}

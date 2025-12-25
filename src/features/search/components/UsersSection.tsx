@@ -1,22 +1,6 @@
 import Image from "next/image";
 import React from "react";
-
-const userResults = [
-  {
-    id: "user-1",
-    name: "sajnasd",
-    flashcards: 0,
-    classes: 0,
-    color: "from-[#6EE7B7] to-[#3B82F6]",
-  },
-  {
-    id: "user-2",
-    name: "sakjnasd",
-    flashcards: 0,
-    classes: 0,
-    color: "from-[#F472B6] to-[#C084FC]",
-  },
-];
+import { userResults } from "../data/flashcardsdata";
 
 const UsersSection = () => {
   return (

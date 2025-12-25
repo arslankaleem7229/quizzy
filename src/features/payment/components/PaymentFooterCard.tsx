@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const PaymentFooterCard = () => {
+export default function PaymentFooterCard() {
   return (
     <div className="">
       <div className="rounded-3xl bg-(--foreground)/10 px-8 py-10 text-(--textColor) flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-between">
@@ -30,6 +30,4 @@ const PaymentFooterCard = () => {
       </p>
     </div>
   );
-};
-
-export default PaymentFooterCard;
+}

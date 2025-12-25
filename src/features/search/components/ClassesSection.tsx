@@ -1,22 +1,6 @@
 import React from "react";
 import { FaUsers } from "react-icons/fa";
-
-const userResults = [
-  {
-    id: "user-1",
-    name: "sajnasd",
-    flashcards: 0,
-    classes: 0,
-    color: "#6EE7B7",
-  },
-  {
-    id: "user-2",
-    name: "sakjnasd",
-    flashcards: 0,
-    classes: 0,
-    color: "#F472B6",
-  },
-];
+import { userResults } from "../data/flashcardsdata";
 
 const ClassesSection = () => {
   return (
