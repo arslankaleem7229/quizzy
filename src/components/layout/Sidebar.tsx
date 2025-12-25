@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import React from "react";
 
 type NavItem = {
   label: string;
@@ -135,9 +136,11 @@ const SidebarButton = ({
                 before:mask-no-repeat
                 before:mask-center
               `}
-        style={{
-          ["--icon" as never]: `url(${item.icon})`,
-        }}
+        style={
+          {
+            "--icon": `url(${item.icon})`,
+          } as React.CSSProperties
+        }
       />
       <div className="hidden 2xl:flex">{item.label}</div>
     </Link>
