@@ -15,11 +15,9 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'env-file', variable: 'ENV_FILE')]) {
                     sh '''
-                     
-                rm -f .env.docker
-                cp $ENV_FILE .env.docker
-                chmod 644 .env.docker
-            
+                        rm -f .env.production
+                        cp $ENV_FILE .env.production
+                        chmod 644 .env.production
                     '''
                 }
             }
@@ -33,13 +31,14 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                sh 'docker-compose up -d --build'
+                sh 'docker-compose -f docker-compose.prod.yml up -d --build'
             }
         }
         
         stage('Cleanup') {
             steps {
                 sh '''
+                    rm -f .env.docker
                     docker image prune -f
                 '''
             }
