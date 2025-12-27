@@ -36,10 +36,7 @@ pipeline {
         
         stage('Cleanup') {
             steps {
-                sh '''
-                    rm -f .env.docker
-                    docker image prune -f
-                '''
+                sh 'docker image prune -f'
             }
         }
     }
