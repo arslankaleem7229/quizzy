@@ -15,6 +15,7 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'env-file', variable: 'ENV_FILE')]) {
                     sh '''
+                     
                 rm -f .env.docker
                 cp $ENV_FILE .env.docker
                 chmod 644 .env.docker
