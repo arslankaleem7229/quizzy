@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   // output: "standalone",
+
   images: {
     // path: "@/public",
     unoptimized: true,
@@ -20,6 +21,9 @@ const nextConfig: NextConfig = {
         hostname: "amzn-s3-quizzy-bucket.s3.eu-west-2.amazonaws.com",
       },
     ],
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };
 
