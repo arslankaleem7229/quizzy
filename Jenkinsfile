@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    
     environment {
         APP_NAME = 'quizzy'
     }
@@ -16,7 +15,11 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'env-file', variable: 'ENV_FILE')]) {
                     sh '''
-                        cp $ENV_FILE .env.docker
+                     
+                rm -f .env.docker
+                cp $ENV_FILE .env.docker
+                chmod 644 .env.docker
+            
                     '''
                 }
             }
@@ -34,6 +37,13 @@ pipeline {
             }
         }
         
+        stage('Cleanup') {
+            steps {
+                sh '''
+                    docker image prune -f
+                '''
+            }
+        }
         stage('Cleanup') {
             steps {
                 sh 'docker image prune -f'
