@@ -1,29 +1,28 @@
 "use client";
 import Logo from "@/public/Quizzy.svg";
 import SearchField from "@/components/common/inputs/SearchField";
-import NavbarUserButton from "@/components/common/buttons/NavbarUserButton";
+import NavbarUserButtonContent from "@/components/common/buttons/NavbarUserButton";
 import NavbarCreateButton from "@/components/common/buttons/NavbarCreateButton";
 import NavbarUpgradeButton from "@/components/common/buttons/NavbarUpgradeButton";
 import { useSession } from "next-auth/react";
-import { useMemo } from "react";
 import { User } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
-  const user = useMemo(() => session?.user as User, [session]);
+  const user = session?.user as User | undefined;
+
+  if (status === "loading") {
+    return <div className="bg-red-500"></div>;
+  }
 
   return (
     <>
       {
         <header
           className={`flex flex-wrap md:flex-nowrap sticky top-0 left-0 right-0 h-28 md:h-16 items-center px-2 lg:px-4 ${
-            status === "loading"
-              ? "bg-transparent"
-              : status == "unauthenticated"
-              ? "bg-white"
-              : "bg-(--background)"
+            status == "unauthenticated" ? "bg-white" : "bg-(--background)"
           } z-999`}
         >
           <div className="flex flex-1 md:flex-none shrink-0 gap-2 mr-4 xl:mr-0">
@@ -44,7 +43,7 @@ const Navbar = () => {
           <div className="flex flex-none gap-x-6 items-center ml-10 lg:mx-5">
             <NavbarCreateButton />
             <NavbarUpgradeButton />
-            <NavbarUserButton user={user} />
+            <NavbarUserButtonContent user={user!} />
           </div>
 
           <SearchField

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import "@/styles/globals.css";
 import "@/lib/utils/string.extensions";
-import { cookies } from "next/headers";
 import { Providers } from "@/providers/AppProviders";
 import { GlobalDrawer } from "@/components/common/drawer/GlobalDrawer";
 import Script from "next/script";
@@ -17,13 +16,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isAuthed = Boolean((await cookies()).get("next-auth.session-token"));
   return (
     <html lang="en" suppressHydrationWarning data-theme="light">
       <body
-        className={`min-h-screen ${
-          isAuthed ? "bg-(--background)" : "bg-white"
-        } text-black transition-colors`}
+        className={`min-h-screen bg-(--background) text-black transition-colors`}
       >
         <Script
           src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"

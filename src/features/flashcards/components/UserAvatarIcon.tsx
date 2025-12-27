@@ -14,7 +14,7 @@ export function UserAvatarIcon({
     <div className={`${classname}  md:flex-wrap items-center gap-1 md:gap-3`}>
       {!user.image ? (
         <div className="flex h-5 w-5 text-sm lg:h-12 lg:w-12 lg:text-xl items-center justify-center rounded-full bg-teal-600  font-semibold text-(--textColor)">
-          {user.name?.charAt(0).toUpperCase()}
+          {(user.name ?? user.username)?.charAt(0).toUpperCase()}
         </div>
       ) : (
         <div className="relative h-5 w-5 lg:h-12 lg:w-12 items-center justify-center rounded-full overflow-hidden">

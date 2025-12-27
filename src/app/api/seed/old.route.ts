@@ -66,7 +66,10 @@ export async function POST(request: NextRequest) {
       const parsed = JSON.parse(text);
       quizz = parsed.quizz;
     } catch (err) {
-      return NextResponse.json({ error: "Invalid JSON file" }, { status: 400 });
+      return NextResponse.json(
+        { error: `Invalid JSON file ${err}` },
+        { status: 400 }
+      );
     }
 
     // Ensure quiz exists
@@ -93,7 +96,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const quiz = await prisma.quizz.create({
+    const quiz = await prisma.quiz.create({
       data: {
         slug: quizz.slug,
         createdById: userId,

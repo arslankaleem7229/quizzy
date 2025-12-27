@@ -99,7 +99,7 @@ export function CreateFlashcards() {
       <div className="flex w-full">
         <div
           className={`flex-1 transition-all duration-300 ${
-            isSmartAssistOpen ? "xl:mr-[360px]" : ""
+            isSmartAssistOpen ? "xl:mr-90" : ""
           }`}
         >
           <div className="mx-auto max-w-7xl px-4 py-6 lg:px-12 lg:py-12">

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import z from "zod";
 import { verifyApiAuth } from "@/lib/utils/verifyToken";
 import prisma from "@/prisma/client";
 import { attemptWithAnswersInclude } from "@/lib/types/attempt.includes";

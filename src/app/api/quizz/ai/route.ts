@@ -50,7 +50,7 @@ async function readJsonPayload(request: NextRequest): Promise<AiQuizPayload> {
   try {
     body = await request.json();
   } catch (error) {
-    throw new Error("Invalid or missing JSON body");
+    throw new Error(`Invalid or missing JSON body ${error}`);
   }
 
   const payload = body as Partial<AiQuizPayload>;

@@ -81,7 +81,7 @@ export function getQuizzGenQueue() {
 
   if (!queue) {
     const connection = new Redis({
-      host: process.env.REDIS_HOST!,
+      host: process.env.REDIS_HOST ?? "quizzy-redis",
       port: Number(process.env.REDIS_PORT || 6379),
       password: process.env.REDIS_PASSWORD,
       maxRetriesPerRequest: null,

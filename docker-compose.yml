@@ -2,7 +2,7 @@ services:
   app:
     build: .
     container_name: quizzy-node
-    # command: node server.js
+    # command: npm run dev
     # working_dir: /app
     # volumes:
     #   - .:/app
@@ -14,23 +14,23 @@ services:
     env_file:
       - .env.docker
 
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      - FACEBOOK_CLIENT_ID=${FACEBOOK_CLIENT_ID}
-      - FACEBOOK_CLIENT_SECRET=${FACEBOOK_CLIENT_SECRET}
-      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
-      - DEEPSEEK_API_BASE_URL=${DEEPSEEK_API_BASE_URL}
-      - APP_URL=${APP_URL}
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID}
-      - S3_SECRET_ACCESS_KEY=${S3_SECRET_ACCESS_KEY}
-      - S3_REGION=${S3_REGION}
-      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+    # environment:
+    #   - DATABASE_URL=${DATABASE_URL}
+    #   - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
+    #   - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+    #   - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+    #   - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+    #   - FACEBOOK_CLIENT_ID=${FACEBOOK_CLIENT_ID}
+    #   - FACEBOOK_CLIENT_SECRET=${FACEBOOK_CLIENT_SECRET}
+    #   - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+    #   - DEEPSEEK_API_BASE_URL=${DEEPSEEK_API_BASE_URL}
+    #   - APP_URL=${APP_URL}
+    #   - REDIS_HOST=redis
+    #   - REDIS_PORT=6379
+    #   - S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID}
+    #   - S3_SECRET_ACCESS_KEY=${S3_SECRET_ACCESS_KEY}
+    #   - S3_REGION=${S3_REGION}
+    #   - S3_BUCKET_NAME=${S3_BUCKET_NAME}
 
     depends_on:
       - redis
@@ -53,16 +53,18 @@ services:
   postgres:
     image: postgres:17
     container_name: quizzy-postgres
+
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: quizzy-v1
+
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-    restart: unless-stopped
+    restart: always
 
   redis:
     image: redis:8.4-alpine

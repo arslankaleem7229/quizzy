@@ -12,7 +12,9 @@ import {
 
 export async function GET(request: NextRequest) {
   const auth = await verifyApiAuth(request);
-  if (!auth.authorized) return auth.response;
+  if (!auth.authorized) {
+    return auth.response;
+  }
 
   const user = await prisma.user.findUnique({
     where: { id: auth.token.id },

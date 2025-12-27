@@ -41,13 +41,13 @@ const NavbarUserButtonContent = ({ user }: { user: User }) => {
           {user?.image ? (
             <Image
               src={user.image}
-              alt={user.name ?? "user"}
+              alt={user.name ?? user.username ?? "user"}
               fill
               className="object-cover"
             />
           ) : (
             <span className="font-semibold">
-              {user?.name?.charAt(0)?.toUpperCase() ?? "U"}
+              {(user?.name ?? user.username)?.charAt(0)?.toUpperCase() ?? "U"}
             </span>
           )}
         </button>
@@ -119,14 +119,20 @@ const UserHeader = ({ user }: { user: User }) => (
   <div className="px-4 py-3 flex items-center gap-3 border-b border-(--foreground)/20">
     <div className="relative h-12 w-12 rounded-full overflow-hidden">
       {user.image ? (
-        <Image src={user.image} alt={user.name ?? "user"} fill />
+        <Image
+          src={user.image}
+          alt={user.name ?? user.username ?? "user"}
+          fill
+        />
       ) : (
-        <span>{user.name?.charAt(0)?.toUpperCase() ?? "U"}</span>
+        <span>
+          {(user.name ?? user.username)?.charAt(0)?.toUpperCase() ?? "U"}
+        </span>
       )}
     </div>
     <div className="flex flex-col">
       <span className="text-sm text-(--textColor) font-semibold">
-        {user.name}
+        {user.name ?? user.username}
       </span>
       <span className="text-xs text-gray-300">{user.email}</span>
     </div>

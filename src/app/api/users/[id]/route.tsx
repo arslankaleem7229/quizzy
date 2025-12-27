@@ -5,13 +5,13 @@ import { userSchema } from "@/types/api";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
   const user = await prisma.user.findUnique({
-    where: { id: params.id },
+    where: { id: (await params).id },
   });
 
   if (!user)
@@ -21,7 +21,7 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
@@ -30,12 +30,12 @@ export async function POST(
   const validation = userSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.issues, { status: 404 });
-  return NextResponse.json({ id: params.id, name: "Arslan" });
+  return NextResponse.json({ id: (await params).id, name: "Arslan" });
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
@@ -47,12 +47,12 @@ export async function PUT(
     return NextResponse.json(validation.error.issues, { status: 400 });
 
   const user = await prisma.user.findUnique({
-    where: { id: params.id },
+    where: { id: (await params).id },
   });
 
   if (!user)
     return NextResponse.json(
-      { error: `User with id: ${params.id} doesnot exist` },
+      { error: `User with id: ${(await params).id} doesnot exist` },
       { status: 400 }
     );
 
@@ -71,7 +71,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
@@ -83,12 +83,12 @@ export async function DELETE(
     return NextResponse.json(validation.error.issues, { status: 400 });
 
   const user = await prisma.user.findUnique({
-    where: { id: params.id },
+    where: { id: (await params).id },
   });
 
   if (!user)
     return NextResponse.json(
-      { error: `User with id: ${params.id} doesnot exist` },
+      { error: `User with id: ${(await params).id} doesnot exist` },
       { status: 404 }
     );
 

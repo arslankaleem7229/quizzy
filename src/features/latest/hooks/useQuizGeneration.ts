@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { socket } from "@/lib/socket";
-import { AiJobResponse, JobState, JobUpdatePayload, JobStatus } from "../types";
+import { JobState, JobUpdatePayload, JobStatus } from "../types";
 import { fetchJobs } from "../services/fetchJobs";
 import saveJob from "../services/saveJob";
 

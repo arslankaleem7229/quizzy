@@ -39,8 +39,6 @@ export async function fetchFlashcards({
         },
         body: JSON.stringify({ quizId: quiz.id, language: language }),
       });
-
-      console.log(await result.json());
     } catch (error) {
       console.error("Failed to log recent attempt", error);
     }

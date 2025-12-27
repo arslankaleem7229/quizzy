@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /* config options here */
+  // output: "standalone",
   images: {
+    // path: "@/public",
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -17,11 +21,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-
-  /* config options here */
 };
 
 export default nextConfig;

@@ -209,16 +209,16 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
   const language = request.nextUrl.searchParams.get("language") || "en";
-
+  const attemptId = (await params).id;
   try {
     const attempt = await prisma.attempt.findUnique({
-      where: { id: params.id },
+      where: { id: attemptId },
     });
 
     if (!attempt || attempt.userId !== auth.token.id) {

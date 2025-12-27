@@ -1,4 +1,13 @@
 -- CreateEnum
+CREATE TYPE "JobStatus" AS ENUM ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED');
+
+-- CreateEnum
+CREATE TYPE "EmailFrequency" AS ENUM ('INSTANT', 'DAILY', 'WEEKLY', 'NEVER');
+
+-- CreateEnum
+CREATE TYPE "Theme" AS ENUM ('DARK', 'LIGHT', 'AUTO');
+
+-- CreateEnum
 CREATE TYPE "AttachmentType" AS ENUM ('QUESTION_IMAGE', 'OPTION_IMAGE', 'QUESTION_AUDIO', 'QUESTION_GIF', 'OPTION_GIF');
 
 -- CreateEnum
@@ -45,6 +54,7 @@ CREATE TABLE "users" (
     "email" TEXT,
     "email_verified" TIMESTAMP(3),
     "image" TEXT,
+    "images" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "hashedPassword" TEXT,
     "username" TEXT,
     "dob" TIMESTAMP(3),
@@ -118,7 +128,7 @@ CREATE TABLE "question_options" (
     "optionText" TEXT NOT NULL,
     "is_correct" BOOLEAN NOT NULL DEFAULT false,
     "has_attachment" BOOLEAN NOT NULL DEFAULT false,
-    "order_index" INTEGER NOT NULL DEFAULT 0,
+    "order_index" SERIAL NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
@@ -183,6 +193,55 @@ CREATE TABLE "reviews" (
     "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "reviews_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "user_preferences" (
+    "id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "theme" "Theme" NOT NULL DEFAULT 'AUTO',
+    "language" VARCHAR(10) NOT NULL DEFAULT 'en',
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "user_preferences_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "notification_settings" (
+    "id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "study_reminders" BOOLEAN NOT NULL DEFAULT true,
+    "streaks_and_badges" BOOLEAN NOT NULL DEFAULT true,
+    "features_and_tips" BOOLEAN NOT NULL DEFAULT true,
+    "sales_and_promotions" BOOLEAN NOT NULL DEFAULT false,
+    "email_frequency" "EmailFrequency" NOT NULL DEFAULT 'DAILY',
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "notification_settings_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "gen_ai_job" (
+    "id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "status" "JobStatus" NOT NULL DEFAULT 'PENDING',
+    "title" TEXT,
+    "description" TEXT,
+    "language" TEXT DEFAULT 'en',
+    "input_text" TEXT,
+    "file_name" TEXT,
+    "quiz_id" TEXT,
+    "ai_response" JSONB,
+    "error_message" TEXT,
+    "retry_count" INTEGER NOT NULL DEFAULT 0,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "started_at" TIMESTAMP(3),
+    "completed_at" TIMESTAMP(3),
+
+    CONSTRAINT "gen_ai_job_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -290,6 +349,21 @@ CREATE INDEX "reviews_quiz_id_created_at_idx" ON "reviews"("quiz_id", "created_a
 -- CreateIndex
 CREATE UNIQUE INDEX "reviews_user_id_quiz_id_key" ON "reviews"("user_id", "quiz_id");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "user_preferences_user_id_key" ON "user_preferences"("user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "notification_settings_user_id_key" ON "notification_settings"("user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "gen_ai_job_quiz_id_key" ON "gen_ai_job"("quiz_id");
+
+-- CreateIndex
+CREATE INDEX "gen_ai_job_user_id_created_at_idx" ON "gen_ai_job"("user_id", "created_at" DESC);
+
+-- CreateIndex
+CREATE INDEX "gen_ai_job_status_created_at_idx" ON "gen_ai_job"("status", "created_at");
+
 -- AddForeignKey
 ALTER TABLE "accounts" ADD CONSTRAINT "accounts_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -331,3 +405,15 @@ ALTER TABLE "reviews" ADD CONSTRAINT "reviews_user_id_fkey" FOREIGN KEY ("user_i
 
 -- AddForeignKey
 ALTER TABLE "reviews" ADD CONSTRAINT "reviews_quiz_id_fkey" FOREIGN KEY ("quiz_id") REFERENCES "quizzes"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "user_preferences" ADD CONSTRAINT "user_preferences_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "notification_settings" ADD CONSTRAINT "notification_settings_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "gen_ai_job" ADD CONSTRAINT "gen_ai_job_quiz_id_fkey" FOREIGN KEY ("quiz_id") REFERENCES "quizzes"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "gen_ai_job" ADD CONSTRAINT "gen_ai_job_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

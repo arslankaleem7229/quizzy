@@ -66,7 +66,7 @@ export default function SignupScreen({ onChange, onSuccess }: AuthScreenProps) {
       </div>
 
       <form onSubmit={handleSubmit} noValidate>
-        <DOBDropdown value={dob} onChange={setDob} />
+        <DOBDropdown value={dob} />
 
         <EmailField
           placeholder="Enter your email address"

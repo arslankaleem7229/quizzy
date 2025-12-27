@@ -18,8 +18,7 @@ export async function createAttempt({
       },
       body: JSON.stringify({ quizId: quizId, language: language }),
     });
-
-    console.log(await result.json());
+    return result.ok;
   } catch (error) {
     console.error("Failed to log recent attempt", error);
   }

@@ -1,5 +1,5 @@
-import Image from "next/image"
-import { TextbookCardProps } from "../types"
+import Image from "next/image";
+import { TextbookCardProps } from "../types";
 
 export function TextbookCard({ book }: TextbookCardProps) {
   return (
@@ -28,5 +28,5 @@ export function TextbookCard({ book }: TextbookCardProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

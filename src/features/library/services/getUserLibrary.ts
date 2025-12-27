@@ -8,6 +8,7 @@ export default async function getUserLibrary() {
     const cookieHeader = (await cookies()).toString();
     const res = await fetch(process.env.APP_URL + `/api/library`, {
       cache: "no-store",
+      method: "GET",
       credentials: "include",
       headers: { cookie: cookieHeader },
     });

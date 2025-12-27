@@ -1,4 +1,3 @@
-import { Quiz } from "@/app/generated/prisma";
 import { QuizWithoutLocalization } from "@/lib/types";
 import { QuizzesResponse } from "@/types/api";
 import { cookies } from "next/headers";

@@ -6,7 +6,7 @@ export default async function CreateFlashcardsPage({
   searchParams: Promise<{ type: string }>;
 }) {
   //use this for differntiaite between terms and quizz
-  console.log((await searchParams).type);
+  // console.log((await searchParams).type);
 
   return <CreateFlashcards />;
 }

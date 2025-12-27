@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
   const { searchParams } = new URL(request.url);
   const query = (searchParams.get("q") || "").trim();
-  const language = searchParams.get("language") || undefined;
+  // const language = searchParams.get("language") || undefined;
   const limitParam = Number(searchParams.get("limit"));
   const limit =
     Number.isFinite(limitParam) && limitParam > 0

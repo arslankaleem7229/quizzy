@@ -1,6 +1,5 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { QuizResponse } from "@/types/api";
 
 import { QuizQuestion } from "@/lib/types";
 import { UseFlashcardTestParams, UseFlashcardTestResult } from "../types";

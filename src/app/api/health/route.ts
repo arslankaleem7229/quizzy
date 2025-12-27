@@ -9,7 +9,7 @@ export async function GET() {
       status: "healthy",
       timestamp: new Date().toISOString(),
       services: {
-        database: "connected",
+        database: await prisma.$queryRaw`SELECT current_database()`,
         server: "running",
       },
     });
@@ -17,7 +17,7 @@ export async function GET() {
     return NextResponse.json(
       {
         status: "unhealthy",
-        error: "Database connection failed",
+        error: `Database connection failed ${error}`,
       },
       { status: 503 }
     );

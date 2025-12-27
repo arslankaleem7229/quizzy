@@ -14,13 +14,13 @@ declare global {
 }
 
 const connection = new Redis({
-  host: process.env.REDIS_HOST!,
+  host: process.env.REDIS_HOST ?? "quizzy-redis",
   port: parseInt(process.env.REDIS_PORT!),
   password: process.env.REDIS_PASSWORD,
   maxRetriesPerRequest: null,
 });
 
-console.log("Redis host:", process.env.REDIS_HOST);
+console.log("Redis host:", process.env.REDIS_HOST ?? "quizzy-redis");
 console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 connection.on("connect", () => {

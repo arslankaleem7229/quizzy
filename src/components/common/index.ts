@@ -1,7 +1,7 @@
 // Buttons
 export { default as NavbarCreateButton } from "./buttons/NavbarCreateButton";
 export { default as NavbarUpgradeButton } from "./buttons/NavbarUpgradeButton";
-export { default as NavbarUserButton } from "./buttons/NavbarUserButton";
+export { default as NavbarUserButtonContent } from "./buttons/NavbarUserButton";
 export { default as SocialLoginButtons } from "./buttons/SocialLoginButtons";
 
 // Inputs

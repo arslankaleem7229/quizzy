@@ -53,9 +53,9 @@ const FlashCardSetsSection = ({
 
             return (
               <Link
-                key={item.quiz.id}
+                key={item.toString()}
                 href={href}
-                className="flex h-full min-h-[200px] flex-col rounded-lg border-(--grayText)/10 border-2 bg-(--cardColor) p-5 transition hover:-translate-0.5"
+                className="flex h-full min-h-50 flex-col rounded-lg border-(--grayText)/10 border-2 bg-(--cardColor) p-5 transition hover:-translate-0.5"
               >
                 <div className="flex flex-2 flex-col justify-evenly">
                   <div>

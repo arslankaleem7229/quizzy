@@ -13,7 +13,11 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
       "@/*": ["./src/*"],
       "@/prisma/*": ["./prisma/*"],
@@ -27,17 +31,8 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "src/proxy.ts"
+    "server.ts",
+    ".next/dev/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "build",
-    "src/app/generated",
-    "src/app/api/seed",
-    "src/lib/types/api-v0",
-    "prisma/old_schema",
-    "gutter",
-    "src/app/api/process"
-  ]
+  "exclude": ["node_modules", "src/app/api/seed/*", "src/app/api/process/*"]
 }

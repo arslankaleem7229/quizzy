@@ -33,7 +33,7 @@ export default function Home() {
         description={
           " Create your own flashcards or find sets made by teachers, students and experts. Study them anytime, anywhere with our free app."
         }
-        image={"/mockups/all-in-one.avif"}
+        image={"/mockups/all-in-one.png"}
         isreversed
       >
         <>
@@ -59,7 +59,7 @@ export default function Home() {
         description={
           "Turn your slides, videos and notes into flashcard sets, practice tests and study guides."
         }
-        image={"/mockups/study-material.avif"}
+        image={"/mockups/study-material.png"}
         isreversed={false}
       >
         <Link href={"/latest"}>
@@ -72,7 +72,7 @@ export default function Home() {
         description={
           "Memorise anything with personalised practice tests and revision sessions in Learn. 98% of students say Quizlet has improved their comprehension."
         }
-        image={"/mockups/prepration.avif"}
+        image={"/mockups/prepration.png"}
         isreversed
       >
         <Link href={"/latest"}>

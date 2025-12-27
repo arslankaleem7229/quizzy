@@ -17,7 +17,7 @@ import {
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
@@ -38,8 +38,9 @@ export async function PATCH(
   }
 
   try {
+    const reviewId = (await params).id;
     const review = await prisma.review.findUnique({
-      where: { id: params.id },
+      where: { id: reviewId },
     });
 
     if (!review) {
@@ -89,14 +90,15 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(request);
   if (!auth.authorized) return auth.response;
 
   try {
+    const reviewId = (await params).id;
     const review = await prisma.review.findUnique({
-      where: { id: params.id },
+      where: { id: reviewId },
     });
 
     if (!review) {

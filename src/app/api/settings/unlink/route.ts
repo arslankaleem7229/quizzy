@@ -30,7 +30,7 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const [_, user] = await prisma.$transaction([
+    const [, user] = await prisma.$transaction([
       prisma.account.delete({
         where: {
           id: parsed.data.id,

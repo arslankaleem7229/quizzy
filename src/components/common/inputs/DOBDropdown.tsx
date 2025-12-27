@@ -1,8 +1,6 @@
 "use client";
 
-"use client";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type DOBValue = {
   day: string;
@@ -10,18 +8,8 @@ type DOBValue = {
   year: string;
 };
 
-export default function DOBDropdown({
-  value,
-  onChange,
-}: {
-  value: DOBValue;
-  onChange: (value: DOBValue) => void;
-}) {
-  const [dob, setDob] = useState<DOBValue>(value);
-
-  useEffect(() => {
-    setDob(value);
-  }, [value.day, value.month, value.year]);
+export default function DOBDropdown({ value }: { value: DOBValue }) {
+  const [dob, setDob] = useState<DOBValue>(() => value);
 
   const days = Array.from({ length: 31 }, (_, i) =>
     String(i + 1).padStart(2, "0")
@@ -47,7 +35,6 @@ export default function DOBDropdown({
   const handleChange = (partial: Partial<DOBValue>) => {
     const next = { ...dob, ...partial };
     setDob(next);
-    onChange(next);
   };
 
   return (

@@ -1,4 +1,5 @@
 import Sidebar from "@/components/layout/Sidebar";
+import { Suspense } from "react";
 
 export default function HomeLayout({
   children,
@@ -7,7 +8,9 @@ export default function HomeLayout({
 }>) {
   return (
     <div className="min-h-screen min-w-screen bg-(--background) text-(--textColor) transition-colors flex">
-      <Sidebar />
+      <Suspense>
+        <Sidebar />
+      </Suspense>
       {children}
     </div>
   );

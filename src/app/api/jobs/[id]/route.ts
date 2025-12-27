@@ -4,12 +4,12 @@ import { verifyApiAuth } from "@/lib/utils/verifyToken";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { jobId: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const auth = await verifyApiAuth(req);
   if (!auth.authorized) return auth.response;
 
-  const jobId = params.jobId;
+  const jobId = (await params).id;
   const userId = auth.token.id;
 
   try {

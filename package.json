@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node server.ts",
+    "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "next start",
     "lint": "eslint",
     "prisma:migrate": "npx prisma format && npx prisma migrate dev"
   },
@@ -26,20 +26,19 @@
     "@tanstack/react-query": "^5.90.12",
     "bullmq": "^5.66.2",
     "canvas-confetti": "^1.9.4",
-    "crypto": "^1.0.1",
     "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",
     "framer-motion": "^12.23.26",
     "ioredis": "^5.8.2",
     "jose": "^6.1.2",
     "lucide-react": "^0.561.0",
-    "next": "^16.0.10",
+    "next": "16.1.1",
     "next-auth": "^4.24.13",
     "next-themes": "^0.4.6",
     "openai": "^6.15.0",
-    "react": "19.2.0",
+    "react": "19.2.3",
     "react-calendar": "^6.0.0",
-    "react-dom": "19.2.0",
+    "react-dom": "19.2.3",
     "react-icons": "^5.5.0",
     "socket.io": "^4.8.2",
     "socket.io-client": "^4.8.2",
@@ -47,25 +46,33 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.16",
+    "@tailwindcss/postcss": "^4",
     "@types/bcrypt": "^6.0.0",
     "@types/canvas-confetti": "^1.9.0",
-    "@types/node": "^24.10.1",
+    "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.4.23",
     "bcrypt": "^6.0.0",
     "eslint": "^9",
-    "eslint-config-next": "16.0.1",
+    "eslint-config-next": "16.1.1",
     "postcss": "^8.5.6",
     "prisma": "^7.1.0",
-    "tailwindcss": "^4.1.16",
+    "tailwindcss": "^4.1.18",
     "tsx": "^4.21.0",
     "typescript": "^5"
   },
   "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arslankaleem7229/quizzy.git"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arslankaleem7229/quizzy/issues"
+  },
+  "homepage": "https://github.com/arslankaleem7229/quizzy#readme"
 }

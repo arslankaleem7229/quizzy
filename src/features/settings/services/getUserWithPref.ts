@@ -4,15 +4,18 @@ import { cookies } from "next/headers";
 export async function getUserWithPref() {
   const res = await fetch(process.env.APP_URL + "/api/settings", {
     cache: "no-store",
+    method: "GET",
     credentials: "include",
     headers: {
       cookie: (await cookies()).toString(),
     },
   });
 
+  const parsed = await res.json();
+
   if (!res.ok) throw new Error("Failed to load user details");
 
-  const data: UserWithPreferenceResponse = await res.json();
+  const data: UserWithPreferenceResponse = parsed;
 
   if (!data.success) throw new Error("Something went wrong");
 

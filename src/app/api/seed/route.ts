@@ -124,8 +124,7 @@ export async function POST(request: NextRequest) {
     processedLocalizations.filter((a) =>
       a.questions.filter((q) =>
         q.options.filter((op) => {
-          if ((op.attachments?.length ?? 0) > 0) console.log(op.attachments);
-          return op.attachments;
+          if ((op.attachments?.length ?? 0) > 0) return op.attachments;
         })
       )
     );

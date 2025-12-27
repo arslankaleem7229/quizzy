@@ -162,10 +162,11 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user }) {
-      console.log(user);
-      // TODO: FIX this for new user or provider auth
-      if (!user || !user.isActive) {
+    async signIn({ user, account }) {
+      if (account?.provider !== "credentials") {
+        return true;
+      }
+      if (user?.isActive === false) {
         return "/login?error=inactive";
       }
       return true;
@@ -176,6 +177,7 @@ const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.username = user.username;
         token.email = user.email;
+        token.picture = user.image;
       }
 
       return token;
@@ -194,11 +196,11 @@ const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.username = token.username;
         session.user.role = token.role;
+        session.user.image = token.picture;
       }
 
       if (process.env.NEXTAUTH_SECRET) {
         // Attach a signed JWT so the client can grab a Bearer token after auth
-
         const signed = await encode({
           token,
           secret: process.env.NEXTAUTH_SECRET,

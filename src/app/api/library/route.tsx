@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
     const results = await prisma.quizLocalization.findMany({
       where: { quiz: { createdById: auth.token.id } },
       select: {
+        id: true,
         title: true,
         description: true,
         language: true,
