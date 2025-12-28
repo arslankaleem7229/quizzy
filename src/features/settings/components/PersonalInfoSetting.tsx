@@ -8,22 +8,25 @@ import { XIcon } from "lucide-react";
 import { UserWithPreference } from "@/lib/types";
 import { usePersonalInfoSettings } from "../hooks/usePersonalInfoSettings";
 import SettingDropDownRow from "./SettingDropDownRow";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 type props = {
   user: UserWithPreference;
 };
 
 export default function PersonalInfoSetting({ user }: props) {
+  const { update } = useSession();
+
+  const [newUsername, setNewUsername] = useState<string | null>(null);
   const {
     error,
-    newUsername,
     isLoading,
     currentImage,
     availableImages,
     currentUser,
     closeDrawer,
     openDrawer,
-    setNewUsername,
     handleChange,
     handleClick,
     handleUpdates,
@@ -60,9 +63,11 @@ export default function PersonalInfoSetting({ user }: props) {
               className="bg-(--primary) rounded-full py-2 px-4"
               onClick={() => {
                 if (newUsername) {
-                  handleUpdates({ username: newUsername }).then(() =>
-                    closeDrawer()
-                  );
+                  handleUpdates({ username: newUsername }).then(async () => {
+                    await update({ username: username });
+                    closeDrawer();
+                    return;
+                  });
                 }
               }}
             >
@@ -160,7 +165,11 @@ export default function PersonalInfoSetting({ user }: props) {
             value={role}
             options={[UserRole.STUDENT, UserRole.TEACHER]}
             isLoading={isLoading}
-            onClick={(option) => handleUpdates({ accountType: option })}
+            onClick={(option) =>
+              handleUpdates({ accountType: option }).then(async () => {
+                await update({ role: option });
+              })
+            }
           />
 
           <SettingEditButtonRow label="School information" value="Not set">

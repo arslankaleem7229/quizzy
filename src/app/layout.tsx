@@ -27,7 +27,7 @@ export default async function RootLayout({
         />
         <Providers>
           <Navbar />
-          <div className="flex pt-10 lg:pt-0">{children}</div>
+          <div className="flex lg:pt-0">{children}</div>
           <GlobalDrawer />
         </Providers>
       </body>

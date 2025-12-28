@@ -1,0 +1,20 @@
+sudo systemctl start jenkins
+sudo systemctl stop jenkins
+
+docker system prune -f && docker compose down && docker compose up --build
+
+docker exec -it quizzy-node 
+
+ssh -i ./keys/Quizzy.pem ec2-user@13.135.143.65 
+
+aws ec2 start-instances --instance-ids i-0b08711f9e1db370a
+
+# TODO: stop ec2 every day
+sudo shutdown -h +30
+
+scp -i ./keys/Quizzy.pem quizzy_backup.sql ec2-user@13.135.143.65:~
+
+docker exec -i quizzy-postgres psql -U postgres -c "CREATE DATABASE \"quizzy-v1\";" 2>/dev/null || true
+docker exec -i quizzy-postgres psql -U postgres -c "CREATE DATABASE \"shadow_db\";" 2>/dev/null || true
+pg_dump -U postgres -d quizzy-v1 -f quizzy_backup.sql
+docker exec quizzy-postgres pg_dump -U postgres -d quizzy-v1 > quizzy_backup.sql
