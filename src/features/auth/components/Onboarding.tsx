@@ -74,8 +74,10 @@ export default function Onboarding({ type }: { type?: "login" | "signup" }) {
             {formType === "login" ? (
               <LoginScreen
                 onSuccess={() => {
-                  console.log("onSuccess fired");
+                  console.log("Before redirect");
+                  router.refresh(); // dirty fix, but it works
                   router.push("/latest");
+                  console.log("After redirect");
                 }}
                 onChange={() => {
                   setFormType("signup");
