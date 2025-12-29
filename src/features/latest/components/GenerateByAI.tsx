@@ -48,7 +48,12 @@ export function GenerateByAI() {
           actionLabel={job.quizId ? "View set" : undefined}
           onAction={
             job.quizId
-              ? () => router.push(`/flashcard-sets/${job.quizId}`)
+              ? () => {
+                  console.log("Before redirect");
+                  router.refresh();
+                  router.push(`/flashcard-sets/${job.quizId}`);
+                  console.log("After redirect");
+                }
               : undefined
           }
         />

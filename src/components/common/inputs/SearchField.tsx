@@ -26,7 +26,10 @@ SearchFieldProps) => {
     event.preventDefault();
     const query = value.trim();
     const url = query ? `/search?q=${encodeURIComponent(query)}` : "/search";
+    console.log("Before redirect");
+    router.refresh(); // dirty fix, but it works
     router.push(url);
+    console.log("After redirect");
   };
 
   return (

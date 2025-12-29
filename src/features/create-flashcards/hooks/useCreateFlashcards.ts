@@ -58,7 +58,10 @@ export function useCreateFlashcards({
           ? `/flashcard-sets/${quizId}#practice`
           : `/flashcard-sets/${quizId}`;
 
+        console.log("Before redirect");
+        router.refresh();
         router.push(destination);
+        console.log("After redirect");
       } catch (err) {
         const errorMessage =
           err instanceof Error
