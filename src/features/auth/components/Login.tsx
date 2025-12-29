@@ -13,10 +13,11 @@ export default function LoginScreen({ onSuccess, onChange }: AuthScreenProps) {
     const formData = new FormData(e.currentTarget);
     const identifier = (formData.get("email") as string | null)?.trim() || "";
     const password = (formData.get("password") as string | null)?.trim() || "";
-    const success = await loginWithCredentials({ identifier, password });
-    if (success) {
-      onSuccess();
-    }
+    await loginWithCredentials({ identifier, password }).then((success) => {
+      if (success) {
+        onSuccess();
+      }
+    });
   };
 
   const { loading, error, loginWithCredentials, loginWithSocial } = useLogin();
