@@ -21,9 +21,9 @@ const HomePosters = ({
       <div
         className={`flex ${
           isreversed ? "md:flex-row-reverse" : "md:flex-row"
-        } flex-col max-w-6xl md:px-16 px-6 mx-auto min-h-[640px] md:min-h-0`}
+        } flex-col max-w-6xl md:px-16 px-6 mx-auto min-h-160 md:min-h-0`}
       >
-        <div className="relative w-full flex-1 md:basis-1/2 md:min-h-[360px] ">
+        <div className="relative w-full flex-1 md:basis-1/2 md:min-h-90 ">
           <Image src={image} alt="all-in-one" fill className="object-contain" />
         </div>
         <div

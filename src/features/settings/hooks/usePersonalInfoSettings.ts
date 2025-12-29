@@ -7,14 +7,16 @@ import { updateUserSettings } from "../services/updateUserSettings";
 import { uploadProfilePicture } from "../services/uploadProfilePicture";
 import { avatars } from "../data/avatars";
 import { useDrawer } from "@/providers";
+import { useSession } from "next-auth/react";
 
 export function usePersonalInfoSettings(initialUser: UserWithPreference) {
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState(initialUser);
   const [error, setError] = useState<string | null | undefined>(null);
-  const [newUsername, setNewUsername] = useState<string | null>(null);
 
   const { openDrawer, closeDrawer } = useDrawer();
+
+  const { update } = useSession();
 
   const { image, images } = currentUser;
   const userImage = image;
@@ -67,6 +69,7 @@ export function usePersonalInfoSettings(initialUser: UserWithPreference) {
       const result = await updateUserSettings(payload);
       if (result.success) {
         setCurrentUser(result.user ?? initialUser);
+
         return true;
       } else {
         setError(result.error);
@@ -89,6 +92,8 @@ export function usePersonalInfoSettings(initialUser: UserWithPreference) {
     try {
       const result = await uploadProfilePicture(file);
       if (result.success) {
+        await update({ picture: result.user?.image ?? currentImage });
+
         updateCurrentImage(result.user?.image ?? currentImage);
       } else {
         throw new Error(result.error);
@@ -108,6 +113,7 @@ export function usePersonalInfoSettings(initialUser: UserWithPreference) {
       const result = await selectAvatarImage(url);
       if (result.success) {
         updateCurrentImage(result.user?.image ?? url);
+        await update({ picture: result.user?.image ?? url });
       } else {
         throw new Error(result.error);
       }
@@ -122,15 +128,12 @@ export function usePersonalInfoSettings(initialUser: UserWithPreference) {
     isLoading,
     error,
     currentUser,
-    newUsername,
     currentImage,
     availableImages,
-
     openDrawer,
     closeDrawer,
     handleChange,
     handleClick,
     handleUpdates,
-    setNewUsername,
   };
 }

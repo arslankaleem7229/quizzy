@@ -172,12 +172,18 @@ const authOptions: NextAuthOptions = {
       return true;
     },
 
-    async jwt({ token, user }) {
+    async jwt({ token, user, session, trigger }) {
       if (user) {
         token.id = user.id;
         token.username = user.username;
         token.email = user.email;
         token.picture = user.image;
+      }
+
+      if (trigger === "update" && session) {
+        token.picture = session?.image ?? session?.picture ?? token?.picture;
+        token.username = session?.username ?? token?.username;
+        token.name = session?.name ?? token?.name;
       }
 
       return token;
