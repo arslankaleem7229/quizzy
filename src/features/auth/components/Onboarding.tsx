@@ -73,7 +73,10 @@ export default function Onboarding({ type }: { type?: "login" | "signup" }) {
             </div>
             {formType === "login" ? (
               <LoginScreen
-                onSuccess={() => router.push("/latest")}
+                onSuccess={() => {
+                  console.log("onSuccess fired");
+                  router.push("/latest");
+                }}
                 onChange={() => {
                   setFormType("signup");
                 }}

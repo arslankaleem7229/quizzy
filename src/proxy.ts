@@ -32,7 +32,6 @@ export async function proxy(req: NextRequest) {
 
 export const config = {
   matcher: [
-    // THIS FUCKING LINE WASTE my 5 FUCKING HOURS FUCK - learn more
     // "/((?!api|_next/static|_next/image|favicon.ico|site.webmanifest|robots.txt|sitemap.xml).*)",
     "/((?!api|_next/static|_next/image|favicon.ico|site.webmanifest|robots.txt|sitemap.xml|.*\\..*).*)",
   ],
